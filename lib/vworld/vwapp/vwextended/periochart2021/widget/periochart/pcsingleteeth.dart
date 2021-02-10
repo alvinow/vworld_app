@@ -10,12 +10,14 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 
 class PcSingleTeeth extends StatefulWidget{
   PcSingleTeeth(this.pcSingleTeethProperties,
-      this.pcPropertiesOnChangedCallback, this.pcProperties);
+      this.pcPropertiesOnChangedCallback, this.pcProperties, {this.columnWidth:42});
   final PcSingleTeethProperties pcSingleTeethProperties;
 
   final PcProperties pcProperties;
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
+
+  final double columnWidth;
 
   @override
   _PcSingleTeethState createState()=> _PcSingleTeethState();
@@ -45,7 +47,7 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
             //color: Colors.blue,
             child: SizedBox(
               height: 150,
-              width: 53,
+              width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
                   this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties),
             ))
@@ -58,7 +60,7 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
             color: Colors.blue,
             child: SizedBox(
               height: 150,
-              width: 53,
+              width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
                   this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties),
             )),

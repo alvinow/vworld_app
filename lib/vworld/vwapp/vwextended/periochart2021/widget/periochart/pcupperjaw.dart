@@ -5,6 +5,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcsingleteeth.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcupperjawgraphic.dart';
 
 class PcUpperJaw extends StatelessWidget {
   PcUpperJaw(this.pcProperties, this.pcPropertiesOnChangedCallback);
@@ -18,7 +19,38 @@ class PcUpperJaw extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> teethColumnWidgets = List<Widget>();
 
-    Widget tableColumnName=Container(
+
+    Widget tableColumnNameLingual=Container
+      (
+      padding: EdgeInsets.fromLTRB(0, 0, 4, 0) ,
+
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [        Container(
+          height: 18,
+          child: Text('Gingival Margin',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+        ),
+          Container(
+            height: 18,
+            child: Text('Probing Depth',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+          ),
+          Container(
+            height: 18,
+            child: Text('Plaque',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+          ),
+          Container(
+            height: 18,
+            child: Text('Bleeding on Probing',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
+          ),
+          Container(
+            height: 18,
+            child: Text('Furcation',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
+          ),],
+      ),
+    );
+
+    Widget tableColumnNameBuccal=Container(
         padding: EdgeInsets.fromLTRB(0, 0, 4, 0) ,
 
         child:Column(
@@ -26,26 +58,44 @@ class PcUpperJaw extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Container(
-          height: 21,
+          height: 18,
           child: Text('',style: TextStyle( fontSize: 12,color: Colors.black
           )),
         ),
         Container(
-          height: 21,
-          child: Text('Mobility',style: TextStyle(fontWeight: FontWeight.w100, fontFamily: 'Arial',fontSize: 12,color: Colors.black),),
+          height: 18,
+          child: Text('Mobility',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
         ),
         Container(
-          height: 21,
-          child: Text('Gingival Margin',style: TextStyle(fontWeight: FontWeight.w100, fontFamily: 'Arial',fontSize: 12,color: Colors.black)),
+          height: 18,
+          child: Text('Implant',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
         ),
         Container(
-          height: 21,
-          child: Text('Probing Depth',style: TextStyle(fontWeight: FontWeight.w100, fontFamily: 'Arial',fontSize: 12,color: Colors.black)),
+          height: 18,
+          child: Text('Furcation',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
         ),
+        Container(
+          height: 18,
+          child: Text('Bleeding on Probing',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black),),
+        ),
+        Container(
+          height: 18,
+          child: Text('Plaque',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+        ),
+        Container(
+          height: 18,
+          child: Text('Gingival Margin',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+        ),
+        Container(
+          height: 18,
+          child: Text('Probing Depth',style: TextStyle(fontWeight: FontWeight.w300, fontFamily: 'Arial',fontSize: 10,color: Colors.black)),
+        ),
+
+
       ],
     ));
 
-    teethColumnWidgets.add(tableColumnName);
+    teethColumnWidgets.add(tableColumnNameBuccal);
 
 
     List<String> teethNumberList = <String>[
@@ -113,10 +163,22 @@ class PcUpperJaw extends StatelessWidget {
     });
 
 
-    Widget returnValue = Row(
+
+    Widget teethsPropertiesTable = Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: teethColumnWidgets,
     );
+
+    return teethsPropertiesTable;
+
+    Widget teethsGraphic=PcUpperJawGraphic(this.pcProperties);
+
+    Widget returnValue=Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      teethsPropertiesTable,
+      Container(margin: EdgeInsets.fromLTRB(80, 0, 0, 0), child:teethsGraphic)
+    ],);
 
     return returnValue;
   }

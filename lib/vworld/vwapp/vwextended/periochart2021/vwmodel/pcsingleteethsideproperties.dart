@@ -4,13 +4,14 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
   PcSingleTeethSideProperties(
       {this.teethNumber,
       this.teethSide,
-      this.furcationLevel: 0,
-      this.isBleedingOnProbingPointA: false,
-      this.isBleedingOnProbingPointB: false,
-      this.isBleedingOnProbingPointC: false,
-      this.isPlaquePointA: false,
-      this.isPlaquePointB: false,
-      this.isPlaquePointC: false,
+      this.furcationLevelPointA: 0,
+        this.furcationLevelPointB: 0,
+      this.isBleedingOnProbingPointA: 0,
+      this.isBleedingOnProbingPointB: 0,
+      this.isBleedingOnProbingPointC: 0,
+      this.isPlaquePointA: 0,
+      this.isPlaquePointB: 0,
+      this.isPlaquePointC: 0,
       this.gingivalMarginPointA: 0,
       this.gingivalMarginPointB: 0,
       this.gingivalMarginPointC: 0,
@@ -23,13 +24,14 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
 
    String teethNumber;
   String teethSide;
-  int furcationLevel;
-  bool isBleedingOnProbingPointA;
-  bool isBleedingOnProbingPointB;
-  bool isBleedingOnProbingPointC;
-  bool isPlaquePointA;
-  bool isPlaquePointB;
-  bool isPlaquePointC;
+  int furcationLevelPointA;
+  int furcationLevelPointB;
+  int isBleedingOnProbingPointA;
+  int isBleedingOnProbingPointB;
+  int isBleedingOnProbingPointC;
+  int isPlaquePointA;
+  int isPlaquePointB;
+  int isPlaquePointC;
   int gingivalMarginPointA;
   int gingivalMarginPointB;
   int gingivalMarginPointC;
@@ -39,7 +41,8 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
 
   static final String teethNumberCCFN = 'teethNumber';
   static final String teethSideCCFN = 'teethSide';
-  static final String furcationLevelCCFN = 'furcationLevel';
+  static final String furcationLevelPointACCFN = 'furcationLevelPointA';
+  static final String furcationLevelPointBCCFN = 'furcationLevelPointB';
   static final String isBleedingOnProbingPointACCFN =
       ' isBleedingOnProbingPointA';
   static final String isBleedingOnProbingPointBCCFN =
@@ -66,7 +69,8 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
     return {
       PcSingleTeethSideProperties.teethNumberCCFN: this.teethNumber,
       PcSingleTeethSideProperties.teethSideCCFN: this.teethSide,
-      PcSingleTeethSideProperties.furcationLevelCCFN: this.furcationLevel,
+      PcSingleTeethSideProperties.furcationLevelPointACCFN: this.furcationLevelPointA,
+      PcSingleTeethSideProperties.furcationLevelPointBCCFN: this.furcationLevelPointB,
       PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN:
           this.isBleedingOnProbingPointA,
       PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN:
@@ -93,7 +97,8 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
       PcSingleTeethSideProperties(
           teethNumber: data[PcSingleTeethSideProperties.teethNumberCCFN],
           teethSide: data[PcSingleTeethSideProperties.teethSideCCFN],
-          furcationLevel: data[PcSingleTeethSideProperties.furcationLevelCCFN],
+          furcationLevelPointA: data[PcSingleTeethSideProperties.furcationLevelPointACCFN],
+          furcationLevelPointB: data[PcSingleTeethSideProperties.furcationLevelPointBCCFN],
           isBleedingOnProbingPointA:
               data[PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN],
           isBleedingOnProbingPointB:

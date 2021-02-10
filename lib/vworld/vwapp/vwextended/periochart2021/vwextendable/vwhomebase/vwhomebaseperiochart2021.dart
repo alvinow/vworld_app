@@ -10,18 +10,32 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 import 'package:vworld_app/vworld/vwcore/vwauthorization/vwauthorization.dart';
 
 class VwHomeBasePeriochart2021 extends VwHomeBase {
-  VwHomeBasePeriochart2021(VwAuthentication vwAuthentication, VwAuthorization vwAuthorization,VwAccounting  vwAccounting):super(vwAuthentication, vwAuthorization, vwAccounting);
+  VwHomeBasePeriochart2021(VwAuthentication vwAuthentication,
+      VwAuthorization vwAuthorization, VwAccounting vwAccounting)
+      : super(vwAuthentication, vwAuthorization, vwAccounting);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
+    List<PcSingleTeethProperties> teeths = List<PcSingleTeethProperties>();
 
-    List<PcSingleTeethProperties> teeths=List<PcSingleTeethProperties>();
+    PcProperties pcProperties = PcProperties(
+        id: Uuid().v4().toString(),
+        patientName: "John Doe",
+        patientDob: '1980-01-01',
+        operatorName: 'Dr. D',
+        examDateTime: DateTime.now(),
+        examTypeId: "InitialExam",
+        teeths: teeths);
 
-
-
-        PcProperties pcProperties=PcProperties(id: Uuid().v4().toString(), patientName: "John Doe", patientDob: '1980-01-01', operatorName: 'Dr. D', examDateTime: DateTime.now(), examTypeId: "InitialExam", teeths: teeths);
-
-    return MaterialApp(home: Scaffold(body: Periochart(initialState: pcProperties,),));
+    return MaterialApp(
+      home: Scaffold(
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Periochart(
+            initialState: pcProperties,
+          ),
+        ),
+      ),
+    );
   }
-
 }

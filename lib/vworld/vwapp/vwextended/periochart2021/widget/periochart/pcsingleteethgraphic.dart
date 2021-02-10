@@ -12,7 +12,7 @@ class PcSingleTeethGraphic extends StatelessWidget {
 
   final PcProperties pcProperties;
 
-  Widget getTeethPicture(String teethNumber, String Side) {
+  Widget getTeethPicture(String teethNumber, String side) {
     final String assetName = "assets/svg/jaw/svg_teeth.svg";
 
     final Widget svg = SvgPicture.asset(
@@ -27,8 +27,8 @@ class PcSingleTeethGraphic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
-      //Container(child: Image.asset("assets/images/teeth11.jpg")
-      Container(  transform: Matrix4.diagonal3Values(3.0, 3.0, 1.0),  child:this.getTeethPicture(this.pcSingleTeethSidePropertiesProperties.teethNumber, this.pcSingleTeethSidePropertiesProperties.teethSide)
+      Container(child: Image.asset("assets/images/teeth11.jpg")
+      //Container(  transform: Matrix4.diagonal3Values(3.0, 3.0, 1.0),  child:this.getTeethPicture(this.pcSingleTeethSidePropertiesProperties.teethNumber, this.pcSingleTeethSidePropertiesProperties.teethSide)
       ),
       CustomPaint(
         painter: CurvePainter(

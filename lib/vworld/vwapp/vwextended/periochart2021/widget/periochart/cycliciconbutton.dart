@@ -13,8 +13,12 @@ class CyclicIconButton extends StatefulWidget {
         this.iconSize: 15.0,
         @required this.colorList,
         this.pcCallbackIntegerField,
-        this.isReadOnly: true});
+        this.isReadOnly: true,
+        this.backgroundColor:Colors.white
 
+      });
+
+  final Color backgroundColor;
   final String fieldName;
   final bool isReadOnly;
   final PcCallbackIntegerField pcCallbackIntegerField;
@@ -53,8 +57,14 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
 
 
     return
-       IconButton(
-
+      Container(
+         color: this.widget.backgroundColor,
+          width: this.widget.iconSize,
+          height: this.widget.iconSize,
+          padding: const EdgeInsets.all(0.0),
+          child:IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints(),
               alignment: Alignment.center,
               iconSize: this.widget.iconSize,
               focusColor: Colors.orange,
@@ -71,7 +81,7 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
                   }
                 }
               },
-              color: this.getActiveColor(), icon: Icon(this.getActiveIconData()));
+              color: this.getActiveColor(), icon: Icon(this.getActiveIconData())));
 
 
   }

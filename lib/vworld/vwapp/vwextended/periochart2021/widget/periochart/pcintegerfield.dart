@@ -12,9 +12,14 @@ class PcIntegerField extends StatelessWidget {
       this.width: 40,
       this.height: 20,
       this.borderWidth: 1,
-      this.useBorder: false});
+      this.useBorder: false,
+      this.minValue:0,
+        this.maxValue:9
+      });
 
   final int value;
+  final int maxValue;
+  final int minValue;
   final String fieldName;
   final String caption;
   final PcCallbackIntegerField pcCallbackIntegerField;
@@ -33,8 +38,12 @@ class PcIntegerField extends StatelessWidget {
       );
     }
 
-    TextEditingController myController =
-        TextEditingController(text: this.value.toString());
+    TextEditingController myController;
+    if (this.value == null) {
+      myController = TextEditingController(text: '');
+    } else {
+      myController = TextEditingController(text: this.value.toString());
+    }
 
     Widget lReturnValue = Scaffold(
         body: TextField(
@@ -45,26 +54,38 @@ class PcIntegerField extends StatelessWidget {
       //maxLengthEnforced: true,
 
       //focusNode: myFocusNode,
-      style: TextStyle(fontSize: 13),
+      style: TextStyle(fontSize: 11),
 
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          keyboardType: TextInputType.number,
       controller: myController,
       //autofocus: true,
       readOnly: false,
 
-/*
-                  onTap: () {
-                    myController.selection = TextSelection(
-                      baseOffset: 0,
-                      extentOffset: myController.text.length,
-                    );
-                  },*/
+
+      onTap: () {
+        if (myController.text!=null && myController.text.length > 0) {
+          myController.selection = TextSelection(
+            baseOffset: 0,
+            extentOffset: myController.text.length,
+          );
+        }
+      },
 
       onChanged: (value) {
-        int outputValue = 0;
-        if (value == null) {
+        int outputValue;
+        if (value == null || value.length == 0 || value=='') {
+
         } else {
           outputValue = int.tryParse(value);
+          if(outputValue>this.maxValue)
+            {
+              outputValue=this.maxValue;
+            }
+          else if(outputValue<this.minValue)
+            {
+              outputValue=this.minValue;
+            }
         }
 
         this.pcCallbackIntegerField(this.fieldName, outputValue);
