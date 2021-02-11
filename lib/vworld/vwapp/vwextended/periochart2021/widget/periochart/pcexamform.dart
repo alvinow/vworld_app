@@ -96,7 +96,15 @@ class PcExamForm extends StatelessWidget {
 
 
         )*/
-        PcStringField(value: pcProperties.patientName, fieldName: PcProperties.patientNameCCFN, caption: 'Patient Name',pcCallbackStringFieldField: this.callbackStringField,),
+        SizedBox(width: 20,height: 5,),
+        PcStringField(value: pcProperties.patientName, fieldName: PcProperties.patientNameCCFN, width: 100,height: 25, caption: 'Patient Name',pcCallbackStringFieldField: this.callbackStringField,),
+        SizedBox(width: 20,height: 5,),
+        PcStringField(value: pcProperties.patientDob, fieldName: PcProperties.patientDobCCFN, width: 100,height: 25, caption: 'Date of Birth',pcCallbackStringFieldField: this.callbackStringField,),
+
+        SizedBox(width: 20,height: 5,),
+        PcStringField(value: pcProperties.operatorName, fieldName: PcProperties.operatorNameCCFN, width: 100,height: 25, caption: 'Clinician',pcCallbackStringFieldField: this.callbackStringField,),
+
+        SizedBox(width: 20,height: 20,),
         PcJaw(this.pcProperties,this.pcPropertiesOnChangedCallback)
       ],
     ));

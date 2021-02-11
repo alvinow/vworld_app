@@ -50,10 +50,57 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
               width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
                   this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties),
-            ))
+            )),
+        Container(
+          //color: Colors.blue,
+            child: SizedBox(
+              height: 150,
+              width: this.widget.columnWidth,
+              child: PcSingleTeethGraphic(
+                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties),
+            )),
+        PcSingleTeethTable(
+            this.widget.pcSingleTeethProperties,
+            PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS,
+            this.implementPcPropertiesOnChangedCallback),
       ],
     );
 
+    Widget lLowerJaw = Column(
+      children: <Widget>[
+
+
+        PcSingleTeethTable(
+            this.widget.pcSingleTeethProperties,
+            PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS,
+            this.implementPcPropertiesOnChangedCallback),
+
+        Container(
+          //color: Colors.blue,
+            child: SizedBox(
+              height: 150,
+              width: this.widget.columnWidth,
+              child: PcSingleTeethGraphic(
+                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties),
+            )),
+
+        Container(
+          //color: Colors.blue,
+            child: SizedBox(
+              height: 150,
+              width: this.widget.columnWidth,
+              child: PcSingleTeethGraphic(
+                  this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties),
+            )),
+        PcSingleTeethTable(
+            this.widget.pcSingleTeethProperties,
+            PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS,
+            this.implementPcPropertiesOnChangedCallback),
+
+      ],
+    );
+
+    /*
     Widget lLowerJaw = Column(
       children: <Widget>[
         Container(
@@ -69,7 +116,7 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
             PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS,
             this.implementPcPropertiesOnChangedCallback),
       ],
-    );
+    );*/
 
     if (this.widget.pcSingleTeethProperties.teethNumber.substring(0, 1) == '1' ||
         this.widget.pcSingleTeethProperties.teethNumber.substring(0, 1) == '2') {

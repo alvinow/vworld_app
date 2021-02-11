@@ -52,10 +52,11 @@ flutter:
   uses-material-design: true
 
   assets:
-      - "assets/images/teeth11.jpg"
-      - "assets/svg/jaw/svg_teeth.svg"
-      - "assets/images/jaw/jaw_lower.jpg"
-      - "assets/images/jaw/jaw_upper.jpg"
+    - "assets/images/teeth11.jpg"
+    - "assets/svg/jaw/svg_teeth.svg"
+    - "assets/images/jaw/jaw_lower.jpg"
+    - "assets/images/jaw/jaw_upper.jpg"
+    - assets/google_fonts/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

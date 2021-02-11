@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
 
-
 class PcProperties extends VwDocumentContent {
   PcProperties(
-      {
-        @required this.id,
-        @required this.patientName,
+      {@required this.id,
+      @required this.patientName,
       @required this.patientDob,
       @required this.operatorName,
       @required this.examDateTime,
       @required this.examTypeId,
-      @required this.teeths});
+      @required this.teeths,
+      });
 
   String id;
   String patientName;
@@ -20,10 +19,8 @@ class PcProperties extends VwDocumentContent {
   String operatorName;
   DateTime examDateTime;
   String examTypeId;
+
   List<PcSingleTeethProperties> teeths;
-
-
-
 
   static final String idCCFN = 'id';
   static final String patientNameCCFN = 'patientName';
@@ -54,20 +51,16 @@ class PcProperties extends VwDocumentContent {
     };
   }
 
-  PcSingleTeethProperties getTeeth(String teethNumber){
+  PcSingleTeethProperties getTeeth(String teethNumber) {
     PcSingleTeethProperties returnValue;
 
-
     teeths.forEach((element) {
-      if(element.teethNumber==teethNumber)
-        {
-          returnValue=element;
-        }
+      if (element.teethNumber == teethNumber) {
+        returnValue = element;
+      }
     });
 
-
     return returnValue;
-
   }
 
   factory PcProperties.fromJson(Map<String, dynamic> data) => PcProperties(
@@ -76,10 +69,11 @@ class PcProperties extends VwDocumentContent {
       patientDob: data[PcProperties.patientDobCCFN],
       operatorName: data[PcProperties.operatorNameCCFN],
       examDateTime: data[PcProperties.examDateTimeCCFN],
-  examTypeId: data[PcProperties.examTypeIdCCFN],
-    teeths: data[PcProperties]==null?List<PcSingleTeethProperties>():
-    data[PcProperties.examTypeIdCCFN]
-        .map<PcSingleTeethProperties>((item) => PcSingleTeethProperties.fromJson(item))
-        .toList()
-  );
+      examTypeId: data[PcProperties.examTypeIdCCFN],
+      teeths: data[PcProperties] == null
+          ? List<PcSingleTeethProperties>()
+          : data[PcProperties.examTypeIdCCFN]
+              .map<PcSingleTeethProperties>(
+                  (item) => PcSingleTeethProperties.fromJson(item))
+              .toList());
 }

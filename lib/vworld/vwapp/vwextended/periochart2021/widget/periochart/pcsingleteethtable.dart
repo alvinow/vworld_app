@@ -5,6 +5,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/cycliciconbutton.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcintegerfield.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcstringfield.dart';
 
 class PcSingleTeethTable extends StatelessWidget {
   PcSingleTeethTable(this.pcSingleTeethProperties, this.teethSide,
@@ -14,6 +15,13 @@ class PcSingleTeethTable extends StatelessWidget {
   final String teethSide; //lingual, buccal
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
   final double columnWidth;
+
+  void implementCallbackStringField(String fieldName, String value){
+    if (fieldName == PcSingleTeethProperties.noteCCFN) {
+      pcSingleTeethProperties.note = value;
+    }
+
+  }
 
   void implementCallbackIntegerField(String fieldName, int value) {
     if (fieldName == PcSingleTeethProperties.mobilityLevelCCFN) {
@@ -105,21 +113,21 @@ class PcSingleTeethTable extends StatelessWidget {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.probingDepthPointA = value;
       } else {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointA = value;
+        this.pcSingleTeethProperties.lingualSide.probingDepthPointA = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.probingDepthPointBCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.probingDepthPointB = value;
       } else {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointB = value;
+        this.pcSingleTeethProperties.lingualSide.probingDepthPointB = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.probingDepthPointCCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.probingDepthPointC = value;
       } else {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointC = value;
+        this.pcSingleTeethProperties.lingualSide.probingDepthPointC = value;
       }
     }
 
@@ -175,10 +183,13 @@ class PcSingleTeethTable extends StatelessWidget {
         if (teethRow == '8' || teethRow == '7' || teethRow == '6') {
           returnValue = Container(
               width: this.columnWidth,
+              padding: EdgeInsets.all(2),
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: Colors.black)),
               child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center, children: [
                 CyclicIconButton(
                     backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                     fieldName:
@@ -257,8 +268,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   isReadOnly: false));
         }
       }
-    }
-    else{
+    } else {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         if (teethRow == '8' || teethRow == '7' || teethRow == '6') {
           returnValue = Container(
@@ -269,7 +279,7 @@ class PcSingleTeethTable extends StatelessWidget {
               child: CyclicIconButton(
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
-                  PcSingleTeethSideProperties.furcationLevelPointACCFN,
+                      PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
                       .buccalSide
@@ -290,8 +300,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   pcCallbackIntegerField: this.implementCallbackIntegerField,
                   isReadOnly: false));
         }
-      }
-      else{
+      } else {
         if (teethRow == '8' || teethRow == '7' || teethRow == '6') {
           returnValue = Container(
               width: this.columnWidth,
@@ -301,7 +310,7 @@ class PcSingleTeethTable extends StatelessWidget {
               child: CyclicIconButton(
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
-                  PcSingleTeethSideProperties.furcationLevelPointACCFN,
+                      PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
                       .lingualSide
@@ -515,7 +524,7 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   Widget getPlaqueRow() {
-    if (this.teethSide == PcSingleTeethProperties.buccalSideCCFN) {
+    if (this.teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
       return Container(
         width: this.columnWidth,
         decoration:
@@ -633,7 +642,7 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   Widget getGingivalMarginRow() {
-    if (this.teethSide == PcSingleTeethProperties.buccalSideCCFN) {
+    if (this.teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
       return Container(
           decoration:
               BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
@@ -729,7 +738,7 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   Widget getProbingDepthRow() {
-    if (this.teethSide == PcSingleTeethProperties.buccalSideCCFN) {
+    if (this.teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
       return Container(
           decoration:
               BoxDecoration(border: Border.all(width: 1, color: Colors.black)),
@@ -812,47 +821,108 @@ class PcSingleTeethTable extends StatelessWidget {
     }
   }
 
+  Widget getNoteRow(){
+    
+    return Container(
+        width: this.columnWidth,
+        height: 18,
+        padding: EdgeInsets.all(2),
+    decoration: BoxDecoration(
+    border: Border.all(width: 1.0, color: Colors.black)),
+    child: PcStringField(value: this.pcSingleTeethProperties.note, fieldName: PcSingleTeethProperties.noteCCFN, width: 100,height: 25, caption: '', pcCallbackStringFieldField: implementCallbackStringField),
+    );
+    
+  }
+  
   @override
   Widget build(BuildContext context) {
+    /*
     BoxDecoration borderBoxDecoration = BoxDecoration(
       border: Border.all(width: 1, color: Colors.black),
     );
+*/
+    final String regio=this.pcSingleTeethProperties.teethNumber.substring(0,1);
 
-    if (this.teethSide == PcSingleTeethProperties.buccalSideCCFN) {
-      return Container(
-          width: this.columnWidth,
-          child: Column(
-            children: [
-              this.getTeethNumberRow(),
-              this.getMobilityLevelRow(),
-              this.getIsImplantRow(),
-              this.getFurcationInputRow(
-                  this.pcSingleTeethProperties.teethNumber,
-                  PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
-              this.getBleedingOnProbingRow(),
-              this.getPlaqueRow(),
-              this.getGingivalMarginRow(),
-              this.getProbingDepthRow()
-            ],
-          ));
-    }
-    else{
-      return Container(
-          width: this.columnWidth,
-          child: Column(
-            children: [
-              this.getGingivalMarginRow(),
-              this.getProbingDepthRow(),
-              this.getPlaqueRow(),
-              this.getBleedingOnProbingRow(),
-              this.getFurcationInputRow(
-                  this.pcSingleTeethProperties.teethNumber,
-                  PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
+    if(regio=='1'||regio=='2') {
+      if (this.teethSide ==
+          PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
+        return Container(
+            width: this.columnWidth,
+            child: Column(
+              children: [
+                this.getTeethNumberRow(),
+                this.getMobilityLevelRow(),
+                this.getIsImplantRow(),
+                this.getFurcationInputRow(
+                    this.pcSingleTeethProperties.teethNumber,
+                    PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
+                this.getBleedingOnProbingRow(),
+                this.getPlaqueRow(),
+                this.getGingivalMarginRow(),
+                this.getProbingDepthRow(),
+                this.getNoteRow()
+              ],
+            ));
+      } else {
+        return Container(
+            width: this.columnWidth,
+            child: Column(
+              children: [
+                this.getGingivalMarginRow(),
+                this.getProbingDepthRow(),
+                this.getPlaqueRow(),
+                this.getBleedingOnProbingRow(),
+                this.getFurcationInputRow(
+                    this.pcSingleTeethProperties.teethNumber,
+                    PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
+
+              ],
+            ));
+      }
+    }else{
+      if (this.teethSide ==
+          PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
+        return Container(
+            width: this.columnWidth,
+            child: Column(
+              children: [
 
 
 
-            ],
-          ));
+                this.getGingivalMarginRow(),
+                this.getProbingDepthRow(),
+                this.getPlaqueRow(),
+                this.getBleedingOnProbingRow(),
+                this.getFurcationInputRow(
+                    this.pcSingleTeethProperties.teethNumber,
+                    PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
+                this.getIsImplantRow(),
+                this.getMobilityLevelRow(),
+                this.getTeethNumberRow(),
+
+
+              ],
+            ));
+      } else {
+        return Container(
+            width: this.columnWidth,
+            child: Column(
+              children: [
+                this.getNoteRow(),
+                this.getFurcationInputRow(
+                    this.pcSingleTeethProperties.teethNumber,
+                    PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
+                this.getBleedingOnProbingRow(),
+                this.getPlaqueRow(),
+                this.getGingivalMarginRow(),
+                this.getProbingDepthRow(),
+
+
+
+
+              ],
+            ));
+      }
     }
   }
 }

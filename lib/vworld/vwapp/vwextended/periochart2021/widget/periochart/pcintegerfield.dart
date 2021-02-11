@@ -9,8 +9,8 @@ class PcIntegerField extends StatelessWidget {
       @required this.fieldName,
       this.caption,
       @required this.pcCallbackIntegerField,
-      this.width: 40,
-      this.height: 20,
+      this.width: 42,
+      this.height: 18,
       this.borderWidth: 1,
       this.useBorder: false,
       this.minValue:0,
@@ -34,7 +34,7 @@ class PcIntegerField extends StatelessWidget {
 
     if (this.useBorder == true) {
       borderBoxDecoration = BoxDecoration(
-        border: Border.all(width: this.borderWidth, color: Colors.lightBlue),
+        border: Border.all(width: this.borderWidth, color: Colors.black),
       );
     }
 
