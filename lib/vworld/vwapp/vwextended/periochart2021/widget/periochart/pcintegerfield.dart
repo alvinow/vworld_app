@@ -13,9 +13,8 @@ class PcIntegerField extends StatelessWidget {
       this.height: 18,
       this.borderWidth: 1,
       this.useBorder: false,
-      this.minValue:0,
-        this.maxValue:9
-      });
+      this.minValue: 0,
+      this.maxValue: 9});
 
   final int value;
   final int maxValue;
@@ -35,6 +34,9 @@ class PcIntegerField extends StatelessWidget {
     if (this.useBorder == true) {
       borderBoxDecoration = BoxDecoration(
         border: Border.all(width: this.borderWidth, color: Colors.black),
+        color: Colors.lightGreen,
+
+
       );
     }
 
@@ -47,24 +49,21 @@ class PcIntegerField extends StatelessWidget {
 
     Widget lReturnValue = Scaffold(
         body: TextField(
-      textAlign: TextAlign.center,
-      textAlignVertical: TextAlignVertical.top,
-      maxLines: 1,
-      //maxLength: 2,
-      //maxLengthEnforced: true,
 
-      //focusNode: myFocusNode,
+      textAlign: TextAlign.center,
+      //textAlignVertical: TextAlignVertical.,
+      maxLines: 1,
+
       style: TextStyle(fontSize: 11),
 
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          keyboardType: TextInputType.number,
+      keyboardType: TextInputType.number,
       controller: myController,
       //autofocus: true,
       readOnly: false,
 
-
       onTap: () {
-        if (myController.text!=null && myController.text.length > 0) {
+        if (myController.text != null && myController.text.length > 0) {
           myController.selection = TextSelection(
             baseOffset: 0,
             extentOffset: myController.text.length,
@@ -74,40 +73,41 @@ class PcIntegerField extends StatelessWidget {
 
       onChanged: (value) {
         int outputValue;
-        if (value == null || value.length == 0 || value=='') {
-
+        if (value == null || value.length == 0 || value == '') {
         } else {
           outputValue = int.tryParse(value);
-          if(outputValue>this.maxValue)
-            {
-              outputValue=this.maxValue;
-            }
-          else if(outputValue<this.minValue)
-            {
-              outputValue=this.minValue;
-            }
+          if (outputValue > this.maxValue) {
+            outputValue = this.maxValue;
+          } else if (outputValue < this.minValue) {
+            outputValue = this.minValue;
+          }
         }
 
         this.pcCallbackIntegerField(this.fieldName, outputValue);
       },
 
       decoration: InputDecoration(
+
         contentPadding: EdgeInsets.all(0),
         labelText: this.caption,
         border: InputBorder.none,
-        focusColor: Colors.orange,
+        focusColor: Colors.red,
         focusedBorder: InputBorder.none,
         enabledBorder: InputBorder.none,
         errorBorder: InputBorder.none,
         disabledBorder: InputBorder.none,
         isDense: true,
+        fillColor: Colors.lightBlue,
+
+
       ),
     ));
 
     Widget lReturnValueWithContainer = Container(
         width: this.width,
         height: this.height,
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+        padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+        margin:  EdgeInsets.fromLTRB(0, 0, 0, 0),
         decoration: borderBoxDecoration,
         child: lReturnValue);
 

@@ -49,15 +49,15 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
               height: 150,
               width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
-                  this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties),
+                  this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties,this.widget.pcSingleTeethProperties),
             )),
         Container(
           //color: Colors.blue,
             child: SizedBox(
-              height: 150,
+              height: 111,
               width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
-                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties),
+                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties,this.widget.pcSingleTeethProperties),
             )),
         PcSingleTeethTable(
             this.widget.pcSingleTeethProperties,
@@ -81,7 +81,7 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
               height: 150,
               width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
-                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties),
+                  this.widget.pcSingleTeethProperties.lingualSide, this.widget.pcProperties,this.widget.pcSingleTeethProperties),
             )),
 
         Container(
@@ -90,7 +90,7 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
               height: 150,
               width: this.widget.columnWidth,
               child: PcSingleTeethGraphic(
-                  this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties),
+                  this.widget.pcSingleTeethProperties.buccalSide, this.widget.pcProperties,this.widget.pcSingleTeethProperties),
             )),
         PcSingleTeethTable(
             this.widget.pcSingleTeethProperties,

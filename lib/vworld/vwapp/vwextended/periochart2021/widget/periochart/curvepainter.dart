@@ -12,19 +12,55 @@ class CurvePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    this.paintItLightBlue(canvas, size);
-    this.paintItRed(canvas, size);
+    final double baseheight=74;
+
+    final double heightmultiplier=5;
+
+    this.paintHorizontalGrid(canvas, size,baseheight,heightmultiplier);
+    this.paintProbingDepth(canvas, size,baseheight,heightmultiplier);
+    this.paintGingivalMargin(canvas, size,baseheight,(heightmultiplier*-1));
+
+  }
+
+  void paintHorizontalGrid(Canvas canvas, Size size, double baseheight,double heightmultiplier){
+
+    var paint = Paint();
+
+    paint.color = Colors.black;
+    paint.style = PaintingStyle.stroke;
+    paint.strokeWidth = 1;
+
+
+    for(int la=0;la<14;la++){
+
+      double currentHeight=baseheight-(heightmultiplier*la);
+
+      var startPoint = Offset(0, currentHeight);
+      var controlPoint1 = Offset(2 * size.width / 4, currentHeight);
+      var endPoint = Offset(size.width, currentHeight);
+
+      var path = Path();
+      path.moveTo(startPoint.dx, startPoint.dy);
+      path.cubicTo(startPoint.dx, startPoint.dy, controlPoint1.dx,
+          controlPoint1.dy, endPoint.dx, endPoint.dy);
+
+      canvas.drawPath(path, paint);
+
+    }
+
+
+
   }
 
   //gingival margin
-  void paintItRed(Canvas canvas, Size size) {
+  void paintItRed(Canvas canvas, Size size, double baseheight,double heightmultiplier) {
     var paint = Paint();
 
     paint.color = Colors.red;
     paint.style = PaintingStyle.stroke;
-    paint.strokeWidth = 3;
+    paint.strokeWidth = 2;
 
-    var baseheight = 90.0;
+    //var baseheight = 74.0;
 
     var startPoint = Offset(0, baseheight);
     var controlPoint1 = Offset(2 * size.width / 4, baseheight);
@@ -145,16 +181,108 @@ class CurvePainter extends CustomPainter {
     return returnValue;
   }
 
-  //probing depth
-  void paintItLightBlue(Canvas canvas, Size size) {
+
+  void paintGingivalMargin(Canvas canvas, Size size,double baseheight,double heightmultiplier){
+    try {
+      var paint = Paint();
+
+      paint.color = Colors.red;
+      paint.style = PaintingStyle.stroke;
+      paint.strokeWidth = 2;
+
+      //var baseheight = 90.0;
+
+      PcSingleTeethSideProperties leftNeighborSingleTeethSideProperties =
+      this.getLeftNeighborSingleTeethSideProperties();
+
+      PcSingleTeethSideProperties rightNeighborSingleTeethSideProperties =
+      this.getRightNeighborSingleTeethSideProperties();
+
+      double leftNeighbourDx = 0;
+      double leftNeighbourDy;
+
+      if (leftNeighborSingleTeethSideProperties != null) {
+        leftNeighbourDy = baseheight -
+            (0.5 *
+                heightmultiplier *
+                (this.pcSingleTeethSideProperties.gingivalMarginPointA +
+                    leftNeighborSingleTeethSideProperties.gingivalMarginPointC));
+      }
+
+      var startPointDx = size.width / 8;
+      var startPointDy = baseheight -
+          (this.pcSingleTeethSideProperties.gingivalMarginPointA * heightmultiplier);
+
+      var controlPoint1Dx = size.width / 2;
+      var controlPoint1Dy = baseheight -
+          (this.pcSingleTeethSideProperties.gingivalMarginPointB * heightmultiplier);
+
+      var endPointDx = 7 * size.width / 8;
+      var endPointDy = baseheight -
+          (this.pcSingleTeethSideProperties.gingivalMarginPointC * heightmultiplier);
+
+      double rightNeighbourDx = size.width;
+      double rightNeighbourDy;
+
+      if (rightNeighborSingleTeethSideProperties != null) {
+        rightNeighbourDy = baseheight -
+            (0.5 *
+                heightmultiplier *
+                (this.pcSingleTeethSideProperties.gingivalMarginPointC +
+                    rightNeighborSingleTeethSideProperties.gingivalMarginPointA));
+      }
+
+      Offset leftNeighbourPoint;
+      if (leftNeighbourDy != null) {
+        leftNeighbourPoint = Offset(leftNeighbourDx, leftNeighbourDy);
+      }
+      var startPoint = Offset(startPointDx, startPointDy);
+      var controlPoint1 = Offset(controlPoint1Dx, controlPoint1Dy);
+      var endPoint = Offset(endPointDx, endPointDy);
+
+      Offset rightNeighbourPoint;
+      if (rightNeighbourDy != null) {
+        rightNeighbourPoint = Offset(rightNeighbourDx, rightNeighbourDy);
+      }
+
+      var path = Path();
+
+      if (leftNeighbourPoint != null) {
+        path.moveTo(leftNeighbourPoint.dx, leftNeighbourPoint.dy);
+        path.lineTo(startPoint.dx, startPoint.dy);
+      } else {
+        path.moveTo(startPoint.dx, startPoint.dy);
+      }
+      path.lineTo(controlPoint1.dx, controlPoint1.dy);
+      path.lineTo(endPoint.dx, endPoint.dy);
+
+      if (rightNeighbourPoint != null) {
+        path.lineTo(rightNeighbourPoint.dx, rightNeighbourPoint.dy);
+      }
+
+      /*
+    path.cubicTo(startPoint.dx, startPoint.dy,
+        controlPoint1.dx, controlPoint1.dy,
+        endPoint.dx, endPoint.dy);*/
+
+      canvas.drawPath(path, paint);
+    } catch (error) {
+      print(
+          "Error Catched on CurvePainter.paintItLightBlue(Canvas canvas, Size size);ErrorMessage=" +
+              error.toString());
+    }
+  }
+
+
+  void paintProbingDepth(Canvas canvas, Size size,double baseheight,double heightmultiplier) {
     try {
       var paint = Paint();
 
       paint.color = Colors.lightBlue;
       paint.style = PaintingStyle.stroke;
-      paint.strokeWidth = 3;
+      paint.strokeWidth = 2;
 
-      var baseheight = 90.0;
+      //var baseheight = 90.0;
 
       PcSingleTeethSideProperties leftNeighborSingleTeethSideProperties =
           this.getLeftNeighborSingleTeethSideProperties();
@@ -168,22 +296,22 @@ class CurvePainter extends CustomPainter {
       if (leftNeighborSingleTeethSideProperties != null) {
         leftNeighbourDy = baseheight -
             (0.5 *
-                6 *
-                (this.pcSingleTeethSideProperties.probingDepthPointA +
-                    leftNeighborSingleTeethSideProperties.probingDepthPointC));
+                heightmultiplier *
+                ((this.pcSingleTeethSideProperties.probingDepthPointA-this.pcSingleTeethSideProperties.gingivalMarginPointA) +
+                    (leftNeighborSingleTeethSideProperties.probingDepthPointC-leftNeighborSingleTeethSideProperties.gingivalMarginPointC)   ));
       }
 
       var startPointDx = size.width / 8;
       var startPointDy = baseheight -
-          (this.pcSingleTeethSideProperties.probingDepthPointA * 6);
+          ((this.pcSingleTeethSideProperties.probingDepthPointA-this.pcSingleTeethSideProperties.gingivalMarginPointA)  * heightmultiplier);
 
       var controlPoint1Dx = size.width / 2;
       var controlPoint1Dy = baseheight -
-          (this.pcSingleTeethSideProperties.probingDepthPointB * 6);
+          ((this.pcSingleTeethSideProperties.probingDepthPointB-this.pcSingleTeethSideProperties.gingivalMarginPointB) * heightmultiplier);
 
       var endPointDx = 7 * size.width / 8;
       var endPointDy = baseheight -
-          (this.pcSingleTeethSideProperties.probingDepthPointC * 6);
+          ((this.pcSingleTeethSideProperties.probingDepthPointC-this.pcSingleTeethSideProperties.gingivalMarginPointC) * heightmultiplier);
 
       double rightNeighbourDx = size.width;
       double rightNeighbourDy;
@@ -191,9 +319,9 @@ class CurvePainter extends CustomPainter {
       if (rightNeighborSingleTeethSideProperties != null) {
         rightNeighbourDy = baseheight -
             (0.5 *
-                6 *
-                (this.pcSingleTeethSideProperties.probingDepthPointC +
-                    rightNeighborSingleTeethSideProperties.probingDepthPointA));
+                heightmultiplier *
+                ((this.pcSingleTeethSideProperties.probingDepthPointC-this.pcSingleTeethSideProperties.gingivalMarginPointC) +
+                    (rightNeighborSingleTeethSideProperties.probingDepthPointA-rightNeighborSingleTeethSideProperties.gingivalMarginPointC)  ));
       }
 
       Offset leftNeighbourPoint;
