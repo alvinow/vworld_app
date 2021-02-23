@@ -5,9 +5,13 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/curvepainter.dart';
 import 'dart:math' as math;
 
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/cycliciconbutton.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/furcationpicture.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/teethpicture.dart';
+
 class PcSingleTeethGraphic extends StatelessWidget {
   PcSingleTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties,
-      this.pcSingleTeethProperties);
+      this.pcSingleTeethProperties, this.columnWidth);
 
   final PcSingleTeethSideProperties pcSingleTeethSideProperties;
 
@@ -15,55 +19,21 @@ class PcSingleTeethGraphic extends StatelessWidget {
 
   final PcProperties pcProperties;
 
-  Widget getTeethPicture(String teethNumber, String side) {
-    String pictureFileName = "assets/images/teeths/image_not_found.jpg";
+  final double columnWidth;
 
-    if (side == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-      pictureFileName = "assets/images/teeths/teeth11_buccal_240x640.jpg";
-    } else {
-      pictureFileName = "assets/images/teeths/teeth11_lingual_240x640.jpg";
-    }
 
-    Widget implantPicture11 = Container();
 
-    if (this.pcSingleTeethProperties.isImplant == 1) {
-      implantPicture11 = this.getImplantPicture(teethNumber, side);
-    }
 
-    Widget basePicture11 = Stack(
-        children: [
-      Container(child: Image.asset(pictureFileName)),
-      implantPicture11
-    ]);
-
-    final String regio =
-        this.pcSingleTeethSideProperties.teethNumber.substring(0, 1);
-
-    Widget lReturnValue = basePicture11;
-
-    if (regio == '2' || regio == '3') //flip horizontal
-    {
-      lReturnValue = Transform(
-        alignment: Alignment.center,
-        transform: Matrix4.rotationY(math.pi),
-        child: basePicture11,
-      );
-    }
-
-    return lReturnValue;
-  }
 
   Widget getImplantPicture(String teethNumber, String side) {
     String pictureFileName =
         "assets/images/teeths/implant11_buccal_240x640.jpg";
 
-    if(side==PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS)
-      {
-        pictureFileName =
-        "assets/images/teeths/implant11_lingual_240x640.jpg";
-      }
+    if (side == PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS) {
+      pictureFileName = "assets/images/teeths/implant11_lingual_240x640.jpg";
+    }
 
-    Widget basePicture11 = Container( child: Image.asset(pictureFileName));
+    Widget basePicture11 = Container(child: Image.asset(pictureFileName));
 
     return basePicture11;
   }
@@ -72,8 +42,9 @@ class PcSingleTeethGraphic extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget teethPicture = Container(
         child: Stack(children: [
-      this.getTeethPicture(this.pcSingleTeethSideProperties.teethNumber,
-          this.pcSingleTeethSideProperties.teethSide),
+      /*this.getTeethPicture(this.pcSingleTeethSideProperties.teethNumber,
+          this.pcSingleTeethSideProperties.teethSide),*/
+          TeethPicture(this.pcSingleTeethSideProperties.teethNumber, this.pcSingleTeethSideProperties.teethSide, this.pcSingleTeethProperties, this.pcSingleTeethSideProperties,columnWidth: this.columnWidth,),
       CustomPaint(
         painter:
             CurvePainter(this.pcSingleTeethSideProperties, this.pcProperties),

@@ -6,10 +6,9 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcsingleteeth.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 
-
 class PcCustomJaw extends StatelessWidget {
   PcCustomJaw(this.pcProperties, this.pcPropertiesOnChangedCallback,
-      this.teethNumberList,this.jawSide);
+      this.teethNumberList, this.jawSide);
 
   final PcProperties pcProperties;
 
@@ -17,9 +16,8 @@ class PcCustomJaw extends StatelessWidget {
   final List<String> teethNumberList;
   final String jawSide;
 
-  static final String upperJawSideFMS='upperJawSide';
-  static final String lowerJawSideFMS='lowerJawSide';
-
+  static final String upperJawSideFMS = 'upperJawSide';
+  static final String lowerJawSideFMS = 'lowerJawSide';
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +130,6 @@ class PcCustomJaw extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Arial',
                       fontSize: 16,
-
                       color: Colors.black)),
             ),
             Container(
@@ -222,21 +219,21 @@ class PcCustomJaw extends StatelessWidget {
           children: [
             Container(
               height: 4,
-              child:
-              Text('', style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontFamily: 'Arial',
-                  fontSize: 10,
-                  color: Colors.black)),
+              child: Text('',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Arial',
+                      fontSize: 10,
+                      color: Colors.black)),
             ),
             Container(
               height: 18,
-              child:
-              Text('Note', style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontFamily: 'Arial',
-                  fontSize: 10,
-                  color: Colors.black)),
+              child: Text('Note',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Arial',
+                      fontSize: 10,
+                      color: Colors.black)),
             ),
             Container(
               height: 18,
@@ -399,22 +396,15 @@ class PcCustomJaw extends StatelessWidget {
                       fontSize: 10,
                       color: Colors.black)),
             ),
-
-
           ],
         ));
 
-
-
-
     Widget tableColumnName;
 
-    if(this.jawSide==PcCustomJaw.upperJawSideFMS)
-      {
-        tableColumnName=tableColumnNameUpperJaw;
-      }
-    else{
-      tableColumnName=tableColumnNameLowerJaw;
+    if (this.jawSide == PcCustomJaw.upperJawSideFMS) {
+      tableColumnName = tableColumnNameUpperJaw;
+    } else {
+      tableColumnName = tableColumnNameLowerJaw;
     }
 
     teethColumnWidgets.add(tableColumnName);

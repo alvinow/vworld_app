@@ -7,8 +7,8 @@ class PcStringField extends StatelessWidget {
       {@required this.value,
       @required this.fieldName,
       @required this.caption,
-        @required this.height:18,
-        @required this.width:42,
+        this.height:18,
+        this.width:42,
       @required this.pcCallbackStringFieldField});
 
   final String value;

@@ -29,12 +29,9 @@ class _PeriochartState extends State<Periochart> {
         this.currentState, this.implementPcPropertiesOnChangedCallback);
   }
 
-  void implementPcPropertiesOnChangedCallback(
-      bool isDoUpdate) {
+  void implementPcPropertiesOnChangedCallback(bool isDoUpdate) {
     if (isDoUpdate) {
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 }

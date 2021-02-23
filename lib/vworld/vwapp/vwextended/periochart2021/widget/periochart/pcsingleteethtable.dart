@@ -23,12 +23,16 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   void implementCallbackIntegerField(String fieldName, int value) {
+
+    bool doSetState=false;
+
     if (fieldName == PcSingleTeethProperties.mobilityLevelCCFN) {
       pcSingleTeethProperties.mobilityLevel = value;
     } else if (fieldName == PcSingleTeethProperties.isImplantCCFN) {
       pcSingleTeethProperties.isImplant = value;
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointACCFN) {
+      doSetState=true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointA = value;
       } else {
@@ -36,6 +40,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointBCCFN) {
+      doSetState=true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointB = value;
       } else {
@@ -130,7 +135,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     }
 
-    pcPropertiesOnChangedCallback(false);
+    pcPropertiesOnChangedCallback(doSetState);
   }
 
   Widget getFurcationInputRow(String teethNumber, String teethSide) {
