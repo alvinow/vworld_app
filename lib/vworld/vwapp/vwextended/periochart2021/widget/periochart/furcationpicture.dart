@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/cycliciconbutton.dart';
 
-class FurcationPicture extends StatelessWidget{
-
-  FurcationPicture(this.teethNumber, this.side, {this.furcationLevelPointA:0,this.furcationLevelPointB:0});
+class FurcationPicture extends StatelessWidget {
+  FurcationPicture(this.teethNumber, this.side,
+      {this.furcationLevelPointA: 0, this.furcationLevelPointB: 0});
 
   final String teethNumber;
   final String side;
   final int furcationLevelPointA;
   final int furcationLevelPointB;
-  //final PcSingleTeethProperties pcSingleTeethProperties;
 
   @override
   Widget build(BuildContext context) {
-
     Widget returnValue = Container();
 
     int furcationType = 0;
@@ -58,11 +56,8 @@ class FurcationPicture extends StatelessWidget{
 
     if (furcationType == 0) {
     } else if (furcationType == 1) {
-
-
-
       returnValue = CyclicIconButton(
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.transparent,
           fieldName: PcSingleTeethSideProperties.furcationLevelPointACCFN,
           initialIndex: this.furcationLevelPointA,
           iconDataList: <IconData>[
@@ -73,32 +68,18 @@ class FurcationPicture extends StatelessWidget{
           ],
           iconSize: 14,
           colorList: <Color>[
-            Colors.green,
-            Colors.yellow,
-            Colors.orange,
-            Colors.red
+            Colors.transparent,
+            Colors.black,
+            Colors.black,
+            Colors.black
           ],
           isReadOnly: true);
     } else if (furcationType == 2) {
-
-      /*
-      if (side == PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS) {
-        initialIndexA =
-            this.pcSingleTeethProperties.lingualSide.furcationLevelPointA;
-        initialIndexB =
-            this.pcSingleTeethProperties.lingualSide.furcationLevelPointB;
-      } else {
-        initialIndexA =
-            this.pcSingleTeethProperties.buccalSide.furcationLevelPointA;
-        initialIndexB =
-            this.pcSingleTeethProperties.buccalSide.furcationLevelPointB;
-      }*/
-
       returnValue = Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           CyclicIconButton(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Colors.transparent,
               fieldName: PcSingleTeethSideProperties.furcationLevelPointACCFN,
               initialIndex: this.furcationLevelPointA,
               iconDataList: <IconData>[
@@ -109,14 +90,14 @@ class FurcationPicture extends StatelessWidget{
               ],
               iconSize: 14,
               colorList: <Color>[
-                Colors.green,
-                Colors.yellow,
-                Colors.orange,
-                Colors.red
+                Colors.transparent,
+                Colors.black,
+                Colors.black,
+                Colors.black
               ],
               isReadOnly: true),
           CyclicIconButton(
-              backgroundColor: Colors.yellow,
+              backgroundColor: Colors.transparent,
               fieldName: PcSingleTeethSideProperties.furcationLevelPointBCCFN,
               initialIndex: this.furcationLevelPointB,
               iconDataList: <IconData>[
@@ -127,10 +108,10 @@ class FurcationPicture extends StatelessWidget{
               ],
               iconSize: 14,
               colorList: <Color>[
-                Colors.green,
-                Colors.yellow,
-                Colors.orange,
-                Colors.red
+                Colors.transparent,
+                Colors.black,
+                Colors.black,
+                Colors.black
               ],
               isReadOnly: true)
         ],
@@ -138,6 +119,5 @@ class FurcationPicture extends StatelessWidget{
     }
 
     return returnValue;
-
   }
 }

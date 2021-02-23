@@ -58,7 +58,11 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
 
                 int diffInMs = difference.inMilliseconds;
 
+
+
                 if (diffInMs > 200) {
+
+
                   await this.nextCircularIndex();
                 }
               }
@@ -89,6 +93,6 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
           .pcCallbackIntegerField(this.widget.fieldName, this.currentIndex);
     }
 
-    setState(() {});
+    //setState(() {});
   }
 }

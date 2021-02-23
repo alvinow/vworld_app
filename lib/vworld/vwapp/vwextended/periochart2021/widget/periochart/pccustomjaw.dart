@@ -19,11 +19,8 @@ class PcCustomJaw extends StatelessWidget {
   static final String upperJawSideFMS = 'upperJawSide';
   static final String lowerJawSideFMS = 'lowerJawSide';
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> teethColumnWidgets = List<Widget>();
-
-    Widget tableColumnNameUpperJaw = Container(
+  Widget getTableColumnNameUpperJaw() {
+    Widget returnValue = Container(
         padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -133,7 +130,7 @@ class PcCustomJaw extends StatelessWidget {
                       color: Colors.black)),
             ),
             Container(
-              height: 140,
+              height: 105,
               child: Text('',
                   style: TextStyle(
                       fontWeight: FontWeight.w300,
@@ -211,7 +208,11 @@ class PcCustomJaw extends StatelessWidget {
           ],
         ));
 
-    Widget tableColumnNameLowerJaw = Container(
+    return returnValue;
+  }
+
+  Widget getTableColumnNameLowerjaw() {
+    return Container(
         padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -398,6 +399,15 @@ class PcCustomJaw extends StatelessWidget {
             ),
           ],
         ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> teethColumnWidgets = List<Widget>();
+
+    Widget tableColumnNameUpperJaw = this.getTableColumnNameUpperJaw();
+
+    Widget tableColumnNameLowerJaw = this.getTableColumnNameLowerjaw();
 
     Widget tableColumnName;
 

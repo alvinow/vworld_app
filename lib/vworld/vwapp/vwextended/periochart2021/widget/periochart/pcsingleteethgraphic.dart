@@ -42,8 +42,6 @@ class PcSingleTeethGraphic extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget teethPicture = Container(
         child: Stack(children: [
-      /*this.getTeethPicture(this.pcSingleTeethSideProperties.teethNumber,
-          this.pcSingleTeethSideProperties.teethSide),*/
           TeethPicture(this.pcSingleTeethSideProperties.teethNumber, this.pcSingleTeethSideProperties.teethSide, this.pcSingleTeethProperties, this.pcSingleTeethSideProperties,columnWidth: this.columnWidth,),
       CustomPaint(
         painter:

@@ -14,8 +14,13 @@ class TeethPicture extends StatelessWidget {
   final PcSingleTeethSideProperties pcSingleTeethSideProperties;
   final double columnWidth;
 
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
     String pictureFileName = "assets/images/teeths/image_not_found.jpg";
 
     int furcationLevelPointA=0;
@@ -39,9 +44,13 @@ class TeethPicture extends StatelessWidget {
       implantPicture11 = this.getImplantPicture(teethNumber, side);
     }
 
-    //Widget furcationPicture11 = this.getFurcationPicture(teethNumber, side);
+    Widget furcationPicture11=Container();
 
-    Widget furcationPicture11=FurcationPicture(teethNumber, side,furcationLevelPointA: furcationLevelPointA,furcationLevelPointB: furcationLevelPointB,);
+    if(this.pcSingleTeethProperties.isImplant==0) {
+      furcationPicture11 =FurcationPicture(
+        teethNumber, side, furcationLevelPointA: furcationLevelPointA,
+        furcationLevelPointB: furcationLevelPointB,);
+    }
 
     Widget basePicture11 = Stack(children: [
       Container(child: Image.asset(pictureFileName)),

@@ -11,7 +11,7 @@ class PcJaw extends StatelessWidget {
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
   final List<String> teethNumberListUpperJaw = <String>[
-    '18'/*,
+    '18',
     '17',
     '16',
     '15',
@@ -26,11 +26,11 @@ class PcJaw extends StatelessWidget {
     '25',
     '26',
     '27',
-    '28'*/
+    '28'
   ];
 
   final List<String> teethNumberListLowerJaw = <String>[
-    '48'/*,
+    '48',
     '47',
     '46',
     '45',
@@ -45,7 +45,7 @@ class PcJaw extends StatelessWidget {
     '35',
     '36',
     '37',
-    '38'*/
+    '38'
   ];
 
   @override

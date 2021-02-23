@@ -23,16 +23,16 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   void implementCallbackIntegerField(String fieldName, int value) {
-
-    bool doSetState=false;
+    bool doSetState = false;
 
     if (fieldName == PcSingleTeethProperties.mobilityLevelCCFN) {
       pcSingleTeethProperties.mobilityLevel = value;
     } else if (fieldName == PcSingleTeethProperties.isImplantCCFN) {
+      doSetState = true;
       pcSingleTeethProperties.isImplant = value;
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointACCFN) {
-      doSetState=true;
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointA = value;
       } else {
@@ -40,7 +40,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointBCCFN) {
-      doSetState=true;
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointB = value;
       } else {
@@ -184,7 +184,10 @@ class PcSingleTeethTable extends StatelessWidget {
                   isReadOnly: false));
         }
       } else {
-        if (teethRow == '8' || teethRow == '7' || teethRow == '6') {
+        if (teethRow == '8' ||
+            teethRow == '7' ||
+            teethRow == '6' ||
+            teethRow == '4') {
           returnValue = Container(
               width: this.columnWidth,
               padding: EdgeInsets.all(2),
@@ -243,38 +246,9 @@ class PcSingleTeethTable extends StatelessWidget {
                             this.implementCallbackIntegerField,
                         isReadOnly: false)
                   ]));
-        } else if (teethRow == '4') {
-          returnValue = Container(
-              width: this.columnWidth,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1.0, color: Colors.black)),
-              child: CyclicIconButton(
-                  backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
-                  fieldName:
-                      PcSingleTeethSideProperties.furcationLevelPointACCFN,
-                  initialIndex: this
-                      .pcSingleTeethProperties
-                      .lingualSide
-                      .furcationLevelPointA,
-                  iconDataList: <IconData>[
-                    Icons.circle,
-                    Icons.brightness_1_outlined,
-                    Icons.brightness_medium_rounded,
-                    Icons.circle
-                  ],
-                  iconSize: 14,
-                  colorList: <Color>[
-                    Color.fromRGBO(200, 200, 200, 25.0),
-                    Colors.black,
-                    Colors.black,
-                    Colors.black
-                  ],
-                  pcCallbackIntegerField: this.implementCallbackIntegerField,
-                  isReadOnly: false));
         }
       }
-    } else {
+    } else if (teethRegio == '3' || teethRegio == '4') {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         if (teethRow == '8' || teethRow == '7' || teethRow == '6') {
           returnValue = Container(
@@ -360,25 +334,19 @@ class PcSingleTeethTable extends StatelessWidget {
   }
 
   Widget getMobilityLevelRow() {
-    return
-      Container(
-      child: PcIntegerField(
-        value: this.pcSingleTeethProperties.mobilityLevel,
-        fieldName: PcSingleTeethProperties.mobilityLevelCCFN,
-        //caption: 'mobility',
-        pcCallbackIntegerField: implementCallbackIntegerField,
-        width: this.columnWidth,
-        height: 14,
-        borderWidth: 1,
-        useBorder: false,
-      ),
+    return Container(
+        child: PcIntegerField(
+          value: this.pcSingleTeethProperties.mobilityLevel,
+          fieldName: PcSingleTeethProperties.mobilityLevelCCFN,
+          //caption: 'mobility',
+          pcCallbackIntegerField: implementCallbackIntegerField,
+          width: this.columnWidth,
+          height: 14,
+          borderWidth: 1,
+          useBorder: false,
+        ),
         decoration:
-        BoxDecoration(border: Border.all(width: 1, color: Colors.black))
-
-      );
-
-
-
+            BoxDecoration(border: Border.all(width: 1, color: Colors.black)));
   }
 
   Widget getIsImplantRow() {
@@ -914,7 +882,7 @@ class PcSingleTeethTable extends StatelessWidget {
                 this.getBleedingOnProbingRow(),
                 this.getFurcationInputRow(
                     this.pcSingleTeethProperties.teethNumber,
-                    PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
+                    PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
                 this.getIsImplantRow(),
                 this.getMobilityLevelRow(),
                 this.getTeethNumberRow(),
@@ -928,7 +896,7 @@ class PcSingleTeethTable extends StatelessWidget {
                 this.getNoteRow(),
                 this.getFurcationInputRow(
                     this.pcSingleTeethProperties.teethNumber,
-                    PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
+                    PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
                 this.getBleedingOnProbingRow(),
                 this.getPlaqueRow(),
                 this.getGingivalMarginRow(),
