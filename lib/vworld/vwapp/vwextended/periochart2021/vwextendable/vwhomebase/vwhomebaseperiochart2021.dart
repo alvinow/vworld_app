@@ -27,7 +27,33 @@ class VwHomeBasePeriochart2021 extends VwHomeBase {
         examTypeId: "InitialExam",
         teeths: teeths);
 
+
     return MaterialApp(
+
+
+
+      home: Scaffold(
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: InteractiveViewer(
+            panEnabled: false, // Set it to false to prevent panning.
+            boundaryMargin: EdgeInsets.all(80),
+            minScale: 0.5,
+            maxScale: 4,
+            child: Periochart(
+              initialState: pcProperties,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    
+
+    return MaterialApp(
+
+
+
       home: Scaffold(
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

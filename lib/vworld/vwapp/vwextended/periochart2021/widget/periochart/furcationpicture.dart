@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vworld_app/fonts/perio_icon_icons.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/cycliciconbutton.dart';
+
 
 class FurcationPicture extends StatelessWidget {
   FurcationPicture(this.teethNumber, this.side,
@@ -63,7 +65,7 @@ class FurcationPicture extends StatelessWidget {
           iconDataList: <IconData>[
             Icons.circle,
             Icons.brightness_1_outlined,
-            Icons.brightness_medium_rounded,
+            PerioIcon.half_circle_svgrepo_com,
             Icons.circle
           ],
           iconSize: 14,
@@ -85,7 +87,7 @@ class FurcationPicture extends StatelessWidget {
               iconDataList: <IconData>[
                 Icons.circle,
                 Icons.brightness_1_outlined,
-                Icons.brightness_medium_rounded,
+                PerioIcon.half_circle_svgrepo_com,
                 Icons.circle
               ],
               iconSize: 14,
@@ -103,7 +105,7 @@ class FurcationPicture extends StatelessWidget {
               iconDataList: <IconData>[
                 Icons.circle,
                 Icons.brightness_1_outlined,
-                Icons.brightness_medium_rounded,
+                PerioIcon.half_circle_svgrepo_com,
                 Icons.circle
               ],
               iconSize: 14,

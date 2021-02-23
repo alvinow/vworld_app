@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
 
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
@@ -55,6 +56,12 @@ flutter:
     - "assets/images/jaw/jaw_lower.jpg"
     - "assets/images/jaw/jaw_upper.jpg"
     - assets/google_fonts/
+
+
+  fonts:
+    - family:  PerioIcon
+      fonts:
+        - asset: "assets/fonts/PerioIcon.ttf"
 
 
   # To add assets to your application, add an assets section, like this:
