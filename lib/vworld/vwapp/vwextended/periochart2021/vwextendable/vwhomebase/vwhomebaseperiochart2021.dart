@@ -5,7 +5,6 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/vwaaa/vwaccounting/vwaccountin
 import 'package:vworld_app/vworld/vwapp/vwappbase/vwaaa/vwauthentication/vwauthentication.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
-
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwcore/vwauthorization/vwauthorization.dart';
 
@@ -27,38 +26,22 @@ class VwHomeBasePeriochart2021 extends VwHomeBase {
         examTypeId: "InitialExam",
         teeths: teeths);
 
-
     return MaterialApp(
-
-
-
       home: Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
+        body: SafeArea(
           child: InteractiveViewer(
-            panEnabled: false, // Set it to false to prevent panning.
-            boundaryMargin: EdgeInsets.all(80),
-            minScale: 0.5,
-            maxScale: 4,
+            boundaryMargin: const EdgeInsets.fromLTRB(50, 50, 50, 50),
+            constrained: false,
+            scaleEnabled: true,
+
+            panEnabled: true, // Set it to false to prevent panning.
+
+            minScale: 0.1,
+            maxScale: 2,
+
             child: Periochart(
               initialState: pcProperties,
             ),
-          ),
-        ),
-      ),
-    );
-
-    
-
-    return MaterialApp(
-
-
-
-      home: Scaffold(
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Periochart(
-            initialState: pcProperties,
           ),
         ),
       ),

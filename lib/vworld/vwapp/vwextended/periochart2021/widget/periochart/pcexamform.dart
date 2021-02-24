@@ -48,8 +48,9 @@ class PcExamForm extends StatelessWidget {
 
     return Container(
         color: Colors.white,
-        width: 1600,
-        height: 3200,
+        width: 900,
+        height: 1450,
+        padding: const EdgeInsets.fromLTRB(50, 30, 30, 50),
 
         child:Column(
       crossAxisAlignment: CrossAxisAlignment.start,
