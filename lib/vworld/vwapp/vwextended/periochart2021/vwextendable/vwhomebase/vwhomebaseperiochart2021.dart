@@ -27,9 +27,14 @@ class VwHomeBasePeriochart2021 extends VwHomeBase {
         teeths: teeths);
 
     return MaterialApp(
+      color: Colors.grey,
+
       home: Scaffold(
+        backgroundColor: Colors.blueGrey,
         body: SafeArea(
+
           child: InteractiveViewer(
+
             boundaryMargin: const EdgeInsets.fromLTRB(50, 50, 50, 50),
             constrained: false,
             scaleEnabled: true,
