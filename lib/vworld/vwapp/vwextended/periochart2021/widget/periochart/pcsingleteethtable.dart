@@ -49,6 +49,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointA =
             value;
@@ -58,6 +59,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointB =
             value;
@@ -67,6 +69,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointCCCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointC =
             value;
@@ -75,18 +78,21 @@ class PcSingleTeethTable extends StatelessWidget {
             value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointACCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointA = value;
       } else {
         this.pcSingleTeethProperties.lingualSide.isPlaquePointA = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointBCCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointB = value;
       } else {
         this.pcSingleTeethProperties.lingualSide.isPlaquePointB = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointCCCFN) {
+      doSetState = true;
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointC = value;
       } else {
@@ -151,6 +157,8 @@ class PcSingleTeethTable extends StatelessWidget {
 
     final String teethRegio = teethNumber.substring(0, 1);
     final String teethRow = teethNumber.substring(1, 2);
+
+    if(this.pcSingleTeethProperties.isImplant==0){
 
     if (teethRegio == '1' || teethRegio == '2') {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
@@ -260,7 +268,7 @@ class PcSingleTeethTable extends StatelessWidget {
               child: CyclicIconButton(
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
-                      PcSingleTeethSideProperties.furcationLevelPointACCFN,
+                  PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
                       .buccalSide
@@ -291,7 +299,7 @@ class PcSingleTeethTable extends StatelessWidget {
               child: CyclicIconButton(
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
-                      PcSingleTeethSideProperties.furcationLevelPointACCFN,
+                  PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
                       .lingualSide
@@ -313,6 +321,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   isReadOnly: false));
         }
       }
+    }
     }
 
     return returnValue;

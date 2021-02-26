@@ -17,10 +17,14 @@ class VwHomeBasePeriochart2021 extends VwHomeBase {
   Widget build(BuildContext context) {
     List<PcSingleTeethProperties> teeths = List<PcSingleTeethProperties>();
 
+    String date = '19800101T170555';
+    //String dateWithT = date.substring(0, 8) + 'T' + date.substring(8);
+    DateTime dateTime = DateTime.parse(date);
+
     PcProperties pcProperties = PcProperties(
         id: Uuid().v4().toString(),
         patientName: "John Doe",
-        patientDob: '1980-01-01',
+        patientDob: dateTime,
         operatorName: 'Dr. D',
         examDateTime: DateTime.now(),
         examTypeId: "InitialExam",

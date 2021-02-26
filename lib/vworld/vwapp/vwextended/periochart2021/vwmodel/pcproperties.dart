@@ -6,7 +6,7 @@ class PcProperties extends VwDocumentContent {
   PcProperties(
       {@required this.id,
       @required this.patientName,
-      @required this.patientDob,
+        @required  this.patientDob,
       @required this.operatorName,
       @required this.examDateTime,
       @required this.examTypeId,
@@ -15,7 +15,7 @@ class PcProperties extends VwDocumentContent {
 
   String id;
   String patientName;
-  String patientDob;
+  DateTime patientDob;
   String operatorName;
   DateTime examDateTime;
   String examTypeId;

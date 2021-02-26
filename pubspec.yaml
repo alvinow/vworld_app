@@ -34,6 +34,7 @@ dependencies:
   uuid: ^2.2.2
   path_drawing: ^0.4.1+1
   matrix4_transform: ^1.1.7
+  hexcolor: ^1.0.6
 
 dev_dependencies:
   flutter_test:

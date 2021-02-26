@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 
 class PcStringField extends StatelessWidget {
@@ -9,20 +10,40 @@ class PcStringField extends StatelessWidget {
       @required this.caption,
         this.height:18,
         this.width:42,
-      @required this.pcCallbackStringFieldField});
+      @required this.pcCallbackStringFieldField,
+        this.borderWidth:1,
+        this.useBorder:false,
+        this.fontSize:18,
+        this.backgroundColorHex:"#ebf1f2"
 
+      });
+  final String backgroundColorHex;
   final String value;
   final String fieldName;
   final String caption;
   final double width;
   final double height;
   final PcCallbackStringField pcCallbackStringFieldField;
+  final double borderWidth;
+  final bool useBorder;
+  final double fontSize;
+
 
   @override
   Widget build(BuildContext context) {
     BoxDecoration borderBoxDecoration = BoxDecoration();
     TextEditingController myController = TextEditingController()
       ..text = this.value;
+
+    if (this.useBorder == true) {
+      borderBoxDecoration = BoxDecoration(
+
+        border: Border.all(width: this.borderWidth, color: Colors.black),
+        color:  HexColor(this.backgroundColorHex),
+
+
+      );
+    }
 
     Widget lReturnValue = Scaffold(
         body: TextField(
@@ -33,7 +54,7 @@ class PcStringField extends StatelessWidget {
         this.pcCallbackStringFieldField(this.fieldName, value);
       },
 
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(fontSize: this.fontSize),
 
 
           decoration: InputDecoration(
@@ -50,9 +71,9 @@ class PcStringField extends StatelessWidget {
     ));
 
     Widget lReturnValueWithContainer = Container(
+        padding: EdgeInsets.all(4),
         width: this.width,
         height: this.height,
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         decoration: borderBoxDecoration,
         child: lReturnValue);
 
