@@ -15,7 +15,9 @@ class PcDateField extends StatelessWidget {
       this.height: 40,
       this.borderWidth: 1,
       this.useBorder: true,
-      this.fontSize: 18});
+      this.fontSize: 18,
+      this.requestParetSetStateOnChanged:false
+      });
 
   final DateTime value;
   final String fieldName;
@@ -26,6 +28,7 @@ class PcDateField extends StatelessWidget {
   final double borderWidth;
   final bool useBorder;
   final double fontSize;
+  final bool requestParetSetStateOnChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,6 @@ class PcDateField extends StatelessWidget {
           ),
           controller: myController,
           readOnly: true,
-
           onTap: () async {
             DatePicker.showDatePicker(context,
                 showTitleActions: true,
@@ -70,22 +72,17 @@ class PcDateField extends StatelessWidget {
                 maxTime: DateTime.now(),
                 theme: DatePickerTheme(
                     headerColor: Colors.lightBlue,
-                    backgroundColor: Colors.grey,
+                    backgroundColor: Colors.white70,
                     itemStyle: TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         fontSize: 18),
                     doneStyle: TextStyle(color: Colors.white, fontSize: 16)),
-                onChanged: (date) {
-              print('change $date in time zone ' +
-                  date.timeZoneOffset.inHours.toString());
-            }, onConfirm: (date) {
-              print('confirm $date');
-              //this.pcProperties.examDateTime=date;
-              this.pcCallbackDateField(this.fieldName, date);
+                onConfirm: (date) {
+                  myController.text=formatterDateTimeID.format(date);
+              this.pcCallbackDateField(this.fieldName, date, this.requestParetSetStateOnChanged);
             }, currentTime: this.value, locale: LocaleType.en);
           },
-          //decoration: InputDecoration(labelText: this.caption, ),
         ));
 
     return lReturnValue;

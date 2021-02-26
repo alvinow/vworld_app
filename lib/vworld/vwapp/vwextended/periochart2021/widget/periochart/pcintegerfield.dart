@@ -83,7 +83,7 @@ class PcIntegerField extends StatelessWidget {
           }
         }
 
-        this.pcCallbackIntegerField(this.fieldName, outputValue);
+        this.pcCallbackIntegerField(this.fieldName, outputValue,true);
       },
 
       decoration: InputDecoration(

@@ -83,7 +83,7 @@ class PcJaw extends StatelessWidget {
                           style: textStyleBox1,
                         ),
                         Text(
-                          "      Mean Attachment level=   0 mm",
+                          "      Mean Attachment Level=   0 mm",
                           style: textStyleBox1,
                         ),
                         Text(
@@ -91,7 +91,7 @@ class PcJaw extends StatelessWidget {
                           style: textStyleBox1,
                         ),
                         Text(
-                          "      0% Bleeding on probing",
+                          "      0% Bleeding on Probing",
                           style: textStyleBox1,
                         ),
                       ],

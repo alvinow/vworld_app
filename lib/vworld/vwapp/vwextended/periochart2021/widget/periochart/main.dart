@@ -4,9 +4,9 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
 
 typedef PcPropertiesOnChangedCallback = void Function(bool);
-typedef PcCallbackDateField = void Function(String, DateTime);
-typedef PcCallbackStringField = void Function(String, String);
-typedef PcCallbackIntegerField = void Function(String, int);
+typedef PcCallbackDateField = void Function(String, DateTime,bool);
+typedef PcCallbackStringField = void Function(String, String,bool);
+typedef PcCallbackIntegerField = void Function(String, int,bool);
 
 class Periochart extends StatefulWidget {
   Periochart({@required this.initialState});
@@ -29,8 +29,8 @@ class _PeriochartState extends State<Periochart> {
         this.currentState, this.implementPcPropertiesOnChangedCallback);
   }
 
-  void implementPcPropertiesOnChangedCallback(bool isDoUpdate) {
-    if (isDoUpdate) {
+  void implementPcPropertiesOnChangedCallback(bool doSetState) {
+    if (doSetState) {
       setState(() {});
     }
   }

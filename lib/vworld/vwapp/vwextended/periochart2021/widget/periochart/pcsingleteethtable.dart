@@ -17,23 +17,23 @@ class PcSingleTeethTable extends StatelessWidget {
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
   final double columnWidth;
 
-  void implementCallbackStringField(String fieldName, String value) {
+  void implementCallbackStringField(String fieldName, String value, bool doSetState) {
     if (fieldName == PcSingleTeethProperties.noteCCFN) {
       pcSingleTeethProperties.note = value;
     }
   }
 
-  void implementCallbackIntegerField(String fieldName, int value) {
-    bool doSetState = false;
+  void implementCallbackIntegerField(String fieldName, int value, bool doSetState) {
+
 
     if (fieldName == PcSingleTeethProperties.mobilityLevelCCFN) {
       pcSingleTeethProperties.mobilityLevel = value;
     } else if (fieldName == PcSingleTeethProperties.isImplantCCFN) {
-      doSetState = true;
+
       pcSingleTeethProperties.isImplant = value;
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointACCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointA = value;
       } else {
@@ -41,7 +41,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointBCCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.furcationLevelPointB = value;
       } else {
@@ -49,7 +49,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointA =
             value;
@@ -59,7 +59,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointB =
             value;
@@ -69,7 +69,7 @@ class PcSingleTeethTable extends StatelessWidget {
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointCCCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointC =
             value;
@@ -78,21 +78,21 @@ class PcSingleTeethTable extends StatelessWidget {
             value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointACCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointA = value;
       } else {
         this.pcSingleTeethProperties.lingualSide.isPlaquePointA = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointBCCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointB = value;
       } else {
         this.pcSingleTeethProperties.lingualSide.isPlaquePointB = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointCCCFN) {
-      doSetState = true;
+
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         this.pcSingleTeethProperties.buccalSide.isPlaquePointC = value;
       } else {
@@ -169,6 +169,7 @@ class PcSingleTeethTable extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: Colors.black)),
               child: CyclicIconButton(
+                requestParetSetStateOnChanged: true,
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
                       PcSingleTeethSideProperties.furcationLevelPointACCFN,
@@ -207,6 +208,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CyclicIconButton(
+                        requestParetSetStateOnChanged: true,
                         backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                         fieldName: PcSingleTeethSideProperties
                             .furcationLevelPointACCFN,
@@ -231,6 +233,7 @@ class PcSingleTeethTable extends StatelessWidget {
                             this.implementCallbackIntegerField,
                         isReadOnly: false),
                     CyclicIconButton(
+                        requestParetSetStateOnChanged: true,
                         backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                         fieldName: PcSingleTeethSideProperties
                             .furcationLevelPointBCCFN,
@@ -266,6 +269,7 @@ class PcSingleTeethTable extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: Colors.black)),
               child: CyclicIconButton(
+                  requestParetSetStateOnChanged: true,
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
                   PcSingleTeethSideProperties.furcationLevelPointACCFN,
@@ -297,6 +301,7 @@ class PcSingleTeethTable extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: Colors.black)),
               child: CyclicIconButton(
+                  requestParetSetStateOnChanged: true,
                   backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
                   fieldName:
                   PcSingleTeethSideProperties.furcationLevelPointACCFN,
@@ -366,6 +371,7 @@ class PcSingleTeethTable extends StatelessWidget {
         decoration:
             BoxDecoration(border: Border.all(width: 1.0, color: Colors.black)),
         child: CyclicIconButton(
+            requestParetSetStateOnChanged: true,
             backgroundColor: Color.fromRGBO(200, 200, 200, 25.0),
             fieldName: PcSingleTeethProperties.isImplantCCFN,
             initialIndex: this.pcSingleTeethProperties.isImplant,
@@ -827,6 +833,7 @@ class PcSingleTeethTable extends StatelessWidget {
       child: PcStringField(
           value: this.pcSingleTeethProperties.note,
           fieldName: PcSingleTeethProperties.noteCCFN,
+          fontSize: 11,
           width: 100,
           height: 25,
           caption: '',

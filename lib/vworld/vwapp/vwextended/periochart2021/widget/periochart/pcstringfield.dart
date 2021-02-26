@@ -47,17 +47,19 @@ class PcStringField extends StatelessWidget {
 
     Widget lReturnValue = Scaffold(
         body: TextField(
+
           maxLines: 1,
       controller: myController,
       readOnly: false,
       onChanged: (value) {
-        this.pcCallbackStringFieldField(this.fieldName, value);
+        this.pcCallbackStringFieldField(this.fieldName, value,true);
       },
 
           style: TextStyle(fontSize: this.fontSize),
 
 
           decoration: InputDecoration(
+
             contentPadding: EdgeInsets.all(0),
             labelText: this.caption,
             border: InputBorder.none,
@@ -71,7 +73,7 @@ class PcStringField extends StatelessWidget {
     ));
 
     Widget lReturnValueWithContainer = Container(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.fromLTRB(2, 1, 2, 1),
         width: this.width,
         height: this.height,
         decoration: borderBoxDecoration,

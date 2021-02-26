@@ -12,7 +12,8 @@ class CyclicIconButton extends StatefulWidget {
       @required this.colorList,
       this.pcCallbackIntegerField,
       this.isReadOnly: true,
-      this.backgroundColor: Colors.white});
+      this.backgroundColor: Colors.white,
+      this.requestParetSetStateOnChanged: false});
 
   final Color backgroundColor;
   final String fieldName;
@@ -21,7 +22,8 @@ class CyclicIconButton extends StatefulWidget {
   final List<IconData> iconDataList;
   final List<Color> colorList;
   final double iconSize;
-  final initialIndex;
+  final int initialIndex;
+  final bool requestParetSetStateOnChanged;
 
   _CyclicIconButtonState createState() => _CyclicIconButtonState();
 }
@@ -39,7 +41,9 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
 
   @override
   Widget build(BuildContext context) {
-    this.currentIndex = this.widget.initialIndex;
+    if(this.currentIndex==null) {
+      this.currentIndex = this.widget.initialIndex;
+    }
     return Container(
         color: this.widget.backgroundColor,
         width: this.widget.iconSize,
@@ -58,11 +62,7 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
 
                 int diffInMs = difference.inMilliseconds;
 
-
-
                 if (diffInMs > 200) {
-
-
                   await this.nextCircularIndex();
                 }
               }
@@ -88,11 +88,12 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
     }
 
     if (this.widget.pcCallbackIntegerField != null) {
-      this
-          .widget
-          .pcCallbackIntegerField(this.widget.fieldName, this.currentIndex);
+      this.widget.pcCallbackIntegerField(this.widget.fieldName,
+          this.currentIndex, this.widget.requestParetSetStateOnChanged);
     }
 
-    //setState(() {});
+   if(this.widget.requestParetSetStateOnChanged==false) {
+     setState(() {});
+   }
   }
 }

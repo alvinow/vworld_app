@@ -13,7 +13,7 @@ class PcExamForm extends StatelessWidget {
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
 
-  void callbackStringField(String fieldName, String value) {
+  void callbackStringField(String fieldName, String value, bool doSetState) {
     if (fieldName == PcProperties.patientNameCCFN) {
       this.pcProperties.patientName = value;
     }
@@ -25,7 +25,7 @@ class PcExamForm extends StatelessWidget {
     this.pcPropertiesOnChangedCallback(false);
   }
 
-  void callbackDateField(String fieldName, DateTime value) {
+  void callbackDateField(String fieldName, DateTime value, bool doSetState) {
     if (fieldName == PcProperties.examDateTimeCCFN) {
       this.pcProperties.examDateTime = value;
     }
@@ -34,7 +34,7 @@ class PcExamForm extends StatelessWidget {
       this.pcProperties.patientDob = value;
     }
 
-    this.pcPropertiesOnChangedCallback(true);
+    this.pcPropertiesOnChangedCallback(doSetState);
   }
 
   @override
