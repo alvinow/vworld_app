@@ -1,6 +1,12 @@
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:hive/hive.dart';
+part 'pcsingleteethsideproperties.g.dart';
 
-class PcSingleTeethSideProperties extends VwDocumentContent {
+@HiveType(typeId: 3)
+@JsonSerializable()
+
+class PcSingleTeethSideProperties  {
   PcSingleTeethSideProperties(
       {this.teethNumber,
       this.teethSide,
@@ -22,21 +28,52 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
   static final String pcSingleTeethSideLingualFMS = 'PcSingleTeethSideLingual';
   static final String pcSingleTeethSideBuccalFMS = 'PcSingleTeethSideBuccal';
 
-   String teethNumber;
+  @HiveField(0)
+  String teethNumber;
+
+  @HiveField(1)
   String teethSide;
+
+  @HiveField(2)
   int furcationLevelPointA;
+
+  @HiveField(3)
   int furcationLevelPointB;
+
+  @HiveField(4)
   int isBleedingOnProbingPointA;
+
+  @HiveField(5)
   int isBleedingOnProbingPointB;
+
+  @HiveField(6)
   int isBleedingOnProbingPointC;
+
+  @HiveField(7)
   int isPlaquePointA;
+
+  @HiveField(8)
   int isPlaquePointB;
+
+  @HiveField(9)
   int isPlaquePointC;
+
+  @HiveField(10)
   int gingivalMarginPointA;
+
+  @HiveField(11)
   int gingivalMarginPointB;
+
+  @HiveField(12)
   int gingivalMarginPointC;
+
+  @HiveField(13)
   int probingDepthPointA;
+
+  @HiveField(14)
   int probingDepthPointB;
+
+  @HiveField(15)
   int probingDepthPointC;
 
   static final String teethNumberCCFN = 'teethNumber';
@@ -64,6 +101,12 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
     return VwDocumentContent.documenttypeIdUnknown;
   }
 
+  factory PcSingleTeethSideProperties.fromJson(Map<String, dynamic> json) =>
+      _$PcSingleTeethSidePropertiesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PcSingleTeethSidePropertiesToJson(this);
+
+  /*
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -92,6 +135,9 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
     };
   }
 
+   */
+
+  /*
   @override
   factory PcSingleTeethSideProperties.fromJson(Map<String, dynamic> data) =>
       PcSingleTeethSideProperties(
@@ -119,5 +165,5 @@ class PcSingleTeethSideProperties extends VwDocumentContent {
           probingDepthPointB:
               data[PcSingleTeethSideProperties.probingDepthPointBCCFN],
           probingDepthPointC:
-              data[PcSingleTeethSideProperties.probingDepthPointCCCFN]);
+              data[PcSingleTeethSideProperties.probingDepthPointCCCFN]);*/
 }

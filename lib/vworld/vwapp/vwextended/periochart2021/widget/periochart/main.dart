@@ -1,35 +1,100 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcexamform.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
+import 'package:hive/hive.dart';
 
 typedef PcPropertiesOnChangedCallback = void Function(bool);
-typedef PcCallbackDateField = void Function(String, DateTime,bool);
-typedef PcCallbackStringField = void Function(String, String,bool);
-typedef PcCallbackIntegerField = void Function(String, int,bool);
+typedef PcPropertiesLoadFromBox = Future<void> Function(String);
+typedef PcPropertiesSaveToBox = Future<void> Function(String);
+typedef PcCallbackDateField = void Function(String, DateTime, bool);
+typedef PcCallbackStringField = void Function(String, String, bool);
+typedef PcCallbackIntegerField = void Function(String, int, bool);
 
 class Periochart extends StatefulWidget {
-  Periochart({@required this.initialState});
-  final PcProperties initialState;
+  Periochart(this.pcProperties);
+  final PcProperties pcProperties;
   _PeriochartState createState() => _PeriochartState();
+
+
+  static  PcProperties getBlankPcPropertiesId(){
+
+    String date = '19800101T000000';
+    DateTime dateTime = DateTime.parse(date);
+
+    List<PcSingleTeethProperties> teeths = List<PcSingleTeethProperties>();
+
+    return  PcProperties(
+    id: Uuid().v4().toString(),
+  patientName: "John Doe",
+  patientDob: dateTime,
+  operatorName: 'Dr. D',
+  examDateTime: DateTime.now(),
+  examTypeId: "InitialExam",
+  teeths: teeths);
+
+  }
+
 }
 
 class _PeriochartState extends State<Periochart> {
   PcProperties currentState;
+  String currentLoaderPcPropertiesId;
 
   @override
   void initState() {
     super.initState();
-    this.currentState = this.widget.initialState;
+    this.currentState = Periochart.getBlankPcPropertiesId();
+currentLoaderPcPropertiesId = this.widget.pcProperties.id;
+currentState=this.widget.pcProperties;
   }
 
   @override
   Widget build(BuildContext context) {
     return PcExamForm(
-        this.currentState, this.implementPcPropertiesOnChangedCallback);
+        this.currentState, this.implementPcPropertiesOnChangedCallback,pcPropertiesLoadFromBox: this.implememtPcPropertiesLoadFromBox,
+      pcPropertiesSaveToBox: this.implementPcPropertiesSaveToBox,
+
+
+    );
   }
 
-  void implementPcPropertiesOnChangedCallback(bool doSetState) {
+Future<void> implememtPcPropertiesLoadFromBox(String pcPropertiesId) async{
+
+
+
+    var box = await Hive.openBox('PcProperties');
+
+   PcProperties pcProperties= await box.get(pcPropertiesId);
+
+   if(pcProperties!=null) {
+     this.currentState = pcProperties;
+
+     setState(() {
+
+     });
+   }
+
+    await box.close();
+  }
+
+  Future<void> implementPcPropertiesSaveToBox(String pcPropertiesId) async{
+
+    var box = await Hive.openBox('PcProperties');
+
+
+    await box.put(pcPropertiesId, this.currentState);
+
+    this.currentLoaderPcPropertiesId=pcPropertiesId;
+
+    await box.close();
+
+  }
+
+  void implementPcPropertiesOnChangedCallback(
+      bool doSetState) {
     if (doSetState) {
       setState(() {});
     }

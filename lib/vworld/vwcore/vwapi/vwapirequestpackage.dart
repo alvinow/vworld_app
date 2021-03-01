@@ -1,7 +1,7 @@
 import 'package:vworld_app/vworld/vwcore/vwapi/vwapirequest.dart';
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
 
-class VwApiRequestPackage extends VwDocumentContent {
+class VwApiRequestPackage{
   String loginsessionId;
   String apkId;
   List<VwApiRequest> requestList;

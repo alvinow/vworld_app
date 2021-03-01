@@ -1,17 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcdatefield.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcjaw.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcstringfield.dart';
+import 'package:hive/hive.dart';
+
 
 class PcExamForm extends StatelessWidget {
-  PcExamForm(this.pcProperties, this.pcPropertiesOnChangedCallback);
+  PcExamForm(this.pcProperties, this.pcPropertiesOnChangedCallback,{this.pcPropertiesLoadFromBox,this.pcPropertiesSaveToBox} );
 
   final PcProperties pcProperties;
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
+
+  final PcPropertiesLoadFromBox pcPropertiesLoadFromBox;
+
+  final PcPropertiesSaveToBox pcPropertiesSaveToBox;
 
   void callbackStringField(String fieldName, String value, bool doSetState) {
     if (fieldName == PcProperties.patientNameCCFN) {
@@ -47,6 +54,30 @@ class PcExamForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            SizedBox(
+              height: 50,
+              width: 200,
+              child: IconButton(
+                icon: Icon(Icons.arrow_circle_up),
+                onPressed: () async{
+
+
+                  await this.pcPropertiesLoadFromBox('file1');
+
+                },
+              ),
+            ),
+            SizedBox(
+              height: 50,
+              width: 200,
+              child: IconButton(
+                icon: Icon(Icons.save),
+                onPressed: () async{
+                  await this.pcPropertiesSaveToBox('file1');
+
+                },
+              ),
+            ),
             Row(children: [
               Text(
                 'PERIODONTAL CHART',

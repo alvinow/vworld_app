@@ -1,7 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwextendable/vwhomebase/vwhomebaseperiochart2021.dart';
 
-void main() {
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
+
+Future<void> main() async{
+
+
+
+  await Hive.initFlutter();
+
+  await Hive.registerAdapter(PcPropertiesAdapter());
+  await Hive.registerAdapter(PcSingleTeethPropertiesAdapter());
+  await Hive.registerAdapter(PcSingleTeethSidePropertiesAdapter());
+
+
+
   runApp(MyApp());
 }
 

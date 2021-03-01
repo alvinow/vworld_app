@@ -1,25 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:hive/hive.dart';
+part 'pcproperties.g.dart';
 
+@HiveType(typeId: 1)
+@JsonSerializable()
 class PcProperties extends VwDocumentContent {
   PcProperties(
       {@required this.id,
       @required this.patientName,
-        @required  this.patientDob,
+      @required this.patientDob,
       @required this.operatorName,
       @required this.examDateTime,
       @required this.examTypeId,
       @required this.teeths,
-      });
+      this.documenttypeId: 'documenttypeId_PcProperties'});
 
+  @HiveField(0)
   String id;
+
+  @HiveField(1)
   String patientName;
+
+  @HiveField(2)
   DateTime patientDob;
+
+  @HiveField(3)
   String operatorName;
+
+  @HiveField(4)
   DateTime examDateTime;
+
+  @HiveField(5)
   String examTypeId;
 
+  @HiveField(6)
+  @override
+  String documenttypeId;
+
+  @HiveField(7)
   List<PcSingleTeethProperties> teeths;
 
   static final String idCCFN = 'id';
@@ -30,12 +51,17 @@ class PcProperties extends VwDocumentContent {
   static final String examTypeIdCCFN = 'examTypeId';
   static final String teethsCCFN = 'teeths';
 
+  factory PcProperties.fromJson(Map<String, dynamic> json) =>
+      _$PcPropertiesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PcPropertiesToJson(this);
 
   @override
   String getDocumenttypeId() {
     return VwDocumentContent.documenttypeIdPcSingleTeethProperties;
   }
 
+/*
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -49,7 +75,7 @@ class PcProperties extends VwDocumentContent {
           ? this.teeths.map((item) => item.toJson()).toList()
           : [],
     };
-  }
+  }*/
 
   PcSingleTeethProperties getTeeth(String teethNumber) {
     PcSingleTeethProperties returnValue;
@@ -62,7 +88,7 @@ class PcProperties extends VwDocumentContent {
 
     return returnValue;
   }
-
+/*
   factory PcProperties.fromJson(Map<String, dynamic> data) => PcProperties(
       id: data[PcProperties.idCCFN],
       patientName: data[PcProperties.patientNameCCFN],
@@ -76,4 +102,6 @@ class PcProperties extends VwDocumentContent {
               .map<PcSingleTeethProperties>(
                   (item) => PcSingleTeethProperties.fromJson(item))
               .toList());
+
+ */
 }

@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:hive/hive.dart';
+part 'pcsingleteethproperties.g.dart';
 
-class PcSingleTeethProperties extends VwDocumentContent {
+@HiveType(typeId: 2)
+@JsonSerializable()
+class PcSingleTeethProperties {
   PcSingleTeethProperties({@required this.teethNumber, this.mobilityLevel:0,  this.isImplant:0,@required this.buccalSide,@required this.lingualSide, this.note});
 
+  @HiveField(0)
   String teethNumber;
+
+  @HiveField(1)
   int mobilityLevel;
+
+  @HiveField(2)
   int isImplant;
+
+  @HiveField(3)
   PcSingleTeethSideProperties buccalSide;
+
+  @HiveField(4)
   PcSingleTeethSideProperties lingualSide;
+
+  @HiveField(5)
   String note;
 
   static final String teethNumberCCFN = 'teethNumber';
@@ -24,6 +40,12 @@ class PcSingleTeethProperties extends VwDocumentContent {
     return VwDocumentContent.documenttypeIdPcSingleTeethProperties;
   }
 
+  factory PcSingleTeethProperties.fromJson(Map<String, dynamic> json) =>
+      _$PcSingleTeethPropertiesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PcSingleTeethPropertiesToJson(this);
+
+  /*
   @override
   Map<String, dynamic> toJson() {
     return {
@@ -36,6 +58,9 @@ class PcSingleTeethProperties extends VwDocumentContent {
     };
   }
 
+   */
+
+  /*
   factory PcSingleTeethProperties.fromJson(Map<String, dynamic> data) {
 
 
@@ -48,5 +73,5 @@ class PcSingleTeethProperties extends VwDocumentContent {
         lingualSide: data[PcSingleTeethProperties.buccalSideCCFN]==null? PcSingleTeethSideProperties(teethSide:PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS ):PcSingleTeethSideProperties.fromJson(data[PcSingleTeethProperties.lingualSideCCFN]),
           );
 
-  }
+  }*/
 }
