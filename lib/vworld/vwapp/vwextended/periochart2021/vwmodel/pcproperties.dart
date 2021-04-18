@@ -22,25 +22,28 @@ class PcProperties extends VwDocumentContent {
   String id;
 
   @HiveField(1)
-  String patientName;
+  String patientId;
 
   @HiveField(2)
-  DateTime patientDob;
+  String patientName;
 
   @HiveField(3)
-  String operatorName;
+  DateTime patientDob;
 
   @HiveField(4)
-  DateTime examDateTime;
+  String operatorName;
 
   @HiveField(5)
-  String examTypeId;
+  DateTime examDateTime;
 
   @HiveField(6)
+  String examTypeId;
+
+  @HiveField(7)
   @override
   String documenttypeId;
 
-  @HiveField(7)
+  @HiveField(8)
   List<PcSingleTeethProperties> teeths;
 
   static final String idCCFN = 'id';

@@ -31,7 +31,7 @@ List<Object> get props => [title,description];
 
 @override
 String toString() =>
-'PeriochartLoaderStateProcessing{title:${title},description:${description}}';
+'PeriochartLoaderStateProcessing{title:$title,description:$description}';
 }
 
 class PeriochartLoaderStateShowChart extends PeriochartLoaderState{

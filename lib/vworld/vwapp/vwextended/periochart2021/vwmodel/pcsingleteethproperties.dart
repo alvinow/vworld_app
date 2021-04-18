@@ -35,7 +35,7 @@ class PcSingleTeethProperties {
   static final String lingualSideCCFN='lingualSide';
   static final String noteCCFN='note';
 
-  @override
+
   String getDocumenttypeId() {
     return VwDocumentContent.documenttypeIdPcSingleTeethProperties;
   }

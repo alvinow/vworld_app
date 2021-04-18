@@ -4,9 +4,6 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/curvepainter.dart';
 import 'dart:math' as math;
-
-import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/cycliciconbutton.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/furcationpicture.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/teethpicture.dart';
 
 class PcSingleTeethGraphic extends StatelessWidget {
@@ -45,7 +42,7 @@ class PcSingleTeethGraphic extends StatelessWidget {
           TeethPicture(this.pcSingleTeethSideProperties.teethNumber, this.pcSingleTeethSideProperties.teethSide, this.pcSingleTeethProperties, this.pcSingleTeethSideProperties,columnWidth: this.columnWidth,),
       CustomPaint(
         painter:
-            CurvePainter(this.pcSingleTeethSideProperties, this.pcProperties),
+        PerioTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties),
         child: Container(),
       ),
     ]));

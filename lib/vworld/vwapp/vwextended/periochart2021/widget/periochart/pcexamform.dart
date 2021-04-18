@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcdatefield.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcjaw.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/periochart/pcstringfield.dart';
-import 'package:hive/hive.dart';
 
 
 class PcExamForm extends StatelessWidget {
-  PcExamForm(this.pcProperties, this.pcPropertiesOnChangedCallback,{this.pcPropertiesLoadFromBox,this.pcPropertiesSaveToBox} );
+  PcExamForm(this.pcProperties, this.pcPropertiesOnChangedCallback,
+      {this.pcPropertiesLoadFromBox, this.pcPropertiesSaveToBox});
 
   final PcProperties pcProperties;
 
@@ -59,11 +58,8 @@ class PcExamForm extends StatelessWidget {
               width: 200,
               child: IconButton(
                 icon: Icon(Icons.arrow_circle_up),
-                onPressed: () async{
-
-
+                onPressed: () async {
                   await this.pcPropertiesLoadFromBox('file1');
-
                 },
               ),
             ),
@@ -72,9 +68,8 @@ class PcExamForm extends StatelessWidget {
               width: 200,
               child: IconButton(
                 icon: Icon(Icons.save),
-                onPressed: () async{
+                onPressed: () async {
                   await this.pcPropertiesSaveToBox('file1');
-
                 },
               ),
             ),

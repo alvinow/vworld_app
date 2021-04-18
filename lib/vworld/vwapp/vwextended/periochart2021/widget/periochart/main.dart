@@ -18,25 +18,21 @@ class Periochart extends StatefulWidget {
   final PcProperties pcProperties;
   _PeriochartState createState() => _PeriochartState();
 
-
-  static  PcProperties getBlankPcPropertiesId(){
-
+  static PcProperties getBlankPcPropertiesId() {
     String date = '19800101T000000';
     DateTime dateTime = DateTime.parse(date);
 
-    List<PcSingleTeethProperties> teeths = List<PcSingleTeethProperties>();
+    List<PcSingleTeethProperties> teeths = <PcSingleTeethProperties>[];
 
-    return  PcProperties(
-    id: Uuid().v4().toString(),
-  patientName: "John Doe",
-  patientDob: dateTime,
-  operatorName: 'Dr. D',
-  examDateTime: DateTime.now(),
-  examTypeId: "InitialExam",
-  teeths: teeths);
-
+    return PcProperties(
+        id: Uuid().v4().toString(),
+        patientName: "John Doe",
+        patientDob: dateTime,
+        operatorName: 'Dr. D',
+        examDateTime: DateTime.now(),
+        examTypeId: "InitialExam",
+        teeths: teeths);
   }
-
 }
 
 class _PeriochartState extends State<Periochart> {
@@ -47,54 +43,54 @@ class _PeriochartState extends State<Periochart> {
   void initState() {
     super.initState();
     this.currentState = Periochart.getBlankPcPropertiesId();
-currentLoaderPcPropertiesId = this.widget.pcProperties.id;
-currentState=this.widget.pcProperties;
+    currentLoaderPcPropertiesId = this.widget.pcProperties.id;
+    currentState = this.widget.pcProperties;
   }
 
   @override
   Widget build(BuildContext context) {
-    return PcExamForm(
-        this.currentState, this.implementPcPropertiesOnChangedCallback,pcPropertiesLoadFromBox: this.implememtPcPropertiesLoadFromBox,
-      pcPropertiesSaveToBox: this.implementPcPropertiesSaveToBox,
+    return SafeArea(
+        child: InteractiveViewer(
+            boundaryMargin: const EdgeInsets.fromLTRB(50, 50, 50, 50),
+            constrained: false,
+            scaleEnabled: true,
+            panEnabled: true, // Set it to false to prevent panning.
 
-
-    );
+            minScale: 0.1,
+            maxScale: 2,
+            child: PcExamForm(
+              this.currentState,
+              this.implementPcPropertiesOnChangedCallback,
+              pcPropertiesLoadFromBox: this.implememtPcPropertiesLoadFromBox,
+              pcPropertiesSaveToBox: this.implementPcPropertiesSaveToBox,
+            )));
   }
 
-Future<void> implememtPcPropertiesLoadFromBox(String pcPropertiesId) async{
-
-
-
+  Future<void> implememtPcPropertiesLoadFromBox(String pcPropertiesId) async {
     var box = await Hive.openBox('PcProperties');
 
-   PcProperties pcProperties= await box.get(pcPropertiesId);
+    PcProperties pcProperties = await box.get(pcPropertiesId);
 
-   if(pcProperties!=null) {
-     this.currentState = pcProperties;
+    if (pcProperties != null) {
+      this.currentState = pcProperties;
 
-     setState(() {
-
-     });
-   }
+      setState(() {});
+    }
 
     await box.close();
   }
 
-  Future<void> implementPcPropertiesSaveToBox(String pcPropertiesId) async{
-
+  Future<void> implementPcPropertiesSaveToBox(String pcPropertiesId) async {
     var box = await Hive.openBox('PcProperties');
-
 
     await box.put(pcPropertiesId, this.currentState);
 
-    this.currentLoaderPcPropertiesId=pcPropertiesId;
+    this.currentLoaderPcPropertiesId = pcPropertiesId;
 
     await box.close();
-
   }
 
-  void implementPcPropertiesOnChangedCallback(
-      bool doSetState) {
+  void implementPcPropertiesOnChangedCallback(bool doSetState) {
     if (doSetState) {
       setState(() {});
     }

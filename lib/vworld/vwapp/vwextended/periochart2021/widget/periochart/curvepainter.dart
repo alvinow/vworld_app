@@ -3,8 +3,8 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcprop
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
 
-class CurvePainter extends CustomPainter {
-  CurvePainter(this.pcSingleTeethSideProperties, this.pcProperties);
+class PerioTeethGraphic extends CustomPainter {
+  PerioTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties);
 
   final PcSingleTeethSideProperties pcSingleTeethSideProperties;
 
@@ -126,7 +126,7 @@ class CurvePainter extends CustomPainter {
     PcSingleTeethSideProperties returnValue;
 
     try {
-      String leftNeighbourTeethNumber = CurvePainter
+      String leftNeighbourTeethNumber = PerioTeethGraphic
           .getLeftNeighbourTeethNumber(
           this.pcSingleTeethSideProperties.teethNumber);
 
@@ -157,7 +157,7 @@ class CurvePainter extends CustomPainter {
 
     try {
       String rightNeighbourTeethNumber =
-          CurvePainter.getRightNeighbourTeethNumber(
+      PerioTeethGraphic.getRightNeighbourTeethNumber(
               this.pcSingleTeethSideProperties.teethNumber);
 
       if (rightNeighbourTeethNumber != null &&

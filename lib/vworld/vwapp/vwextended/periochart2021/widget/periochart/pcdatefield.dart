@@ -37,7 +37,7 @@ class PcDateField extends StatelessWidget {
     if (this.useBorder == true) {
       borderBoxDecoration = BoxDecoration(
         border: Border.all(width: this.borderWidth, color: Colors.black),
-        color: HexColor("#d1ebf0"),
+        color: Hexcolor("#d1ebf0"),
       );
     }
 

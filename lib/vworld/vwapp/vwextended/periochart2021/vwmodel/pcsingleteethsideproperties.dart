@@ -96,7 +96,7 @@ class PcSingleTeethSideProperties  {
   static final String probingDepthPointBCCFN = 'probingDepthPointB';
   static final String probingDepthPointCCCFN = 'probingDepthPointC';
 
-  @override
+
   String getDocumenttypeId() {
     return VwDocumentContent.documenttypeIdUnknown;
   }

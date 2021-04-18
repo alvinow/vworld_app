@@ -403,7 +403,7 @@ class PcCustomJaw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> teethColumnWidgets = List<Widget>();
+    List<Widget> teethColumnWidgets = <Widget>[];
 
     Widget tableColumnNameUpperJaw = this.getTableColumnNameUpperJaw();
 

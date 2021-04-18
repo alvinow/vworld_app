@@ -10,12 +10,12 @@ class VwApiRequestPackage{
   static final String apkIdCCFN = 'apkId';
   static final String requestListCCFN = 'requestList';
 
-  @override
+
   String getDocumenttypeId() {
     return VwDocumentContent.documenttypeIdVwApiRequestPackage;
   }
 
-  @override
+
   Map<String, dynamic> toJson() {
     return {
       VwApiRequestPackage.loginsessionIdCCFN: this.loginsessionId,

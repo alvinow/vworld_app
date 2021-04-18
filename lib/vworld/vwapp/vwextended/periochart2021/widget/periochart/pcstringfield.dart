@@ -39,7 +39,7 @@ class PcStringField extends StatelessWidget {
       borderBoxDecoration = BoxDecoration(
 
         border: Border.all(width: this.borderWidth, color: Colors.black),
-        color:  HexColor(this.backgroundColorHex),
+        color:  Hexcolor(this.backgroundColorHex),
 
 
       );
