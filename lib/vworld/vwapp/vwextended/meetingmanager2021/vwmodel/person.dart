@@ -8,6 +8,11 @@ part 'person.g.dart';
 class Person{
 Person({@required this.person_id,@required this.person_fullname});
 
+factory Person.fromJson(Map<String, dynamic> json) =>
+    _$PersonFromJson(json);
+
+Map<String, dynamic> toJson() => _$PersonToJson(this);
+
 @HiveField(0)
   final String person_id;
 @HiveField(1)

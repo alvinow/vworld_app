@@ -32,7 +32,16 @@ class MeetingTab1 extends StatelessWidget {
           label: 'Kegiatan',
         ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle, color: Colors.black),
+          icon: Icon(Icons.perm_contact_calendar, color: Colors.black),
+          label: 'Panitia',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.people_alt_rounded , color: Colors.black),
+          label: 'Peserta',
+        ),
+
+        BottomNavigationBarItem(
+            icon: Icon(Icons.person, color: Colors.black),
             label: 'Pengguna'),
       ],
       onTap: (index) {

@@ -15,7 +15,9 @@ class VwHomeBasePeriochart2021 extends VwHomeBase {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(home:LayAuth());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:LayAuth());
 
   }
 }

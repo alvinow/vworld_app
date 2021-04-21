@@ -8,12 +8,14 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginreq
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/page/loginpagelayauth/loginpagelayauth.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/actorinfopage/actorinfopage.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/calendarpage1/main.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingdetailform/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/library/meetingtab1/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/main.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingtab1/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/organization.dart';
+import 'dart:convert';
 
 class MeetingMainPage extends StatefulWidget{
 
@@ -66,7 +68,23 @@ class _MeetingMainPageState extends State<MeetingMainPage>{
                 title: Text(appBarTitle),
               ),
 
-              body: CalendarPage1(title: state.title,currrentUser: state.actor , meetingList: state.meetingList,organizationMember: state.organizationMember,)
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MeetingDetailForm()  )
+                  );
+
+
+                  //print(json.encode(state.actor.toJson()));
+                  // Add your onPressed code here!
+                },
+                child: const Icon(Icons.add),
+                backgroundColor: Colors.green,
+              ),
+
+              body: CalendarPage1(title: state.title,currrentUser: state.actor , meetingList: state.meetingList)
           );
         }
 

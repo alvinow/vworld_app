@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
 part 'actor.g.dart';
 
 @HiveType(typeId: 50001)
@@ -20,23 +21,30 @@ class Actor {
 }
   );
 
+  factory Actor.fromJson(Map<String, dynamic> json) =>
+      _$ActorFromJson(json);
 
+  Map<String, dynamic> toJson() => _$ActorToJson(this);
 
   @HiveField(0)
-  final String actor_id;
+  @override
+  String documenttypeId=Document.actorDocumenttypeId;
+
   @HiveField(1)
-  final String actor_actorrole_id;
+  final String actor_id;
   @HiveField(2)
-  final String actor_fullname;
+  final String actor_actorrole_id;
   @HiveField(3)
-  final String actor_username;
+  final String actor_fullname;
   @HiveField(4)
-  final String actor_password;
+  final String actor_username;
   @HiveField(5)
-  final String actor_loginrightstatus_id;
+  final String actor_password;
   @HiveField(6)
-  final String actor_person_id;
+  final String actor_loginrightstatus_id;
   @HiveField(7)
+  final String actor_person_id;
+  @HiveField(8)
   final String actor_organization_id;
 
 }

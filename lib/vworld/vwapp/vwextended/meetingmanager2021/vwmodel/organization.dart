@@ -12,6 +12,11 @@ class Organization {
     @required this.organization_name
 });
 
+  factory Organization.fromJson(Map<String, dynamic> json) =>
+      _$OrganizationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrganizationToJson(this);
+
   @HiveField(0)
   final String organization_id;
   @HiveField(1)

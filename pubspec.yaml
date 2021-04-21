@@ -45,6 +45,12 @@ dependencies:
   connectivity:
   table_calendar: ^2.3.3
   date_format:
+  sqflite:
+  path_provider:
+  path:
+  flutter_money_formatter:
+  flutter_udid:
+  device_info:
 
 
 

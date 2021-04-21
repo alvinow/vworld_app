@@ -17,36 +17,38 @@ class ActorAdapter extends TypeAdapter<Actor> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Actor(
-      actor_id: fields[0] as String,
-      actor_actorrole_id: fields[1] as String,
-      actor_fullname: fields[2] as String,
-      actor_username: fields[3] as String,
-      actor_password: fields[4] as String,
-      actor_loginrightstatus_id: fields[5] as String,
-      actor_person_id: fields[6] as String,
-      actor_organization_id: fields[7] as String,
-    );
+      actor_id: fields[1] as String,
+      actor_actorrole_id: fields[2] as String,
+      actor_fullname: fields[3] as String,
+      actor_username: fields[4] as String,
+      actor_password: fields[5] as String,
+      actor_loginrightstatus_id: fields[6] as String,
+      actor_person_id: fields[7] as String,
+      actor_organization_id: fields[8] as String,
+    )..documenttypeId = fields[0] as String;
   }
 
   @override
   void write(BinaryWriter writer, Actor obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.actor_id)
+      ..write(obj.documenttypeId)
       ..writeByte(1)
-      ..write(obj.actor_actorrole_id)
+      ..write(obj.actor_id)
       ..writeByte(2)
-      ..write(obj.actor_fullname)
+      ..write(obj.actor_actorrole_id)
       ..writeByte(3)
-      ..write(obj.actor_username)
+      ..write(obj.actor_fullname)
       ..writeByte(4)
-      ..write(obj.actor_password)
+      ..write(obj.actor_username)
       ..writeByte(5)
-      ..write(obj.actor_loginrightstatus_id)
+      ..write(obj.actor_password)
       ..writeByte(6)
-      ..write(obj.actor_person_id)
+      ..write(obj.actor_loginrightstatus_id)
       ..writeByte(7)
+      ..write(obj.actor_person_id)
+      ..writeByte(8)
       ..write(obj.actor_organization_id);
   }
 
@@ -75,10 +77,11 @@ Actor _$ActorFromJson(Map<String, dynamic> json) {
     actor_loginrightstatus_id: json['actor_loginrightstatus_id'] as String,
     actor_person_id: json['actor_person_id'] as String,
     actor_organization_id: json['actor_organization_id'] as String,
-  );
+  )..documenttypeId = json['documenttypeId'] as String;
 }
 
 Map<String, dynamic> _$ActorToJson(Actor instance) => <String, dynamic>{
+      'documenttypeId': instance.documenttypeId,
       'actor_id': instance.actor_id,
       'actor_actorrole_id': instance.actor_actorrole_id,
       'actor_fullname': instance.actor_fullname,

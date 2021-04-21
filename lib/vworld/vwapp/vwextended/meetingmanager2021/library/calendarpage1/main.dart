@@ -14,12 +14,12 @@ final Map<DateTime, List> _holidays = {
 };
 
 class CalendarPage1 extends StatefulWidget {
-  CalendarPage1({Key key, this.title, this.currrentUser, this.meetingList,this.organizationMember}) : super(key: key);
+  CalendarPage1({Key key, this.title, this.currrentUser, this.meetingList}) : super(key: key);
 
   final String title;
   final Actor currrentUser;
   final List<Meeting> meetingList;
-  final List<Actor> organizationMember;
+
 
 
   @override
@@ -39,19 +39,17 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
 
     _events = {
 
-      DateUtil1.convertDateFromString('2021-04-14 08:00:00') : ['Kegiatan A1'],
-      DateUtil1.convertDateFromString('2021-04-15 08:00:00') : ['Kegiatan A1'],
+      DateUtil1.convertDateFromString('2021-04-14 08:00:00') : ['Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I'],
+      DateUtil1.convertDateFromString('2021-04-15 08:00:00') : ['Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I','Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar'],
       DateUtil1.convertDateFromString('2021-04-16 08:00:00') : [
-        'Kegiatan A1',
-        'Kegiatan A2',
-        'Kegiatan B2',
-        'Kegiatan C2',
-        'Kegiatan D2'
+        'Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I',
+        'Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar',
+
+
       ],
       DateUtil1.convertDateFromString('2021-04-17 08:00:00')  : [
-        'Kegiatan A0',
-        'Kegiatan B0',
-        'Kegiatan C0'
+        'Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar',
+
       ],
 
     };
@@ -131,6 +129,14 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
 
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
+
+
+    print('Oldest Meeting:   ${Meeting.getOldestMeetingDateTime(this.widget.meetingList)}');
+    print('Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
+
+
+
+
     return TableCalendar(
       locale: 'en_US',
       calendarController: _calendarController,

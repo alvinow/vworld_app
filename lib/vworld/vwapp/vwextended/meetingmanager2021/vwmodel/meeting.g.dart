@@ -21,16 +21,18 @@ class MeetingAdapter extends TypeAdapter<Meeting> {
       meeting_meetingtype_id: fields[1] as String,
       meeting_meetingstatus_id: fields[2] as String,
       meeting_name: fields[3] as String,
-      meeting_start_datetime: fields[4] as String,
-      meeting_end_datetime: fields[5] as String,
+      meeting_start_datetime: fields[4] as DateTime,
+      meeting_end_datetime: fields[5] as DateTime,
       meeting_owner_actor_id: fields[6] as String,
+      comitte: (fields[7] as List)?.cast<Actor>(),
+      participants: (fields[8] as List)?.cast<Actor>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Meeting obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.meeting_id)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class MeetingAdapter extends TypeAdapter<Meeting> {
       ..writeByte(5)
       ..write(obj.meeting_end_datetime)
       ..writeByte(6)
-      ..write(obj.meeting_owner_actor_id);
+      ..write(obj.meeting_owner_actor_id)
+      ..writeByte(7)
+      ..write(obj.comitte)
+      ..writeByte(8)
+      ..write(obj.participants);
   }
 
   @override
@@ -68,9 +74,21 @@ Meeting _$MeetingFromJson(Map<String, dynamic> json) {
     meeting_meetingtype_id: json['meeting_meetingtype_id'] as String,
     meeting_meetingstatus_id: json['meeting_meetingstatus_id'] as String,
     meeting_name: json['meeting_name'] as String,
-    meeting_start_datetime: json['meeting_start_datetime'] as String,
-    meeting_end_datetime: json['meeting_end_datetime'] as String,
+    meeting_start_datetime: json['meeting_start_datetime'] == null
+        ? null
+        : DateTime.parse(json['meeting_start_datetime'] as String),
+    meeting_end_datetime: json['meeting_end_datetime'] == null
+        ? null
+        : DateTime.parse(json['meeting_end_datetime'] as String),
     meeting_owner_actor_id: json['meeting_owner_actor_id'] as String,
+    comitte: (json['comitte'] as List)
+        ?.map(
+            (e) => e == null ? null : Actor.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    participants: (json['participants'] as List)
+        ?.map(
+            (e) => e == null ? null : Actor.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -79,7 +97,10 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
       'meeting_meetingtype_id': instance.meeting_meetingtype_id,
       'meeting_meetingstatus_id': instance.meeting_meetingstatus_id,
       'meeting_name': instance.meeting_name,
-      'meeting_start_datetime': instance.meeting_start_datetime,
-      'meeting_end_datetime': instance.meeting_end_datetime,
+      'meeting_start_datetime':
+          instance.meeting_start_datetime?.toIso8601String(),
+      'meeting_end_datetime': instance.meeting_end_datetime?.toIso8601String(),
       'meeting_owner_actor_id': instance.meeting_owner_actor_id,
+      'comitte': instance.comitte,
+      'participants': instance.participants,
     };

@@ -13,7 +13,7 @@ class AppStaticParam {
   static final int maxUploadFileSize = 10000000; //max file size 5mb
   static final String localFileDocumentDirectory = "local_file_document";
   static final String loginAppMainLogo="assets/icon/sdg_logo.png";
-  static final String titleApplicationName="Virtual Clinic";
+  static final String titleApplicationName="Event Management System";
 
   static String getFrameworkId() {
     return "v.7-2.3";

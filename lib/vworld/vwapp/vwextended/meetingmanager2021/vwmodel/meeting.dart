@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
+import 'dart:core';
 part 'meeting.g.dart';
 
 @HiveType(typeId: 50002)
 @JsonSerializable()
 class Meeting {
-  Meeting({@required this.meeting_id,
-  @required this.meeting_meetingtype_id,
-    @required this.meeting_meetingstatus_id,
-    @required this.meeting_name,
-    @required this.meeting_start_datetime,
-    @required this.meeting_end_datetime,
-    @required this.meeting_owner_actor_id
-  });
+  Meeting(
+      {@required this.meeting_id,
+      @required this.meeting_meetingtype_id,
+      @required this.meeting_meetingstatus_id,
+      @required this.meeting_name,
+      @required this.meeting_start_datetime,
+      @required this.meeting_end_datetime,
+      @required this.meeting_owner_actor_id,
+      @required this.comitte,
+      @required this.participants});
 
   factory Meeting.fromJson(Map<String, dynamic> json) =>
       _$MeetingFromJson(json);
 
   Map<String, dynamic> toJson() => _$MeetingToJson(this);
-
 
   @HiveField(0)
   final String meeting_id;
@@ -30,9 +33,72 @@ class Meeting {
   @HiveField(3)
   final String meeting_name;
   @HiveField(4)
-  final String meeting_start_datetime;
+  final DateTime meeting_start_datetime;
   @HiveField(5)
-  final String meeting_end_datetime;
+  final DateTime meeting_end_datetime;
   @HiveField(6)
   final String meeting_owner_actor_id;
+
+  @HiveField(7)
+  final List<Actor> comitte;
+  @HiveField(8)
+  final List<Actor> participants;
+
+  static Map<DateTime, dynamic> getCalenderList(List<Meeting> meetings) {
+    Map<DateTime, dynamic> returnValue = Map<DateTime, dynamic>();
+
+    final DateTime oldestMeetingDate = Meeting.getOldestMeetingDateTime(meetings);
+    final DateTime newestMeetingDate = Meeting.getLatestMeetingDateTime(meetings);
+
+    int diffDaysCountMeeting=Meeting.getDiffDaysMeetingDateTime(meetings);
+
+
+
+    for(int la=0;la<diffDaysCountMeeting;la++)
+      {
+
+
+      }
+
+    print('Oldest Meeting: $oldestMeetingDate');
+
+    print('Newest Meeting: $newestMeetingDate');
+  }
+
+  static int getDiffDaysMeetingDateTime(List<Meeting> meetings) {
+    DateTime oldestMeeting = Meeting.getOldestMeetingDateTime(meetings);
+    DateTime newestMeeting = Meeting.getLatestMeetingDateTime(meetings);
+
+    int returnValue = oldestMeeting.difference(newestMeeting).inDays.abs();
+
+    return returnValue;
+  }
+
+  static DateTime getOldestMeetingDateTime(List<Meeting> meetings) {
+    DateTime returnValue = DateTime.now();
+
+    for (int la = 0; la < meetings.length; la++) {
+      DateTime currentMeetingDate =
+          meetings.elementAt(la).meeting_start_datetime;
+
+      if (returnValue.difference(currentMeetingDate).inDays > 0) {
+        returnValue = currentMeetingDate;
+      }
+    }
+
+    return returnValue;
+  }
+
+  static DateTime getLatestMeetingDateTime(List<Meeting> meetings) {
+    DateTime returnValue = DateTime.now();
+
+    for (int la = 0; la < meetings.length; la++) {
+      DateTime currentMeetingDate = meetings.elementAt(la).meeting_end_datetime;
+
+      if (returnValue.difference(currentMeetingDate).inDays < 0) {
+        returnValue = currentMeetingDate;
+      }
+    }
+    return returnValue;
+  }
 }
