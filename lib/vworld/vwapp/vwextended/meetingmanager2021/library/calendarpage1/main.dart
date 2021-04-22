@@ -37,6 +37,10 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
     super.initState();
     final _selectedDay = DateTime.now();
 
+
+    _events=Meeting.getCalenderList(this.widget.meetingList);
+
+    /*
     _events = {
 
       DateUtil1.convertDateFromString('2021-04-14 08:00:00') : ['Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I'],
@@ -52,7 +56,7 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
 
       ],
 
-    };
+    };*/
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();

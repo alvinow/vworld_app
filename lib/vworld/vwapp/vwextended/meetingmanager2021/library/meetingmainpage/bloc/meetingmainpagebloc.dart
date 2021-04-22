@@ -45,8 +45,8 @@ class MeetingmainpageBloc
           meeting_meetingstatus_id: '2',
           meeting_name:
               'Penyusunan Laporan Keuangan Tahun Anggaran 2021 Triwulan I',
-          meeting_start_datetime: DateUtil1.convertDateFromString('2021-03-01'),
-          meeting_end_datetime: DateUtil1.convertDateFromString('2021-03-03'),
+          meeting_start_datetime: DateUtil1.convertDateFromString('2021-03-01 08:00:00'),
+          meeting_end_datetime: DateUtil1.convertDateFromString('2021-03-03 21:00:00'),
           meeting_owner_actor_id: 'zuser1',
           comitte: comitte,
           participants: participants);
@@ -57,8 +57,8 @@ class MeetingmainpageBloc
           meeting_meetingstatus_id: '2',
           meeting_name:
               'Bimtek Operator SAS Satker LPMP dan BP PAUD Tahun Anggran 2021 Triwulan I',
-          meeting_start_datetime: DateUtil1.convertDateFromString('2021-04-01'),
-          meeting_end_datetime: DateUtil1.convertDateFromString('2021-04-03'),
+          meeting_start_datetime: DateUtil1.convertDateFromString('2021-04-01 08:00:00'),
+          meeting_end_datetime: DateUtil1.convertDateFromString('2021-04-03 21:00:00'),
           meeting_owner_actor_id: 'zuser1',
           comitte: comitte,
           participants: participants);

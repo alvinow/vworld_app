@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
@@ -44,25 +45,54 @@ class Meeting {
   @HiveField(8)
   final List<Actor> participants;
 
-  static Map<DateTime, dynamic> getCalenderList(List<Meeting> meetings) {
-    Map<DateTime, dynamic> returnValue = Map<DateTime, dynamic>();
+  static Map<DateTime, List<String>> getCalenderList(List<Meeting> meetings) {
+    Map<DateTime, List<String>> returnValue = Map<DateTime, List<String>>();
 
-    final DateTime oldestMeetingDate = Meeting.getOldestMeetingDateTime(meetings);
-    final DateTime newestMeetingDate = Meeting.getLatestMeetingDateTime(meetings);
+    final DateTime oldestMeetingDate =
+        Meeting.getOldestMeetingDateTime(meetings);
+    final DateTime newestMeetingDate =
+        Meeting.getLatestMeetingDateTime(meetings);
 
-    int diffDaysCountMeeting=Meeting.getDiffDaysMeetingDateTime(meetings);
+    int diffDaysCountMeeting = Meeting.getDiffDaysMeetingDateTime(meetings);
+
+    DateTime dateIteratorAfter = DateTime(
+        oldestMeetingDate.year, oldestMeetingDate.month, oldestMeetingDate.day);
+    DateTime dateIteratorBefore = DateTime(oldestMeetingDate.year,
+        oldestMeetingDate.month, oldestMeetingDate.day, 23, 59, 59);
+    ;
+
+    for (int dayCounter = 0; dayCounter < diffDaysCountMeeting; dayCounter++) {
+      List<String> currentMeetingList = <String>[];
+      for (int meetingCounter = 0;
+          meetingCounter < meetings.length;
+          meetingCounter++) {
+        final currentMeeting = meetings.elementAt(meetingCounter);
+
+        bool isAfterStart=dateIteratorBefore.isAfter(currentMeeting.meeting_start_datetime);
+
+        bool isBeforeEnd=dateIteratorAfter.isBefore(currentMeeting.meeting_end_datetime) ;
+
+        bool isSameMoment=currentMeeting.meeting_start_datetime
+            .isAtSameMomentAs(dateIteratorAfter);
 
 
 
-    for(int la=0;la<diffDaysCountMeeting;la++)
-      {
-
-
+        if (isSameMoment || (isAfterStart && isBeforeEnd) ) {
+          currentMeetingList.add(currentMeeting.meeting_name);
+        }
       }
+
+      returnValue[dateIteratorAfter] = currentMeetingList;
+
+      dateIteratorAfter = dateIteratorAfter.add(Duration(days: 1));
+      dateIteratorBefore = dateIteratorBefore.add(Duration(days: 1));
+    }
 
     print('Oldest Meeting: $oldestMeetingDate');
 
     print('Newest Meeting: $newestMeetingDate');
+
+    return returnValue;
   }
 
   static int getDiffDaysMeetingDateTime(List<Meeting> meetings) {

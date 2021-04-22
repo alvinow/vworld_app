@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/dateutil.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
 
 // Create a Form widget.
 class MeetingDetailSubmitForm extends StatefulWidget {
+  MeetingDetailSubmitForm(this.initialState);
+
+
+  final Meeting initialState;
+
   @override
   _MeetingDetailSubmitFormState createState() {
     return _MeetingDetailSubmitFormState();
@@ -36,6 +42,7 @@ class _MeetingDetailSubmitFormState extends State<MeetingDetailSubmitForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
+            initialValue: this.widget.initialState.meeting_name,
             decoration: InputDecoration(
                 border: UnderlineInputBorder(), labelText: 'Nama Kegiatan'),
 

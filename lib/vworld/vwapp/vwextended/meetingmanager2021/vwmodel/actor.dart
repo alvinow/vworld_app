@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
 part 'actor.g.dart';
+
 
 @HiveType(typeId: 50001)
 @JsonSerializable()

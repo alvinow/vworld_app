@@ -6,9 +6,10 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcproperties.dart';
 import 'package:hive/hive.dart';
 
-typedef PcPropertiesOnChangedCallback = void Function(bool);
+
 typedef PcPropertiesLoadFromBox = Future<void> Function(String);
 typedef PcPropertiesSaveToBox = Future<void> Function(String);
+typedef PcPropertiesOnChangedCallback = void Function(bool);
 typedef PcCallbackDateField = void Function(String, DateTime, bool);
 typedef PcCallbackStringField = void Function(String, String, bool);
 typedef PcCallbackIntegerField = void Function(String, int, bool);
