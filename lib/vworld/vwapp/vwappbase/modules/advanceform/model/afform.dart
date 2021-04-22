@@ -12,8 +12,22 @@ class AfForm {
   @HiveField(0)
   List<AfFieldForm> fieldFormList;
 
-  factory AfForm.fromJson(Map<String, dynamic> json) =>
-      _$AfFormFromJson(json);
+  factory AfForm.fromJson(Map<String, dynamic> json) => _$AfFormFromJson(json);
 
   Map<String, dynamic> toJson() => _$AfFormToJson(this);
+
+  bool setValue(String fieldName, var value) {
+    bool returnValue = false;
+
+    for (int la = 0; la < this.fieldFormList.length; la++) {
+      AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
+
+      if (currentFieldForm.fieldValue.fieldName == fieldName) {
+        currentFieldForm.fieldValue.value = value;
+        returnValue = true;
+        break;
+      }
+    }
+    return returnValue;
+  }
 }

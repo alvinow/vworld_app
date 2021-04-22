@@ -10,6 +10,21 @@ abstract class MeetingmainpageEvent extends Equatable {
   List<Object> get props => [];
 }
 
+
+
+class OpenAfformPageOnMeetingmainpageEvent extends MeetingmainpageEvent {
+  OpenAfformPageOnMeetingmainpageEvent(this.timestamp);
+
+  final DateTime timestamp;
+
+  @override
+  List<Object> get props => [timestamp];
+
+  @override
+  String toString() =>
+      'OpenAfformPageOnMeetingmainpageEvent{${this.timestamp.toString()}}';
+}
+
 class OpeneventpageOnMeetingmainpageEvent extends MeetingmainpageEvent {
   OpeneventpageOnMeetingmainpageEvent(this.timestamp);
 

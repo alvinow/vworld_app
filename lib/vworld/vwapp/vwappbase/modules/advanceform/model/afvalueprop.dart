@@ -7,7 +7,7 @@ part 'afvalueprop.g.dart';
 class AfValueProp {
   AfValueProp({
 
-    this.uifieldType,
+    this.uifieldType:'String',
     this.stringMaxLines:1,
     this.stringMaxLength:160,
     this.intMaxValue:9223372036854775807,

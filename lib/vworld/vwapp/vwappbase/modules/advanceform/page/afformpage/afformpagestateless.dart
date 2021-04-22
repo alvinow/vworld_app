@@ -2,27 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 
 class AfFormPageStateless extends StatelessWidget{
 
-  AfFormPageStateless({this.state});
+  AfFormPageStateless({@required this.state, this.propertiesOnChangedCallback, this.callbackStringField});
 
   final AfForm state;
+  final AfPropertiesOnChangedCallback propertiesOnChangedCallback;
+  final AfCallbackStringField callbackStringField;
 
   @override
   Widget build(BuildContext context) {
 
     Widget returnValue=Center(child:Text('<Empty Form>'));
 
-    returnValue=AfFormPageStateless.generateForm(this.state);
+    returnValue=this._generateForm(this.state);
 
     return returnValue;
 
   }
 
-  static Widget generateForm(AfForm afForm){
+   Widget _generateForm(AfForm afForm){
 
-    Widget returnValue=Container();
+    Widget returnValue=Container(child: Center(child: Text('<Blank Form>'),),);
 
     List<Widget> fieldFormList=<Widget>[];
 
@@ -33,6 +36,9 @@ class AfFormPageStateless extends StatelessWidget{
         Widget currentUiField=Container(
 
           child: TextFormField(
+            onChanged: (value){
+              this.callbackStringField(currentFieldForm.fieldValue.fieldName,value,true);
+            },
 
             decoration: InputDecoration(
                 border: UnderlineInputBorder(), labelText: currentFieldForm.fieldValue.fieldCaption),

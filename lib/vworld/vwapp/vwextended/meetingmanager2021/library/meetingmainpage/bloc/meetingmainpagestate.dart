@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
@@ -30,6 +32,16 @@ class DisplayeventpageOnMeetingmainpageState extends MeetingmainpageState {
 
   @override
   String toString() => 'ShoweventpageOnMeetingmainpageState';
+}
+
+class DisplayAfformOnMeetingmainpageState extends MeetingmainpageState{
+  DisplayAfformOnMeetingmainpageState(this.afForm);
+
+  AfForm afForm;
+
+  @override
+  String toString() => 'DisplayAfformOnMeetingmainpageState';
+
 }
 
 class DisplayactorinfopageOnMeetingmainpageState extends MeetingmainpageState{

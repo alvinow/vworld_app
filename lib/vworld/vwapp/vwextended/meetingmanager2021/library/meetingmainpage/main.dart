@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/layauth.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginrequestparam.dart';
@@ -99,7 +100,26 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
       } else if (state is DisplayactorinfopageOnMeetingmainpageState) {
         returnValue =
             ActorInfoPage(this.bloc, MeetingTab1(this.bloc, 1), state.actor);
+      } else if(state is DisplayAfformOnMeetingmainpageState){
+
+        String appBarTitle = 'Demo AfForm';
+
+        returnValue=returnValue = Scaffold(
+            bottomNavigationBar: MeetingTab1(this.bloc, 0),
+            appBar: AppBar(
+              title: Text(appBarTitle),
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+               print('Button Tapped');
+              },
+              child: const Icon(Icons.add),
+              backgroundColor: Colors.green,
+            ),
+            body: AfFormPage(initialState: state.afForm,));
+
       }
+
 
       return returnValue;
     }));

@@ -1,5 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpagestateless.dart';
+import 'dart:convert';
+
+typedef AfPropertiesOnChangedCallback = void Function(bool);
+
+typedef AfCallbackDateField = void Function(String, DateTime, bool);
+typedef AfCallbackStringField = void Function(String, String, bool);
+typedef AfCallbackIntegerField = void Function(String, int, bool);
+typedef AfCallbackDoubleField = void Function(String, int, double);
+
+
 
 class AfFormPage extends StatefulWidget{
   AfFormPage({this.initialState});
@@ -19,8 +30,13 @@ class _AfFormPageState extends State<AfFormPage>{
     // TODO: implement initState
     super.initState();
 
-    this.currentState=AfForm.fromJson(this.widget.initialState.toJson());
 
+    String test1= json.encode(this.widget.initialState.toJson())  ;
+
+    this.currentState=AfForm.fromJson(json.decode(test1));
+
+
+    print('current state='+json.encode( this.currentState.toJson()));
 
   }
 
@@ -29,8 +45,27 @@ class _AfFormPageState extends State<AfFormPage>{
 
     Widget returnValue=Container(child: Center(child: Text('<Blank Form>')));
 
-    returnValue=AfFormPage();
+    returnValue=AfFormPageStateless(state: this.currentState);
 
     return returnValue;
   }
+
+  void implementAfPropertiesOnChangedCallback(bool doSetState) {
+    if (doSetState) {
+      setState(() {});
+    }
+  }
+
+  void implementAfCallbackStringField(String fieldName, String value, bool doSetState)
+  {
+    this.currentState.setValue(fieldName, value);
+    if(doSetState==true)
+      {
+        setState(() {
+
+        });
+      }
+  }
+
+
 }

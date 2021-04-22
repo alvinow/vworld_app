@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
@@ -8,17 +9,18 @@ part 'affieldform.g.dart';
 @JsonSerializable()
 class AfFieldForm {
   AfFieldForm(
-      {this.fieldValue,
+      {@required this.fieldValue,
+      this.valueProp,
       this.useExpansionTile: true,
+      this.autoExpandWhenNotNull: true,
       this.initiallyExpanded: true,
       this.isObscureText: false,
       this.isReadOnly: false});
 
   @HiveField(0)
-  AfFieldValue fieldValue;
+  final AfFieldValue fieldValue;
   @HiveField(1)
   AfValueProp valueProp;
-
   @HiveField(2)
   bool useExpansionTile;
   @HiveField(3)

@@ -18,13 +18,13 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
     };
     return AfFieldForm(
       fieldValue: fields[0] as AfFieldValue,
+      valueProp: fields[1] as AfValueProp,
       useExpansionTile: fields[2] as bool,
+      autoExpandWhenNotNull: fields[3] as bool,
       initiallyExpanded: fields[4] as bool,
       isObscureText: fields[5] as bool,
       isReadOnly: fields[6] as bool,
-    )
-      ..valueProp = fields[1] as AfValueProp
-      ..autoExpandWhenNotNull = fields[3] as bool;
+    );
   }
 
   @override
@@ -67,15 +67,15 @@ AfFieldForm _$AfFieldFormFromJson(Map<String, dynamic> json) {
     fieldValue: json['fieldValue'] == null
         ? null
         : AfFieldValue.fromJson(json['fieldValue'] as Map<String, dynamic>),
+    valueProp: json['valueProp'] == null
+        ? null
+        : AfValueProp.fromJson(json['valueProp'] as Map<String, dynamic>),
     useExpansionTile: json['useExpansionTile'] as bool,
+    autoExpandWhenNotNull: json['autoExpandWhenNotNull'] as bool,
     initiallyExpanded: json['initiallyExpanded'] as bool,
     isObscureText: json['isObscureText'] as bool,
     isReadOnly: json['isReadOnly'] as bool,
-  )
-    ..valueProp = json['valueProp'] == null
-        ? null
-        : AfValueProp.fromJson(json['valueProp'] as Map<String, dynamic>)
-    ..autoExpandWhenNotNull = json['autoExpandWhenNotNull'] as bool;
+  );
 }
 
 Map<String, dynamic> _$AfFieldFormToJson(AfFieldForm instance) =>

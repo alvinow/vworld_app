@@ -49,9 +49,18 @@ class MeetingTab1 extends StatelessWidget {
           this.bloc.add(OpeneventpageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020UserloginInfo(DateTime.now()));
         } else if (index == 1) {
+          this.bloc.add(OpenAfformPageOnMeetingmainpageEvent (DateTime.now()));
+
+        }
+        else if (index == 2) {
           this.bloc.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020ShowUserDashboard(DateTime.now()));
         }
+        else if (index == 3) {
+          this.bloc.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
+          //this.bloc.add(EventSpiMobile2020ShowUserDashboard(DateTime.now()));
+        }
+
       },
     );
   }
