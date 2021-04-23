@@ -104,10 +104,28 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
 
         String appBarTitle = 'Demo AfForm';
 
+        AfFormPage afFormPage=AfFormPage(initialState: state.afForm,);
+
         returnValue=returnValue = Scaffold(
             bottomNavigationBar: MeetingTab1(this.bloc, 0),
             appBar: AppBar(
               title: Text(appBarTitle),
+              actions: <Widget>[
+                Padding(
+                    padding: EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        print('Save Button Tapped');
+                       print(json.encode(afFormPage.getCurrentStateLink().toJson()));
+                      },
+                      child: Icon(
+                        Icons.save,
+                        size: 26.0,
+                      ),
+                    )
+                ),
+              ],
+
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
@@ -116,7 +134,7 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               child: const Icon(Icons.add),
               backgroundColor: Colors.green,
             ),
-            body: AfFormPage(initialState: state.afForm,));
+            body: afFormPage);
 
       }
 

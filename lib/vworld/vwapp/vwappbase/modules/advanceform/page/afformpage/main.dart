@@ -9,43 +9,60 @@ typedef AfCallbackDateField = void Function(String, DateTime, bool);
 typedef AfCallbackStringField = void Function(String, String, bool);
 typedef AfCallbackIntegerField = void Function(String, int, bool);
 typedef AfCallbackDoubleField = void Function(String, int, double);
+typedef AfGetCurrentState = AfForm Function();
 
-
-
-class AfFormPage extends StatefulWidget{
+class AfFormPage extends StatefulWidget {
   AfFormPage({this.initialState});
 
   AfForm initialState;
 
+  AfGetCurrentState getCurrentStateLink;
+
+  AfForm getCurrentState(){
+
+    if(this.getCurrentStateLink!=null) {
+      return this.getCurrentStateLink();
+    }
+    else{
+      return null;
+    }
+  }
 
   _AfFormPageState createState() => _AfFormPageState();
 }
 
-class _AfFormPageState extends State<AfFormPage>{
-
+class _AfFormPageState extends State<AfFormPage> {
   AfForm currentState;
+
+
+  AfForm implementGetCurrentState(){
+    return currentState;
+  }
+
 
   @override
   void initState() {
-    // TODO: implement initState
+
+
     super.initState();
 
+    this.widget.getCurrentStateLink=this.implementGetCurrentState;
 
-    String test1= json.encode(this.widget.initialState.toJson())  ;
+    String encodedJson = json.encode(this.widget.initialState.toJson());
 
-    this.currentState=AfForm.fromJson(json.decode(test1));
-
-
-    print('current state='+json.encode( this.currentState.toJson()));
+    this.currentState = AfForm.fromJson(json.decode(encodedJson));
 
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget returnValue = Container(child: Center(child: Text('<Blank Form>')));
 
-    Widget returnValue=Container(child: Center(child: Text('<Blank Form>')));
-
-    returnValue=AfFormPageStateless(state: this.currentState);
+    returnValue = AfFormPageStateless(
+      state: this.currentState,
+      callbackStringField: this.implementAfCallbackStringField,
+      propertiesOnChangedCallback: this.implementAfPropertiesOnChangedCallback,
+    );
 
     return returnValue;
   }
@@ -56,16 +73,11 @@ class _AfFormPageState extends State<AfFormPage>{
     }
   }
 
-  void implementAfCallbackStringField(String fieldName, String value, bool doSetState)
-  {
+  void implementAfCallbackStringField(
+      String fieldName, String value, bool doSetState) {
     this.currentState.setValue(fieldName, value);
-    if(doSetState==true)
-      {
-        setState(() {
-
-        });
-      }
+    if (doSetState == true) {
+      setState(() {});
+    }
   }
-
-
 }
