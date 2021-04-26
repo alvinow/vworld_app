@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/fieldwidget/afdatefield.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/fieldwidget/afstringfield.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 
 class AfFormPageStateless extends StatelessWidget{
 
-  AfFormPageStateless({@required this.state, this.propertiesOnChangedCallback, this.callbackStringField});
+  AfFormPageStateless({@required this.state, this.propertiesOnChangedCallback, this.callbackStringField,this.callbackDateField});
 
   final AfForm state;
   final AfPropertiesOnChangedCallback propertiesOnChangedCallback;
   final AfCallbackStringField callbackStringField;
+  final AfCallbackDateField callbackDateField;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,21 @@ class AfFormPageStateless extends StatelessWidget{
       {
         AfFieldForm currentFieldForm=afForm.fieldFormList.elementAt(la);
 
+        Widget currentUiField=Container();
+        
+        if(currentFieldForm.fieldValue.valueAfDataType=='String'){
+
+          currentUiField=AfStringField(fieldValue: currentFieldForm.fieldValue, valueProp:currentFieldForm.valueProp ,  afCallbackStringField: this.callbackStringField);
+          fieldFormList.add(currentUiField);
+        }
+        else if(currentFieldForm.fieldValue.valueAfDataType=='DateTime'){
+
+          currentUiField=AfDateField(fieldValue: currentFieldForm.fieldValue, valueProp:currentFieldForm.valueProp ,  afCallbackDateFieldField: this.callbackDateField);
+          fieldFormList.add(currentUiField);
+        }
+        
+
+        /*
         Widget currentUiField=Container(
 
           child: TextFormField(
@@ -47,8 +65,9 @@ class AfFormPageStateless extends StatelessWidget{
 
           )
         );
+        */
 
-       fieldFormList.add(currentUiField);
+
 
       }
     returnValue=Container(

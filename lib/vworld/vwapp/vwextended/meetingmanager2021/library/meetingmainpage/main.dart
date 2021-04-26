@@ -3,7 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/formdemo.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/layauth.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginrequestparam.dart';
@@ -69,6 +73,27 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
+
+
+
+                  AfForm meetingForm=AfFormDemo.getAfFormById('meeting_af_form_id');
+
+
+                  AfFieldValue field1=AfFieldValue(fieldName: 'meeting_id', value: Uuid().v4(),valueAfDataType: 'String',  creatorActorId: this.widget.currrentActor.actor_id, lastUpdaterActorId: this.widget.currrentActor.actor_id);
+
+                  AfFieldValueRecord fieldValueRecord=AfFieldValueRecord(afFormId: 'meeting_af_form_id', afRecordId: Uuid().v4(), record: <AfFieldValue>[field1] );
+
+                 meetingForm.setRecord(fieldValueRecord);
+
+                  Widget newMeetingPage = Scaffold(
+                      appBar: AppBar(
+                        title: Text("Detail Kegiatan"),
+                      ),
+                      body: AfFormPage(initialState:  meetingForm , formCollection: <AfForm>[],)
+                  );
+
+
+                  /*
                   Meeting newMeeting = Meeting(
                       meeting_id: Uuid().v4(),
                       meeting_meetingtype_id: 'onlinemeeting',
@@ -81,10 +106,12 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
                       comitte: <Actor>[],
                       participants: <Actor>[]);
 
+                   */
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MeetingDetailForm(newMeeting)));
+                          builder: (context) => newMeetingPage  ));
 
                   //print(json.encode(state.actor.toJson()));
                   // Add your onPressed code here!

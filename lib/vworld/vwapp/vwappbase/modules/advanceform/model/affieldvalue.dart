@@ -11,26 +11,39 @@ class AfFieldValue {
       @required this.value,
       @required this.fieldCaption,
       @required this.valueAfDataType: "String",
-      @required this.createdDate,
-      @required this.lastUpdate,
-      @required this.lastUpdaterActorId});
+      @required this.created,
+      @required this.updated,
+      @required this.creatorActorId,
+      @required this.lastUpdaterActorId,
+      @required this.afRefValueFormId});
 
   @HiveField(0)
-  String fieldName;
+  final String fieldName;
   @HiveField(1)
   var value;
   @HiveField(2)
-  String fieldCaption;
+  final String fieldCaption;
   @HiveField(3)
-  String valueAfDataType;
+  final String valueAfDataType;
   @HiveField(4)
-  String createdDate;
+  String created;
   @HiveField(5)
-  String lastUpdate;
+  String updated;
   @HiveField(6)
+  String creatorActorId;
+  @HiveField(7)
   String lastUpdaterActorId;
+  @HiveField(8)
+  final String afRefValueFormId;
 
-  static List<String> afDataType = ["String", "Integer", "Double", "DateTime"];
+  static List<String> afDataType = [
+    "String",
+    "Integer",
+    "Double",
+    "DateTime",
+    "AfFormRecord",
+    "AfFormRecordList"
+  ];
 
   factory AfFieldValue.fromJson(Map<String, dynamic> json) =>
       _$AfFieldValueFromJson(json);

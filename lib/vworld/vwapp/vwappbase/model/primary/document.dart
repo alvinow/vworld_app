@@ -416,6 +416,8 @@ class Document extends DocumentModel {
 
   static final String documenttypeIdUpsynctoken="documenttype_id_upsynctoken";
 
+  static final String afformDocumenttypeId="afform_documenttype_id";
+
   static final String folderDocumenttypeId = "folder";
   static final String userfolderstackDocumenttypeId = "userfolderstack";
   //static final String flatSpmdetailWebsas2020DocumenttypeId =      "flat_spmdetail_websas2020";

@@ -12,10 +12,10 @@ typedef AfCallbackDoubleField = void Function(String, int, double);
 typedef AfGetCurrentState = AfForm Function();
 
 class AfFormPage extends StatefulWidget {
-  AfFormPage({this.initialState});
+  AfFormPage({@required this.initialState, @required this.formCollection });
 
-  AfForm initialState;
-
+  final AfForm initialState;
+  final List<AfForm> formCollection;
   AfGetCurrentState getCurrentStateLink;
 
   AfForm getCurrentState(){
@@ -61,6 +61,7 @@ class _AfFormPageState extends State<AfFormPage> {
     returnValue = AfFormPageStateless(
       state: this.currentState,
       callbackStringField: this.implementAfCallbackStringField,
+      callbackDateField: this.implementAfCallbackDateField,
       propertiesOnChangedCallback: this.implementAfPropertiesOnChangedCallback,
     );
 
@@ -75,6 +76,13 @@ class _AfFormPageState extends State<AfFormPage> {
 
   void implementAfCallbackStringField(
       String fieldName, String value, bool doSetState) {
+    this.currentState.setValue(fieldName, value);
+    if (doSetState == true) {
+      setState(() {});
+    }
+  }
+  void implementAfCallbackDateField(
+      String fieldName, DateTime value, bool doSetState) {
     this.currentState.setValue(fieldName, value);
     if (doSetState == true) {
       setState(() {});

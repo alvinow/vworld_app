@@ -14,7 +14,8 @@ class AfValueProp {
     this.intMinValue:-9223372036854775807,
     this.doubleDigitPrecision:6,
     this.doubleDigitMaxLength:26,
-    this.isMandatory:false
+    this.isMandatory:false,
+    this.isReadOnly:false
 
 });
 
@@ -37,6 +38,9 @@ class AfValueProp {
   final int doubleDigitMaxLength;
   @HiveField(7)
   final bool isMandatory;
+  @HiveField(8)
+  final bool isReadOnly;
+
 
   factory AfValueProp.fromJson(Map<String, dynamic> json) =>
       _$AfValuePropFromJson(json);

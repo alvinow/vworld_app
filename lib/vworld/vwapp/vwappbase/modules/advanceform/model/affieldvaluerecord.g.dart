@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'afform.dart';
+part of 'affieldvaluerecord.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AfFormAdapter extends TypeAdapter<AfForm> {
+class AfFieldValueRecordAdapter extends TypeAdapter<AfFieldValueRecord> {
   @override
-  final int typeId = 101;
+  final int typeId = 105;
 
   @override
-  AfForm read(BinaryReader reader) {
+  AfFieldValueRecord read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return AfForm(
-      fieldFormList: (fields[2] as List)?.cast<AfFieldForm>(),
+    return AfFieldValueRecord(
       afFormId: fields[0] as String,
       afRecordId: fields[1] as String,
+      record: (fields[2] as List)?.cast<AfFieldValue>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, AfForm obj) {
+  void write(BinaryWriter writer, AfFieldValueRecord obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -32,7 +32,7 @@ class AfFormAdapter extends TypeAdapter<AfForm> {
       ..writeByte(1)
       ..write(obj.afRecordId)
       ..writeByte(2)
-      ..write(obj.fieldFormList);
+      ..write(obj.record);
   }
 
   @override
@@ -41,7 +41,7 @@ class AfFormAdapter extends TypeAdapter<AfForm> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AfFormAdapter &&
+      other is AfFieldValueRecordAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -50,19 +50,20 @@ class AfFormAdapter extends TypeAdapter<AfForm> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-AfForm _$AfFormFromJson(Map<String, dynamic> json) {
-  return AfForm(
-    fieldFormList: (json['fieldFormList'] as List)
-        ?.map((e) =>
-            e == null ? null : AfFieldForm.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+AfFieldValueRecord _$AfFieldValueRecordFromJson(Map<String, dynamic> json) {
+  return AfFieldValueRecord(
     afFormId: json['afFormId'] as String,
     afRecordId: json['afRecordId'] as String,
+    record: (json['record'] as List)
+        ?.map((e) =>
+            e == null ? null : AfFieldValue.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
-Map<String, dynamic> _$AfFormToJson(AfForm instance) => <String, dynamic>{
+Map<String, dynamic> _$AfFieldValueRecordToJson(AfFieldValueRecord instance) =>
+    <String, dynamic>{
       'afFormId': instance.afFormId,
       'afRecordId': instance.afRecordId,
-      'fieldFormList': instance.fieldFormList,
+      'record': instance.record,
     };
