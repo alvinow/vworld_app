@@ -10,27 +10,34 @@ part 'affieldform.g.dart';
 class AfFieldForm {
   AfFieldForm(
       {@required this.fieldValue,
-      this.valueProp,
+       @required this.valueProp,
       this.useExpansionTile: true,
       this.autoExpandWhenNotNull: true,
       this.initiallyExpanded: true,
-      this.isObscureText: false,
-      this.isReadOnly: false});
+      });
 
   @HiveField(0)
   final AfFieldValue fieldValue;
   @HiveField(1)
-  AfValueProp valueProp;
+  final AfValueProp valueProp;
   @HiveField(2)
   bool useExpansionTile;
   @HiveField(3)
   bool autoExpandWhenNotNull;
   @HiveField(4)
   bool initiallyExpanded;
-  @HiveField(5)
-  bool isObscureText;
-  @HiveField(6)
-  bool isReadOnly;
+
+  bool isValueValid(){
+
+    if((this.fieldValue.value==null || this.fieldValue.value.toString()=='') && this.valueProp.isNotNull==true)
+      {
+        return false;
+      }
+    else{
+      return true;
+    }
+  }
+
 
   factory AfFieldForm.fromJson(Map<String, dynamic> json) =>
       _$AfFieldFormFromJson(json);

@@ -7,7 +7,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affi
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/formdemo.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/layauth.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginrequestparam.dart';
@@ -19,6 +19,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/me
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/library/meetingtab1/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/main.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/page/meetingpagedetail/meetingpagedetail.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/organization.dart';
@@ -85,13 +86,43 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
 
                  meetingForm.setRecord(fieldValueRecord);
 
+                 AfFormPage afFormPage=AfFormPage(initialState:  meetingForm , formCollection: <AfForm>[],);
+
+                 Widget newMeetingPage =MeetingPageDetail(afFormPage:afFormPage);
+
+                 /*
                   Widget newMeetingPage = Scaffold(
                       appBar: AppBar(
                         title: Text("Detail Kegiatan"),
-                      ),
-                      body: AfFormPage(initialState:  meetingForm , formCollection: <AfForm>[],)
-                  );
+                        actions: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.save,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              // do something
+                              if (afFormPage.getCurrentState().isRecordValid()) {
 
+                                print('Record Valid');
+                                Navigator.pop(context);
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.red,
+                                        duration: Duration(seconds: 5),
+                                        content: Text('Record is not valid')));
+                                print('Record Not Valid');
+                              }
+                            },
+                          )
+                        ],
+                      ),
+
+                      body: afFormPage
+                  );
+*/
 
                   /*
                   Meeting newMeeting = Meeting(
@@ -169,19 +200,6 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
       return returnValue;
     }));
 
-    /*
-    String appBarTitle='Jadwal Kegiatan';
 
-    return Scaffold(
-        bottomNavigationBar:MeetingTab1(null, 0),
-
-        appBar: AppBar(
-        title: Text(appBarTitle),
-      ),
-
-      body: CalendarPage1(title: this.widget.title,currrentUser: this.widget.currrentUser , meetingList: this.widget.meetingList,organizationMember: this.widget.organizationMember,)
-    );
-
-     */
   }
 }

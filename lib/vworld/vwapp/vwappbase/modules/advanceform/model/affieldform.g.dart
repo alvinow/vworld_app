@@ -22,15 +22,13 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
       useExpansionTile: fields[2] as bool,
       autoExpandWhenNotNull: fields[3] as bool,
       initiallyExpanded: fields[4] as bool,
-      isObscureText: fields[5] as bool,
-      isReadOnly: fields[6] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, AfFieldForm obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.fieldValue)
       ..writeByte(1)
@@ -40,11 +38,7 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
       ..writeByte(3)
       ..write(obj.autoExpandWhenNotNull)
       ..writeByte(4)
-      ..write(obj.initiallyExpanded)
-      ..writeByte(5)
-      ..write(obj.isObscureText)
-      ..writeByte(6)
-      ..write(obj.isReadOnly);
+      ..write(obj.initiallyExpanded);
   }
 
   @override
@@ -73,8 +67,6 @@ AfFieldForm _$AfFieldFormFromJson(Map<String, dynamic> json) {
     useExpansionTile: json['useExpansionTile'] as bool,
     autoExpandWhenNotNull: json['autoExpandWhenNotNull'] as bool,
     initiallyExpanded: json['initiallyExpanded'] as bool,
-    isObscureText: json['isObscureText'] as bool,
-    isReadOnly: json['isReadOnly'] as bool,
   );
 }
 
@@ -85,6 +77,4 @@ Map<String, dynamic> _$AfFieldFormToJson(AfFieldForm instance) =>
       'useExpansionTile': instance.useExpansionTile,
       'autoExpandWhenNotNull': instance.autoExpandWhenNotNull,
       'initiallyExpanded': instance.initiallyExpanded,
-      'isObscureText': instance.isObscureText,
-      'isReadOnly': instance.isReadOnly,
     };

@@ -40,12 +40,14 @@ class AfFormPageStateless extends StatelessWidget{
         
         if(currentFieldForm.fieldValue.valueAfDataType=='String'){
 
-          currentUiField=AfStringField(fieldValue: currentFieldForm.fieldValue, valueProp:currentFieldForm.valueProp ,  afCallbackStringField: this.callbackStringField);
+
+
+          currentUiField=AfStringField(fieldValue: currentFieldForm.fieldValue,isValueValid: currentFieldForm.isValueValid(),isNotNull:currentFieldForm.valueProp.isNotNull , valueProp:currentFieldForm.valueProp ,  afCallbackStringField: this.callbackStringField);
           fieldFormList.add(currentUiField);
         }
         else if(currentFieldForm.fieldValue.valueAfDataType=='DateTime'){
 
-          currentUiField=AfDateField(fieldValue: currentFieldForm.fieldValue, valueProp:currentFieldForm.valueProp ,  afCallbackDateFieldField: this.callbackDateField);
+          currentUiField=AfDateField(fieldValue: currentFieldForm.fieldValue, isValueValid: currentFieldForm.isValueValid(),isNotNull:currentFieldForm.valueProp.isNotNull , valueProp:currentFieldForm.valueProp ,  afCallbackDateFieldField: this.callbackDateField);
           fieldFormList.add(currentUiField);
         }
         

@@ -27,6 +27,22 @@ class AfForm {
 
   Map<String, dynamic> toJson() => _$AfFormToJson(this);
 
+  bool isRecordValid(){
+    bool returnValue=true;
+
+    for(int la=0;la<this.fieldFormList.length;la++){
+      AfFieldForm currentElement= this.fieldFormList.elementAt(la);
+
+      if(currentElement.isValueValid()==false)
+        {
+          returnValue=false;
+          break;
+        }
+    }
+
+    return returnValue;
+  }
+
   AfFieldValueRecord getRecord() {
     AfFieldValueRecord returnValue;
 

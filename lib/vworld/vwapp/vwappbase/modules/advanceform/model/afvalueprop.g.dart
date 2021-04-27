@@ -25,13 +25,16 @@ class AfValuePropAdapter extends TypeAdapter<AfValueProp> {
       doubleDigitPrecision: fields[5] as int,
       doubleDigitMaxLength: fields[6] as int,
       isMandatory: fields[7] as bool,
+      isReadOnly: fields[8] as bool,
+      isObscureText: fields[9] as bool,
+      isNotNull: fields[10] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, AfValueProp obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.uifieldType)
       ..writeByte(1)
@@ -47,7 +50,13 @@ class AfValuePropAdapter extends TypeAdapter<AfValueProp> {
       ..writeByte(6)
       ..write(obj.doubleDigitMaxLength)
       ..writeByte(7)
-      ..write(obj.isMandatory);
+      ..write(obj.isMandatory)
+      ..writeByte(8)
+      ..write(obj.isReadOnly)
+      ..writeByte(9)
+      ..write(obj.isObscureText)
+      ..writeByte(10)
+      ..write(obj.isNotNull);
   }
 
   @override
@@ -75,6 +84,9 @@ AfValueProp _$AfValuePropFromJson(Map<String, dynamic> json) {
     doubleDigitPrecision: json['doubleDigitPrecision'] as int,
     doubleDigitMaxLength: json['doubleDigitMaxLength'] as int,
     isMandatory: json['isMandatory'] as bool,
+    isReadOnly: json['isReadOnly'] as bool,
+    isObscureText: json['isObscureText'] as bool,
+    isNotNull: json['isNotNull'] as bool,
   );
 }
 
@@ -88,4 +100,7 @@ Map<String, dynamic> _$AfValuePropToJson(AfValueProp instance) =>
       'doubleDigitPrecision': instance.doubleDigitPrecision,
       'doubleDigitMaxLength': instance.doubleDigitMaxLength,
       'isMandatory': instance.isMandatory,
+      'isReadOnly': instance.isReadOnly,
+      'isObscureText': instance.isObscureText,
+      'isNotNull': instance.isNotNull,
     };

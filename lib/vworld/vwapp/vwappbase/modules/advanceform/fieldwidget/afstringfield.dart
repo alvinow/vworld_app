@@ -14,7 +14,10 @@ class AfStringField extends StatelessWidget {
       this.borderWidth: 1,
       this.useBorder: false,
       this.fontSize: 18,
-      this.backgroundColorHex: "#ebf1f2"});
+      this.backgroundColorHex: "#ebf1f2",
+        this.isValueValid: false,
+        this.isNotNull: false
+      });
 
   final AfValueProp valueProp;
   final AfFieldValue fieldValue;
@@ -28,6 +31,8 @@ class AfStringField extends StatelessWidget {
   final double borderWidth;
   final bool useBorder;
   final double fontSize;
+  final bool isValueValid;
+  final bool isNotNull;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +48,7 @@ class AfStringField extends StatelessWidget {
       style: TextStyle(fontSize: this.fontSize),
       decoration: InputDecoration(
           border: UnderlineInputBorder(),
+        labelStyle: TextStyle(color: this.isValueValid? Colors.black: Colors.red),
         contentPadding: EdgeInsets.all(0),
         labelText: this.fieldValue.fieldCaption,
         focusColor: Colors.orange,

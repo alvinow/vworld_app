@@ -29,7 +29,7 @@ class AfFormDemo {
     AfForm returnValue = AfForm(fieldFormList: <AfFieldForm>[],afFormId: 'meeting_af_form_id');
 
     AfFieldForm field1 = AfFieldForm(
-        valueProp: AfValueProp(isReadOnly: true),
+        valueProp: AfValueProp(isReadOnly: true,isNotNull: true),
         fieldValue: AfFieldValue(
             fieldName: 'meeting_id',
             fieldCaption: 'Meeting ID',
@@ -49,7 +49,7 @@ class AfFormDemo {
             lastUpdaterActorId: null));
 
     AfFieldForm field3 = AfFieldForm(
-        valueProp: AfValueProp(),
+        valueProp: AfValueProp(isNotNull: true),
         fieldValue: AfFieldValue(
             fieldName: 'meeting_meetingstatus_id',
             fieldCaption: 'Meeting Status ID',
@@ -59,7 +59,7 @@ class AfFormDemo {
             lastUpdaterActorId: null));
 
     AfFieldForm field4 = AfFieldForm(
-        valueProp: AfValueProp(),
+        valueProp: AfValueProp(isNotNull: true),
         fieldValue: AfFieldValue(
             fieldName: 'meeting_name',
             fieldCaption: 'Meeting Name',
@@ -69,7 +69,7 @@ class AfFormDemo {
             lastUpdaterActorId: null));
 
     AfFieldForm field5 = AfFieldForm(
-        valueProp: AfValueProp(),
+        valueProp: AfValueProp(isNotNull: true),
         fieldValue: AfFieldValue(
             fieldName: 'meeting_start_datetime',
             fieldCaption: 'Meeting Start',
@@ -79,7 +79,7 @@ class AfFormDemo {
             lastUpdaterActorId: null));
 
     AfFieldForm field6 = AfFieldForm(
-        valueProp: AfValueProp(),
+        valueProp: AfValueProp(isNotNull: true),
         fieldValue: AfFieldValue(
             fieldName: 'meeting_end_datetime',
             fieldCaption: 'Meeting End',
