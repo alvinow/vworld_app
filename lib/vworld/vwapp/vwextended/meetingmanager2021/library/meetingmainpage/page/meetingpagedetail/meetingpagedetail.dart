@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 
-typedef OnSaveValidRecordMeetingPageDetail = void Function(AfForm);
-typedef OnSaveInvalidRecordMeetingPageDetail = void Function(AfForm);
+typedef OnSaveValidRecordMeetingPageDetail = void Function(AfForm,BuildContext );
+typedef OnSaveInvalidRecordMeetingPageDetail = void Function(AfForm,BuildContext );
 
 class MeetingPageDetail extends StatelessWidget {
   MeetingPageDetail(
@@ -32,14 +32,14 @@ class MeetingPageDetail extends StatelessWidget {
                 if (afFormPage.getCurrentState().isRecordValid()) {
                   if (this.onSaveValidRecordMeetingPageDetail != null) {
                     onSaveValidRecordMeetingPageDetail(
-                        this.afFormPage.getCurrentState());
+                        this.afFormPage.getCurrentState(),context);
                   }
-                  print('Record Valid');
-                  Navigator.pop(context);
+                  //print('Record Valid');
+                  //Navigator.pop(context);
                 } else {
                   if (this.onSaveInvalidRecordMeetingPageDetail != null) {
                     this.onSaveInvalidRecordMeetingPageDetail(
-                        this.afFormPage.getCurrentState());
+                        this.afFormPage.getCurrentState(),context);
                   } /*else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         backgroundColor: Colors.red,

@@ -8,36 +8,29 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affi
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/layauth.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginrequestparam.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/page/loginpagelayauth/loginpagelayauth.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/util/dateutil.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/actorinfopage/actorinfopage.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/calendarpage1/main.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingdetailform/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/library/meetingtab1/main.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/page/meetingpagedetail/meetingpagedetail.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/organization.dart';
 import 'dart:convert';
 
 class MeetingMainPage extends StatefulWidget {
   MeetingMainPage({@required this.currrentActor});
 
-  //final String title;
   final Actor currrentActor;
-  //final List<Meeting> meetingList;
-  //final List<Actor> organizationMember;
-
   _MeetingMainPageState createState() => _MeetingMainPageState();
 }
 
 class _MeetingMainPageState extends State<MeetingMainPage> {
   MeetingmainpageBloc bloc;
+
+  void implementSaveValidRecordMeetingPageDetail(AfForm,BuildContext context) {
+    print("Simulation: Saving Record...");
+    Navigator.pop(context);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,23 +67,35 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
+                  AfForm meetingForm =
+                      AfFormDemo.getAfFormById('meeting_af_form_id');
 
+                  AfFieldValue field1 = AfFieldValue(
+                      fieldName: 'meeting_id',
+                      value: Uuid().v4(),
+                      valueAfDataType: 'String',
+                      creatorActorId: this.widget.currrentActor.actor_id,
+                      lastUpdaterActorId: this.widget.currrentActor.actor_id);
 
+                  AfFieldValueRecord fieldValueRecord = AfFieldValueRecord(
+                      afFormId: 'meeting_af_form_id',
+                      afRecordId: Uuid().v4(),
+                      record: <AfFieldValue>[field1]);
 
-                  AfForm meetingForm=AfFormDemo.getAfFormById('meeting_af_form_id');
+                  meetingForm.setRecord(fieldValueRecord);
 
+                  AfFormPage afFormPage = AfFormPage(
+                    initialState: meetingForm,
+                    formCollection: <AfForm>[],
+                  );
 
-                  AfFieldValue field1=AfFieldValue(fieldName: 'meeting_id', value: Uuid().v4(),valueAfDataType: 'String',  creatorActorId: this.widget.currrentActor.actor_id, lastUpdaterActorId: this.widget.currrentActor.actor_id);
+                  Widget newMeetingPage = MeetingPageDetail(
+                    afFormPage: afFormPage,
+                    onSaveValidRecordMeetingPageDetail:
+                        this.implementSaveValidRecordMeetingPageDetail,
+                  );
 
-                  AfFieldValueRecord fieldValueRecord=AfFieldValueRecord(afFormId: 'meeting_af_form_id', afRecordId: Uuid().v4(), record: <AfFieldValue>[field1] );
-
-                 meetingForm.setRecord(fieldValueRecord);
-
-                 AfFormPage afFormPage=AfFormPage(initialState:  meetingForm , formCollection: <AfForm>[],);
-
-                 Widget newMeetingPage =MeetingPageDetail(afFormPage:afFormPage);
-
-                 /*
+                  /*
                   Widget newMeetingPage = Scaffold(
                       appBar: AppBar(
                         title: Text("Detail Kegiatan"),
@@ -139,10 +144,8 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
 
                    */
 
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => newMeetingPage  ));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => newMeetingPage));
 
                   //print(json.encode(state.actor.toJson()));
                   // Add your onPressed code here!
@@ -158,13 +161,14 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
       } else if (state is DisplayactorinfopageOnMeetingmainpageState) {
         returnValue =
             ActorInfoPage(this.bloc, MeetingTab1(this.bloc, 1), state.actor);
-      } else if(state is DisplayAfformOnMeetingmainpageState){
-
+      } else if (state is DisplayAfformOnMeetingmainpageState) {
         String appBarTitle = 'Demo AfForm';
 
-        AfFormPage afFormPage=AfFormPage(initialState: state.afForm,);
+        AfFormPage afFormPage = AfFormPage(
+          initialState: state.afForm,
+        );
 
-        returnValue=returnValue = Scaffold(
+        returnValue = returnValue = Scaffold(
             bottomNavigationBar: MeetingTab1(this.bloc, 0),
             appBar: AppBar(
               title: Text(appBarTitle),
@@ -174,32 +178,27 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
                     child: GestureDetector(
                       onTap: () {
                         print('Save Button Tapped');
-                       print(json.encode(afFormPage.getCurrentStateLink().toJson()));
+                        print(json
+                            .encode(afFormPage.getCurrentStateLink().toJson()));
                       },
                       child: Icon(
                         Icons.save,
                         size: 26.0,
                       ),
-                    )
-                ),
+                    )),
               ],
-
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-               print('Button Tapped');
+                print('Button Tapped');
               },
               child: const Icon(Icons.add),
               backgroundColor: Colors.green,
             ),
             body: afFormPage);
-
       }
-
 
       return returnValue;
     }));
-
-
   }
 }

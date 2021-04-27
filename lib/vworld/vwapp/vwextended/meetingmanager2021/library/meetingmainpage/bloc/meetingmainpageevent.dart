@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 
 abstract class MeetingmainpageEvent extends Equatable {
   const MeetingmainpageEvent();
@@ -23,6 +24,24 @@ class OpenAfformPageOnMeetingmainpageEvent extends MeetingmainpageEvent {
   @override
   String toString() =>
       'OpenAfformPageOnMeetingmainpageEvent{${this.timestamp.toString()}}';
+}
+
+class SavemeetingeventpageOnMeetingmainpageEvent extends MeetingmainpageEvent{
+  SavemeetingeventpageOnMeetingmainpageEvent(this.timestamp, this.meetingAfForm);
+
+  final DateTime timestamp;
+  final AfForm meetingAfForm;
+
+  @override
+  List<Object> get props => [timestamp,meetingAfForm];
+
+  @override
+  String toString() =>
+      'SavemeetingeventpageOnMeetingmainpageEvent{${this.timestamp.toString()}}';
+
+
+
+
 }
 
 class OpeneventpageOnMeetingmainpageEvent extends MeetingmainpageEvent {
