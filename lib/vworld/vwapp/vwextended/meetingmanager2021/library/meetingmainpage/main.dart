@@ -8,6 +8,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affi
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/util/vwdialog/vwdialog.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/actorinfopage/actorinfopage.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/calendarpage1/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
@@ -26,10 +27,14 @@ class MeetingMainPage extends StatefulWidget {
 class _MeetingMainPageState extends State<MeetingMainPage> {
   MeetingmainpageBloc bloc;
 
-  void implementSaveValidRecordMeetingPageDetail(AfForm,BuildContext context) {
+  void implementSaveValidRecordMeetingPageDetail(AfForm afForm,BuildContext context) {
     print("Simulation: Saving Record...");
     Navigator.pop(context);
 
+  }
+
+  void implementSaveInvalidRecordMeetingPageDetail(AfForm afForm, BuildContext context){
+    VwDialog.showAlertDialog(context, title: 'Please fill the required field(s)');
   }
 
   @override
@@ -91,6 +96,7 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
 
                   Widget newMeetingPage = MeetingPageDetail(
                     afFormPage: afFormPage,
+                    onSaveInvalidRecordMeetingPageDetail: this.implementSaveInvalidRecordMeetingPageDetail,
                     onSaveValidRecordMeetingPageDetail:
                         this.implementSaveValidRecordMeetingPageDetail,
                   );

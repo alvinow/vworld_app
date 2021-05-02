@@ -41,7 +41,6 @@ class SavemeetingeventpageOnMeetingmainpageEvent extends MeetingmainpageEvent{
 
 
 
-
 }
 
 class OpeneventpageOnMeetingmainpageEvent extends MeetingmainpageEvent {
