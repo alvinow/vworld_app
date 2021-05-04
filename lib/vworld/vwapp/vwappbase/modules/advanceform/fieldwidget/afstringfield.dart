@@ -39,7 +39,7 @@ class AfStringField extends StatelessWidget {
     Widget returnValue = Container(
       padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: TextFormField(
-          initialValue: this.fieldValue.value==null? null : this.fieldValue.value.toString(),
+          initialValue: this.fieldValue.stringValue==null? null : this.fieldValue.stringValue.toString(),
       maxLines: 1,
       readOnly: this.valueProp.isReadOnly,
       onChanged: (value) {

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VwDialog {
-
-  static void showAlertDialog(BuildContext context,{String title:'Alert Dialog',String content:'',String buttonCaption:'OK'}) {
-
+  static void showAlertDialog(BuildContext context,
+      {String title: 'Alert Dialog',
+      String content: '',
+      String buttonCaption: 'OK'}) {
     // set up the button
     Widget okButton = FlatButton(
       child: Text(buttonCaption),
       onPressed: () {
-        Navigator.of(context).pop();
-
+        Navigator.of(context).pop(); //popping the dialog
       },
     );
 
@@ -31,5 +31,4 @@ class VwDialog {
       },
     );
   }
-
 }

@@ -39,7 +39,7 @@ class Document extends DocumentModel {
     @required this.documentstatusId,
     @required this.documenttypeId: 'Document',
     @required this.json,
-    this.creatorLoginsessionId,
+    @required this.creatorLoginsessionId,
     this.binaryfileId,
     this.binaryUploadBase64,
     this.binaryUploadMd5,
@@ -463,10 +463,10 @@ class Document extends DocumentModel {
 
   //vworld_app -- documenttype_id #begin
 
-  static final String actorDocumenttypeId='actorDocumenttypeId';
-  static final String meetingDocumenttypeId='meetingDocumenttypeId';
-  static final String organizationDocumenttypeId='organizationDocumenttypeId';
-  static final String personDocumenttypeId='personDocumenttypeId';
+  static final String actorDocumenttypeId='meetingmanager_2021_actor_documenttype_id';
+  static final String meetingDocumenttypeId='meetingmanager_2021_meeting_document_type_id';
+  static final String organizationDocumenttypeId='meetingmanager_2021_organization_documenttype_id';
+  static final String personDocumenttypeId='meetingmanager_2021_person_documenttype_id';
 
   //vworld_app -- documenttype_id #end
 

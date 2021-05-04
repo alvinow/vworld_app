@@ -497,6 +497,8 @@ class DocumentDocStreamStore {
     return returnValue;
   }
 
+
+
   static Future<List<Document>> getDocumentsBySearchParamByField(
       DocumentSearchParamByFields documentSearchParamByField, {
         List<String> columns,

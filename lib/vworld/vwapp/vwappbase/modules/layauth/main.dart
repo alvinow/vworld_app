@@ -68,7 +68,7 @@ class _LayAuthState extends State<LayAuth> {
             Actor currentActor=Actor(actor_id: state.loginResponse.userProfile.userlogin_id, actor_actorrole_id: appRoleId, actor_fullname: actor_fullname, actor_username: actor_username, actor_password: '****', actor_loginrightstatus_id: '1', actor_person_id: '<invalid_person_id>', actor_organization_id: currentOrganization.organization_id);
 
 
-            returnValue=MeetingMainPage(currrentActor: currentActor,);
+            returnValue=MeetingMainPage(currrentActor: currentActor,loginResponse: state.loginResponse,);
           }
 
 

@@ -38,9 +38,9 @@ class AfDateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String dateInitialValue = this.fieldValue.value == null
+    String dateInitialValue = this.fieldValue.dateTimeValue == null
         ? null
-        : DateUtil1.get24hDateFormat().format(this.fieldValue.value);
+        : DateUtil1.get24hDateFormat().format(this.fieldValue.dateTimeValue);
 
     //String dateInitialValue=this.fieldValue.value==null? null : this.fieldValue.value.toString() ;
 
@@ -68,9 +68,9 @@ class AfDateField extends StatelessWidget {
 
               print('confirm $date');
             },
-                currentTime: this.fieldValue.value == null
+                currentTime: this.fieldValue.dateTimeValue == null
                     ? DateTime.now()
-                    : this.fieldValue.value,
+                    : this.fieldValue.dateTimeValue,
                 locale: LocaleType.id);
           },
           onChanged: (value) {

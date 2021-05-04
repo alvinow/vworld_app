@@ -56,7 +56,10 @@ class AfForm {
         AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
         AfFieldValue newFieldValue = AfFieldValue(
             fieldName: currentFieldForm.fieldValue.fieldName,
-            value: currentFieldForm.fieldValue.value,
+            stringValue: currentFieldForm.fieldValue.stringValue,
+            integerValue: currentFieldForm.fieldValue.integerValue,
+            doubleValue: currentFieldForm.fieldValue.doubleValue,
+            dateTimeValue: currentFieldForm.fieldValue.dateTimeValue,
             fieldCaption: currentFieldForm.fieldValue.fieldCaption,
             valueAfDataType: currentFieldForm.fieldValue.valueAfDataType,
             created: currentFieldForm.fieldValue.created,
@@ -97,8 +100,15 @@ class AfForm {
                 currentDestinationFieldValue.fieldName) {
               if (currentDestinationFieldValue.valueAfDataType ==
                   currentSourceFieldValue.valueAfDataType) {
-                currentDestinationFieldValue.value =
-                    currentSourceFieldValue.value;
+                currentDestinationFieldValue.stringValue =currentSourceFieldValue.stringValue;
+                currentDestinationFieldValue.integerValue =currentSourceFieldValue.integerValue;
+                currentDestinationFieldValue.doubleValue =currentSourceFieldValue.doubleValue;
+                currentDestinationFieldValue.dateTimeValue =currentSourceFieldValue.dateTimeValue;
+
+
+
+
+
                 currentDestinationFieldValue.creatorActorId =
                     currentSourceFieldValue.creatorActorId;
                 currentDestinationFieldValue.lastUpdaterActorId =
@@ -126,7 +136,19 @@ class AfForm {
       AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
 
       if (currentFieldForm.fieldValue.fieldName == fieldName) {
-        currentFieldForm.fieldValue.value = value;
+        if(currentFieldForm.fieldValue.valueAfDataType=='String') {
+          currentFieldForm.fieldValue.stringValue = value;
+        }
+        else if(currentFieldForm.fieldValue.valueAfDataType=='Integer') {
+          currentFieldForm.fieldValue.integerValue = value;
+        }
+        else if(currentFieldForm.fieldValue.valueAfDataType=='Double') {
+          currentFieldForm.fieldValue.doubleValue = value;
+        }
+        else if(currentFieldForm.fieldValue.valueAfDataType=='DateTime') {
+          currentFieldForm.fieldValue.dateTimeValue = value;
+        }
+
         returnValue = true;
         break;
       }

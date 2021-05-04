@@ -27,6 +27,7 @@ class LoginResponse{
   final bool authenticated;
 
   @HiveField(2)
+  @JsonKey(name: 'loginsession_id')
   final String loginsessionId;
 
   @HiveField(3)

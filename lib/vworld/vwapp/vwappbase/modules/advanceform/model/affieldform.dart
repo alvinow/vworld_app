@@ -29,7 +29,41 @@ class AfFieldForm {
 
   bool isValueValid(){
 
-    if((this.fieldValue.value==null || this.fieldValue.value.toString()=='') && this.valueProp.isNotNull==true)
+    bool isValueNull=true;
+
+    if(this.fieldValue.valueAfDataType=='String')
+      {
+        if(this.fieldValue.stringValue!=null || this.fieldValue.stringValue.toString()=='')
+          {
+            isValueNull=false;
+          }
+      }
+    else if(this.fieldValue.valueAfDataType=='Integer')
+      {
+        if(this.fieldValue.integerValue!=null)
+        {
+          isValueNull=false;
+        }
+      }
+    else if(this.fieldValue.valueAfDataType=='Double')
+    {
+      if(this.fieldValue.doubleValue!=null)
+      {
+        isValueNull=false;
+      }
+    }
+    else if(this.fieldValue.valueAfDataType=='DateTime')
+    {
+      if(this.fieldValue.dateTimeValue!=null)
+      {
+        isValueNull=false;
+      }
+    }
+
+
+
+
+    if(( isValueNull==true) && this.valueProp.isNotNull==true)
       {
         return false;
       }

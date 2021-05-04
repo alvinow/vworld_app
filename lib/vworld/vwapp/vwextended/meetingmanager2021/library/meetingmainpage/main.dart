@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
@@ -18,29 +19,33 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/ac
 import 'dart:convert';
 
 class MeetingMainPage extends StatefulWidget {
-  MeetingMainPage({@required this.currrentActor});
+  MeetingMainPage({@required this.currrentActor,@required this.loginResponse});
 
   final Actor currrentActor;
+  final LoginResponse loginResponse;
   _MeetingMainPageState createState() => _MeetingMainPageState();
 }
 
 class _MeetingMainPageState extends State<MeetingMainPage> {
   MeetingmainpageBloc bloc;
 
-  void implementSaveValidRecordMeetingPageDetail(AfForm afForm,BuildContext context) {
+  Future<void> implementSaveValidRecordMeetingPageDetail(AfForm afForm,BuildContext context) async{
     print("Simulation: Saving Record...");
-    Navigator.pop(context);
+    await Navigator.pop(context); //popping the afForm
+
+    this.bloc.add(SavemeetingeventpageOnMeetingmainpageEvent(DateTime.now(), afForm));
+
 
   }
 
-  void implementSaveInvalidRecordMeetingPageDetail(AfForm afForm, BuildContext context){
+  Future<void>  implementSaveInvalidRecordMeetingPageDetail(AfForm afForm, BuildContext context) async{
     VwDialog.showAlertDialog(context, title: 'Please fill the required field(s)');
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) {
-      this.bloc = MeetingmainpageBloc(this.widget.currrentActor);
+      this.bloc = MeetingmainpageBloc(this.widget.currrentActor, this.widget.loginResponse);
 
       return this.bloc;
     }, child: BlocBuilder<MeetingmainpageBloc, MeetingmainpageState>(
@@ -77,7 +82,7 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
 
                   AfFieldValue field1 = AfFieldValue(
                       fieldName: 'meeting_id',
-                      value: Uuid().v4(),
+                      stringValue: Uuid().v4(),
                       valueAfDataType: 'String',
                       creatorActorId: this.widget.currrentActor.actor_id,
                       lastUpdaterActorId: this.widget.currrentActor.actor_id);
@@ -101,54 +106,6 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
                         this.implementSaveValidRecordMeetingPageDetail,
                   );
 
-                  /*
-                  Widget newMeetingPage = Scaffold(
-                      appBar: AppBar(
-                        title: Text("Detail Kegiatan"),
-                        actions: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.save,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              // do something
-                              if (afFormPage.getCurrentState().isRecordValid()) {
-
-                                print('Record Valid');
-                                Navigator.pop(context);
-                              }
-                              else{
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Colors.red,
-                                        duration: Duration(seconds: 5),
-                                        content: Text('Record is not valid')));
-                                print('Record Not Valid');
-                              }
-                            },
-                          )
-                        ],
-                      ),
-
-                      body: afFormPage
-                  );
-*/
-
-                  /*
-                  Meeting newMeeting = Meeting(
-                      meeting_id: Uuid().v4(),
-                      meeting_meetingtype_id: 'onlinemeeting',
-                      meeting_meetingstatus_id: '2',
-                      meeting_start_datetime: DateUtil1.convertDateFromString(
-                          '2021-03-01 08:00:00'),
-                      meeting_end_datetime: DateUtil1.convertDateFromString(
-                          '2021-03-03 21:00:00'),
-                      meeting_owner_actor_id: this.widget.currrentActor.actor_id,
-                      comitte: <Actor>[],
-                      participants: <Actor>[]);
-
-                   */
 
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => newMeetingPage));

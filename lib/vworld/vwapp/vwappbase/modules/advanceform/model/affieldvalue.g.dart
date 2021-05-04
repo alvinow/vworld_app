@@ -18,38 +18,47 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
     };
     return AfFieldValue(
       fieldName: fields[0] as String,
-      value: fields[1] as dynamic,
-      fieldCaption: fields[2] as String,
-      valueAfDataType: fields[3] as String,
-      created: fields[4] as String,
-      updated: fields[5] as String,
-      creatorActorId: fields[6] as String,
-      lastUpdaterActorId: fields[7] as String,
-      afRefValueFormId: fields[8] as String,
+      stringValue: fields[1] as String,
+      integerValue: fields[2] as int,
+      doubleValue: fields[3] as double,
+      dateTimeValue: fields[4] as DateTime,
+      fieldCaption: fields[5] as String,
+      valueAfDataType: fields[6] as String,
+      created: fields[7] as String,
+      updated: fields[8] as String,
+      creatorActorId: fields[9] as String,
+      lastUpdaterActorId: fields[10] as String,
+      afRefValueFormId: fields[11] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, AfFieldValue obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.fieldName)
       ..writeByte(1)
-      ..write(obj.value)
+      ..write(obj.stringValue)
       ..writeByte(2)
-      ..write(obj.fieldCaption)
+      ..write(obj.integerValue)
       ..writeByte(3)
-      ..write(obj.valueAfDataType)
+      ..write(obj.doubleValue)
       ..writeByte(4)
-      ..write(obj.created)
+      ..write(obj.dateTimeValue)
       ..writeByte(5)
-      ..write(obj.updated)
+      ..write(obj.fieldCaption)
       ..writeByte(6)
-      ..write(obj.creatorActorId)
+      ..write(obj.valueAfDataType)
       ..writeByte(7)
-      ..write(obj.lastUpdaterActorId)
+      ..write(obj.created)
       ..writeByte(8)
+      ..write(obj.updated)
+      ..writeByte(9)
+      ..write(obj.creatorActorId)
+      ..writeByte(10)
+      ..write(obj.lastUpdaterActorId)
+      ..writeByte(11)
       ..write(obj.afRefValueFormId);
   }
 
@@ -71,7 +80,12 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
 AfFieldValue _$AfFieldValueFromJson(Map<String, dynamic> json) {
   return AfFieldValue(
     fieldName: json['fieldName'] as String,
-    value: json['value'],
+    stringValue: json['stringValue'] as String,
+    integerValue: json['integerValue'] as int,
+    doubleValue: (json['doubleValue'] as num)?.toDouble(),
+    dateTimeValue: json['dateTimeValue'] == null
+        ? null
+        : DateTime.parse(json['dateTimeValue'] as String),
     fieldCaption: json['fieldCaption'] as String,
     valueAfDataType: json['valueAfDataType'] as String,
     created: json['created'] as String,
@@ -85,7 +99,10 @@ AfFieldValue _$AfFieldValueFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$AfFieldValueToJson(AfFieldValue instance) =>
     <String, dynamic>{
       'fieldName': instance.fieldName,
-      'value': instance.value,
+      'stringValue': instance.stringValue,
+      'integerValue': instance.integerValue,
+      'doubleValue': instance.doubleValue,
+      'dateTimeValue': instance.dateTimeValue?.toIso8601String(),
       'fieldCaption': instance.fieldCaption,
       'valueAfDataType': instance.valueAfDataType,
       'created': instance.created,

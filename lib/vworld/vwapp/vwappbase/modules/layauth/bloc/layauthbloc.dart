@@ -48,7 +48,8 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
   static Future<LoginToServerResponse> loginToServerWithResponse(
       {@required LoginRequestParam loginRequestParam,
       @required String loginApiUrl}) async {
-    LoginToServerResponse returnValue = LoginToServerResponse(loginResponse: LoginResponse());
+    LoginToServerResponse returnValue =
+        LoginToServerResponse(loginResponse: LoginResponse());
     try {
       final String loginRequestBodyString =
           json.encode(loginRequestParam.toJson());
@@ -144,7 +145,6 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
       print('Error in getLoginResponseFromDevice' + Error.toString());
     }
 
-
     return returnValue;
   }
 
@@ -174,7 +174,8 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
 
       final loginResponse = await LayAuthBloc.getLoginResponseFromDevice();
 
-      if (loginResponse == null || (loginResponse != null && loginResponse.authenticated==false) ) {
+      if (loginResponse == null ||
+          (loginResponse != null && loginResponse.authenticated == false)) {
         yield LayAuthStateLoggedOut();
         return;
       } else {

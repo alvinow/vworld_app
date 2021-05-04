@@ -8,7 +8,10 @@ part 'affieldvalue.g.dart';
 class AfFieldValue {
   AfFieldValue(
       {@required this.fieldName,
-      @required this.value,
+      this.stringValue,
+      this.integerValue,
+      this.doubleValue,
+      this.dateTimeValue,
       @required this.fieldCaption,
       @required this.valueAfDataType: "String",
       @required this.created,
@@ -19,21 +22,34 @@ class AfFieldValue {
 
   @HiveField(0)
   final String fieldName;
+
   @HiveField(1)
-  var value;
+  String stringValue;
+
   @HiveField(2)
-  final String fieldCaption;
+  int integerValue;
+
   @HiveField(3)
-  final String valueAfDataType;
+  double doubleValue;
+
   @HiveField(4)
-  String created;
+  DateTime dateTimeValue;
+
+
+
   @HiveField(5)
-  String updated;
+  final String fieldCaption;
   @HiveField(6)
-  String creatorActorId;
+  final String valueAfDataType;
   @HiveField(7)
-  String lastUpdaterActorId;
+  String created;
   @HiveField(8)
+  String updated;
+  @HiveField(9)
+  String creatorActorId;
+  @HiveField(10)
+  String lastUpdaterActorId;
+  @HiveField(11)
   final String afRefValueFormId;
 
   static List<String> afDataType = [

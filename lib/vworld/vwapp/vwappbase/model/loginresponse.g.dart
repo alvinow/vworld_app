@@ -57,7 +57,7 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
   return LoginResponse(
     success: json['success'] as bool,
     authenticated: json['authenticated'] as bool,
-    loginsessionId: json['loginsessionId'] as String,
+    loginsessionId: json['loginsession_id'] as String,
     userProfile: json['userProfile'] == null
         ? null
         : Userlogin.fromJson(json['userProfile'] as Map<String, dynamic>),
@@ -68,6 +68,6 @@ Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
       'authenticated': instance.authenticated,
-      'loginsessionId': instance.loginsessionId,
+      'loginsession_id': instance.loginsessionId,
       'userProfile': instance.userProfile,
     };
