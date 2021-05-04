@@ -7,12 +7,10 @@ part 'affieldvaluerecord.g.dart';
 @HiveType(typeId: 105)
 @JsonSerializable()
 class AfFieldValueRecord {
-  AfFieldValueRecord({
-    @required this.afFormId,
-    @required this.afRecordId,
-    @required this.record
-});
-
+  AfFieldValueRecord(
+      {@required this.afFormId,
+      @required this.afRecordId,
+      @required this.record});
 
   @HiveField(0)
   final String afFormId;
@@ -22,6 +20,23 @@ class AfFieldValueRecord {
 
   @HiveField(2)
   final List<AfFieldValue> record;
+
+  AfFieldValue getAfFieldValue(String fieldName) {
+    AfFieldValue returnValue;
+
+    try {
+      for (int la = 0; la < this.record.length; la++) {
+        AfFieldValue currentAfFieldValue = this.record.elementAt(la);
+
+        if (currentAfFieldValue.fieldName == fieldName) {
+          returnValue = currentAfFieldValue;
+          break;
+        }
+      }
+    } catch (error) {}
+
+    return returnValue;
+  }
 
   factory AfFieldValueRecord.fromJson(Map<String, dynamic> json) =>
       _$AfFieldValueRecordFromJson(json);

@@ -20,7 +20,7 @@ import 'dart:convert';
 
 class MeetingmainpageBloc
     extends Bloc<MeetingmainpageEvent, MeetingmainpageState> {
-  MeetingmainpageBloc(this.currentActor,this.loginResponse)
+  MeetingmainpageBloc(this.currentActor, this.loginResponse)
       : super(UninitializedOnMeetingainpageState());
 
   final Actor currentActor;
@@ -41,36 +41,34 @@ class MeetingmainpageBloc
   @override
   Stream<MeetingmainpageState> mapEventToState(
       MeetingmainpageEvent event) async* {
+    final MeetingmainpageState currentState = this.state;
 
-   final MeetingmainpageState currentState=this.state;
+    if (event is OpenAfformPageOnMeetingmainpageEvent) {
+      yield DisplayAfformOnMeetingmainpageState(AfFormDemo.getNewMeetingForm());
+    } else if (event is SavemeetingeventpageOnMeetingmainpageEvent) {
+      String encodedJson = json.encode(event.meetingAfForm.toJson());
 
-   if(event is OpenAfformPageOnMeetingmainpageEvent){
+      Document newMeetingDocument = Document(
+        id: event.meetingAfForm.afRecordId,
+        refId: event.meetingAfForm.afFormId,
+        refIdMd5: CryptoUtil.getMd5(event.meetingAfForm.afFormId),
+        created: DateTime.now().toString(),
+        documentstatusId: "1",
+        documenttypeId: Document.meetingDocumenttypeId,
+        json: encodedJson,
+        ownerUserloginId: currentActor.actor_id,
+        jsonHashBycreator: CryptoUtil.getMd5(encodedJson),
+        ownerGroupId: '0',
+        lastupdate: DateTime.now().toString(),
+        isLocalClientOnly: 0,
+        creatorLoginsessionId: this.loginResponse.loginsessionId,
+      );
 
-
-
-
-     yield DisplayAfformOnMeetingmainpageState(AfFormDemo.getNewMeetingForm());
-
-
-
-   }
-
-   else if(event is SavemeetingeventpageOnMeetingmainpageEvent)
-     {
-       String encodedJson= json.encode( event.meetingAfForm.toJson()) ;
-
-
-      Document newMeetingDocument=Document(id: event.meetingAfForm.afRecordId , refId: event.meetingAfForm.afFormId , refIdMd5: CryptoUtil.getMd5(event.meetingAfForm.afFormId), created: DateTime.now().toString(), documentstatusId: "1", documenttypeId: Document.meetingDocumenttypeId, json: encodedJson, ownerUserloginId: currentActor.actor_id, jsonHashBycreator: CryptoUtil.getMd5(encodedJson), ownerGroupId: '0', lastupdate: DateTime.now().toString(), isLocalClientOnly: 0,creatorLoginsessionId: this.loginResponse.loginsessionId, );
-
-      final int returnValue= await DocumentDocStreamStore.syncDocument(newMeetingDocument);
+      final int returnValue =
+          await DocumentDocStreamStore.syncDocument(newMeetingDocument);
 
       yield currentState;
-
-
-
-     }
-
-    else if (event is OpeneventpageOnMeetingmainpageEvent) {
+    } else if (event is OpeneventpageOnMeetingmainpageEvent) {
       final String title = 'Jadwal Kegiatan';
 
       List<Meeting> meetingList = <Meeting>[];
@@ -79,20 +77,31 @@ class MeetingmainpageBloc
 
       List<Actor> participants = <Actor>[];
 
+      List<Document> meetingDocuments =
+          await MeetingStore.getMeetingsByActor(this.currentActor);
 
-      List<Document> meetingDocuments=await MeetingStore.getMeetingsByActor(this.currentActor);
+      for (int la = 0; la < meetingDocuments.length; la++) {
+        Document currentDocument=meetingDocuments.elementAt(la);
 
+        AfForm currentAfForm=AfForm.fromJson(json.decode(currentDocument.json));
 
+        Meeting currentMeeting=MeetingStore.convertFromAfForm(currentAfForm);
 
+        meetingList.add(currentMeeting);
 
+      }
+
+      /*
       Meeting meeting1 = Meeting(
           meeting_id: '521516c6-a25e-11eb-90a3-60f81dc538c2',
           meeting_meetingtype_id: 'onlinemeeting',
           meeting_meetingstatus_id: '2',
           meeting_name:
               'Penyusunan Laporan Keuangan Tahun Anggaran 2021 Triwulan I',
-          meeting_start_datetime: DateUtil1.convertDateFromString('2021-03-01 08:00:00'),
-          meeting_end_datetime: DateUtil1.convertDateFromString('2021-03-03 21:00:00'),
+          meeting_start_datetime:
+              DateUtil1.convertDateFromString('2021-03-01 08:00:00'),
+          meeting_end_datetime:
+              DateUtil1.convertDateFromString('2021-03-03 21:00:00'),
           meeting_owner_actor_id: 'zuser1',
           comitte: comitte,
           participants: participants);
@@ -103,14 +112,18 @@ class MeetingmainpageBloc
           meeting_meetingstatus_id: '2',
           meeting_name:
               'Bimtek Operator SAS Satker LPMP dan BP PAUD Tahun Anggran 2021 Triwulan I',
-          meeting_start_datetime: DateUtil1.convertDateFromString('2021-04-01 08:00:00'),
-          meeting_end_datetime: DateUtil1.convertDateFromString('2021-04-03 21:00:00'),
+          meeting_start_datetime:
+              DateUtil1.convertDateFromString('2021-04-01 08:00:00'),
+          meeting_end_datetime:
+              DateUtil1.convertDateFromString('2021-04-03 21:00:00'),
           meeting_owner_actor_id: 'zuser1',
           comitte: comitte,
           participants: participants);
 
       meetingList.add(meeting1);
       meetingList.add(meeting2);
+
+       */
 
       yield DisplayeventpageOnMeetingmainpageState(
           title: title,
