@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/afformgrid.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/afformgridparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/dateutil.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
@@ -14,19 +16,20 @@ final Map<DateTime, List> _holidays = {
 };
 
 class CalendarPage1 extends StatefulWidget {
-  CalendarPage1({Key key, this.title, this.currrentUser, this.meetingList}) : super(key: key);
+  CalendarPage1({Key key, this.title, this.currrentUser, this.meetingList, this.afFormGridParam})
+      : super(key: key);
 
   final String title;
   final Actor currrentUser;
   final List<Meeting> meetingList;
-
-
+  final AfFormGridParam afFormGridParam;
 
   @override
   _CalendarPage1State createState() => _CalendarPage1State();
 }
 
-class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateMixin {
+class _CalendarPage1State extends State<CalendarPage1>
+    with TickerProviderStateMixin {
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
@@ -37,8 +40,7 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
     super.initState();
     final _selectedDay = DateTime.now();
 
-
-    _events=Meeting.getCalenderList(this.widget.meetingList);
+    _events = Meeting.getCalenderList(this.widget.meetingList);
 
     /*
     _events = {
@@ -95,20 +97,19 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-
-    return  Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          _buildTableCalendar(),
-          // _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-          //_buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      );
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        // Switch out 2 lines below to play with TableCalendar's settings
+        //-----------------------
+        _buildTableCalendar(),
+        // _buildTableCalendarWithBuilders(),
+        const SizedBox(height: 8.0),
+        //_buildButtons(),
+        const SizedBox(height: 8.0),
+        Expanded(child: _buildEventGrid(this.widget.afFormGridParam)),
+      ],
+    );
 
     /*
     return Scaffold(
@@ -133,13 +134,10 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
 
   // Simple TableCalendar configuration (using Styles)
   Widget _buildTableCalendar() {
-
-
-    print('Oldest Meeting:   ${Meeting.getOldestMeetingDateTime(this.widget.meetingList)}');
-    print('Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
-
-
-
+    print(
+        'Oldest Meeting:   ${Meeting.getOldestMeetingDateTime(this.widget.meetingList)}');
+    print(
+        'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
     return TableCalendar(
       locale: 'en_US',
@@ -155,7 +153,7 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
       ),
       headerStyle: HeaderStyle(
         formatButtonTextStyle:
-        TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
+            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
         formatButtonDecoration: BoxDecoration(
           color: Colors.deepOrange[400],
           borderRadius: BorderRadius.circular(16.0),
@@ -170,7 +168,6 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
-
       calendarController: _calendarController,
       events: _events,
       holidays: _holidays,
@@ -267,8 +264,8 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
         color: _calendarController.isSelected(date)
             ? Colors.brown[500]
             : _calendarController.isToday(date)
-            ? Colors.brown[300]
-            : Colors.blue[400],
+                ? Colors.brown[300]
+                : Colors.blue[400],
       ),
       width: 16.0,
       height: 16.0,
@@ -343,21 +340,25 @@ class _CalendarPage1State extends State<CalendarPage1> with TickerProviderStateM
     );
   }
 
+  Widget _buildEventGrid(AfFormGridParam afFormGridParam){
+    return AfFormGrid(afFormGridParam);
+  }
+
   Widget _buildEventList() {
     return ListView(
       children: _selectedEvents
           .map((event) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin:
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: ListTile(
-          title: Text(event.toString()),
-          onTap: () => print('$event tapped!'),
-        ),
-      ))
+                decoration: BoxDecoration(
+                  border: Border.all(width: 0.8),
+                  borderRadius: BorderRadius.circular(12.0),
+                ),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                child: ListTile(
+                  title: Text(event.toString()),
+                  onTap: () => print('$event tapped!'),
+                ),
+              ))
           .toList(),
     );
   }

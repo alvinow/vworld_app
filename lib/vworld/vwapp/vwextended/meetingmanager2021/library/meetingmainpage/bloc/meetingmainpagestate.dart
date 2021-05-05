@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/afformgridparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
@@ -23,12 +24,13 @@ class UninitializedOnMeetingainpageState extends MeetingmainpageState {
 }
 
 class DisplayeventpageOnMeetingmainpageState extends MeetingmainpageState {
-  DisplayeventpageOnMeetingmainpageState({@required this.title, @required this.actor, @required this.meetingList, @required this.organizationMember});
+  DisplayeventpageOnMeetingmainpageState({@required this.title, @required this.actor, @required this.meetingList, @required this.organizationMember, @required this.afFormGridParam});
 
   final String title;
   final Actor actor;
   final List<Meeting> meetingList;
   final List<Actor> organizationMember;
+  final AfFormGridParam afFormGridParam;
 
   @override
   String toString() => 'ShoweventpageOnMeetingmainpageState';

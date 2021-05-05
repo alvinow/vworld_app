@@ -10,7 +10,7 @@ class AfFieldValueRecord {
   AfFieldValueRecord(
       {@required this.afFormId,
       @required this.afRecordId,
-      @required this.record});
+      @required this.fields});
 
   @HiveField(0)
   final String afFormId;
@@ -19,14 +19,14 @@ class AfFieldValueRecord {
   final String afRecordId;
 
   @HiveField(2)
-  final List<AfFieldValue> record;
+  final List<AfFieldValue> fields;
 
   AfFieldValue getAfFieldValue(String fieldName) {
     AfFieldValue returnValue;
 
     try {
-      for (int la = 0; la < this.record.length; la++) {
-        AfFieldValue currentAfFieldValue = this.record.elementAt(la);
+      for (int la = 0; la < this.fields.length; la++) {
+        AfFieldValue currentAfFieldValue = this.fields.elementAt(la);
 
         if (currentAfFieldValue.fieldName == fieldName) {
           returnValue = currentAfFieldValue;

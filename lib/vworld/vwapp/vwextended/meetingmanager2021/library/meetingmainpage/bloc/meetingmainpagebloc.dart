@@ -6,7 +6,9 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/afformgridparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/documentdocstreamstore/documentdocstreamstore.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/cryptoutil/cryptoutil.dart';
@@ -77,18 +79,22 @@ class MeetingmainpageBloc
 
       List<Actor> participants = <Actor>[];
 
+      AfFormGridParam afFormGridParam= AfFormGridParam(records: <AfFieldValueRecord>[], hasReachedMax: true);
+
       List<Document> meetingDocuments =
           await MeetingStore.getMeetingsByActor(this.currentActor);
 
       for (int la = 0; la < meetingDocuments.length; la++) {
-        Document currentDocument=meetingDocuments.elementAt(la);
+        Document currentDocument = meetingDocuments.elementAt(la);
 
-        AfForm currentAfForm=AfForm.fromJson(json.decode(currentDocument.json));
+        AfForm currentAfForm =
+            AfForm.fromJson(json.decode(currentDocument.json));
 
-        Meeting currentMeeting=MeetingStore.convertFromAfForm(currentAfForm);
+        Meeting currentMeeting = MeetingStore.convertFromAfForm(currentAfForm);
 
         meetingList.add(currentMeeting);
 
+        afFormGridParam.records.add(currentAfForm.getRecord());
       }
 
       /*
@@ -129,7 +135,9 @@ class MeetingmainpageBloc
           title: title,
           actor: currentActor,
           meetingList: meetingList,
-          organizationMember: <Actor>[]);
+          organizationMember: <Actor>[],
+      afFormGridParam: afFormGridParam
+      );
     } else if (event is OpenactorinfopageOnMeetingmainpageEvent) {
       yield DisplayactorinfopageOnMeetingmainpageState(actor: currentActor);
     }

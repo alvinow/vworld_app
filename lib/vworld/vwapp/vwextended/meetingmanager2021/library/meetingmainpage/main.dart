@@ -90,7 +90,7 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
                   AfFieldValueRecord fieldValueRecord = AfFieldValueRecord(
                       afFormId: 'meeting_af_form_id',
                       afRecordId: Uuid().v4(),
-                      record: <AfFieldValue>[field1]);
+                      fields: <AfFieldValue>[field1]);
 
                   meetingForm.setRecord(fieldValueRecord);
 
@@ -119,7 +119,10 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               body: CalendarPage1(
                   title: state.title,
                   currrentUser: state.actor,
-                  meetingList: state.meetingList));
+                  meetingList: state.meetingList,
+                afFormGridParam: state.afFormGridParam,
+
+              ));
         }
       } else if (state is DisplayactorinfopageOnMeetingmainpageState) {
         returnValue =

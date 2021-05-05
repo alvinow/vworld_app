@@ -50,7 +50,7 @@ class AfForm {
       AfFieldValueRecord newRecord = AfFieldValueRecord(
           afFormId: this.afFormId,
           afRecordId: this.afRecordId,
-          record: <AfFieldValue>[]);
+          fields: <AfFieldValue>[]);
 
       for (int la = 0; la < this.fieldFormList.length; la++) {
         AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
@@ -68,7 +68,7 @@ class AfForm {
             lastUpdaterActorId: currentFieldForm.fieldValue.lastUpdaterActorId,
             afRefValueFormId: currentFieldForm.fieldValue.afRefValueFormId);
 
-        newRecord.record.add(newFieldValue);
+        newRecord.fields.add(newFieldValue);
       }
 
       returnValue = newRecord;
@@ -91,10 +91,10 @@ class AfForm {
               this.fieldFormList.elementAt(lDest).fieldValue;
 
           for (int lSource = 0;
-              lSource < fieldValueRecord.record.length;
+              lSource < fieldValueRecord.fields.length;
               lSource++) {
             AfFieldValue currentSourceFieldValue =
-                fieldValueRecord.record.elementAt(lSource);
+                fieldValueRecord.fields.elementAt(lSource);
 
             if (currentSourceFieldValue.fieldName ==
                 currentDestinationFieldValue.fieldName) {

@@ -19,7 +19,7 @@ class AfFieldValueRecordAdapter extends TypeAdapter<AfFieldValueRecord> {
     return AfFieldValueRecord(
       afFormId: fields[0] as String,
       afRecordId: fields[1] as String,
-      record: (fields[2] as List)?.cast<AfFieldValue>(),
+      fields: (fields[2] as List)?.cast<AfFieldValue>(),
     );
   }
 
@@ -32,7 +32,7 @@ class AfFieldValueRecordAdapter extends TypeAdapter<AfFieldValueRecord> {
       ..writeByte(1)
       ..write(obj.afRecordId)
       ..writeByte(2)
-      ..write(obj.record);
+      ..write(obj.fields);
   }
 
   @override
@@ -54,7 +54,7 @@ AfFieldValueRecord _$AfFieldValueRecordFromJson(Map<String, dynamic> json) {
   return AfFieldValueRecord(
     afFormId: json['afFormId'] as String,
     afRecordId: json['afRecordId'] as String,
-    record: (json['record'] as List)
+    fields: (json['fields'] as List)
         ?.map((e) =>
             e == null ? null : AfFieldValue.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -65,5 +65,5 @@ Map<String, dynamic> _$AfFieldValueRecordToJson(AfFieldValueRecord instance) =>
     <String, dynamic>{
       'afFormId': instance.afFormId,
       'afRecordId': instance.afRecordId,
-      'record': instance.record,
+      'fields': instance.fields,
     };
