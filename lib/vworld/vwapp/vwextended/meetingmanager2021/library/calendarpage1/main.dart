@@ -99,15 +99,18 @@ class _CalendarPage1State extends State<CalendarPage1>
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      //mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         // Switch out 2 lines below to play with TableCalendar's settings
         //-----------------------
-        _buildTableCalendar(),
+        Container(height:300, child: SingleChildScrollView (scrollDirection: Axis.vertical,  child:  _buildTableCalendar()),)  ,
+        //Container(height:300, child:SingleChildScrollView(child: Container(height:600 ,width: 600, child: Center(child:Text('Hello World',)), color: Colors.amber,))),
         // _buildTableCalendarWithBuilders(),
-        const SizedBox(height: 8.0),
+        //Expanded(child:const SizedBox(height: 8.0)),
         //_buildButtons(),
-        const SizedBox(height: 8.0),
-        Expanded(child: _buildEventGrid(this.widget.afFormGridParam)),
+        //Expanded(child: const SizedBox(height: 8.0)),
+        Expanded(child:_buildEventGrid(this.widget.afFormGridParam)),
       ],
     );
 
@@ -140,6 +143,7 @@ class _CalendarPage1State extends State<CalendarPage1>
         'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
     return TableCalendar(
+
       locale: 'en_US',
       calendarController: _calendarController,
       events: _events,
