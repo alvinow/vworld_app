@@ -104,7 +104,8 @@ class _CalendarPage1State extends State<CalendarPage1>
       children: <Widget>[
         // Switch out 2 lines below to play with TableCalendar's settings
         //-----------------------
-        Container(height:300, child: SingleChildScrollView (scrollDirection: Axis.vertical,  child:  _buildTableCalendar()),)  ,
+        //Container(height:300, child: SingleChildScrollView (scrollDirection: Axis.vertical,  child:  _buildTableCalendar()),)  ,
+        _buildTableCalendar(),
         //Container(height:300, child:SingleChildScrollView(child: Container(height:600 ,width: 600, child: Center(child:Text('Hello World',)), color: Colors.amber,))),
         // _buildTableCalendarWithBuilders(),
         //Expanded(child:const SizedBox(height: 8.0)),
@@ -142,7 +143,7 @@ class _CalendarPage1State extends State<CalendarPage1>
     print(
         'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
-    return TableCalendar(
+    Widget returnValue= TableCalendar(
 
       locale: 'en_US',
       calendarController: _calendarController,
@@ -167,6 +168,9 @@ class _CalendarPage1State extends State<CalendarPage1>
       onVisibleDaysChanged: _onVisibleDaysChanged,
       onCalendarCreated: _onCalendarCreated,
     );
+
+    print('Table Calendar created');
+    return returnValue;
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)

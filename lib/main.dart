@@ -8,7 +8,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcprop
 
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethproperties.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsingleteethsideproperties.dart';
-
+import 'package:flutter/services.dart' ;
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+
     return VwHomeBasePeriochart2021(null, null, null);
   }
 }
