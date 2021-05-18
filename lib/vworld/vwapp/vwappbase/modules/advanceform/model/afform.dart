@@ -27,17 +27,16 @@ class AfForm {
 
   Map<String, dynamic> toJson() => _$AfFormToJson(this);
 
-  bool isRecordValid(){
-    bool returnValue=true;
+  bool isRecordValid() {
+    bool returnValue = true;
 
-    for(int la=0;la<this.fieldFormList.length;la++){
-      AfFieldForm currentElement= this.fieldFormList.elementAt(la);
+    for (int la = 0; la < this.fieldFormList.length; la++) {
+      AfFieldForm currentElement = this.fieldFormList.elementAt(la);
 
-      if(currentElement.isValueValid()==false)
-        {
-          returnValue=false;
-          break;
-        }
+      if (currentElement.isValueValid() == false) {
+        returnValue = false;
+        break;
+      }
     }
 
     return returnValue;
@@ -60,6 +59,7 @@ class AfForm {
             integerValue: currentFieldForm.fieldValue.integerValue,
             doubleValue: currentFieldForm.fieldValue.doubleValue,
             dateTimeValue: currentFieldForm.fieldValue.dateTimeValue,
+            displayValue: currentFieldForm.fieldValue.displayValue,
             fieldCaption: currentFieldForm.fieldValue.fieldCaption,
             valueAfDataType: currentFieldForm.fieldValue.valueAfDataType,
             created: currentFieldForm.fieldValue.created,
@@ -100,14 +100,16 @@ class AfForm {
                 currentDestinationFieldValue.fieldName) {
               if (currentDestinationFieldValue.valueAfDataType ==
                   currentSourceFieldValue.valueAfDataType) {
-                currentDestinationFieldValue.stringValue =currentSourceFieldValue.stringValue;
-                currentDestinationFieldValue.integerValue =currentSourceFieldValue.integerValue;
-                currentDestinationFieldValue.doubleValue =currentSourceFieldValue.doubleValue;
-                currentDestinationFieldValue.dateTimeValue =currentSourceFieldValue.dateTimeValue;
-
-
-
-
+                currentDestinationFieldValue.stringValue =
+                    currentSourceFieldValue.stringValue;
+                currentDestinationFieldValue.integerValue =
+                    currentSourceFieldValue.integerValue;
+                currentDestinationFieldValue.doubleValue =
+                    currentSourceFieldValue.doubleValue;
+                currentDestinationFieldValue.dateTimeValue =
+                    currentSourceFieldValue.dateTimeValue;
+                currentDestinationFieldValue.displayValue =
+                    currentSourceFieldValue.displayValue;
 
                 currentDestinationFieldValue.creatorActorId =
                     currentSourceFieldValue.creatorActorId;
@@ -136,21 +138,19 @@ class AfForm {
       AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
 
       if (currentFieldForm.fieldValue.fieldName == afFieldValue.fieldName) {
-        if(currentFieldForm.fieldValue.valueAfDataType=='String') {
+        if (currentFieldForm.fieldValue.valueAfDataType == 'String') {
           currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
         }
-        if(currentFieldForm.fieldValue.valueAfDataType=='ComboString') {
+        if (currentFieldForm.fieldValue.valueAfDataType == 'ComboString') {
           currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
-          currentFieldForm.fieldValue.displayValue =  afFieldValue.displayValue;
-        }
-        else if(currentFieldForm.fieldValue.valueAfDataType=='Integer') {
+          currentFieldForm.fieldValue.displayValue = afFieldValue.displayValue;
+        } else if (currentFieldForm.fieldValue.valueAfDataType == 'Integer') {
           currentFieldForm.fieldValue.integerValue = afFieldValue.integerValue;
-        }
-        else if(currentFieldForm.fieldValue.valueAfDataType=='Double') {
+        } else if (currentFieldForm.fieldValue.valueAfDataType == 'Double') {
           currentFieldForm.fieldValue.doubleValue = afFieldValue.doubleValue;
-        }
-        else if(currentFieldForm.fieldValue.valueAfDataType=='DateTime') {
-          currentFieldForm.fieldValue.dateTimeValue = afFieldValue.dateTimeValue;
+        } else if (currentFieldForm.fieldValue.valueAfDataType == 'DateTime') {
+          currentFieldForm.fieldValue.dateTimeValue =
+              afFieldValue.dateTimeValue;
         }
 
         returnValue = true;

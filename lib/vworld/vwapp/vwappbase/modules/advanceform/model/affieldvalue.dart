@@ -39,28 +39,30 @@ class AfFieldValue {
   @HiveField(4)
   DateTime dateTimeValue;
 
-
-
   @HiveField(5)
-  final String fieldCaption;
-  @HiveField(6)
-  final String valueAfDataType;
+  String displayValue;
+
+
+
   @HiveField(7)
-  String created;
+  final String fieldCaption;
   @HiveField(8)
-  String updated;
+  final String valueAfDataType;
   @HiveField(9)
-  String creatorActorId;
+  String created;
   @HiveField(10)
-  String lastUpdaterActorId;
+  String updated;
   @HiveField(11)
+  String creatorActorId;
+  @HiveField(12)
+  String lastUpdaterActorId;
+  @HiveField(13)
   final String afRefValueFormId;
 
-  @HiveField(12)
+  @HiveField(14)
   final List<AfFieldValue> comboStringList;
 
-  @HiveField(13)
-  String displayValue;
+
 
 
 

@@ -79,7 +79,9 @@ class MeetingmainpageBloc
 
       List<Actor> participants = <Actor>[];
 
-      AfFormGridParam afFormGridParam= AfFormGridParam(this.currentActor, this.loginResponse, records: <AfFieldValueRecord>[], hasReachedMax: true);
+      AfFormGridParam afFormGridParam = AfFormGridParam(
+          this.currentActor, this.loginResponse,
+          records: <AfFieldValueRecord>[], hasReachedMax: true);
 
       List<Document> meetingDocuments =
           await MeetingStore.getMeetingsByActor(this.currentActor);
@@ -97,15 +99,12 @@ class MeetingmainpageBloc
         afFormGridParam.records.add(currentAfForm.getRecord());
       }
 
-
-
       yield DisplayeventpageOnMeetingmainpageState(
           title: title,
           actor: currentActor,
           meetingList: meetingList,
           organizationMember: <Actor>[],
-      afFormGridParam: afFormGridParam
-      );
+          afFormGridParam: afFormGridParam);
     } else if (event is OpenactorinfopageOnMeetingmainpageEvent) {
       yield DisplayactorinfopageOnMeetingmainpageState(actor: currentActor);
     }

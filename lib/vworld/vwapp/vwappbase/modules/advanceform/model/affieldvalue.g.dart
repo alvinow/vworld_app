@@ -22,15 +22,15 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       integerValue: fields[2] as int,
       doubleValue: fields[3] as double,
       dateTimeValue: fields[4] as DateTime,
-      displayValue: fields[13] as String,
-      fieldCaption: fields[5] as String,
-      valueAfDataType: fields[6] as String,
-      created: fields[7] as String,
-      updated: fields[8] as String,
-      creatorActorId: fields[9] as String,
-      lastUpdaterActorId: fields[10] as String,
-      afRefValueFormId: fields[11] as String,
-      comboStringList: (fields[12] as List)?.cast<AfFieldValue>(),
+      displayValue: fields[5] as String,
+      fieldCaption: fields[7] as String,
+      valueAfDataType: fields[8] as String,
+      created: fields[9] as String,
+      updated: fields[10] as String,
+      creatorActorId: fields[11] as String,
+      lastUpdaterActorId: fields[12] as String,
+      afRefValueFormId: fields[13] as String,
+      comboStringList: (fields[14] as List)?.cast<AfFieldValue>(),
     );
   }
 
@@ -49,23 +49,23 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       ..writeByte(4)
       ..write(obj.dateTimeValue)
       ..writeByte(5)
-      ..write(obj.fieldCaption)
-      ..writeByte(6)
-      ..write(obj.valueAfDataType)
+      ..write(obj.displayValue)
       ..writeByte(7)
-      ..write(obj.created)
+      ..write(obj.fieldCaption)
       ..writeByte(8)
-      ..write(obj.updated)
+      ..write(obj.valueAfDataType)
       ..writeByte(9)
-      ..write(obj.creatorActorId)
+      ..write(obj.created)
       ..writeByte(10)
-      ..write(obj.lastUpdaterActorId)
+      ..write(obj.updated)
       ..writeByte(11)
-      ..write(obj.afRefValueFormId)
+      ..write(obj.creatorActorId)
       ..writeByte(12)
-      ..write(obj.comboStringList)
+      ..write(obj.lastUpdaterActorId)
       ..writeByte(13)
-      ..write(obj.displayValue);
+      ..write(obj.afRefValueFormId)
+      ..writeByte(14)
+      ..write(obj.comboStringList);
   }
 
   @override
@@ -114,6 +114,7 @@ Map<String, dynamic> _$AfFieldValueToJson(AfFieldValue instance) =>
       'integerValue': instance.integerValue,
       'doubleValue': instance.doubleValue,
       'dateTimeValue': instance.dateTimeValue?.toIso8601String(),
+      'displayValue': instance.displayValue,
       'fieldCaption': instance.fieldCaption,
       'valueAfDataType': instance.valueAfDataType,
       'created': instance.created,
@@ -122,5 +123,4 @@ Map<String, dynamic> _$AfFieldValueToJson(AfFieldValue instance) =>
       'lastUpdaterActorId': instance.lastUpdaterActorId,
       'afRefValueFormId': instance.afRefValueFormId,
       'comboStringList': instance.comboStringList,
-      'displayValue': instance.displayValue,
     };
