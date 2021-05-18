@@ -1,25 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/vwdialog/vwdialog.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/actorinfopage/actorinfopage.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/calendarpage1/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/library/meetingtab1/main.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/page/meetingpagedetail/meetingpagedetail.dart';
+import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/page/meetingpagedetail/libmeetingpagedetail.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'dart:convert';
 
 class MeetingMainPage extends StatefulWidget {
-  MeetingMainPage({@required this.currrentActor,@required this.loginResponse});
+  MeetingMainPage({@required this.currrentActor, @required this.loginResponse});
 
   final Actor currrentActor;
   final LoginResponse loginResponse;
@@ -29,23 +25,26 @@ class MeetingMainPage extends StatefulWidget {
 class _MeetingMainPageState extends State<MeetingMainPage> {
   MeetingmainpageBloc bloc;
 
-  Future<void> implementSaveValidRecordMeetingPageDetail(AfForm afForm,BuildContext context) async{
+  Future<void> implementSaveValidRecordMeetingPageDetail(
+      AfForm afForm, BuildContext context) async {
     print("Simulation: Saving Record...");
     await Navigator.pop(context); //popping the afForm
 
-    this.bloc.add(SavemeetingeventpageOnMeetingmainpageEvent(DateTime.now(), afForm));
-
-
+    this.bloc.add(
+        SavemeetingeventpageOnMeetingmainpageEvent(DateTime.now(), afForm));
   }
 
-  Future<void>  implementSaveInvalidRecordMeetingPageDetail(AfForm afForm, BuildContext context) async{
-    VwDialog.showAlertDialog(context, title: 'Please fill the required field(s)');
+  Future<void> implementSaveInvalidRecordMeetingPageDetail(
+      AfForm afForm, BuildContext context) async {
+    VwDialog.showAlertDialog(context,
+        title: 'Please fill the required field(s)');
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) {
-      this.bloc = MeetingmainpageBloc(this.widget.currrentActor, this.widget.loginResponse);
+      this.bloc = MeetingmainpageBloc(
+          this.widget.currrentActor, this.widget.loginResponse);
 
       return this.bloc;
     }, child: BlocBuilder<MeetingmainpageBloc, MeetingmainpageState>(
@@ -77,51 +76,21 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  AfForm meetingForm =
-                      AfFormDemo.getAfFormById('meeting_af_form_id');
-
-                  AfFieldValue field1 = AfFieldValue(
-                      fieldName: 'meeting_id',
-                      stringValue: Uuid().v4(),
-                      valueAfDataType: 'String',
-                      creatorActorId: this.widget.currrentActor.actor_id,
-                      lastUpdaterActorId: this.widget.currrentActor.actor_id);
-
-                  AfFieldValueRecord fieldValueRecord = AfFieldValueRecord(
-                      afFormId: 'meeting_af_form_id',
-                      afRecordId: Uuid().v4(),
-                      fields: <AfFieldValue>[field1]);
-
-                  meetingForm.setRecord(fieldValueRecord);
-
-                  AfFormPage afFormPage = AfFormPage(
-                    initialState: meetingForm,
-                    formCollection: <AfForm>[],
-                  );
-
-                  Widget newMeetingPage = MeetingPageDetail(
-                    afFormPage: afFormPage,
-                    onSaveInvalidRecordMeetingPageDetail: this.implementSaveInvalidRecordMeetingPageDetail,
-                    onSaveValidRecordMeetingPageDetail:
-                        this.implementSaveValidRecordMeetingPageDetail,
-                  );
-
-
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => newMeetingPage));
-
-                  //print(json.encode(state.actor.toJson()));
-                  // Add your onPressed code here!
+                  LibMeetingPageDetail.openNewMeetingPageDetail(context,
+                      this.widget.currrentActor, this.widget.loginResponse,
+                      onSaveValidRecordMeetingPageDetail:
+                          this.implementSaveValidRecordMeetingPageDetail,
+                      onSaveInvalidRecordMeetingPageDetail:
+                          this.implementSaveInvalidRecordMeetingPageDetail);
                 },
                 child: const Icon(Icons.add),
                 backgroundColor: Colors.green,
               ),
               body: CalendarPage1(
-                  title: state.title,
-                  currrentUser: state.actor,
-                  meetingList: state.meetingList,
+                title: state.title,
+                currrentUser: state.actor,
+                meetingList: state.meetingList,
                 afFormGridParam: state.afFormGridParam,
-
               ));
         }
       } else if (state is DisplayactorinfopageOnMeetingmainpageState) {

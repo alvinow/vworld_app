@@ -36,8 +36,6 @@ class MeetingPageDetail extends StatelessWidget {
                     onSaveValidRecordMeetingPageDetail(
                         this.afFormPage.getCurrentState(), context);
                   }
-                  //print('Record Valid');
-                  //Navigator.pop(context);
                 } else {
                   if (this.onSaveInvalidRecordMeetingPageDetail != null) {
                     this.onSaveInvalidRecordMeetingPageDetail(

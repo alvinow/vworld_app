@@ -79,7 +79,7 @@ class MeetingmainpageBloc
 
       List<Actor> participants = <Actor>[];
 
-      AfFormGridParam afFormGridParam= AfFormGridParam(records: <AfFieldValueRecord>[], hasReachedMax: true);
+      AfFormGridParam afFormGridParam= AfFormGridParam(this.currentActor, this.loginResponse, records: <AfFieldValueRecord>[], hasReachedMax: true);
 
       List<Document> meetingDocuments =
           await MeetingStore.getMeetingsByActor(this.currentActor);
@@ -97,39 +97,7 @@ class MeetingmainpageBloc
         afFormGridParam.records.add(currentAfForm.getRecord());
       }
 
-      /*
-      Meeting meeting1 = Meeting(
-          meeting_id: '521516c6-a25e-11eb-90a3-60f81dc538c2',
-          meeting_meetingtype_id: 'onlinemeeting',
-          meeting_meetingstatus_id: '2',
-          meeting_name:
-              'Penyusunan Laporan Keuangan Tahun Anggaran 2021 Triwulan I',
-          meeting_start_datetime:
-              DateUtil1.convertDateFromString('2021-03-01 08:00:00'),
-          meeting_end_datetime:
-              DateUtil1.convertDateFromString('2021-03-03 21:00:00'),
-          meeting_owner_actor_id: 'zuser1',
-          comitte: comitte,
-          participants: participants);
 
-      Meeting meeting2 = Meeting(
-          meeting_id: '0214e89e-a25f-11eb-90a3-60f81dc538c2',
-          meeting_meetingtype_id: 'onlinemeeting',
-          meeting_meetingstatus_id: '2',
-          meeting_name:
-              'Bimtek Operator SAS Satker LPMP dan BP PAUD Tahun Anggran 2021 Triwulan I',
-          meeting_start_datetime:
-              DateUtil1.convertDateFromString('2021-04-01 08:00:00'),
-          meeting_end_datetime:
-              DateUtil1.convertDateFromString('2021-04-03 21:00:00'),
-          meeting_owner_actor_id: 'zuser1',
-          comitte: comitte,
-          participants: participants);
-
-      meetingList.add(meeting1);
-      meetingList.add(meeting2);
-
-       */
 
       yield DisplayeventpageOnMeetingmainpageState(
           title: title,

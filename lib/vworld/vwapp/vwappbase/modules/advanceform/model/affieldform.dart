@@ -14,6 +14,7 @@ class AfFieldForm {
       this.useExpansionTile: true,
       this.autoExpandWhenNotNull: true,
       this.initiallyExpanded: true,
+        this.isHidden:false
       });
 
   @HiveField(0)
@@ -26,6 +27,10 @@ class AfFieldForm {
   bool autoExpandWhenNotNull;
   @HiveField(4)
   bool initiallyExpanded;
+  @HiveField(5)
+  bool isHidden;
+
+
 
   bool isValueValid(){
 
@@ -38,6 +43,13 @@ class AfFieldForm {
             isValueNull=false;
           }
       }
+    else if(this.fieldValue.valueAfDataType=='ComboString')
+    {
+      if(this.fieldValue.stringValue!=null || this.fieldValue.stringValue.toString()=='')
+      {
+        isValueNull=false;
+      }
+    }
     else if(this.fieldValue.valueAfDataType=='Integer')
       {
         if(this.fieldValue.integerValue!=null)

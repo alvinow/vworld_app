@@ -22,6 +22,7 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       integerValue: fields[2] as int,
       doubleValue: fields[3] as double,
       dateTimeValue: fields[4] as DateTime,
+      displayValue: fields[13] as String,
       fieldCaption: fields[5] as String,
       valueAfDataType: fields[6] as String,
       created: fields[7] as String,
@@ -29,13 +30,14 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       creatorActorId: fields[9] as String,
       lastUpdaterActorId: fields[10] as String,
       afRefValueFormId: fields[11] as String,
+      comboStringList: (fields[12] as List)?.cast<AfFieldValue>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, AfFieldValue obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.fieldName)
       ..writeByte(1)
@@ -59,7 +61,11 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       ..writeByte(10)
       ..write(obj.lastUpdaterActorId)
       ..writeByte(11)
-      ..write(obj.afRefValueFormId);
+      ..write(obj.afRefValueFormId)
+      ..writeByte(12)
+      ..write(obj.comboStringList)
+      ..writeByte(13)
+      ..write(obj.displayValue);
   }
 
   @override
@@ -86,6 +92,7 @@ AfFieldValue _$AfFieldValueFromJson(Map<String, dynamic> json) {
     dateTimeValue: json['dateTimeValue'] == null
         ? null
         : DateTime.parse(json['dateTimeValue'] as String),
+    displayValue: json['displayValue'] as String,
     fieldCaption: json['fieldCaption'] as String,
     valueAfDataType: json['valueAfDataType'] as String,
     created: json['created'] as String,
@@ -93,6 +100,10 @@ AfFieldValue _$AfFieldValueFromJson(Map<String, dynamic> json) {
     creatorActorId: json['creatorActorId'] as String,
     lastUpdaterActorId: json['lastUpdaterActorId'] as String,
     afRefValueFormId: json['afRefValueFormId'] as String,
+    comboStringList: (json['comboStringList'] as List)
+        ?.map((e) =>
+            e == null ? null : AfFieldValue.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -110,4 +121,6 @@ Map<String, dynamic> _$AfFieldValueToJson(AfFieldValue instance) =>
       'creatorActorId': instance.creatorActorId,
       'lastUpdaterActorId': instance.lastUpdaterActorId,
       'afRefValueFormId': instance.afRefValueFormId,
+      'comboStringList': instance.comboStringList,
+      'displayValue': instance.displayValue,
     };

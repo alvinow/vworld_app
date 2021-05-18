@@ -22,13 +22,14 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
       useExpansionTile: fields[2] as bool,
       autoExpandWhenNotNull: fields[3] as bool,
       initiallyExpanded: fields[4] as bool,
+      isHidden: fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, AfFieldForm obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.fieldValue)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
       ..writeByte(3)
       ..write(obj.autoExpandWhenNotNull)
       ..writeByte(4)
-      ..write(obj.initiallyExpanded);
+      ..write(obj.initiallyExpanded)
+      ..writeByte(5)
+      ..write(obj.isHidden);
   }
 
   @override
@@ -67,6 +70,7 @@ AfFieldForm _$AfFieldFormFromJson(Map<String, dynamic> json) {
     useExpansionTile: json['useExpansionTile'] as bool,
     autoExpandWhenNotNull: json['autoExpandWhenNotNull'] as bool,
     initiallyExpanded: json['initiallyExpanded'] as bool,
+    isHidden: json['isHidden'] as bool,
   );
 }
 
@@ -77,4 +81,5 @@ Map<String, dynamic> _$AfFieldFormToJson(AfFieldForm instance) =>
       'useExpansionTile': instance.useExpansionTile,
       'autoExpandWhenNotNull': instance.autoExpandWhenNotNull,
       'initiallyExpanded': instance.initiallyExpanded,
+      'isHidden': instance.isHidden,
     };

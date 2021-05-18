@@ -129,24 +129,28 @@ class AfForm {
     return returnValue;
   }
 
-  bool setValue(String fieldName, var value) {
+  bool setValue(AfFieldValue afFieldValue) {
     bool returnValue = false;
 
     for (int la = 0; la < this.fieldFormList.length; la++) {
       AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
 
-      if (currentFieldForm.fieldValue.fieldName == fieldName) {
+      if (currentFieldForm.fieldValue.fieldName == afFieldValue.fieldName) {
         if(currentFieldForm.fieldValue.valueAfDataType=='String') {
-          currentFieldForm.fieldValue.stringValue = value;
+          currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
+        }
+        if(currentFieldForm.fieldValue.valueAfDataType=='ComboString') {
+          currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
+          currentFieldForm.fieldValue.displayValue =  afFieldValue.displayValue;
         }
         else if(currentFieldForm.fieldValue.valueAfDataType=='Integer') {
-          currentFieldForm.fieldValue.integerValue = value;
+          currentFieldForm.fieldValue.integerValue = afFieldValue.integerValue;
         }
         else if(currentFieldForm.fieldValue.valueAfDataType=='Double') {
-          currentFieldForm.fieldValue.doubleValue = value;
+          currentFieldForm.fieldValue.doubleValue = afFieldValue.doubleValue;
         }
         else if(currentFieldForm.fieldValue.valueAfDataType=='DateTime') {
-          currentFieldForm.fieldValue.dateTimeValue = value;
+          currentFieldForm.fieldValue.dateTimeValue = afFieldValue.dateTimeValue;
         }
 
         returnValue = true;

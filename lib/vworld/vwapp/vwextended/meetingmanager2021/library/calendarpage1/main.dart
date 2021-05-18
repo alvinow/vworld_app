@@ -16,7 +16,12 @@ final Map<DateTime, List> _holidays = {
 };
 
 class CalendarPage1 extends StatefulWidget {
-  CalendarPage1({Key key, this.title, this.currrentUser, this.meetingList, this.afFormGridParam})
+  CalendarPage1(
+      {Key key,
+      this.title,
+      this.currrentUser,
+      this.meetingList,
+      this.afFormGridParam})
       : super(key: key);
 
   final String title;
@@ -41,24 +46,6 @@ class _CalendarPage1State extends State<CalendarPage1>
     final _selectedDay = DateTime.now();
 
     _events = Meeting.getCalenderList(this.widget.meetingList);
-
-    /*
-    _events = {
-
-      DateUtil1.convertDateFromString('2021-04-14 08:00:00') : ['Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I'],
-      DateUtil1.convertDateFromString('2021-04-15 08:00:00') : ['Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I','Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar'],
-      DateUtil1.convertDateFromString('2021-04-16 08:00:00') : [
-        'Kegiatan Penyusunan Laporan Keuangan 2021 Triwulan I',
-        'Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar',
-
-
-      ],
-      DateUtil1.convertDateFromString('2021-04-17 08:00:00')  : [
-        'Bimbingan Teknis Tahap I 2021 Untuk Peningkatan Kompetensi Operator Sekolah Dasar',
-
-      ],
-
-    };*/
 
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
@@ -100,40 +87,11 @@ class _CalendarPage1State extends State<CalendarPage1>
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
-      //mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        // Switch out 2 lines below to play with TableCalendar's settings
-        //-----------------------
-        //Container(height:300, child: SingleChildScrollView (scrollDirection: Axis.vertical,  child:  _buildTableCalendar()),)  ,
         _buildTableCalendar(),
-        //Container(height:300, child:SingleChildScrollView(child: Container(height:600 ,width: 600, child: Center(child:Text('Hello World',)), color: Colors.amber,))),
-        // _buildTableCalendarWithBuilders(),
-        //Expanded(child:const SizedBox(height: 8.0)),
-        //_buildButtons(),
-        //Expanded(child: const SizedBox(height: 8.0)),
-        Expanded(child:_buildEventGrid(this.widget.afFormGridParam)),
+        Expanded(child: _buildEventGrid(this.widget.afFormGridParam)),
       ],
     );
-
-    /*
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          _buildTableCalendar(),
-          // _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-          //_buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      ),
-    );*/
   }
 
   // Simple TableCalendar configuration (using Styles)
@@ -143,8 +101,7 @@ class _CalendarPage1State extends State<CalendarPage1>
     print(
         'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
-    Widget returnValue= TableCalendar(
-
+    Widget returnValue = TableCalendar(
       locale: 'en_US',
       calendarController: _calendarController,
       events: _events,
@@ -334,21 +291,11 @@ class _CalendarPage1State extends State<CalendarPage1>
           ],
         ),
         const SizedBox(height: 8.0),
-        /*RaisedButton(
-          child: Text(
-              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
-          onPressed: () {
-            _calendarController.setSelectedDay(
-              DateTime(dateTime.year, dateTime.month, dateTime.day),
-              runCallback: true,
-            );
-          },
-        ),*/
       ],
     );
   }
 
-  Widget _buildEventGrid(AfFormGridParam afFormGridParam){
+  Widget _buildEventGrid(AfFormGridParam afFormGridParam) {
     return AfFormGrid(afFormGridParam);
   }
 

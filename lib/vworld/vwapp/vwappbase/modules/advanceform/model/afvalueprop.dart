@@ -14,7 +14,7 @@ class AfValueProp {
       this.doubleDigitPrecision: 6,
       this.doubleDigitMaxLength: 26,
       this.isMandatory: false,
-      this.isReadOnly: false,
+      this.isGuiReadOnly: false,
       this.isObscureText: false,
       this.isNotNull: false});
 
@@ -35,7 +35,7 @@ class AfValueProp {
   @HiveField(7)
   final bool isMandatory;
   @HiveField(8)
-  final bool isReadOnly;
+  final bool isGuiReadOnly;
   @HiveField(9)
   final bool isObscureText;
   @HiveField(10)

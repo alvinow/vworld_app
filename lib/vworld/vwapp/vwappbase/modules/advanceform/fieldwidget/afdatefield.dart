@@ -12,80 +12,86 @@ class AfDateField extends StatelessWidget {
     @required this.fieldValue,
     this.height: 18,
     this.width: 42,
-    @required this.afCallbackDateFieldField,
+    @required this.afCallbackField,
     this.borderWidth: 1,
     this.useBorder: false,
     this.fontSize: 18,
     this.backgroundColorHex: "#ebf1f2",
     this.isValueValid: false,
     this.isNotNull: false,
+    this.isReadOnly:false
   });
 
   final AfValueProp valueProp;
   final AfFieldValue fieldValue;
   final String backgroundColorHex;
-  //final String value;
-  //final String fieldName;
-  //final String caption;
   final double width;
   final double height;
-  final AfCallbackDateField afCallbackDateFieldField;
+  final AfCallbackField afCallbackField;
   final double borderWidth;
   final bool useBorder;
   final double fontSize;
   final bool isValueValid;
   final bool isNotNull;
+  final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
-    String dateInitialValue = this.fieldValue.dateTimeValue == null
+    String dateTimeInitialValue = this.fieldValue.dateTimeValue == null
         ? null
-        : DateUtil1.get24hDateFormat().format(this.fieldValue.dateTimeValue);
+        : DateUtil1.getDate24hTimeFormat()
+            .format(this.fieldValue.dateTimeValue);
 
     //String dateInitialValue=this.fieldValue.value==null? null : this.fieldValue.value.toString() ;
 
-    TextEditingController myController = TextEditingController()
-      ..text = dateInitialValue;
+    TextEditingController dateTimeController = TextEditingController()
+      ..text = dateTimeInitialValue;
 
-    Widget returnValue = Container(
-        padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
-        child: TextFormField(
-          controller: myController,
-          maxLines: 1,
-          readOnly: true,
-          onTap: () {
-            DatePicker.showDateTimePicker(context,
-                showTitleActions: true,
-                minTime: DateTime.now().subtract(Duration(days: 36500)),
-                maxTime: DateTime.now().subtract(Duration(days: 36500)),
-                onChanged: (date) {
+    Widget dateTimeField = TextFormField(
+      controller: dateTimeController,
+      maxLines: 1,
+      readOnly: true,
+      onTap: ()
+    {
+      if (!(this.isReadOnly || this.valueProp.isGuiReadOnly))
+        {
+        DatePicker.showDateTimePicker(context, showTitleActions: true,
+            onChanged: (date) {
               print('change $date');
-            }, onConfirm: (date) {
-              if (this.afCallbackDateFieldField != null) {
-                this.afCallbackDateFieldField(
-                    this.fieldValue.fieldName, date, true);
+            },
+            onConfirm: (date) {
+              print("TimePickerRsult=" + date.toString());
+
+              if (this.afCallbackField != null) {
+                this.afCallbackField(
+                    AfFieldValue(
+                        fieldName: this.fieldValue.fieldName,
+                        dateTimeValue: date),
+                    true);
               }
 
               print('confirm $date');
             },
-                currentTime: this.fieldValue.dateTimeValue == null
-                    ? DateTime.now()
-                    : this.fieldValue.dateTimeValue,
-                locale: LocaleType.id);
-          },
-          onChanged: (value) {
-            //this.afCallbackStringField(this.fieldValue.fieldName, value, true);
-          },
-          style: TextStyle(fontSize: this.fontSize),
-          decoration: InputDecoration(
-            labelStyle: TextStyle(color: this.isValueValid? Colors.black: Colors.red),
-            border: UnderlineInputBorder(),
-            contentPadding: EdgeInsets.all(0),
-            labelText: this.fieldValue.fieldCaption,
-            focusColor: Colors.orange,
-            isDense: true,
-          ),
-        ));
+            currentTime: this.fieldValue.dateTimeValue == null
+                ? DateTime.now()
+                : this.fieldValue.dateTimeValue,
+            locale: LocaleType.id);
+    }
+      },
+      style: TextStyle(fontSize: this.fontSize),
+      decoration: InputDecoration(
+        labelStyle:
+            TextStyle(color: this.isValueValid ? Colors.black : Colors.red),
+        border: UnderlineInputBorder(),
+        contentPadding: EdgeInsets.all(0),
+        labelText: this.fieldValue.fieldCaption,
+        focusColor: Colors.orange,
+        isDense: true,
+      ),
+    );
+
+    Widget returnValue = Container(
+        padding: EdgeInsets.fromLTRB(10, 5, 10, 5), child: dateTimeField);
 
     return returnValue;
   }

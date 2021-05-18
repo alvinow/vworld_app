@@ -12,13 +12,17 @@ class AfFieldValue {
       this.integerValue,
       this.doubleValue,
       this.dateTimeValue,
+      this.displayValue,
       @required this.fieldCaption,
       @required this.valueAfDataType: "String",
       @required this.created,
       @required this.updated,
       @required this.creatorActorId,
       @required this.lastUpdaterActorId,
-      @required this.afRefValueFormId});
+      @required this.afRefValueFormId,
+      @required this.comboStringList,
+
+      });
 
   @HiveField(0)
   final String fieldName;
@@ -52,11 +56,20 @@ class AfFieldValue {
   @HiveField(11)
   final String afRefValueFormId;
 
+  @HiveField(12)
+  final List<AfFieldValue> comboStringList;
+
+  @HiveField(13)
+  String displayValue;
+
+
+
   static List<String> afDataType = [
     "String",
     "Integer",
     "Double",
     "DateTime",
+    "ComboString",
     "AfFormRecord",
     "AfFormRecordList"
   ];

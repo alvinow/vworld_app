@@ -17,7 +17,17 @@ class DateUtil1 {
     return DateFormat('yyyy-MM-dd hh:mm:ss');
   }
 
-  static DateFormat get24hDateFormat(){
+  static DateFormat getDate24hTimeFormat(){
     return DateFormat('yyyy-MMMM-dd HH:mm');
   }
+
+  static DateFormat getDateOnlyFormat(){
+    return DateFormat('yyyy-MMMM-dd');
+
+  }
+
+  static DateFormat get24hTimeFormat(){
+    return DateFormat('HH:mm');
+  }
+
 }

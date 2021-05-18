@@ -24,12 +24,12 @@ class AfFormDemo {
   final List<Actor> participants;
      */
 
-
-
-    AfForm returnValue = AfForm(fieldFormList: <AfFieldForm>[],afFormId: 'meeting_af_form_id');
+    AfForm returnValue =
+        AfForm(fieldFormList: <AfFieldForm>[], afFormId: 'meeting_af_form_id');
 
     AfFieldForm field1 = AfFieldForm(
-        valueProp: AfValueProp(isReadOnly: true,isNotNull: true),
+        valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
+        isHidden: true,
         fieldValue: AfFieldValue(
             fieldName: 'meeting_id',
             fieldCaption: 'Meeting ID',
@@ -43,7 +43,12 @@ class AfFormDemo {
         fieldValue: AfFieldValue(
             fieldName: 'meeting_meetingtype_id',
             fieldCaption: 'Meeting Type ID',
-            valueAfDataType: 'String',
+            valueAfDataType: 'ComboString',
+            comboStringList: <AfFieldValue>[
+              AfFieldValue(
+                  displayValue: 'Online Meeting', stringValue: 'onlinemeeting'),
+              AfFieldValue(displayValue: 'Kegiatan', stringValue: 'kegiatan')
+            ],
             created: null,
             updated: null,
             lastUpdaterActorId: null));
@@ -53,7 +58,13 @@ class AfFormDemo {
         fieldValue: AfFieldValue(
             fieldName: 'meeting_meetingstatus_id',
             fieldCaption: 'Meeting Status ID',
-            valueAfDataType: 'String',
+            comboStringList: <AfFieldValue>[
+              AfFieldValue(displayValue: 'draft', stringValue: '0'),
+              AfFieldValue(displayValue: 'waitingforapproval', stringValue: '1'),
+              AfFieldValue(displayValue: 'planned', stringValue: '2'),
+              AfFieldValue(displayValue: 'cancel', stringValue: '3'),
+            ],
+            valueAfDataType: 'ComboString',
             created: null,
             updated: null,
             lastUpdaterActorId: null));
@@ -118,11 +129,10 @@ class AfFormDemo {
             updated: null,
             lastUpdaterActorId: null));
 
-
+    returnValue.fieldFormList.add(field4);
     returnValue.fieldFormList.add(field1);
     returnValue.fieldFormList.add(field2);
     returnValue.fieldFormList.add(field3);
-    returnValue.fieldFormList.add(field4);
     returnValue.fieldFormList.add(field5);
     returnValue.fieldFormList.add(field6);
     returnValue.fieldFormList.add(field7);
