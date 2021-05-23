@@ -6,20 +6,25 @@ import 'dart:convert';
 
 typedef AfPropertiesOnChangedCallback = void Function(bool);
 
-//typedef AfCallbackDateField = void Function(String, DateTime, bool);
-//typedef AfCallbackStringField = void Function(String, String, bool);
-//typedef AfCallbackIntegerField = void Function(String, int, bool);
-//typedef AfCallbackDoubleField = void Function(String, int, double);
 typedef AfCallbackField = void Function(AfFieldValue, bool);
 typedef AfGetCurrentState = AfForm Function();
 
 class AfFormPage extends StatefulWidget {
-  AfFormPage({@required this.initialState, @required this.formCollection, this.isReadOnly:false});
+  AfFormPage(
+      {@required this.initialState,
+      @required this.formCollection,
+      this.isReadOnly: false,
+      this.title}){
+    if(this.title==null){
+      this.title='Record of '+this.initialState.afFormId;
+    }
+  }
 
   final AfForm initialState;
   final List<AfForm> formCollection;
   AfGetCurrentState getCurrentStateLink;
   bool isReadOnly;
+  String title;
 
   AfForm getCurrentState() {
     if (this.getCurrentStateLink != null) {

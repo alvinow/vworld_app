@@ -21,29 +21,36 @@ class MeetingPageDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget saveButton=            IconButton(
+      icon: Icon(
+        Icons.save,
+        color: Colors.white,
+      ),
+      onPressed: () {
+        if (afFormPage.getCurrentState().isRecordValid()) {
+          if (this.onSaveValidRecordMeetingPageDetail != null) {
+            onSaveValidRecordMeetingPageDetail(
+                this.afFormPage.getCurrentState(), context);
+          }
+        } else {
+          if (this.onSaveInvalidRecordMeetingPageDetail != null) {
+            this.onSaveInvalidRecordMeetingPageDetail(
+                this.afFormPage.getCurrentState(), context);
+          }
+        }
+      },
+    );
+
+    if(this.afFormPage.isReadOnly==true)
+      {
+        saveButton=Container();
+      }
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Detail Kegiatan"),
           actions: [
-            IconButton(
-              icon: Icon(
-                Icons.save,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                if (afFormPage.getCurrentState().isRecordValid()) {
-                  if (this.onSaveValidRecordMeetingPageDetail != null) {
-                    onSaveValidRecordMeetingPageDetail(
-                        this.afFormPage.getCurrentState(), context);
-                  }
-                } else {
-                  if (this.onSaveInvalidRecordMeetingPageDetail != null) {
-                    this.onSaveInvalidRecordMeetingPageDetail(
-                        this.afFormPage.getCurrentState(), context);
-                  }
-                }
-              },
-            )
+            saveButton
           ],
         ),
         body: afFormPage);

@@ -46,8 +46,35 @@ class MeetingmainpageBloc
     final MeetingmainpageState currentState = this.state;
 
     if (event is OpenAfformPageOnMeetingmainpageEvent) {
-      yield DisplayAfformOnMeetingmainpageState(AfFormDemo.getNewMeetingForm());
-    } else if (event is SavemeetingeventpageOnMeetingmainpageEvent) {
+      yield DisplayAfformOnMeetingmainpageState(AfFormDemo.getMeetingForm());
+    }
+    else if(event is SyncAfRecordOnMeetingmainpageEvent)
+      {
+        String encodedJson = json.encode(event.afForm.getRecord().toJson());
+
+        Document afDocument = Document(
+          id: event.afForm.afRecordId,
+          refId: event.afForm.afFormId,
+          refIdMd5: CryptoUtil.getMd5(event.afForm.afFormId),
+          created: DateTime.now().toString(),
+          documentstatusId: "1",
+          documenttypeId: event.afForm.afFormId,
+          json: encodedJson,
+          ownerUserloginId: currentActor.actor_id,
+          jsonHashBycreator: CryptoUtil.getMd5(encodedJson),
+          ownerGroupId: '0',
+          lastupdate: DateTime.now().toString(),
+          isLocalClientOnly: 0,
+          creatorLoginsessionId: this.loginResponse.loginsessionId,
+        );
+
+        final int returnValue =
+        await DocumentDocStreamStore.syncDocument(afDocument);
+
+        yield currentState;
+
+      }
+    else if (event is SavemeetingeventpageOnMeetingmainpageEvent) {
       String encodedJson = json.encode(event.meetingAfForm.toJson());
 
       Document newMeetingDocument = Document(

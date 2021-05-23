@@ -4,15 +4,14 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affi
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 
 class AfFormGridParam {
-  AfFormGridParam(
-      this.currrentActor,
-      this.loginResponse,
+  AfFormGridParam(this.currrentActor, this.loginResponse,
       {@required this.records,
-
-      @required this.hasReachedMax: false});
+      @required this.hasReachedMax: false,
+      this.pageTitle: 'Record(s)'});
 
   final List<AfFieldValueRecord> records;
   final bool hasReachedMax;
   final Actor currrentActor;
   final LoginResponse loginResponse;
+  final String pageTitle;
 }

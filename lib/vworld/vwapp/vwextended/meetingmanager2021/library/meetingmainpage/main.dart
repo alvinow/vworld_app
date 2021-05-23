@@ -5,6 +5,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/library/editorform/editorform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/vwdialog/vwdialog.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/actorinfopage/actorinfopage.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/calendarpage1/main.dart';
@@ -97,40 +98,32 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
         returnValue =
             ActorInfoPage(this.bloc, MeetingTab1(this.bloc, 1), state.actor);
       } else if (state is DisplayAfformOnMeetingmainpageState) {
-        String appBarTitle = 'Demo AfForm';
+        String appBarTitle = 'Panitia';
 
         AfFormPage afFormPage = AfFormPage(
           initialState: state.afForm,
         );
 
-        returnValue = returnValue = Scaffold(
+        returnValue =  Scaffold(
             bottomNavigationBar: MeetingTab1(this.bloc, 0),
             appBar: AppBar(
               title: Text(appBarTitle),
-              actions: <Widget>[
-                Padding(
-                    padding: EdgeInsets.only(right: 20.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        print('Save Button Tapped');
-                        print(json
-                            .encode(afFormPage.getCurrentStateLink().toJson()));
-                      },
-                      child: Icon(
-                        Icons.save,
-                        size: 26.0,
-                      ),
-                    )),
-              ],
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                print('Button Tapped');
+                LibEditorFormStyle1.createNewRecord('panitia_id', context, this.widget.currrentActor, this.widget.loginResponse);
+
+                LibMeetingPageDetail.openNewMeetingPageDetail(context,
+                    this.widget.currrentActor, this.widget.loginResponse,
+                    onSaveValidRecordMeetingPageDetail:
+                    this.implementSaveValidRecordMeetingPageDetail,
+                    onSaveInvalidRecordMeetingPageDetail:
+                    this.implementSaveInvalidRecordMeetingPageDetail);
               },
               child: const Icon(Icons.add),
               backgroundColor: Colors.green,
             ),
-            body: afFormPage);
+            body: Text('Panitia Page'));
       }
 
       return returnValue;

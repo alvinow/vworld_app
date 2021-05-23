@@ -26,6 +26,22 @@ class OpenAfformPageOnMeetingmainpageEvent extends MeetingmainpageEvent {
       'OpenAfformPageOnMeetingmainpageEvent{${this.timestamp.toString()}}';
 }
 
+class SyncAfRecordOnMeetingmainpageEvent extends MeetingmainpageEvent{
+
+  SyncAfRecordOnMeetingmainpageEvent(this.timestamp,this.afForm);
+
+  final DateTime timestamp;
+  final AfForm afForm;
+
+  @override
+  List<Object> get props => [timestamp,afForm];
+
+  @override
+  String toString() =>
+      'SyncAfRecordOnMeetingmainpageEvent{${this.timestamp.toString()}}';
+
+}
+
 class SavemeetingeventpageOnMeetingmainpageEvent extends MeetingmainpageEvent{
   SavemeetingeventpageOnMeetingmainpageEvent(this.timestamp, this.meetingAfForm);
 

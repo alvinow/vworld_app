@@ -6,11 +6,11 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afva
 class AfFormDemo {
   static AfForm getAfFormById(String afFormId) {
     if (afFormId == 'meeting_af_form_id') {
-      return AfFormDemo.getNewMeetingForm();
+      return AfFormDemo.getMeetingForm();
     }
   }
 
-  static AfForm getNewMeetingForm() {
+  static AfForm getMeetingForm() {
     /*
 
   final String meeting_id;
@@ -26,6 +26,17 @@ class AfFormDemo {
 
     AfForm returnValue =
         AfForm(fieldFormList: <AfFieldForm>[], afFormId: 'meeting_af_form_id');
+
+    AfFieldForm field0 = AfFieldForm(
+        valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
+        isHidden: true,
+        fieldValue: AfFieldValue(
+            fieldName: 'record_id',
+            fieldCaption: 'Record ID',
+            valueAfDataType: 'String',
+            created: null,
+            updated: null,
+            lastUpdaterActorId: null));
 
     AfFieldForm field1 = AfFieldForm(
         valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
@@ -129,6 +140,7 @@ class AfFormDemo {
             updated: null,
             lastUpdaterActorId: null));
 
+    returnValue.fieldFormList.add(field0);
     returnValue.fieldFormList.add(field4);
     returnValue.fieldFormList.add(field1);
     returnValue.fieldFormList.add(field2);
