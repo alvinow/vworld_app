@@ -56,7 +56,33 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
         this.bloc.add(OpeneventpageOnMeetingmainpageEvent(DateTime.now()));
       } else if (state is ProcessingOnMeetingmainpageState) {
         returnValue = InitscreenSplash(title: state.title);
-      } else if (state is DisplayeventpageOnMeetingmainpageState) {
+      }
+
+      else if(state is DisplayPanitiaListPageOnMeetingmainpageState)
+        {
+          String appBarTitle = 'Panitia';
+          returnValue =  Scaffold(
+              bottomNavigationBar: MeetingTab1(this.bloc, 1),
+              appBar: AppBar(
+                title: Text(appBarTitle),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  LibEditorFormStyle1.createNewRecord('panitia_id', context, this.widget.currrentActor, this.widget.loginResponse);
+
+                  LibMeetingPageDetail.openNewMeetingPageDetail(context,
+                      this.widget.currrentActor, this.widget.loginResponse,
+                      onSaveValidRecordMeetingPageDetail:
+                      this.implementSaveValidRecordMeetingPageDetail,
+                      onSaveInvalidRecordMeetingPageDetail:
+                      this.implementSaveInvalidRecordMeetingPageDetail);
+                },
+                child: const Icon(Icons.add),
+                backgroundColor: Colors.green,
+              ),
+              body: Text('Panitia List Grid'));
+        }
+      else if (state is DisplayeventpageOnMeetingmainpageState) {
         final String appRoleId = state.actor.actor_actorrole_id;
 
         returnValue = InitscreenSplash(

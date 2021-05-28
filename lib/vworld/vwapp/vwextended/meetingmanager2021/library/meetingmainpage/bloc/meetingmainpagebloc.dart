@@ -48,6 +48,10 @@ class MeetingmainpageBloc
     if (event is OpenAfformPageOnMeetingmainpageEvent) {
       yield DisplayAfformOnMeetingmainpageState(AfFormDemo.getMeetingForm());
     }
+    else if (event is RequestDisplayPanitiaListPageOnMeetingmainpageEvent)
+      {
+        yield DisplayPanitiaListPageOnMeetingmainpageState(null);
+      }
     else if(event is SyncAfRecordOnMeetingmainpageEvent)
       {
         String encodedJson = json.encode(event.afForm.getRecord().toJson());

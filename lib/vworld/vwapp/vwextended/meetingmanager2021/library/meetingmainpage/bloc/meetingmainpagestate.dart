@@ -20,11 +20,17 @@ class UninitializedOnMeetingainpageState extends MeetingmainpageState {
   String toString() => 'UninitializedOnMeetingainpageState';
 }
 
-class DisplayafrecordlistOnMeetingmainpageState extends MeetingmainpageState{
+class DisplayAfrecordlistOnMeetingmainpageState extends MeetingmainpageState {
+  DisplayAfrecordlistOnMeetingmainpageState(this.afFormGridParam);
+
+  final AfFormGridParam afFormGridParam;
+}
+
+class DisplayPanitiaListPageOnMeetingmainpageState extends MeetingmainpageState{
+  DisplayPanitiaListPageOnMeetingmainpageState(this.afFormGridParam);
 
 
   final AfFormGridParam afFormGridParam;
-
 }
 
 class DisplayeventpageOnMeetingmainpageState extends MeetingmainpageState {

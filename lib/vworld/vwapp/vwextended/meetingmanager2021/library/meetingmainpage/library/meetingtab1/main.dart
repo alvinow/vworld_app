@@ -49,7 +49,7 @@ class MeetingTab1 extends StatelessWidget {
           this.bloc.add(OpeneventpageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020UserloginInfo(DateTime.now()));
         } else if (index == 1) {
-          this.bloc.add(OpenAfformPageOnMeetingmainpageEvent (DateTime.now()));
+          this.bloc.add(RequestDisplayPanitiaListPageOnMeetingmainpageEvent(DateTime.now()));
 
         }
         else if (index == 2) {
