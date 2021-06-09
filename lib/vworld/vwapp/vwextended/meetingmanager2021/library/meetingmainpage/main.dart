@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/genlib/genlib.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/main.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/library/editorform/editorform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/vwdialog/vwdialog.dart';
@@ -68,19 +69,25 @@ class _MeetingMainPageState extends State<MeetingMainPage> {
               ),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
-                  LibEditorFormStyle1.createNewRecord('panitia_id', context, this.widget.currrentActor, this.widget.loginResponse);
 
+                  print('Add New Panitia');
+
+                  LibEditorFormStyle1.createNewRecord('form_panitia_meeting', context, this.widget.currrentActor, this.widget.loginResponse);
+
+                  /*
                   LibMeetingPageDetail.openNewMeetingPageDetail(context,
                       this.widget.currrentActor, this.widget.loginResponse,
                       onSaveValidRecordMeetingPageDetail:
                       this.implementSaveValidRecordMeetingPageDetail,
                       onSaveInvalidRecordMeetingPageDetail:
                       this.implementSaveInvalidRecordMeetingPageDetail);
+
+                   */
                 },
                 child: const Icon(Icons.add),
                 backgroundColor: Colors.green,
               ),
-              body: Text('Panitia List Grid'));
+              body: AfFormGrid(state.afFormGridParam));
         }
       else if (state is DisplayeventpageOnMeetingmainpageState) {
         final String appRoleId = state.actor.actor_actorrole_id;

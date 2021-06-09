@@ -1,23 +1,19 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import 'package:bloc/bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldform.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/documentsearchparambyfields.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvaluerecord.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afform.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformgrid/afformgridparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/util/afformdemo.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/documentdocstreamstore/documentdocstreamstore.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/cryptoutil/cryptoutil.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/util/dateutil.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/bloc/bloc.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/meetingmainpage/library/meetingstore/meetingstore.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/meeting.dart';
-import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/organization.dart';
 import 'dart:convert';
 
 class MeetingmainpageBloc
@@ -50,7 +46,33 @@ class MeetingmainpageBloc
     }
     else if (event is RequestDisplayPanitiaListPageOnMeetingmainpageEvent)
       {
-        yield DisplayPanitiaListPageOnMeetingmainpageState(null);
+
+       DocumentSearchField documentSearchField1=DocumentSearchField(isActive: true, isHidden: true, displayCaption: 'Document Type Id', fieldName: Document.documenttypeId_CCFN, queryValue: Document.panitiaMeetingDocumenttypeId, equalityOperator: '=');
+
+       final int currentFetchLimit=100;
+
+       List<Document> documentList1=await DocumentDocStreamStore.getDocumentsBySearchParamByField( DocumentSearchParamByFields(title: 'param1', requiredSearchFieldList: [documentSearchField1] ),limit:currentFetchLimit );
+
+       bool hasReachedMax=false;
+       if(documentList1.length<currentFetchLimit)
+         {
+           hasReachedMax=true;
+         }
+
+
+
+       List<AfFieldValueRecord> records=<AfFieldValueRecord>[];
+
+       for(int la=0;la<documentList1.length;la++) {
+         Document currentDocument = documentList1.elementAt(la);
+         AfFieldValueRecord currentFieldValueRecord = AfFieldValueRecord
+             .fromDocument(currentDocument);
+
+         records.add(currentFieldValueRecord);
+       }
+
+
+        yield DisplayPanitiaListPageOnMeetingmainpageState(AfFormGridParam(this.currentActor, this.loginResponse, records:  records, hasReachedMax: hasReachedMax));
       }
     else if(event is SyncAfRecordOnMeetingmainpageEvent)
       {

@@ -1,8 +1,8 @@
 class AppStaticParam {
   static final String syncUrl =
-      'https://api.bagkeudikdasmen.id/proc7/api/2.0/request';
+      'https://api.bagkeu.dikdasmen.kemdikbud.go.id/api/2.0/request';
   static final String loginUrl =
-      "https://api.bagkeudikdasmen.id/proc7/api/2.0/json/login";
+      "https://api.bagkeu.dikdasmen.kemdikbud.go.id/api/2.0/json/login";
   //static final String syncUrl ='http://172.14.2.15:1405/api/2.0/request';
   //static final String loginUrl ='http://172.14.2.15:1405/api/2.0/json/login';
 

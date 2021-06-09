@@ -8,6 +8,44 @@ class AfFormDemo {
     if (afFormId == 'meeting_af_form_id') {
       return AfFormDemo.getMeetingForm();
     }
+    else if(afFormId == 'form_panitia_meeting')
+      {return getPanitiaMeetingForm();
+      }
+
+  }
+
+  static AfForm getPanitiaMeetingForm(){
+
+    AfForm returnValue =
+    AfForm(fieldFormList: <AfFieldForm>[], afFormId: 'form_panitia_meeting');
+
+    AfFieldForm field0 = AfFieldForm(
+        valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
+        isHidden: true,
+        fieldValue: AfFieldValue(
+            fieldName: 'record_id',
+            fieldCaption: 'Record ID',
+            valueAfDataType: 'String',
+            created: null,
+            updated: null,
+            lastUpdaterActorId: null));
+
+    AfFieldForm field1 = AfFieldForm(
+        valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
+        isHidden: false,
+        fieldValue: AfFieldValue(
+            fieldName: 'actor_id',
+            fieldCaption: 'Actor ID',
+            valueAfDataType: 'String',
+            created: null,
+            updated: null,
+            lastUpdaterActorId: null));
+
+    returnValue.fieldFormList.add(field0);
+    returnValue.fieldFormList.add(field1);
+
+
+    return returnValue;
   }
 
   static AfForm getMeetingForm() {

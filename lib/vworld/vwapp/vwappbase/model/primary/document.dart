@@ -443,6 +443,8 @@ class Document extends DocumentModel {
   static final String quotionerDocumenttypeId = "quotioner";
   static final String dentalPatientDemographicDocumenttypeId =
       'DentalPatientDemographic';
+
+  static final String panitiaMeetingDocumenttypeId='panitia_meeting_documenttype_id';
   static final String spmValidatorDocumenttypeId = 'formdata_formspmvalidator';
   static final String userprofileDocumenttypeId = 'userprofile_spmvalidator';
   static final String penugasanSatker2019DocumenttypeId =

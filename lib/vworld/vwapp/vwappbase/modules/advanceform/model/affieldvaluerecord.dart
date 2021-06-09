@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hive/hive.dart';
+import 'dart:convert';
 part 'affieldvaluerecord.g.dart';
+
 
 @HiveType(typeId: 105)
 @JsonSerializable()
@@ -36,6 +39,12 @@ class AfFieldValueRecord {
     } catch (error) {}
 
     return returnValue;
+  }
+
+  factory AfFieldValueRecord.fromDocument(Document document)
+  {
+      return AfFieldValueRecord.fromJson( json.decode(document.json));
+
   }
 
   factory AfFieldValueRecord.fromJson(Map<String, dynamic> json) =>

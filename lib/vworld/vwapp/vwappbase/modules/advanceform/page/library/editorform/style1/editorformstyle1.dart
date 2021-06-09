@@ -17,38 +17,44 @@ class LibEditorFormStyle1 {
       String formId, BuildContext context, Actor currrentActor, LoginResponse loginResponse,
       {OnSaveValidRecordEditorForm onSaveValidRecordEditorForm,
         OnSaveInvalidRecordEditorForm onSaveInvalidRecordEditorForm }) {
-    AfForm meetingForm = AfFormDemo.getAfFormById(formId);
 
-    final String recordId=Uuid().v4();
+    try {
+      AfForm meetingForm = AfFormDemo.getAfFormById(formId);
 
-    AfFieldValue field1 = AfFieldValue(
-        fieldName: 'record_id',
-        stringValue: recordId,
-        valueAfDataType: 'String',
-        creatorActorId: currrentActor.actor_id,
-        lastUpdaterActorId: currrentActor.actor_id);
+      final String recordId = Uuid().v4();
 
-    AfFieldValueRecord fieldValueRecord = AfFieldValueRecord(
-        afFormId: formId,
-        afRecordId: recordId,
-        fields: <AfFieldValue>[field1]);
+      AfFieldValue field1 = AfFieldValue(
+          fieldName: 'record_id',
+          stringValue: recordId,
+          valueAfDataType: 'String',
+          creatorActorId: currrentActor.actor_id,
+          lastUpdaterActorId: currrentActor.actor_id);
 
-    meetingForm.setRecord(fieldValueRecord);
+      AfFieldValueRecord fieldValueRecord = AfFieldValueRecord(
+          afFormId: formId,
+          afRecordId: recordId,
+          fields: <AfFieldValue>[field1]);
 
-    AfFormPage afFormPage = AfFormPage(
-      initialState: meetingForm,
-      formCollection: <AfForm>[],
-    );
+      meetingForm.setRecord(fieldValueRecord);
 
-    Widget recordPage = RecordPageDetailStyle1(
-      afFormPage: afFormPage,
-      onSaveValidRecordEditorForm:
-      onSaveValidRecordEditorForm,
-      onSaveInvalidRecordEditorForm: onSaveInvalidRecordEditorForm,
-    );
+      AfFormPage afFormPage = AfFormPage(
+        initialState: meetingForm,
+        formCollection: <AfForm>[],
+      );
 
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => recordPage));
+      Widget recordPage = RecordPageDetailStyle1(
+        afFormPage: afFormPage,
+        onSaveValidRecordEditorForm:
+        onSaveValidRecordEditorForm,
+        onSaveInvalidRecordEditorForm: onSaveInvalidRecordEditorForm,
+      );
+
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => recordPage));
+    }
+    catch(error){
+      print("Error On LibEditorFormStyle1.createNewRecord: "+error.toString());
+    }
   }
 
   static void editRecord(){
