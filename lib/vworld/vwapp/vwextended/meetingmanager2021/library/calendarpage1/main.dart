@@ -38,7 +38,7 @@ class _CalendarPage1State extends State<CalendarPage1>
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
-  CalendarController _calendarController;
+  //CalendarController _calendarController;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _CalendarPage1State extends State<CalendarPage1>
     _events = Meeting.getCalenderList(this.widget.meetingList);
 
     _selectedEvents = _events[_selectedDay] ?? [];
-    _calendarController = CalendarController();
+   // _calendarController = CalendarController();
 
     _animationController = AnimationController(
       vsync: this,
@@ -61,7 +61,7 @@ class _CalendarPage1State extends State<CalendarPage1>
   @override
   void dispose() {
     _animationController.dispose();
-    _calendarController.dispose();
+    //_calendarController.dispose();
     super.dispose();
   }
 
@@ -78,8 +78,8 @@ class _CalendarPage1State extends State<CalendarPage1>
   }
 
   void _onCalendarCreated(
-      DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onCalendarCreated');
+      PageController pageController) {
+   //print('CALLBACK: _onCalendarCreated');
   }
 
   @override
@@ -88,22 +88,34 @@ class _CalendarPage1State extends State<CalendarPage1>
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _buildTableCalendar(),
+        _buildTableCalenderV3(),
         Expanded(child: _buildEventGrid(this.widget.afFormGridParam)),
       ],
     );
   }
 
   // Simple TableCalendar configuration (using Styles)
+  Widget _buildTableCalenderV3(){
+     return TableCalendar(
+      firstDay: DateTime.utc(2010, 10, 16),
+      lastDay: DateTime.utc(2030, 3, 14),
+      focusedDay: DateTime.now(),
+    );
+  }
+
+  /*
   Widget _buildTableCalendar() {
     print(
         'Oldest Meeting:   ${Meeting.getOldestMeetingDateTime(this.widget.meetingList)}');
     print(
         'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
+    //TableCalendar(focusedDay: focusedDay, firstDay: firstDay, lastDay: lastDay)
+
+
     Widget returnValue = TableCalendar(
       locale: 'en_US',
-      calendarController: _calendarController,
+      //calendarController: _calendarController,
       events: _events,
       holidays: _holidays,
       startingDayOfWeek: StartingDayOfWeek.monday,
@@ -128,109 +140,20 @@ class _CalendarPage1State extends State<CalendarPage1>
 
     print('Table Calendar created');
     return returnValue;
-  }
+  }*/
 
-  // More advanced TableCalendar configuration (using Builders & Styles)
-  Widget _buildTableCalendarWithBuilders() {
-    return TableCalendar(
-      calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      initialCalendarFormat: CalendarFormat.month,
-      formatAnimation: FormatAnimation.slide,
-      startingDayOfWeek: StartingDayOfWeek.sunday,
-      availableGestures: AvailableGestures.all,
-      availableCalendarFormats: const {
-        CalendarFormat.month: '',
-        CalendarFormat.week: '',
-      },
-      calendarStyle: CalendarStyle(
-        outsideDaysVisible: false,
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
-        holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
-      ),
-      daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[600]),
-      ),
-      headerStyle: HeaderStyle(
-        centerHeaderTitle: true,
-        formatButtonVisible: false,
-      ),
-      builders: CalendarBuilders(
-        selectedDayBuilder: (context, date, _) {
-          return FadeTransition(
-            opacity: Tween(begin: 0.0, end: 1.0).animate(_animationController),
-            child: Container(
-              margin: const EdgeInsets.all(4.0),
-              padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Colors.deepOrange[300],
-              width: 100,
-              height: 100,
-              child: Text(
-                '${date.day}',
-                style: TextStyle().copyWith(fontSize: 16.0),
-              ),
-            ),
-          );
-        },
-        todayDayBuilder: (context, date, _) {
-          return Container(
-            margin: const EdgeInsets.all(4.0),
-            padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Colors.amber[400],
-            width: 100,
-            height: 100,
-            child: Text(
-              '${date.day}',
-              style: TextStyle().copyWith(fontSize: 16.0),
-            ),
-          );
-        },
-        markersBuilder: (context, date, events, holidays) {
-          final children = <Widget>[];
 
-          if (events.isNotEmpty) {
-            children.add(
-              Positioned(
-                right: 1,
-                bottom: 1,
-                child: _buildEventsMarker(date, events),
-              ),
-            );
-          }
-
-          if (holidays.isNotEmpty) {
-            children.add(
-              Positioned(
-                right: -2,
-                top: -2,
-                child: _buildHolidaysMarker(),
-              ),
-            );
-          }
-
-          return children;
-        },
-      ),
-      onDaySelected: (date, events, holidays) {
-        _onDaySelected(date, events, holidays);
-        _animationController.forward(from: 0.0);
-      },
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
-    );
-  }
 
   Widget _buildEventsMarker(DateTime date, List events) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        color: _calendarController.isSelected(date)
+        /*color: _calendarController.isSelected(date)
             ? Colors.brown[500]
             : _calendarController.isToday(date)
                 ? Colors.brown[300]
-                : Colors.blue[400],
+                : Colors.blue[400],*/
       ),
       width: 16.0,
       height: 16.0,
@@ -267,7 +190,7 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('Month'),
               onPressed: () {
                 setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.month);
+                  //_calendarController.setCalendarFormat(CalendarFormat.month);
                 });
               },
             ),
@@ -275,8 +198,8 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('2 weeks'),
               onPressed: () {
                 setState(() {
-                  _calendarController
-                      .setCalendarFormat(CalendarFormat.twoWeeks);
+                  /*_calendarController
+                      .setCalendarFormat(CalendarFormat.twoWeeks);*/
                 });
               },
             ),
@@ -284,7 +207,7 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('Week'),
               onPressed: () {
                 setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.week);
+                  //_calendarController.setCalendarFormat(CalendarFormat.week);
                 });
               },
             ),

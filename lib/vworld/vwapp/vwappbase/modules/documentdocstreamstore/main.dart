@@ -712,9 +712,11 @@ class DocumentDocStreamStore {
         'Charset': 'utf-8'
       };
 
+
+
       final response = await http.Client()
           .post(
-        AppStaticParam.syncUrl,
+        Uri.http(AppStaticParam.syncUrl, ""),
         headers: headers,
         body: compressedBody,
       )
@@ -860,7 +862,7 @@ class DocumentDocStreamStore {
         };
 
         final response = await http.Client()
-            .post(AppStaticParam.syncUrl,
+            .post(Uri.http(AppStaticParam.syncUrl, "") ,
             headers: headers, body: compressedBody)
             .timeout(const Duration(seconds: 300));
 
@@ -1005,7 +1007,7 @@ class DocumentDocStreamStore {
         };
 
         final response = await http.Client()
-            .post(AppStaticParam.syncUrl,
+            .post( Uri.http(AppStaticParam.syncUrl,"")  ,
             headers: headers, body: compressedBody)
             .timeout(const Duration(seconds: 500));
 

@@ -77,7 +77,7 @@ class UserRepository {
           json.encode(loginRequestBody.toJson()));
 
       final response = await http.Client().post(
-        loginApiUrl,
+        Uri.http(loginApiUrl,"") ,
         headers: {
           "Access-Control-Allow-Origin":
           "*", // Required for CORS support to work
@@ -138,7 +138,7 @@ class UserRepository {
           json.encode(loginRequestBody.toJson()));
 
       final response = await http.Client().post(
-        loginApiUrl,
+        Uri.http(loginApiUrl,"") ,
         headers: {
           "Access-Control-Allow-Origin":
           "*", // Required for CORS support to work
