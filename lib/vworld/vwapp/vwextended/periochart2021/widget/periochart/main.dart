@@ -12,7 +12,7 @@ typedef PcPropertiesSaveToBox = Future<void> Function(String);
 typedef PcPropertiesOnChangedCallback = void Function(bool);
 typedef PcCallbackDateField = void Function(String, DateTime, bool);
 typedef PcCallbackStringField = void Function(String, String, bool);
-typedef PcCallbackIntegerField = void Function(String, int, bool);
+typedef PcCallbackIntegerField = void Function(String, int?, bool);
 
 class Periochart extends StatefulWidget {
   Periochart(this.pcProperties);
@@ -37,8 +37,8 @@ class Periochart extends StatefulWidget {
 }
 
 class _PeriochartState extends State<Periochart> {
-  PcProperties currentState;
-  String currentLoaderPcPropertiesId;
+  PcProperties? currentState;
+  String? currentLoaderPcPropertiesId;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _PeriochartState extends State<Periochart> {
   Future<void> implememtPcPropertiesLoadFromBox(String pcPropertiesId) async {
     var box = await Hive.openBox('PcProperties');
 
-    PcProperties pcProperties = await box.get(pcPropertiesId);
+    PcProperties? pcProperties = await box.get(pcPropertiesId);
 
     if (pcProperties != null) {
       this.currentState = pcProperties;

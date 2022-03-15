@@ -1,6 +1,6 @@
 class Stringop {
-  static String getStringQuery(List<String> list, String phraseConnector) {
-    String returnValue;
+  static String? getStringQuery(List<String> list, String phraseConnector) {
+    String? returnValue;
 
     for (int la = 0; la < list.length; la++) {
       String currentElement = list.elementAt(la);
@@ -39,8 +39,8 @@ class Stringop {
     return lReturnValue;
   }
 
-  static String extractSpecialTag(String inputString, int index) {
-    String lReturnValue;
+  static String? extractSpecialTag(String inputString, int index) {
+    String? lReturnValue;
     const start = "{";
     const end = "}";
 

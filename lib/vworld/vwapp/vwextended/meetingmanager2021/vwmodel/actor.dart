@@ -10,14 +10,14 @@ part 'actor.g.dart';
 
 class Actor {
   Actor({
-    @required this.actor_id,
-    @required this.actor_actorrole_id,
-    @required this.actor_fullname,
-    @required this.actor_username,
-    @required this.actor_password,
-    @required this.actor_loginrightstatus_id,
-    @required this.actor_person_id,
-    @required this.actor_organization_id
+    required this.actor_id,
+    required this.actor_actorrole_id,
+    required this.actor_fullname,
+    required this.actor_username,
+    required this.actor_password,
+    required this.actor_loginrightstatus_id,
+    required this.actor_person_id,
+    required this.actor_organization_id
 }
   );
 
@@ -28,23 +28,23 @@ class Actor {
 
   @HiveField(0)
   @override
-  String documenttypeId=Document.actorDocumenttypeId;
+  String? documenttypeId=Document.actorDocumenttypeId;
 
   @HiveField(1)
-  final String actor_id;
+  final String? actor_id;
   @HiveField(2)
-  final String actor_actorrole_id;
+  final String? actor_actorrole_id;
   @HiveField(3)
-  final String actor_fullname;
+  final String? actor_fullname;
   @HiveField(4)
-  final String actor_username;
+  final String? actor_username;
   @HiveField(5)
-  final String actor_password;
+  final String? actor_password;
   @HiveField(6)
-  final String actor_loginrightstatus_id;
+  final String? actor_loginrightstatus_id;
   @HiveField(7)
-  final String actor_person_id;
+  final String? actor_person_id;
   @HiveField(8)
-  final String actor_organization_id;
+  final String? actor_organization_id;
 
 }

@@ -9,7 +9,8 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/docstream.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/document.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/documentsearchparambyfields.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/downsyncdocstreamrequest.dart';
-import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/filedocumentlink.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/filedocument/filedocument.dart';
+//import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/filedocumentlink.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/upsyncdocstreamresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/upsynctoken.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/cryptoutil/cryptoutil.dart';
@@ -17,7 +18,6 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/util/stringutil.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/userrespository.dart';
 import 'dart:io';
 import 'docstreamdao.dart';
-import 'package:flutter/cupertino.dart';
 import 'dart:io' as Io;
 import 'package:crypto/crypto.dart';
 import 'package:path/path.dart' as path;
@@ -25,7 +25,7 @@ import 'package:path/path.dart' as path;
 class DocumentDocStreamStore {
   static Future<List<DocStream >> getUnuploadedDocstream(
       {int offset: 0, int limit: 10000}) async {
-    List<DocStream> returnValue = List<DocStream>();
+    List<DocStream> returnValue = <DocStream>[];
     try {
 
 
@@ -71,9 +71,9 @@ class DocumentDocStreamStore {
   getDocumentSearchParamByFieldOfFileDocumentLink() {
     DocumentSearchParamByFields returnValue = DocumentSearchParamByFields(
         title: 'DocumentType Group',
-        requiredSearchFieldList: List<DocumentSearchField>(),
-        optionalSearchFieldList: List<DocumentSearchField>(),
-        documentOrderFieldList: List<DocumentOrderField>());
+        requiredSearchFieldList: <DocumentSearchField>[],
+        optionalSearchFieldList: <DocumentSearchField>[],
+        documentOrderFieldList: <DocumentOrderField>[]);
 
     DocumentSearchField documentSearchField = DocumentSearchField(
         isActive: true,
@@ -83,9 +83,9 @@ class DocumentDocStreamStore {
         queryValue: Document.fileDocumentLinkDocumenttypeId,
         equalityOperator: '=');
 
-    returnValue.requiredSearchFieldList.add(documentSearchField);
+    returnValue.requiredSearchFieldList!.add(documentSearchField);
 
-    WhereQuerySetParam whereQuerySetParam = returnValue.getQuerySetParam();
+    WhereQuerySetParam whereQuerySetParam = returnValue.getQuerySetParam()!;
 
     String debugWhereQuery = WhereQuerySetParam.toolsGetSqlWhereQuery(
         whereQuerySetParam.query, whereQuerySetParam.valueList);
@@ -98,24 +98,24 @@ class DocumentDocStreamStore {
 
   static Future<void> processDownsyncBinary(DocStream currentDocStream) async {
     try {
-      if (currentDocStream.document.documenttypeId ==
+      if (currentDocStream.document!.documenttypeId ==
           Document.fileDocumentLinkDocumenttypeId) {
-        if (currentDocStream.document.binaryUploadBase64 != null) {
+        if (currentDocStream.document!.binaryUploadBase64 != null) {
           Uint8List bytes =
-          base64Decode(currentDocStream.document.binaryUploadBase64);
+          base64Decode(currentDocStream.document!.binaryUploadBase64!);
 
           String clientBinaryMd5 = md5.convert(bytes).toString();
 
-          if (clientBinaryMd5 == currentDocStream.document.binaryUploadMd5) {
+          if (clientBinaryMd5 == currentDocStream.document!.binaryUploadMd5) {
             FileDocumentBinary fileDocumentBinary = FileDocumentBinary.fromJson(
-                json.decode(currentDocStream.document.json));
+                json.decode(currentDocStream.document!.json!));
 
             //String basename =  path.basename(fileDocumentBinary.sourceFileInfo.fileNameFullpath);
 
             //String dirname = path.dirname(fileDocumentBinary.sourceFileInfo.fileNameFullpath);
 
             Directory appSavingDir =
-            await UserRepository .getAppSavingDirectory();
+            await (UserRepository .getAppSavingDirectory() as FutureOr<Io.Directory>);
 
             //String binaryFilePathDir= path.join(appDocDir.path,"binaryfile");
 
@@ -124,7 +124,7 @@ class DocumentDocStreamStore {
                 appSavingDir.path);
 
             if (isDirexists == true) {
-              String currentFilename = currentDocStream.document.id;
+              String? currentFilename = currentDocStream.document!.id;
 
               String currentFilenameFullpath =
               path.join(appSavingDir.path, currentFilename);
@@ -140,8 +140,8 @@ class DocumentDocStreamStore {
           }
         }
       }
-      if (currentDocStream.document.binaryUploadBase64 != null) {
-        currentDocStream.document.binaryUploadBase64 = null;
+      if (currentDocStream.document!.binaryUploadBase64 != null) {
+        currentDocStream.document!.binaryUploadBase64 = null;
       }
     } catch (error) {
       print(
@@ -149,8 +149,8 @@ class DocumentDocStreamStore {
     }
   }
 
-  static Future<DocStream> getDocstreamById({@required String id}) async {
-    DocStream returnValue;
+  static Future<DocStream?> getDocstreamById({required String? id}) async {
+    DocStream? returnValue;
 
     try {
       String where = '  ${DocStream.id_CCFN}  = ? ';
@@ -169,8 +169,8 @@ class DocumentDocStreamStore {
   }
 
   static Future<List<DocStream>> getDocstreamsByRefId(
-      {@required String refId}) async {
-    List<DocStream> returnValue = List<DocStream>();
+      {required String refId}) async {
+    List<DocStream> returnValue = <DocStream>[];
     try {
       DocumentSearchField documentSearchFieldRefId = DocumentSearchField(
           isActive: true,
@@ -209,13 +209,13 @@ class DocumentDocStreamStore {
         searchGeneralKeyword: null,
       );
 
-      documentSearchParamByField.requiredSearchFieldList
+      documentSearchParamByField.requiredSearchFieldList!
           .add(documentSearchFieldRefId);
-      documentSearchParamByField.requiredSearchFieldList
+      documentSearchParamByField.requiredSearchFieldList!
           .add(documentSearchFieldStreamstatusId);
-      documentSearchParamByField.requiredSearchFieldList
+      documentSearchParamByField.requiredSearchFieldList!
           .add(documentSearchFieldDocumentstatusId);
-      documentSearchParamByField.documentOrderFieldList
+      documentSearchParamByField.documentOrderFieldList!
           .add(documentOrderField1);
 
       returnValue =
@@ -229,11 +229,11 @@ class DocumentDocStreamStore {
     int returnValue = 0;
 
     try {
-      DocStream existingRecord = await getDocstreamById(id: docStream.id);
+      DocStream? existingRecord = await getDocstreamById(id: docStream.id);
 
-      DocStream existingRecordByDocumentId =
+      DocStream? existingRecordByDocumentId =
       await DocstreamDao.getDocstreamByDocumentId(
-          documentId: docStream.document.id);
+          documentId: docStream.document!.id);
 
       if (existingRecord != null) {
         if (existingRecord.jsonDocumentMd5 != docStream.jsonDocumentMd5 ||
@@ -264,11 +264,11 @@ class DocumentDocStreamStore {
     int returnValue = 0;
 
     try {
-      DocStream existingRecord = await getDocstreamById(id: docStream.id);
+      DocStream? existingRecord = await getDocstreamById(id: docStream.id);
 
-      DocStream existingRecordByDocumentId =
+      DocStream? existingRecordByDocumentId =
       await DocstreamDao.getDocstreamByDocumentId(
-          documentId: docStream.document.id);
+          documentId: docStream.document!.id);
 
       if (existingRecordByDocumentId == null) {
         if (existingRecord != null) {
@@ -318,8 +318,8 @@ class DocumentDocStreamStore {
   }
 
   static Future<List<DocStream>> getResponseQuotionerByUserloginId(
-      {@required String userloginId}) async {
-    List<DocStream> returnValue = List<DocStream>();
+      {required String userloginId}) async {
+    List<DocStream> returnValue = <DocStream>[];
     try {
       returnValue = await DocstreamDao.queryRecord(
           where: Document.ownerUserloginId_CCFN +
@@ -335,14 +335,16 @@ class DocumentDocStreamStore {
   static Future<int> syncDocument(Document document) async {
     int returnValue = 0;
     try {
-      LoginResponse loginResponse =
-      await UserRepository.getLoginResponseFromDevice();
+      LoginResponse? loginResponse =
+      await UserRepository.getLoginResponseFromDevice() ;
 
-      document.creatorLoginsessionId = loginResponse.loginsessionId;
+
+
+      document.creatorLoginsessionId = loginResponse!.loginsessionId;
 
       String created = Document.DateTimeNowUtcMySQLFormat();
 
-      DocStream docStream =
+      DocStream? docStream =
       await DocstreamDao.getDocstreamByDocumentId(documentId: document.id);
 
       if (docStream != null) {
@@ -371,18 +373,18 @@ class DocumentDocStreamStore {
     return returnValue;
   }
 
-  static Future<int> deleteDocumentById({@required String documentId}) async {
+  static Future<int> deleteDocumentById({required String documentId}) async {
     //deleting means set documentstatusId=0
     int returnValue = 0;
     try {
       //set document status id to 0
 
-      DocStream docStream =
+      DocStream? docStream =
       await DocstreamDao.getDocstreamByDocumentId(documentId: documentId);
 
       if (docStream != null) {
         await DocstreamDao.disableStream(docStream.id);
-        docStream.document.documentstatusId = '0';
+        docStream.document!.documentstatusId = '0';
         returnValue = await DocstreamDao.createNewDocStream(docStream);
       }
     } catch (error) {
@@ -394,26 +396,26 @@ class DocumentDocStreamStore {
     return returnValue;
   }
 
-  static Future<List<Document>> getDocumentsByRefId(
-      {@required String refId}) async {
-    List<Document> returnValue = List<Document>();
+  static Future<List<Document?>> getDocumentsByRefId(
+      {required String refId}) async {
+    List<Document> returnValue = <Document>[];
     try {
       List<DocStream> documentDocStreamList =
       await DocumentDocStreamStore.getDocstreamsByRefId(refId: refId);
 
       for (int la = 0; la < documentDocStreamList.length; la++) {
-        returnValue.add(documentDocStreamList.elementAt(la).document);
+        returnValue.add(documentDocStreamList.elementAt(la).document!);
       }
     } catch (error) {}
 
     return returnValue;
   }
 
-  static Future<Document> getDocumentById({@required String documentId}) async {
-    Document returnValue;
+  static Future<Document?> getDocumentById({required String documentId}) async {
+    Document? returnValue;
     try {
       DocStream documentDocStream =
-      await DocstreamDao.getDocstreamByDocumentId(documentId: documentId);
+      await (DocstreamDao.getDocstreamByDocumentId(documentId: documentId) as FutureOr<DocStream>);
 
       //returnValue = Document.fromDocStream(documentDocStream);
       returnValue = documentDocStream.document;
@@ -423,9 +425,9 @@ class DocumentDocStreamStore {
   }
 
   static List<Document> getDocumentsFromDocstreams(List<DocStream> docstream) {
-    List<Document> returnValue = List<Document>();
+    List<Document> returnValue = <Document>[];
     for (int la = 0; la < docstream.length; la++) {
-      Document currentDocument = docstream.elementAt(la).document;
+      Document? currentDocument = docstream.elementAt(la).document;
 
       if (currentDocument != null) {
         returnValue.add(currentDocument);
@@ -437,10 +439,10 @@ class DocumentDocStreamStore {
 
 
   static Future<List<DocStream>> getDocStreamsForMd5SumBySearchParamByField(
-      DocumentSearchParamByFields documentSearchParamByField,{List<String> columns}) async {
-    List<DocStream> returnValue = List<DocStream>();
+      DocumentSearchParamByFields documentSearchParamByField,{List<String>? columns}) async {
+    List<DocStream> returnValue = <DocStream>[];
 
-    WhereQuerySetParam querySetParam =
+    WhereQuerySetParam? querySetParam =
     documentSearchParamByField.getQuerySetParam();
 
     if (querySetParam != null) {
@@ -465,9 +467,9 @@ class DocumentDocStreamStore {
     return returnValue;
   }
 
-  static Future<String> getDocumentMd5SumBySearchParamByField(
+  static Future<String?> getDocumentMd5SumBySearchParamByField(
       DocumentSearchParamByFields documentSearchParamByField) async {
-    String returnValue;
+    String? returnValue;
 
 
 
@@ -476,7 +478,7 @@ class DocumentDocStreamStore {
         documentSearchParamByField,columns: <String> [DocStream.id_CCFN,DocStream.jsonDocumentMd5_CCFN,Document.id_CCFN,Document.ownerUserloginId_CCFN,Document.creatorLoginsessionId_CCFN]);
 
     if (docStreamList.length > 0) {
-      String jsondocumentMd5Sum;
+      String? jsondocumentMd5Sum;
       if (docStreamList.length > 0) {
         for (int la = 0; la < docStreamList.length; la++) {
           DocStream currentDocstream = docStreamList.elementAt(la);
@@ -485,10 +487,10 @@ class DocumentDocStreamStore {
             jsondocumentMd5Sum = currentDocstream.jsonDocumentMd5;
           } else {
             jsondocumentMd5Sum =
-                jsondocumentMd5Sum + ',' + currentDocstream.jsonDocumentMd5;
+                jsondocumentMd5Sum + ',' + currentDocstream.jsonDocumentMd5!;
           }
         }
-        returnValue = CryptoUtil.getMd5(jsondocumentMd5Sum);
+        returnValue = CryptoUtil.getMd5(jsondocumentMd5Sum!);
       }
     } else {
       //zero result
@@ -501,7 +503,7 @@ class DocumentDocStreamStore {
 
   static Future<List<Document>> getDocumentsBySearchParamByField(
       DocumentSearchParamByFields documentSearchParamByField, {
-        List<String> columns,
+        List<String>? columns,
         int offset: 0,
         int limit: 100,
       }) async {
@@ -520,20 +522,20 @@ class DocumentDocStreamStore {
 
   static Future<List<DocStream>> getDocStreamBySearchParamByField(
       DocumentSearchParamByFields documentSearchParamByField, {
-        List<String> columns,
+        List<String>? columns,
         int offset: 0,
         int limit: 100,
       }) async {
-    List<DocStream> returnValue = List<DocStream>();
+    List<DocStream> returnValue = <DocStream>[];
     try {
-      WhereQuerySetParam querySetParam =
+      WhereQuerySetParam? querySetParam =
       documentSearchParamByField.getQuerySetParam();
 
       if (querySetParam != null) {
         String where = querySetParam.query;
         List<dynamic> whereArgs = querySetParam.valueList;
 
-        String orderByParam = documentSearchParamByField.getOrderParam();
+        String? orderByParam = documentSearchParamByField.getOrderParam();
 
         String testWhereQuery =
         WhereQuerySetParam.toolsGetSqlWhereQuery(where, whereArgs);
@@ -561,11 +563,11 @@ class DocumentDocStreamStore {
   }
 
   static Future<void> tokenizingDocstreams(
-      String loginsessionId, List<DocStream> docstreamList) async {
+      String? loginsessionId, List<DocStream> docstreamList) async {
     try {
       int requestTokenCount = 0;
 
-      List<DocStream> untokenizedList = List<DocStream>();
+      List<DocStream> untokenizedList = <DocStream>[];
 
       for (int lc = 0; lc < docstreamList.length; lc++) {
         DocStream currentDocStream = docstreamList.elementAt(lc);
@@ -585,9 +587,9 @@ class DocumentDocStreamStore {
         for (int la = 0; la < tokenList.length; la++) {
           UpsyncToken currentUpsyncToken = tokenList.elementAt(la);
 
-          DocStream currentDocstream =
-          await DocumentDocStreamStore.getDocstreamById(
-              id: currentUpsyncToken.docstreamId);
+          DocStream? currentDocstream =
+          await (DocumentDocStreamStore.getDocstreamById(
+              id: currentUpsyncToken.docstreamId) as FutureOr<DocStream>);
 
           currentDocstream.upsynctoken = currentUpsyncToken.token;
 
@@ -605,7 +607,7 @@ class DocumentDocStreamStore {
 
   static List<UpsyncToken> createUpsyncTokenFromDocStreams(
       String loginsessionId, List<DocStream> docStreamList) {
-    List<UpsyncToken> returnValue = List<UpsyncToken>();
+    List<UpsyncToken> returnValue = <UpsyncToken>[];
     try {
       for (int la = 0; la < docStreamList.length; la++) {
         DocStream currentElement = docStreamList.elementAt(la);
@@ -646,8 +648,8 @@ class DocumentDocStreamStore {
   }
 
   static List<Document> createUpsyncTokenDocumentFromDocstreams(
-      String loginsessionId, List<DocStream> docStreamList) {
-    List<Document> returnValue = List<Document>();
+      String? loginsessionId, List<DocStream> docStreamList) {
+    List<Document> returnValue = <Document>[];
     try {
       for (int la = 0; la < docStreamList.length; la++) {
         DocStream currentElement = docStreamList.elementAt(la);
@@ -680,14 +682,14 @@ class DocumentDocStreamStore {
   }
 
   static Future<List<UpsyncToken>> requestUpsyncToken(
-      String loginsessionId, List<DocStream> docStreamList) async {
-    List<UpsyncToken> returnValue = List<UpsyncToken>();
+      String? loginsessionId, List<DocStream> docStreamList) async {
+    List<UpsyncToken> returnValue = <UpsyncToken>[];
     try {
       List<Document> upsyncTokenRequestList =
       DocumentDocStreamStore.createUpsyncTokenDocumentFromDocstreams(
           loginsessionId, docStreamList);
 
-      ApiProc7Request request = ApiProc7Request(
+      ApiProc7Request? request = ApiProc7Request(
           loginsessionId: loginsessionId,
           sessionRequestId: Uuid().v4(),
           frameworkId: AppStaticParam.getFrameworkId(),
@@ -698,7 +700,7 @@ class DocumentDocStreamStore {
                 requestName: "RequestUpsyncToken",
                 sessionSubRequestId: Uuid().v4(),
                 documents: upsyncTokenRequestList,
-                docstreams: List<DocStream>())
+                docstreams: <DocStream>[])
           ]);
 
       dynamic bodyRequest = request.toJson();
@@ -716,7 +718,7 @@ class DocumentDocStreamStore {
 
       final response = await http.Client()
           .post(
-        Uri.http(AppStaticParam.syncUrl, ""),
+        Uri.parse(AppStaticParam.syncUrl),
         headers: headers,
         body: compressedBody,
       )
@@ -741,19 +743,19 @@ class DocumentDocStreamStore {
 
         if (apiProc7RequestResponse.success == true) {
           for (int la = 0;
-          la < apiProc7RequestResponse.subRequestResponses.length;
+          la < apiProc7RequestResponse.subRequestResponses!.length;
           la++) {
             ApiProc7SubRequestResponse currentSubRequestResponse =
-            apiProc7RequestResponse.subRequestResponses.elementAt(la);
+            apiProc7RequestResponse.subRequestResponses!.elementAt(la);
 
             for (int lb = 0;
-            lb < currentSubRequestResponse.documents.length;
+            lb < currentSubRequestResponse.documents!.length;
             lb++) {
               Document currentDocument =
-              currentSubRequestResponse.documents.elementAt(lb);
+              currentSubRequestResponse.documents!.elementAt(lb);
 
               UpsyncToken currentUpsyncToken =
-              UpsyncToken.fromJson(json.decode(currentDocument.json));
+              UpsyncToken.fromJson(json.decode(currentDocument.json!));
 
               returnValue.add(currentUpsyncToken);
             }
@@ -785,9 +787,9 @@ class DocumentDocStreamStore {
       }
 
       final LoginResponse loginResponse =
-      await UserRepository.getLoginResponseFromDevice();
+      await (UserRepository.getLoginResponseFromDevice() as FutureOr<LoginResponse>);
 
-      final String loginsessionId = loginResponse.loginsessionId;
+      final String? loginsessionId = loginResponse.loginsessionId;
 
       await DocumentDocStreamStore.tokenizingDocstreams(
           loginsessionId, willtokenizedDocstreamList);
@@ -797,7 +799,7 @@ class DocumentDocStreamStore {
       List<DocStream> aftertokenizedDocstreamList =
       await getUnuploadedDocstream();
 
-      List<DocStream> docstreamList = List<DocStream>();
+      List<DocStream> docstreamList = <DocStream>[];
 
       for (int la = 0; la < aftertokenizedDocstreamList.length; la++) {
         DocStream currentElement = aftertokenizedDocstreamList.elementAt(la);
@@ -817,16 +819,17 @@ class DocumentDocStreamStore {
       for (int ld = 0; ld < docstreamList.length; ld++) {
         DocStream currentDocStream = docstreamList.elementAt(ld);
 
-        if (currentDocStream.document.documenttypeId == 'file_document_link') {
+        if (currentDocStream.document!.documenttypeId == 'file_document_link') {
           FileDocumentBinary fileDocumentBinary = FileDocumentBinary.fromJson(
-              json.decode(currentDocStream.document.json));
+              json.decode(currentDocStream.document!.json!));
           try {
-            final bytes = await Io.File(
-                fileDocumentBinary.sourceFileInfo.fileNameFullpath)
+            String fileNameFullPath=fileDocumentBinary.sourceFileInfo!.fileNameFullpath!;
+            final bytes = await Io.File(fileNameFullPath
+                )
                 .readAsBytes();
 
-            currentDocStream.document.binaryUploadBase64 = base64.encode(bytes);
-            currentDocStream.document.binaryUploadMd5 =
+            currentDocStream.document!.binaryUploadBase64 = base64.encode(bytes);
+            currentDocStream.document!.binaryUploadMd5 =
                 md5.convert(bytes).toString();
           } catch (error) {
             print(
@@ -836,7 +839,7 @@ class DocumentDocStreamStore {
       }
 
       if (docstreamList.length > 0) {
-        ApiProc7Request request = ApiProc7Request(
+        ApiProc7Request? request = ApiProc7Request(
             loginsessionId: loginsessionId,
             sessionRequestId: Uuid().v4(),
             frameworkId: AppStaticParam.getFrameworkId(),
@@ -846,7 +849,7 @@ class DocumentDocStreamStore {
               ApiProc7SubRequest(
                   requestName: "SyncRecord",
                   sessionSubRequestId: Uuid().v4(),
-                  documents: List<Document>(),
+                  documents: <Document>[],
                   docstreams: docstreamList)
             ]);
 
@@ -861,9 +864,11 @@ class DocumentDocStreamStore {
           'Charset': 'utf-8'
         };
 
+
+
         final response = await http.Client()
-            .post(Uri.http(AppStaticParam.syncUrl, "") ,
-            headers: headers, body: compressedBody)
+            .post(Uri.parse(AppStaticParam.syncUrl),
+            headers : headers, body: compressedBody)
             .timeout(const Duration(seconds: 300));
 
 
@@ -888,14 +893,14 @@ class DocumentDocStreamStore {
             //returnValue = apiProc7RequestResponse.subRequestResponses.length;
 
             for (int la = 0;
-            la < apiProc7RequestResponse.subRequestResponses.length;
+            la < apiProc7RequestResponse.subRequestResponses!.length;
             la++) {
               ApiProc7SubRequestResponse currentElement =
-              apiProc7RequestResponse.subRequestResponses.elementAt(la);
+              apiProc7RequestResponse.subRequestResponses!.elementAt(la);
 
-              for (int lb = 0; lb < currentElement.docstreams.length; lb++) {
+              for (int lb = 0; lb < currentElement.docstreams!.length; lb++) {
                 DocStream currentDocstream =
-                currentElement.docstreams.elementAt(lb);
+                currentElement.docstreams!.elementAt(lb);
                 int lresult =
                 await DocumentDocStreamStore.downsyncDocumentInDoctsream(
                     currentDocstream);
@@ -920,18 +925,18 @@ class DocumentDocStreamStore {
     bool returnValue = false;
 
     List<DocumentSearchField> savedOptionalSearchFieldList =
-    List<DocumentSearchField>();
+    <DocumentSearchField>[];
 
     savedOptionalSearchFieldList
-        .addAll(documentSearchParamByField.optionalSearchFieldList);
+        .addAll(documentSearchParamByField.optionalSearchFieldList!);
 
     try {
-      documentSearchParamByField.optionalSearchFieldList.clear();
+      documentSearchParamByField.optionalSearchFieldList!.clear();
 
-      if (documentSearchParamByField.getQuerySetParam().query != null) {
+      if (documentSearchParamByField.getQuerySetParam()!.query != null) {
         String whereSql = WhereQuerySetParam.toolsGetSqlWhereQuery(
-            documentSearchParamByField.getQuerySetParam().query,
-            documentSearchParamByField.getQuerySetParam().valueList);
+            documentSearchParamByField.getQuerySetParam()!.query,
+            documentSearchParamByField.getQuerySetParam()!.valueList);
 
         /*
         List<DocStream> localDocstreams = await DocumentDocStreamStore
@@ -940,14 +945,14 @@ class DocumentDocStreamStore {
 
          */
 
-        List<DocStream> localDocstreams = await DocumentDocStreamStore.getDocStreamsForMd5SumBySearchParamByField(documentSearchParamByField,columns: <String> [DocStream.id_CCFN,DocStream.jsonDocumentMd5_CCFN,Document.id_CCFN,Document.ownerUserloginId_CCFN,Document.creatorLoginsessionId_CCFN]);
+        List<DocStream>? localDocstreams = await DocumentDocStreamStore.getDocStreamsForMd5SumBySearchParamByField(documentSearchParamByField,columns: <String> [DocStream.id_CCFN,DocStream.jsonDocumentMd5_CCFN,Document.id_CCFN,Document.ownerUserloginId_CCFN,Document.creatorLoginsessionId_CCFN]);
 
 
-        final String localDocstreamMd5 =
+        final String? localDocstreamMd5 =
         await DocumentDocStreamStore.getDocumentMd5SumBySearchParamByField(
             documentSearchParamByField);
 
-        List<UpsyncToken> localUpsynctoken = List<UpsyncToken>();
+        List<UpsyncToken> localUpsynctoken = <UpsyncToken>[];
 
         for (int la = 0; la < localDocstreams.length; la++) {
           DocStream currentDocstream = localDocstreams.elementAt(la);
@@ -967,20 +972,20 @@ class DocumentDocStreamStore {
             localDocStreams: localUpsynctoken);
 
         final LoginResponse loginResponse =
-        await UserRepository.getLoginResponseFromDevice();
+        await (UserRepository.getLoginResponseFromDevice() as FutureOr<LoginResponse>);
 
-        final String loginsessionId = loginResponse.loginsessionId;
+        final String? loginsessionId = loginResponse.loginsessionId;
 
         Document documentDownsyncDocStreamRequest =
         DocumentDocStreamStore.createMemoryDocumentsByEncodedJson(
             json.encode(downsyncDocStreamRequest.toJson()),
             Document.documenttypeIdDownsyncDocstreamRequest);
 
-        List<Document> documentsSubRequest = List<Document>();
+        List<Document> documentsSubRequest = <Document>[];
 
         documentsSubRequest.add(documentDownsyncDocStreamRequest);
 
-        ApiProc7Request request = ApiProc7Request(
+        ApiProc7Request? request = ApiProc7Request(
             loginsessionId: loginsessionId,
             sessionRequestId: Uuid().v4(),
             frameworkId: AppStaticParam.getFrameworkId(),
@@ -991,7 +996,7 @@ class DocumentDocStreamStore {
                   requestName: "SyncRecord",
                   sessionSubRequestId: Uuid().v4(),
                   documents: documentsSubRequest,
-                  docstreams: List<DocStream>())
+                  docstreams: <DocStream>[])
             ]);
 
         dynamic bodyRequest = request.toJson();
@@ -1007,7 +1012,7 @@ class DocumentDocStreamStore {
         };
 
         final response = await http.Client()
-            .post( Uri.http(AppStaticParam.syncUrl,"")  ,
+            .post( Uri.parse(AppStaticParam.syncUrl)  ,
             headers: headers, body: compressedBody)
             .timeout(const Duration(seconds: 500));
 
@@ -1030,15 +1035,15 @@ class DocumentDocStreamStore {
 
           if (apiProc7RequestResponse.success == true) {
             for (int la = 0;
-            la < apiProc7RequestResponse.subRequestResponses.length;
+            la < apiProc7RequestResponse.subRequestResponses!.length;
             la++) {
               ApiProc7SubRequestResponse currentApiProc7SubRequestResponse =
-              apiProc7RequestResponse.subRequestResponses.elementAt(la);
+              apiProc7RequestResponse.subRequestResponses!.elementAt(la);
               for (int lb = 0;
-              lb < currentApiProc7SubRequestResponse.docstreams.length;
+              lb < currentApiProc7SubRequestResponse.docstreams!.length;
               lb++) {
                 DocStream currentDocStream =
-                currentApiProc7SubRequestResponse.docstreams.elementAt(lb);
+                currentApiProc7SubRequestResponse.docstreams!.elementAt(lb);
 
                 await DocumentDocStreamStore.processDownsyncBinary(
                     currentDocStream);
@@ -1058,7 +1063,7 @@ class DocumentDocStreamStore {
 
     } catch (error) {}
 
-    documentSearchParamByField.optionalSearchFieldList
+    documentSearchParamByField.optionalSearchFieldList!
         .addAll(savedOptionalSearchFieldList);
 
     return returnValue;

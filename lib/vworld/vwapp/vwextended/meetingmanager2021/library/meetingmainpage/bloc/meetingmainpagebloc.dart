@@ -24,6 +24,7 @@ class MeetingmainpageBloc
   final Actor currentActor;
   LoginResponse loginResponse;
 
+  /*
   @override
   Stream<Transition<MeetingmainpageEvent, MeetingmainpageState>>
       transformEvents(
@@ -34,7 +35,7 @@ class MeetingmainpageBloc
       events.debounceTime(const Duration(milliseconds: 500)),
       transitionFn,
     );
-  }
+  }*/
 
   @override
   Stream<MeetingmainpageState> mapEventToState(
@@ -76,12 +77,12 @@ class MeetingmainpageBloc
       }
     else if(event is SyncAfRecordOnMeetingmainpageEvent)
       {
-        String encodedJson = json.encode(event.afForm.getRecord().toJson());
+        String encodedJson = json.encode(event.afForm.getRecord()!.toJson());
 
         Document afDocument = Document(
           id: event.afForm.afRecordId,
           refId: event.afForm.afFormId,
-          refIdMd5: CryptoUtil.getMd5(event.afForm.afFormId),
+          refIdMd5: CryptoUtil.getMd5(event.afForm.afFormId!),
           created: DateTime.now().toString(),
           documentstatusId: "1",
           documenttypeId: event.afForm.afFormId,
@@ -101,12 +102,12 @@ class MeetingmainpageBloc
 
       }
     else if (event is SavemeetingeventpageOnMeetingmainpageEvent) {
-      String encodedJson = json.encode(event.meetingAfForm.toJson());
+      String encodedJson = json.encode(event.meetingAfForm!.toJson());
 
       Document newMeetingDocument = Document(
-        id: event.meetingAfForm.afRecordId,
-        refId: event.meetingAfForm.afFormId,
-        refIdMd5: CryptoUtil.getMd5(event.meetingAfForm.afFormId),
+        id: event.meetingAfForm!.afRecordId,
+        refId: event.meetingAfForm!.afFormId,
+        refIdMd5: CryptoUtil.getMd5(event.meetingAfForm!.afFormId!),
         created: DateTime.now().toString(),
         documentstatusId: "1",
         documenttypeId: Document.meetingDocumenttypeId,
@@ -126,7 +127,7 @@ class MeetingmainpageBloc
     } else if (event is OpeneventpageOnMeetingmainpageEvent) {
       final String title = 'Jadwal Kegiatan';
 
-      List<Meeting> meetingList = <Meeting>[];
+      List<Meeting?> meetingList = <Meeting?>[];
 
       List<Actor> comitte = <Actor>[];
 
@@ -143,11 +144,13 @@ class MeetingmainpageBloc
         Document currentDocument = meetingDocuments.elementAt(la);
 
         AfForm currentAfForm =
-            AfForm.fromJson(json.decode(currentDocument.json));
+            AfForm.fromJson(json.decode(currentDocument.json!));
 
-        Meeting currentMeeting = MeetingStore.convertFromAfForm(currentAfForm);
+        Meeting? currentMeeting = MeetingStore.convertFromAfForm(currentAfForm);
 
-        meetingList.add(currentMeeting);
+        if(!(currentMeeting==null)) {
+          meetingList.add(currentMeeting);
+        }
 
         afFormGridParam.records.add(currentAfForm.getRecord());
       }

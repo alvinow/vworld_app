@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 
 class FileDocumentStorageInfo {
   FileDocumentStorageInfo(
-      {@required this.fileNameFullpath,
-      @required this.md5sum,
-      @required this.size});
+      {this.fileNameFullpath,
+      this.md5sum,
+      this.size});
 
-  final String fileNameFullpath;
-  final String md5sum;
-  final int size;
+  final String? fileNameFullpath;
+  final String? md5sum;
+  final int? size;
 
   static final String fileNameFullpath_CCFN = "fileNameFullPath";
   static final String md5sum_CCFN = "md5sum";

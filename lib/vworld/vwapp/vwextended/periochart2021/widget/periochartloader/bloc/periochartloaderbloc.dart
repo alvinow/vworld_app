@@ -14,6 +14,7 @@ class PeriochartLoaderBloc
   PeriochartLoaderBloc() : super(PeriochartLoaderStateUninitialized());
 
 
+  /*
   @override
   Stream<Transition<PeriochartLoaderEvent, PeriochartLoaderState>>
       transformEvents(
@@ -24,7 +25,7 @@ class PeriochartLoaderBloc
       events.debounceTime(const Duration(milliseconds: 300)),
       transitionFn,
     );
-  }
+  }*/
 
   @override
   Stream<PeriochartLoaderState> mapEventToState(
@@ -38,7 +39,7 @@ class PeriochartLoaderBloc
 
       var box = await Hive.openBox('PcProperties');
 
-      PcProperties loadedPcProperties =
+      PcProperties? loadedPcProperties =
           await box.get(event.loaderPcPropertiesId);
 
       if (loadedPcProperties == null) {

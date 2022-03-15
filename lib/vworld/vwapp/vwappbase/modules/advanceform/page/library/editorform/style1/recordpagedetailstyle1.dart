@@ -5,14 +5,14 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/libra
 
 class RecordPageDetailStyle1 extends StatelessWidget {
   RecordPageDetailStyle1(
-      {@required this.afFormPage,
+      {required this.afFormPage,
       this.onSaveValidRecordEditorForm,
       this.onSaveInvalidRecordEditorForm});
 
   AfFormPage afFormPage;
 
-  OnSaveValidRecordEditorForm onSaveValidRecordEditorForm;
-  OnSaveInvalidRecordEditorForm onSaveInvalidRecordEditorForm;
+  OnSaveValidRecordEditorForm? onSaveValidRecordEditorForm;
+  OnSaveInvalidRecordEditorForm? onSaveInvalidRecordEditorForm;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,14 @@ class RecordPageDetailStyle1 extends StatelessWidget {
         color: Colors.white,
       ),
       onPressed: () {
-        if (afFormPage.getCurrentState().isRecordValid()) {
+        if (afFormPage.getCurrentState()!.isRecordValid()) {
           if (this.onSaveValidRecordEditorForm != null) {
-            this.onSaveValidRecordEditorForm(
+            this.onSaveValidRecordEditorForm!(
                 this.afFormPage.getCurrentState(), context);
           }
         } else {
           if (this.onSaveInvalidRecordEditorForm != null) {
-            this.onSaveInvalidRecordEditorForm(
+            this.onSaveInvalidRecordEditorForm!(
                 this.afFormPage.getCurrentState(), context);
           }
         }
@@ -42,7 +42,7 @@ class RecordPageDetailStyle1 extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(this.afFormPage.title),
+          title: Text(this.afFormPage.title!),
           actions: [saveButton],
         ),
         body: afFormPage);

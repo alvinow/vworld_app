@@ -17,16 +17,16 @@ class PcPatientAdapter extends TypeAdapter<PcPatient> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PcPatient(
-      id: fields[0] as String,
-      fullName: fields[1] as String,
-      gender: fields[2] as String,
-      birthOfDate: fields[3] as DateTime,
-      allergy: fields[4] as String,
-      medicalHistory: fields[5] as String,
-      address: fields[6] as String,
-      city: fields[7] as String,
-      phone: fields[8] as String,
-      occupation: fields[9] as String,
+      id: fields[0] as String?,
+      fullName: fields[1] as String?,
+      gender: fields[2] as String?,
+      birthOfDate: fields[3] as DateTime?,
+      allergy: fields[4] as String?,
+      medicalHistory: fields[5] as String?,
+      address: fields[6] as String?,
+      city: fields[7] as String?,
+      phone: fields[8] as String?,
+      occupation: fields[9] as String?,
     );
   }
 
@@ -73,18 +73,18 @@ class PcPatientAdapter extends TypeAdapter<PcPatient> {
 
 PcPatient _$PcPatientFromJson(Map<String, dynamic> json) {
   return PcPatient(
-    id: json['id'] as String,
-    fullName: json['fullName'] as String,
-    gender: json['gender'] as String,
+    id: json['id'] as String?,
+    fullName: json['fullName'] as String?,
+    gender: json['gender'] as String?,
     birthOfDate: json['birthOfDate'] == null
         ? null
         : DateTime.parse(json['birthOfDate'] as String),
-    allergy: json['allergy'] as String,
-    medicalHistory: json['medicalHistory'] as String,
-    address: json['address'] as String,
-    city: json['city'] as String,
-    phone: json['phone'] as String,
-    occupation: json['occupation'] as String,
+    allergy: json['allergy'] as String?,
+    medicalHistory: json['medicalHistory'] as String?,
+    address: json['address'] as String?,
+    city: json['city'] as String?,
+    phone: json['phone'] as String?,
+    occupation: json['occupation'] as String?,
   );
 }
 

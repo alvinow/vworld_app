@@ -11,21 +11,21 @@ part 'affieldvaluerecord.g.dart';
 @JsonSerializable()
 class AfFieldValueRecord {
   AfFieldValueRecord(
-      {@required this.afFormId,
-      @required this.afRecordId,
-      @required this.fields});
+      {required this.afFormId,
+      required this.afRecordId,
+      required this.fields});
 
   @HiveField(0)
-  final String afFormId;
+  final String? afFormId;
 
   @HiveField(1)
-  final String afRecordId;
+  final String? afRecordId;
 
   @HiveField(2)
   final List<AfFieldValue> fields;
 
-  AfFieldValue getAfFieldValue(String fieldName) {
-    AfFieldValue returnValue;
+  AfFieldValue? getAfFieldValue(String fieldName) {
+    AfFieldValue? returnValue;
 
     try {
       for (int la = 0; la < this.fields.length; la++) {
@@ -43,7 +43,7 @@ class AfFieldValueRecord {
 
   factory AfFieldValueRecord.fromDocument(Document document)
   {
-      return AfFieldValueRecord.fromJson( json.decode(document.json));
+      return AfFieldValueRecord.fromJson( json.decode(document.json!));
 
   }
 

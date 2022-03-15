@@ -17,17 +17,17 @@ class AfValuePropAdapter extends TypeAdapter<AfValueProp> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AfValueProp(
-      uifieldType: fields[0] as String,
-      stringMaxLines: fields[1] as int,
-      stringMaxLength: fields[2] as int,
-      intMaxValue: fields[3] as int,
-      intMinValue: fields[4] as int,
-      doubleDigitPrecision: fields[5] as int,
-      doubleDigitMaxLength: fields[6] as int,
-      isMandatory: fields[7] as bool,
-      isGuiReadOnly: fields[8] as bool,
-      isObscureText: fields[9] as bool,
-      isNotNull: fields[10] as bool,
+      uifieldType: fields[0] as String?,
+      stringMaxLines: fields[1] as int?,
+      stringMaxLength: fields[2] as int?,
+      intMaxValue: fields[3] as int?,
+      intMinValue: fields[4] as int?,
+      doubleDigitPrecision: fields[5] as int?,
+      doubleDigitMaxLength: fields[6] as int?,
+      isMandatory: fields[7] as bool?,
+      isGuiReadOnly: fields[8] as bool?,
+      isObscureText: fields[9] as bool?,
+      isNotNull: fields[10] as bool?,
     );
   }
 
@@ -76,17 +76,17 @@ class AfValuePropAdapter extends TypeAdapter<AfValueProp> {
 
 AfValueProp _$AfValuePropFromJson(Map<String, dynamic> json) {
   return AfValueProp(
-    uifieldType: json['uifieldType'] as String,
-    stringMaxLines: json['stringMaxLines'] as int,
-    stringMaxLength: json['stringMaxLength'] as int,
-    intMaxValue: json['intMaxValue'] as int,
-    intMinValue: json['intMinValue'] as int,
-    doubleDigitPrecision: json['doubleDigitPrecision'] as int,
-    doubleDigitMaxLength: json['doubleDigitMaxLength'] as int,
-    isMandatory: json['isMandatory'] as bool,
-    isGuiReadOnly: json['isGuiReadOnly'] as bool,
-    isObscureText: json['isObscureText'] as bool,
-    isNotNull: json['isNotNull'] as bool,
+    uifieldType: json['uifieldType'] as String?,
+    stringMaxLines: json['stringMaxLines'] as int?,
+    stringMaxLength: json['stringMaxLength'] as int?,
+    intMaxValue: json['intMaxValue'] as int?,
+    intMinValue: json['intMinValue'] as int?,
+    doubleDigitPrecision: json['doubleDigitPrecision'] as int?,
+    doubleDigitMaxLength: json['doubleDigitMaxLength'] as int?,
+    isMandatory: json['isMandatory'] as bool?,
+    isGuiReadOnly: json['isGuiReadOnly'] as bool?,
+    isObscureText: json['isObscureText'] as bool?,
+    isNotNull: json['isNotNull'] as bool?,
   );
 }
 

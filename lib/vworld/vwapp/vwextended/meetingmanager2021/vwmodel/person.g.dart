@@ -17,8 +17,8 @@ class PersonAdapter extends TypeAdapter<Person> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Person(
-      person_id: fields[0] as String,
-      person_fullname: fields[1] as String,
+      person_id: fields[0] as String?,
+      person_fullname: fields[1] as String?,
     );
   }
 
@@ -49,8 +49,8 @@ class PersonAdapter extends TypeAdapter<Person> {
 
 Person _$PersonFromJson(Map<String, dynamic> json) {
   return Person(
-    person_id: json['person_id'] as String,
-    person_fullname: json['person_fullname'] as String,
+    person_id: json['person_id'] as String?,
+    person_fullname: json['person_fullname'] as String?,
   );
 }
 

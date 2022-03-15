@@ -7,17 +7,23 @@ class AfFormDemo {
   static AfForm getAfFormById(String afFormId) {
     if (afFormId == 'meeting_af_form_id') {
       return AfFormDemo.getMeetingForm();
+    } else if (afFormId == 'form_panitia_meeting') {
+      return AfFormDemo.getPanitiaMeetingForm();
+    } else {
+      return AfFormDemo.invalidForm();
     }
-    else if(afFormId == 'form_panitia_meeting')
-      {return getPanitiaMeetingForm();
-      }
-
   }
 
-  static AfForm getPanitiaMeetingForm(){
-
+  static AfForm invalidForm() {
     AfForm returnValue =
-    AfForm(fieldFormList: <AfFieldForm>[], afFormId: 'form_panitia_meeting');
+        AfForm(fieldFormList: <AfFieldForm>[], afFormId: '<invalid_form>');
+
+    return returnValue;
+  }
+
+  static AfForm getPanitiaMeetingForm() {
+    AfForm returnValue = AfForm(
+        fieldFormList: <AfFieldForm>[], afFormId: 'form_panitia_meeting');
 
     AfFieldForm field0 = AfFieldForm(
         valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
@@ -31,7 +37,7 @@ class AfFormDemo {
             lastUpdaterActorId: null));
 
     AfFieldForm field1 = AfFieldForm(
-        valueProp: AfValueProp(isGuiReadOnly: true, isNotNull: true),
+        valueProp: AfValueProp(isGuiReadOnly: false, isNotNull: true),
         isHidden: false,
         fieldValue: AfFieldValue(
             fieldName: 'actor_id',
@@ -41,9 +47,20 @@ class AfFormDemo {
             updated: null,
             lastUpdaterActorId: null));
 
+    AfFieldForm field2 = AfFieldForm(
+        valueProp: AfValueProp(isGuiReadOnly: false, isNotNull: true),
+        isHidden: false,
+        fieldValue: AfFieldValue(
+            fieldName: 'panitiarole_id',
+            fieldCaption: 'Panitia Role ID',
+            valueAfDataType: 'String',
+            created: null,
+            updated: null,
+            lastUpdaterActorId: null));
+
     returnValue.fieldFormList.add(field0);
     returnValue.fieldFormList.add(field1);
-
+    returnValue.fieldFormList.add(field2);
 
     return returnValue;
   }
@@ -95,8 +112,13 @@ class AfFormDemo {
             valueAfDataType: 'ComboString',
             comboStringList: <AfFieldValue>[
               AfFieldValue(
-                  displayValue: 'Online Meeting', stringValue: 'onlinemeeting'),
-              AfFieldValue(displayValue: 'Kegiatan', stringValue: 'kegiatan')
+                  fieldName: 'meeting_meetingtype_id',
+                  displayValue: 'Online Meeting',
+                  stringValue: 'onlinemeeting'),
+              AfFieldValue(
+                  fieldName: 'meeting_meetingtype_id',
+                  displayValue: 'Kegiatan',
+                  stringValue: 'kegiatan')
             ],
             created: null,
             updated: null,
@@ -108,10 +130,12 @@ class AfFormDemo {
             fieldName: 'meeting_meetingstatus_id',
             fieldCaption: 'Meeting Status ID',
             comboStringList: <AfFieldValue>[
-              AfFieldValue(displayValue: 'draft', stringValue: '0'),
-              AfFieldValue(displayValue: 'waitingforapproval', stringValue: '1'),
-              AfFieldValue(displayValue: 'planned', stringValue: '2'),
-              AfFieldValue(displayValue: 'cancel', stringValue: '3'),
+              AfFieldValue(fieldName: 'meeting_meetingstatus_id',displayValue: 'draft', stringValue: '0'),
+              AfFieldValue(
+                  fieldName: 'meeting_meetingstatus_id',
+                  displayValue: 'waitingforapproval', stringValue: '1'),
+              AfFieldValue(fieldName: 'meeting_meetingstatus_id',displayValue: 'planned', stringValue: '2'),
+              AfFieldValue(fieldName: 'meeting_meetingstatus_id',displayValue: 'cancel', stringValue: '3'),
             ],
             valueAfDataType: 'ComboString',
             created: null,

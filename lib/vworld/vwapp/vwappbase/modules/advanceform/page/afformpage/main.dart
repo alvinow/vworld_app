@@ -5,30 +5,30 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/affor
 import 'dart:convert';
 
 typedef AfPropertiesOnChangedCallback = void Function(bool);
-
 typedef AfCallbackField = void Function(AfFieldValue, bool);
-typedef AfGetCurrentState = AfForm Function();
+typedef AfGetCurrentState = AfForm? Function();
 
 class AfFormPage extends StatefulWidget {
   AfFormPage(
-      {@required this.initialState,
-      @required this.formCollection,
+      {required this.initialState,
+      required this.formCollection,
       this.isReadOnly: false,
-      this.title}){
-    if(this.title==null){
-      this.title='Record of '+this.initialState.afFormId;
+      this.title}) {
+    if (this.title == null) {
+      this.title = 'Record of ' +
+          this.initialState.afRecordId.toString().substring(0, 12);
     }
   }
 
   final AfForm initialState;
   final List<AfForm> formCollection;
-  AfGetCurrentState getCurrentStateLink;
+  AfGetCurrentState? getCurrentStateLink;
   bool isReadOnly;
-  String title;
+  String? title;
 
-  AfForm getCurrentState() {
+  AfForm? getCurrentState() {
     if (this.getCurrentStateLink != null) {
-      return this.getCurrentStateLink();
+      return this.getCurrentStateLink!();
     } else {
       return null;
     }
@@ -38,9 +38,9 @@ class AfFormPage extends StatefulWidget {
 }
 
 class _AfFormPageState extends State<AfFormPage> {
-  AfForm currentState;
+  AfForm? currentState;
 
-  AfForm implementGetCurrentState() {
+  AfForm? implementGetCurrentState() {
     return currentState;
   }
 
@@ -76,7 +76,7 @@ class _AfFormPageState extends State<AfFormPage> {
   }
 
   void implementAfCallbackField(AfFieldValue afFieldValue, bool doSetState) {
-    this.currentState.setValue(afFieldValue);
+    this.currentState!.setValue(afFieldValue);
     if (doSetState == true) {
       setState(() {});
     }

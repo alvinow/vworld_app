@@ -2,9 +2,9 @@ import 'package:vworld_app/vworld/vwcore/vwapi/vwapirequest.dart';
 import 'package:vworld_app/vworld/vwcore/vwmodel/vwdocumentcontent.dart';
 
 class VwApiRequestPackage{
-  String loginsessionId;
-  String apkId;
-  List<VwApiRequest> requestList;
+  String? loginsessionId;
+  String? apkId;
+  List<VwApiRequest>? requestList;
 
   static final String loginsessionIdCCFN = 'loginsessionId';
   static final String apkIdCCFN = 'apkId';

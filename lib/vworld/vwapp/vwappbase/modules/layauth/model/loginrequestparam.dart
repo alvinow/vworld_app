@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginRequestParam {
-  final String username;
-  final String password;
+  final String? username;
+  final String? password;
   //final DeviceInfo deviceInfo;
 
   static const String username_fieldName = 'username';
@@ -10,7 +10,7 @@ class LoginRequestParam {
   static const deviceInfo_fieldName = 'deviceInfo';
 
   LoginRequestParam(
-      {@required this.username, @required this.password});
+      {required this.username, required this.password});
 
   Map<String, dynamic> toJson() => {
     username_fieldName: this.username,

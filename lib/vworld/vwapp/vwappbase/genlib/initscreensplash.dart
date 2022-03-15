@@ -10,14 +10,14 @@ class InitscreenSplash extends StatelessWidget {
 
   final String title;
   final String description;
-  final Widget widgetUnderDescription;
-  final Widget mainAnimation;
+  final Widget? widgetUnderDescription;
+  final Widget? mainAnimation;
 
   @override
   Widget build(BuildContext context) {
-    Widget activewidgetUnderDescription = Container();
+    Widget? activewidgetUnderDescription = Container();
 
-    Widget activeMainAnimation = CircularProgressIndicator(
+    Widget? activeMainAnimation = CircularProgressIndicator(
       strokeWidth: 3,
     );
 
@@ -36,7 +36,7 @@ class InitscreenSplash extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  activeMainAnimation,
+                  activeMainAnimation!,
                   SizedBox(
                     height: 20,
                     width: 12,
@@ -51,7 +51,7 @@ class InitscreenSplash extends StatelessWidget {
                     this.description,
                     style: TextStyle(fontSize: 15),
                   )),
-                  activewidgetUnderDescription,
+                  activewidgetUnderDescription!,
                 ])));
   }
 }

@@ -17,10 +17,10 @@ class LoginResponseAdapter extends TypeAdapter<LoginResponse> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return LoginResponse(
-      success: fields[0] as bool,
-      authenticated: fields[1] as bool,
-      loginsessionId: fields[2] as String,
-      userProfile: fields[3] as Userlogin,
+      success: fields[0] as bool?,
+      authenticated: fields[1] as bool?,
+      loginsessionId: fields[2] as String?,
+      userProfile: fields[3] as Userlogin?,
     );
   }
 
@@ -55,9 +55,9 @@ class LoginResponseAdapter extends TypeAdapter<LoginResponse> {
 
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
   return LoginResponse(
-    success: json['success'] as bool,
-    authenticated: json['authenticated'] as bool,
-    loginsessionId: json['loginsession_id'] as String,
+    success: json['success'] as bool?,
+    authenticated: json['authenticated'] as bool?,
+    loginsessionId: json['loginsession_id'] as String?,
     userProfile: json['userProfile'] == null
         ? null
         : Userlogin.fromJson(json['userProfile'] as Map<String, dynamic>),

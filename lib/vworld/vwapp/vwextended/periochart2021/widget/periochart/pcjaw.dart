@@ -7,7 +7,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 class PcJaw extends StatelessWidget {
   PcJaw(this.pcProperties, this.pcPropertiesOnChangedCallback);
 
-  final PcProperties pcProperties;
+  final PcProperties? pcProperties;
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
   final List<String> teethNumberListUpperJaw = <String>[

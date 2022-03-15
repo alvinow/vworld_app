@@ -13,7 +13,7 @@ class PcSingleTeeth extends StatefulWidget {
       {this.columnWidth: 42});
   final PcSingleTeethProperties pcSingleTeethProperties;
 
-  final PcProperties pcProperties;
+  final PcProperties? pcProperties;
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
 
@@ -122,9 +122,9 @@ class _PcSingleTeethState extends State<PcSingleTeeth> {
       ],
     );*/
 
-    if (this.widget.pcSingleTeethProperties.teethNumber.substring(0, 1) ==
+    if (this.widget.pcSingleTeethProperties.teethNumber!.substring(0, 1) ==
             '1' ||
-        this.widget.pcSingleTeethProperties.teethNumber.substring(0, 1) ==
+        this.widget.pcSingleTeethProperties.teethNumber!.substring(0, 1) ==
             '2') {
       returnValue = lUpperJaw;
     } else {

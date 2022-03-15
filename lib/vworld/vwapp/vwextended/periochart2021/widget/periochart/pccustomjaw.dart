@@ -10,7 +10,7 @@ class PcCustomJaw extends StatelessWidget {
   PcCustomJaw(this.pcProperties, this.pcPropertiesOnChangedCallback,
       this.teethNumberList, this.jawSide);
 
-  final PcProperties pcProperties;
+  final PcProperties? pcProperties;
 
   final PcPropertiesOnChangedCallback pcPropertiesOnChangedCallback;
   final List<String> teethNumberList;
@@ -422,9 +422,9 @@ class PcCustomJaw extends StatelessWidget {
     teethNumberList.forEach((element) {
       bool isSingleTeehthPropertiesFound = false;
 
-      for (int la = 0; la < this.pcProperties.teeths.length; la++) {
+      for (int la = 0; la < this.pcProperties!.teeths.length; la++) {
         PcSingleTeethProperties lPcSingleTeethProperties =
-            this.pcProperties.teeths.elementAt(la);
+            this.pcProperties!.teeths.elementAt(la);
         if (lPcSingleTeethProperties.teethNumber == element) {
           isSingleTeehthPropertiesFound = true;
           PcSingleTeeth pcSingleTeeth = PcSingleTeeth(lPcSingleTeethProperties,
@@ -453,7 +453,7 @@ class PcCustomJaw extends StatelessWidget {
                     teethSide: PcSingleTeethSideProperties
                         .pcSingleTeethSideLingualFMS));
 
-        this.pcProperties.teeths.add(pcSingleTeethProperties);
+        this.pcProperties!.teeths.add(pcSingleTeethProperties);
         PcSingleTeeth pcSingleTeeth = PcSingleTeeth(pcSingleTeethProperties,
             pcPropertiesOnChangedCallback, this.pcProperties);
 

@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 
 class DebugDocstream {
   DebugDocstream(
-      {@required this.isRecordInserted,
-        @required this.isDocStreamProcessed,
-        @required this.clientActionId,
-        @required this.errorMessage});
+      {required this.isRecordInserted,
+        required this.isDocStreamProcessed,
+        required this.clientActionId,
+        required this.errorMessage});
 
-  final bool isRecordInserted;
-  final bool isDocStreamProcessed;
-  final String clientActionId;
-  final String errorMessage;
+  final bool? isRecordInserted;
+  final bool? isDocStreamProcessed;
+  final String? clientActionId;
+  final String? errorMessage;
 
   static final String isRecordInserted_CCFN = 'isRecordInserted';
   static final String isDocStreamProcessed_CCFN = 'isDocStreamProcessed';

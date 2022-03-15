@@ -18,12 +18,12 @@ class PcSingleTeethPropertiesAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PcSingleTeethProperties(
-      teethNumber: fields[0] as String,
-      mobilityLevel: fields[1] as int,
-      isImplant: fields[2] as int,
-      buccalSide: fields[3] as PcSingleTeethSideProperties,
-      lingualSide: fields[4] as PcSingleTeethSideProperties,
-      note: fields[5] as String,
+      teethNumber: fields[0] as String?,
+      mobilityLevel: fields[1] as int?,
+      isImplant: fields[2] as int?,
+      buccalSide: fields[3] as PcSingleTeethSideProperties?,
+      lingualSide: fields[4] as PcSingleTeethSideProperties?,
+      note: fields[5] as String?,
     );
   }
 
@@ -63,9 +63,9 @@ class PcSingleTeethPropertiesAdapter
 PcSingleTeethProperties _$PcSingleTeethPropertiesFromJson(
     Map<String, dynamic> json) {
   return PcSingleTeethProperties(
-    teethNumber: json['teethNumber'] as String,
-    mobilityLevel: json['mobilityLevel'] as int,
-    isImplant: json['isImplant'] as int,
+    teethNumber: json['teethNumber'] as String?,
+    mobilityLevel: json['mobilityLevel'] as int?,
+    isImplant: json['isImplant'] as int?,
     buccalSide: json['buccalSide'] == null
         ? null
         : PcSingleTeethSideProperties.fromJson(
@@ -74,7 +74,7 @@ PcSingleTeethProperties _$PcSingleTeethPropertiesFromJson(
         ? null
         : PcSingleTeethSideProperties.fromJson(
             json['lingualSide'] as Map<String, dynamic>),
-    note: json['note'] as String,
+    note: json['note'] as String?,
   );
 }
 

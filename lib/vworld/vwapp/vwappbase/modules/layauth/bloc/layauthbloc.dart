@@ -1,6 +1,9 @@
 import 'dart:async';
-import 'package:rxdart/rxdart.dart';
+import 'dart:convert';
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/material.dart';
+import 'package:stream_transform/stream_transform.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/appstaticparam.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/generalcaption.dart';
@@ -10,12 +13,23 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginreq
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/logintoserverresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/util/connectivityutil.dart';
 import 'bloc.dart';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
+
+const throttleDuration = Duration(milliseconds: 100);
+
+EventTransformer<E> throttleDroppable<E>(Duration duration) {
+  return (events, mapper) {
+    return droppable<E>().call(events.throttle(duration), mapper);
+  };
+}
 
 class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
-  LayAuthBloc() : super(LayAuthStateUninitialized());
+  LayAuthBloc() : super( LayAuthState()){
+
+    on<LayAuthEvent>(
+      _mapEventToState,
+    );
+  }
 
   static final String keySharedPrefLoginResponse = "loginResponse";
   static final String keySharedPrefIsAuthenticated = 'isAuthenticated';
@@ -46,8 +60,8 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
   }
 
   static Future<LoginToServerResponse> loginToServerWithResponse(
-      {@required LoginRequestParam loginRequestParam,
-      @required String loginApiUrl}) async {
+      {required LoginRequestParam loginRequestParam,
+      required String loginApiUrl}) async {
     LoginToServerResponse returnValue =
         LoginToServerResponse(loginResponse: LoginResponse());
     try {
@@ -59,7 +73,7 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
 
       final response = await http.Client()
           .post(
-            Uri.http(loginApiUrl,"")  ,
+            Uri.parse(loginApiUrl),
             headers: {
               "Access-Control-Allow-Origin":
                   "*", // Required for CORS support to work
@@ -77,7 +91,7 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
         returnValue.isConnectedToServer = true;
       }
 
-      String responseBody = response.body != null && response.body.length > 0
+      String? responseBody = response.body != null && response.body.length > 0
           ? response.body.trim().substring(0, 1)
           : null;
 
@@ -107,8 +121,8 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
     return returnValue;
   }
 
-  static Future<bool> getIsAuthenticated() async {
-    bool returnValue = false;
+  static Future<bool?> getIsAuthenticated() async {
+    bool? returnValue = false;
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -123,16 +137,16 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
     return returnValue;
   }
 
-  static Future<LoginResponse> getLoginResponseFromDevice() async {
-    LoginResponse returnValue;
+  static Future<LoginResponse?> getLoginResponseFromDevice() async {
+    LoginResponse? returnValue;
 
-    bool isAuthenticated = await LayAuthBloc.getIsAuthenticated();
+    bool? isAuthenticated = await LayAuthBloc.getIsAuthenticated();
 
     try {
       if (isAuthenticated == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final String loginResponseString =
-            prefs.getString(keySharedPrefLoginResponse);
+            prefs.getString(keySharedPrefLoginResponse)!;
 
         dynamic dynResponseBody = json.decode(loginResponseString);
         returnValue = LoginResponse.fromJson(dynResponseBody);
@@ -154,6 +168,7 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
 
    */
 
+  /*
   @override
   Stream<Transition<LayAuthEvent, LayAuthState>> transformEvents(
     Stream<LayAuthEvent> events,
@@ -164,26 +179,25 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
       transitionFn,
     );
   }
-
+*/
   @override
-  Stream<LayAuthState> mapEventToState(LayAuthEvent event) async* {
+  void _mapEventToState(LayAuthEvent event,Emitter<LayAuthState> emit) async {
     //LayAuthState currentState = state;
 
     if (event is LayAuthEventCheckLocalLoginResponse) {
-      yield LayAuthStateProcessing(title: "initializing");
+      //yield LayAuthStateProcessing(title: "initializing");
 
       final loginResponse = await LayAuthBloc.getLoginResponseFromDevice();
 
       if (loginResponse == null ||
           (loginResponse != null && loginResponse.authenticated == false)) {
         yield LayAuthStateLoggedOut();
-        return;
+
       } else {
         yield LayAuthStateLoggedIn(loginResponse);
-        return;
       }
     } else if (event is LayAuthEventLogin) {
-      yield LayAuthStateProcessing(title: GeneralCaption.authenticatingCCFN);
+      //yield LayAuthStateProcessing(title: GeneralCaption.authenticatingCCFN);
 
       bool isConnectedToInternet =
           await ConnectivityUtil.isConnectedToInternet();
@@ -191,43 +205,50 @@ class LayAuthBloc extends Bloc<LayAuthEvent, LayAuthState> {
       if (isConnectedToInternet == false) {
         await Future.delayed(const Duration(seconds: 2), () {});
 
+
         yield LayAuthStateLoggedOut(
             loginPageAppParam: LoginPageAppParam(
                 isPreviousLoginNotConnectedToInternet: true,
                 isPreviousLogInFailed: false));
         return;
+
+
       }
+      else{
+        final LoginRequestParam loginRequestParam =
+        event.loginPageAppParam.loginRequestParam!;
 
-      final LoginRequestParam loginRequestParam =
-          event.loginPageAppParam.loginRequestParam;
+        final LoginToServerResponse loginToServerResponse =
+        await LayAuthBloc.loginToServerWithResponse(
+            loginRequestParam: loginRequestParam,
+            loginApiUrl: AppStaticParam.loginUrl);
 
-      final LoginToServerResponse loginToServerResponse =
-          await LayAuthBloc.loginToServerWithResponse(
-              loginRequestParam: loginRequestParam,
-              loginApiUrl: AppStaticParam.loginUrl);
+        if (loginToServerResponse.loginResponse != null &&
+            loginToServerResponse.loginResponse.authenticated == true) {
+          await LayAuthBloc.addLoginResponseToSharedPref(
+              loginToServerResponse.loginResponse);
 
-      if (loginToServerResponse.loginResponse != null &&
-          loginToServerResponse.loginResponse.authenticated == true) {
-        await LayAuthBloc.addLoginResponseToSharedPref(
-            loginToServerResponse.loginResponse);
-
-        this.add(LayAuthEventCheckLocalLoginResponse(DateTime.now()));
-        return;
-      } else {
-        if (loginToServerResponse.isExceptionOccured == true ||
-            loginToServerResponse.isConnectedToServer == false) {
-          yield LayAuthStateLoggedOut(
-              loginPageAppParam: LoginPageAppParam(
-                  isPreviousLoginNotConnectedToServer: true,
-                  isPreviousLogInFailed: false));
+          this.add(LayAuthEventCheckLocalLoginResponse(DateTime.now()));
           return;
         } else {
-          yield LayAuthStateLoggedOut(
-              loginPageAppParam:
-                  LoginPageAppParam(isPreviousLogInFailed: true));
-          return;
+          if (loginToServerResponse.isExceptionOccured == true ||
+              loginToServerResponse.isConnectedToServer == false) {
+            yield LayAuthStateLoggedOut(
+                loginPageAppParam: LoginPageAppParam(
+                    isPreviousLoginNotConnectedToServer: true,
+                    isPreviousLogInFailed: false));
+            return;
+          } else {
+            yield LayAuthStateLoggedOut(
+                loginPageAppParam:
+                LoginPageAppParam(isPreviousLogInFailed: true));
+            return;
+          }
         }
+
       }
+
+
     } else if (event is LayAuthEventLogout) {
       yield LayAuthStateProcessing(title: GeneralCaption.loggingOutCCFN);
       await LayAuthBloc.setUnathenticated();

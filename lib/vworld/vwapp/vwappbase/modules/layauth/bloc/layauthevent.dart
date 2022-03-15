@@ -30,7 +30,7 @@ class LayAuthEventCheckLocalLoginResponse extends LayAuthEvent {
 }
 
 class LayAuthEventLogout extends LayAuthEvent {
-  LayAuthEventLogout({@required this.timestamp, @required this.userloginId});
+  LayAuthEventLogout({required this.timestamp, required this.userloginId});
 
   final DateTime timestamp;
   final String userloginId;
@@ -43,7 +43,7 @@ class LayAuthEventLogout extends LayAuthEvent {
 }
 
 class LayAuthEventLogin extends LayAuthEvent {
-  LayAuthEventLogin({@required this.loginPageAppParam, @required this.timestamp});
+  LayAuthEventLogin({required this.loginPageAppParam, required this.timestamp});
 
   final LoginPageAppParam loginPageAppParam;
   final DateTime timestamp;

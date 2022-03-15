@@ -5,7 +5,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/libra
 
 class AfFormGrid extends StatefulWidget {
   AfFormGrid(this.afFormGridParam);
-  AfFormGridParam afFormGridParam;
+  AfFormGridParam? afFormGridParam;
   _AfFormGridState createState() => _AfFormGridState();
 }
 
@@ -35,17 +35,20 @@ class _AfFormGridState extends State<AfFormGrid> {
   Widget build(BuildContext context) {
     Widget returnValue = Container();
 
-    if (this.widget.afFormGridParam.records.length > 0) {
+    if (this.widget.afFormGridParam!.records.length > 0) {
+
+
+
       returnValue = ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          return index >= this.widget.afFormGridParam.records.length
+          return index >= this.widget.afFormGridParam!.records.length
               ? BottomLoader()
               : AfFormGridRow(
-                  this.widget.afFormGridParam.records.elementAt(index), this.widget.afFormGridParam);
+                  this.widget.afFormGridParam!.records.elementAt(index), this.widget.afFormGridParam);
         },
-        itemCount: this.widget.afFormGridParam.hasReachedMax
-            ? this.widget.afFormGridParam.records.length
-            : this.widget.afFormGridParam.records.length + 1,
+        itemCount: this.widget.afFormGridParam!.hasReachedMax
+            ? this.widget.afFormGridParam!.records.length
+            : this.widget.afFormGridParam!.records.length + 1,
         controller: _scrollController,
       );
     } else {

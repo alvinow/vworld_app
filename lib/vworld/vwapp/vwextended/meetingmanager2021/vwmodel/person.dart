@@ -6,7 +6,7 @@ part 'person.g.dart';
 @HiveType(typeId: 50004)
 @JsonSerializable()
 class Person{
-Person({@required this.person_id,@required this.person_fullname});
+Person({required this.person_id,required this.person_fullname});
 
 factory Person.fromJson(Map<String, dynamic> json) =>
     _$PersonFromJson(json);
@@ -14,7 +14,7 @@ factory Person.fromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> toJson() => _$PersonToJson(this);
 
 @HiveField(0)
-  final String person_id;
+  final String? person_id;
 @HiveField(1)
-  final String person_fullname;
+  final String? person_fullname;
 }

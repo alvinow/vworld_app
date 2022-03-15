@@ -11,13 +11,11 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/library/me
 import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/actor.dart';
 
 class LibMeetingPageDetail {
-  static void openMeetingPageDetail(
-      BuildContext context, Actor currrentActor, LoginResponse loginResponse,
-      AfFieldValueRecord fieldValueRecord,
-  {OnSaveValidRecordMeetingPageDetail onSaveValidRecordMeetingPageDetail,
-      OnSaveInvalidRecordMeetingPageDetail
+  static void openMeetingPageDetail(BuildContext context, Actor currrentActor,
+      LoginResponse loginResponse, AfFieldValueRecord? fieldValueRecord,
+      {OnSaveValidRecordMeetingPageDetail? onSaveValidRecordMeetingPageDetail,
+      OnSaveInvalidRecordMeetingPageDetail?
           onSaveInvalidRecordMeetingPageDetail}) {
-
     AfForm meetingForm = AfFormDemo.getAfFormById('meeting_af_form_id');
 
     meetingForm.setRecord(fieldValueRecord);
@@ -31,19 +29,18 @@ class LibMeetingPageDetail {
     Widget newMeetingPage = MeetingPageDetail(
       afFormPage: afFormPage,
       onSaveInvalidRecordMeetingPageDetail:
-      onSaveInvalidRecordMeetingPageDetail,
+          onSaveInvalidRecordMeetingPageDetail,
       onSaveValidRecordMeetingPageDetail: onSaveValidRecordMeetingPageDetail,
     );
 
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => newMeetingPage));
-
   }
 
   static void openNewMeetingPageDetail(
       BuildContext context, Actor currrentActor, LoginResponse loginResponse,
-      {OnSaveValidRecordMeetingPageDetail onSaveValidRecordMeetingPageDetail,
-      OnSaveInvalidRecordMeetingPageDetail
+      {OnSaveValidRecordMeetingPageDetail? onSaveValidRecordMeetingPageDetail,
+      OnSaveInvalidRecordMeetingPageDetail?
           onSaveInvalidRecordMeetingPageDetail}) {
     AfForm meetingForm = AfFormDemo.getAfFormById('meeting_af_form_id');
 

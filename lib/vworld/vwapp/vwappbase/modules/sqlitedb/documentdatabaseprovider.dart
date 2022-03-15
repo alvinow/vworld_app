@@ -19,9 +19,9 @@ class DocumentDatabaseProvider {
   static final databaseVersion = 1;
   static final databaseName = "clientproc7";
 
-  Database _database;
+  Database? _database;
 
-  Future<Database> get database async {
+  Future<Database?> get database async {
     if (_database != null) return _database;
     _database = await createDatabase();
     return _database;

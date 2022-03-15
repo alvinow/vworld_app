@@ -3,14 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/layauth/model/loginpageappparam.dart';
 
-abstract class LayAuthState extends Equatable {
-  LayAuthState();
+ class LayAuthState extends Equatable {
 
   @override
   bool get stringify => true;
 
   @override
   List<Object> get props => [];
+
+
+
 }
 
 class LayAuthStateUninitialized extends LayAuthState {
@@ -28,7 +30,7 @@ class LayAuthStateLoggedOut extends LayAuthState {
 }
 
 class LayAuthStateProcessing extends LayAuthState {
-  LayAuthStateProcessing({@required this.title, this.description:''});
+  LayAuthStateProcessing({required this.title, this.description:''});
 
   final String title;
   final String description;

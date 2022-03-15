@@ -15,7 +15,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 
 class LoginToServerResponse{
   LoginToServerResponse({ this.loginResponse, this.isExceptionOccured:false, this.isConnectedToServer :false});
-  LoginResponse loginResponse;
+  LoginResponse? loginResponse;
   bool isExceptionOccured;
   bool isConnectedToServer;
 }
@@ -26,8 +26,8 @@ class UserRepository {
 
   //static final String loginApiUrl ="https://api.bagkeudikdasmen.id/proc7/api/2.0/json/login";
 
-  static Future<Directory> getAppSavingDirectory() async{
-    Directory returnValue;
+  static Future<Directory?> getAppSavingDirectory() async{
+    Directory? returnValue;
     try {
       Directory appDocDir = await getApplicationDocumentsDirectory();
       returnValue = Directory(
@@ -66,8 +66,8 @@ class UserRepository {
 
 
   static Future<LoginToServerResponse> loginToServerWithResponse(
-      {@required LoginRequestBody loginRequestBody,
-        @required String loginApiUrl}) async {
+      {required LoginRequestBody loginRequestBody,
+        required String loginApiUrl}) async {
     LoginToServerResponse returnValue=LoginToServerResponse();
     try {
       final String loginRequestBodyString =
@@ -77,7 +77,7 @@ class UserRepository {
           json.encode(loginRequestBody.toJson()));
 
       final response = await http.Client().post(
-        Uri.http(loginApiUrl,"") ,
+        Uri.parse(loginApiUrl) ,
         headers: {
           "Access-Control-Allow-Origin":
           "*", // Required for CORS support to work
@@ -95,7 +95,7 @@ class UserRepository {
         returnValue.isConnectedToServer = true;
       }
 
-      String responseBody = response.body != null && response.body.length > 0
+      String? responseBody = response.body != null && response.body.length > 0
           ? response.body.trim().substring(0, 1)
           : null;
 
@@ -110,8 +110,8 @@ class UserRepository {
 
         returnValue.loginResponse = LoginResponse.fromJson(dynResponseBody);
 
-        if(returnValue.loginResponse.authenticated==true) {
-          print('LoginResponse to Json= ' + json.encode(returnValue.loginResponse.toJson()));
+        if(returnValue.loginResponse!.authenticated==true) {
+          print('LoginResponse to Json= ' + json.encode(returnValue.loginResponse!.toJson()));
         }
         else
         {
@@ -126,10 +126,10 @@ class UserRepository {
     return returnValue;
   }
 
-  static Future<LoginResponse> loginToServer(
-      {@required LoginRequestBody loginRequestBody,
-        @required String loginApiUrl}) async {
-    LoginResponse returnValue;
+  static Future<LoginResponse?> loginToServer(
+      {required LoginRequestBody loginRequestBody,
+        required String loginApiUrl}) async {
+    LoginResponse? returnValue;
     try {
       final String loginRequestBodyString =
       json.encode(loginRequestBody.toJson());
@@ -138,7 +138,7 @@ class UserRepository {
           json.encode(loginRequestBody.toJson()));
 
       final response = await http.Client().post(
-        Uri.http(loginApiUrl,"") ,
+        Uri.parse(loginApiUrl) ,
         headers: {
           "Access-Control-Allow-Origin":
           "*", // Required for CORS support to work
@@ -152,7 +152,7 @@ class UserRepository {
 
       ).timeout(const Duration(seconds: 15));;
 
-      String responseBody = response.body != null && response.body.length > 0
+      String? responseBody = response.body != null && response.body.length > 0
           ? response.body.trim().substring(0, 1)
           : null;
 
@@ -211,16 +211,16 @@ class UserRepository {
     }
   }
 
-  static Future<LoginResponse> getLoginResponseFromDevice() async {
-    LoginResponse returnValue;
+  static Future<LoginResponse?> getLoginResponseFromDevice() async {
+    LoginResponse? returnValue;
 
-    bool isAuthenticated = await UserRepository.getIsAuthenticated();
+    bool? isAuthenticated = await UserRepository.getIsAuthenticated();
 
     try {
       if (isAuthenticated == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         final String loginResponseString =
-        prefs.getString(keySharedPrefLoginResponse);
+        prefs.getString(keySharedPrefLoginResponse)!;
 
         dynamic dynResponseBody = json.decode(loginResponseString);
         returnValue = LoginResponse.fromJson(dynResponseBody);
@@ -235,8 +235,8 @@ class UserRepository {
     return returnValue;
   }
 
-  static Future<bool> getIsAuthenticated() async {
-    bool returnValue = false;
+  static Future<bool?> getIsAuthenticated() async {
+    bool? returnValue = false;
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 

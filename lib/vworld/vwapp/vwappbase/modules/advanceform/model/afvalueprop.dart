@@ -19,27 +19,27 @@ class AfValueProp {
       this.isNotNull: false});
 
   @HiveField(0)
-  String uifieldType;
+  String? uifieldType;
   @HiveField(1)
-  final int stringMaxLines;
+  final int? stringMaxLines;
   @HiveField(2)
-  final int stringMaxLength;
+  final int? stringMaxLength;
   @HiveField(3)
-  final int intMaxValue;
+  final int? intMaxValue;
   @HiveField(4)
-  final int intMinValue;
+  final int? intMinValue;
   @HiveField(5)
-  final int doubleDigitPrecision;
+  final int? doubleDigitPrecision;
   @HiveField(6)
-  final int doubleDigitMaxLength;
+  final int? doubleDigitMaxLength;
   @HiveField(7)
-  final bool isMandatory;
+  final bool? isMandatory;
   @HiveField(8)
-  final bool isGuiReadOnly;
+  final bool? isGuiReadOnly;
   @HiveField(9)
-  final bool isObscureText;
+  final bool? isObscureText;
   @HiveField(10)
-  final bool isNotNull;
+  final bool? isNotNull;
 
   factory AfValueProp.fromJson(Map<String, dynamic> json) =>
       _$AfValuePropFromJson(json);

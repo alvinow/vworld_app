@@ -9,39 +9,39 @@ part 'pcproperties.g.dart';
 @JsonSerializable()
 class PcProperties extends VwDocumentContent {
   PcProperties(
-      {@required this.id,
-      @required this.patientName,
-      @required this.patientDob,
-      @required this.operatorName,
-      @required this.examDateTime,
-      @required this.examTypeId,
-      @required this.teeths,
+      {required this.id,
+      required this.patientName,
+      required this.patientDob,
+      required this.operatorName,
+      required this.examDateTime,
+      required this.examTypeId,
+      required this.teeths,
       this.documenttypeId: 'documenttypeId_PcProperties'});
 
   @HiveField(0)
-  String id;
+  String? id;
 
   @HiveField(1)
-  String patientId;
+  String? patientId;
 
   @HiveField(2)
-  String patientName;
+  String? patientName;
 
   @HiveField(3)
-  DateTime patientDob;
+  DateTime? patientDob;
 
   @HiveField(4)
-  String operatorName;
+  String? operatorName;
 
   @HiveField(5)
-  DateTime examDateTime;
+  DateTime? examDateTime;
 
   @HiveField(6)
-  String examTypeId;
+  String? examTypeId;
 
   @HiveField(7)
   @override
-  String documenttypeId;
+  String? documenttypeId;
 
   @HiveField(8)
   List<PcSingleTeethProperties> teeths;
@@ -80,8 +80,8 @@ class PcProperties extends VwDocumentContent {
     };
   }*/
 
-  PcSingleTeethProperties getTeeth(String teethNumber) {
-    PcSingleTeethProperties returnValue;
+  PcSingleTeethProperties? getTeeth(String teethNumber) {
+    PcSingleTeethProperties? returnValue;
 
     teeths.forEach((element) {
       if (element.teethNumber == teethNumber) {

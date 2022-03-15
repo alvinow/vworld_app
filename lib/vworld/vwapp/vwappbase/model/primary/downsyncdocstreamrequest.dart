@@ -4,18 +4,18 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/upsynctoken.dart
 
 class DownsyncDocStreamRequest{
   DownsyncDocStreamRequest({
-    @required this.whereSql,
-    @required this.localDocstreamMd5,
+    required this.whereSql,
+    required this.localDocstreamMd5,
     this.serverDocstreamMd5,
-    @required this.localDocStreams,
+    required this.localDocStreams,
     this.serverDocStreams
   });
 
-  final String whereSql;
-  final String localDocstreamMd5;
-  final String serverDocstreamMd5;
-  final List<UpsyncToken> localDocStreams;
-  final List<UpsyncToken> serverDocStreams;
+  final String? whereSql;
+  final String? localDocstreamMd5;
+  final String? serverDocstreamMd5;
+  final List<UpsyncToken>? localDocStreams;
+  final List<UpsyncToken>? serverDocStreams;
 
 
   static final String whereSql_CCFN='whereSql';
@@ -30,10 +30,10 @@ class DownsyncDocStreamRequest{
     DownsyncDocStreamRequest.serverDocstreamMd5_CCFN: this.serverDocstreamMd5,
     DownsyncDocStreamRequest.localDocStreams_CCFN:  this.localDocStreams == null
         ? []
-        : this.localDocStreams.map((item) => item.toJson()).toList(),
+        : this.localDocStreams!.map((item) => item.toJson()).toList(),
     DownsyncDocStreamRequest.serverDocStreams_CCFN:  this.serverDocStreams == null
         ? []
-        : this.serverDocStreams.map((item) => item.toJson()).toList(),
+        : this.serverDocStreams!.map((item) => item.toJson()).toList(),
   };
 
   factory DownsyncDocStreamRequest.fromJson(Map<String, dynamic> data) =>DownsyncDocStreamRequest(
@@ -41,12 +41,12 @@ class DownsyncDocStreamRequest{
     localDocstreamMd5: data[DownsyncDocStreamRequest.localDocstreamMd5_CCFN],
     serverDocstreamMd5: data[DownsyncDocStreamRequest.serverDocstreamMd5_CCFN],
     localDocStreams: data[DownsyncDocStreamRequest.localDocStreams_CCFN] == null
-        ? List<UpsyncToken>()
+        ? <UpsyncToken>[]
         : data[DownsyncDocStreamRequest.localDocStreams_CCFN]
         .map<UpsyncToken>((item) => UpsyncToken.fromJson(item))
         .toList(),
     serverDocStreams: data[DownsyncDocStreamRequest.serverDocStreams_CCFN] == null
-        ? List<UpsyncToken>()
+        ? <UpsyncToken>[]
         : data[DownsyncDocStreamRequest.serverDocStreams_CCFN]
         .map<UpsyncToken>((item) => UpsyncToken.fromJson(item))
         .toList(),

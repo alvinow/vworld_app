@@ -8,11 +8,11 @@ class TeethPicture extends StatelessWidget {
 
   TeethPicture(this.teethNumber, this.side, this.pcSingleTeethProperties,this.pcSingleTeethSideProperties,{this.columnWidth});
 
-  final String teethNumber;
-  final String side;
+  final String? teethNumber;
+  final String? side;
   final PcSingleTeethProperties pcSingleTeethProperties;
-  final PcSingleTeethSideProperties pcSingleTeethSideProperties;
-  final double columnWidth;
+  final PcSingleTeethSideProperties? pcSingleTeethSideProperties;
+  final double? columnWidth;
 
 
 
@@ -23,19 +23,19 @@ class TeethPicture extends StatelessWidget {
 
     String pictureFileName = "assets/images/teeths/image_not_found.jpg";
 
-    int furcationLevelPointA=0;
+    int? furcationLevelPointA=0;
 
-    int furcationLevelPointB=0;
+    int? furcationLevelPointB=0;
 
 
     if (side == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
       pictureFileName = "assets/images/teeths/teeth11_buccal_240x640.jpg";
-      furcationLevelPointA=this.pcSingleTeethProperties.buccalSide.furcationLevelPointA;
-      furcationLevelPointB=this.pcSingleTeethProperties.buccalSide.furcationLevelPointB;
+      furcationLevelPointA=this.pcSingleTeethProperties.buccalSide!.furcationLevelPointA;
+      furcationLevelPointB=this.pcSingleTeethProperties.buccalSide!.furcationLevelPointB;
     } else {
       pictureFileName = "assets/images/teeths/teeth11_lingual_240x640.jpg";
-      furcationLevelPointA=this.pcSingleTeethProperties.lingualSide.furcationLevelPointA;
-      furcationLevelPointB=this.pcSingleTeethProperties.lingualSide.furcationLevelPointB;
+      furcationLevelPointA=this.pcSingleTeethProperties.lingualSide!.furcationLevelPointA;
+      furcationLevelPointB=this.pcSingleTeethProperties.lingualSide!.furcationLevelPointB;
     }
 
     Widget implantPicture11 = Container();
@@ -59,7 +59,7 @@ class TeethPicture extends StatelessWidget {
     ]);
 
     final String regio =
-    this.pcSingleTeethSideProperties.teethNumber.substring(0, 1);
+    this.pcSingleTeethSideProperties!.teethNumber!.substring(0, 1);
 
     Widget lReturnValue = basePicture11;
 
@@ -75,7 +75,7 @@ class TeethPicture extends StatelessWidget {
     return lReturnValue;
   }
 
-  Widget getImplantPicture(String teethNumber, String side) {
+  Widget getImplantPicture(String? teethNumber, String? side) {
     String pictureFileName =
         "assets/images/teeths/implant11_buccal_240x640.jpg";
 

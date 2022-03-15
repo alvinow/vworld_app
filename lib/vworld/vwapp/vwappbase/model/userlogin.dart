@@ -7,7 +7,7 @@ part 'userlogin.g.dart';
 @JsonSerializable()
 class Userlogin {
   Userlogin(
-      {@required this.userlogin_id,
+      {required this.userlogin_id,
       this.userlogin_username,
       this.userlogin_fullname,
       this.userlogin_role_id});
@@ -18,14 +18,14 @@ class Userlogin {
   Map<String, dynamic> toJson() => _$UserloginToJson(this);
 
   @HiveField(0)
-  final String userlogin_id;
+  final String? userlogin_id;
 
   @HiveField(1)
-  final String userlogin_username;
+  final String? userlogin_username;
 
   @HiveField(2)
-  String userlogin_fullname;
+  String? userlogin_fullname;
 
   @HiveField(3)
-  String userlogin_role_id; //doctor, admin
+  String? userlogin_role_id; //doctor, admin
 }

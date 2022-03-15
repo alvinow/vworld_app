@@ -17,9 +17,9 @@ class AfFieldValueRecordAdapter extends TypeAdapter<AfFieldValueRecord> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AfFieldValueRecord(
-      afFormId: fields[0] as String,
-      afRecordId: fields[1] as String,
-      fields: (fields[2] as List)?.cast<AfFieldValue>(),
+      afFormId: fields[0] as String?,
+      afRecordId: fields[1] as String?,
+      fields: (fields[2] as List).cast<AfFieldValue>(),
     );
   }
 
@@ -52,12 +52,11 @@ class AfFieldValueRecordAdapter extends TypeAdapter<AfFieldValueRecord> {
 
 AfFieldValueRecord _$AfFieldValueRecordFromJson(Map<String, dynamic> json) {
   return AfFieldValueRecord(
-    afFormId: json['afFormId'] as String,
-    afRecordId: json['afRecordId'] as String,
-    fields: (json['fields'] as List)
-        ?.map((e) =>
-            e == null ? null : AfFieldValue.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    afFormId: json['afFormId'] as String?,
+    afRecordId: json['afRecordId'] as String?,
+    fields: (json['fields'] as List<dynamic>)
+        .map((e) => AfFieldValue.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 

@@ -17,8 +17,8 @@ class OrganizationAdapter extends TypeAdapter<Organization> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Organization(
-      organization_id: fields[0] as String,
-      organization_name: fields[1] as String,
+      organization_id: fields[0] as String?,
+      organization_name: fields[1] as String?,
     );
   }
 
@@ -49,8 +49,8 @@ class OrganizationAdapter extends TypeAdapter<Organization> {
 
 Organization _$OrganizationFromJson(Map<String, dynamic> json) {
   return Organization(
-    organization_id: json['organization_id'] as String,
-    organization_name: json['organization_name'] as String,
+    organization_id: json['organization_id'] as String?,
+    organization_name: json['organization_name'] as String?,
   );
 }
 

@@ -5,11 +5,11 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/ac
 
 class AfFormGridParam {
   AfFormGridParam(this.currrentActor, this.loginResponse,
-      {@required this.records,
+      {required this.records,
       @required this.hasReachedMax: false,
       this.pageTitle: 'Record(s)'});
 
-  final List<AfFieldValueRecord> records;
+  final List<AfFieldValueRecord?> records;
   final bool hasReachedMax;
   final Actor currrentActor;
   final LoginResponse loginResponse;

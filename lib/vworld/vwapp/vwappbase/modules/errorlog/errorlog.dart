@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:uuid/uuid.dart';
 
 class ErrorLog{
-  String errorLogId=  Uuid().v4();
-  DateTime dateTime=DateTime.now().toUtc();
-  final String catchedLocation;
-  final String errorMessage;
-  String additionalData="";
-  String loginsessionId="";
+  String? errorLogId=  Uuid().v4();
+  DateTime? dateTime=DateTime.now().toUtc();
+  final String? catchedLocation;
+  final String? errorMessage;
+  String? additionalData="";
+  String? loginsessionId="";
 
   static final  String errorLogId_fieldName='errorLogId';
   static final  String dateTime_fieldName='dateTime';

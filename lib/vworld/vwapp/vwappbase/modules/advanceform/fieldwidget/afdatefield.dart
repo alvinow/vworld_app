@@ -1,3 +1,4 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -8,11 +9,11 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/util/dateutil.dart';
 
 class AfDateField extends StatelessWidget {
   AfDateField({
-    @required this.valueProp,
-    @required this.fieldValue,
+    required this.valueProp,
+    required this.fieldValue,
     this.height: 18,
     this.width: 42,
-    @required this.afCallbackField,
+    required this.afCallbackField,
     this.borderWidth: 1,
     this.useBorder: false,
     this.fontSize: 18,
@@ -22,30 +23,30 @@ class AfDateField extends StatelessWidget {
     this.isReadOnly:false
   });
 
-  final AfValueProp valueProp;
-  final AfFieldValue fieldValue;
+  final AfValueProp? valueProp;
+  final AfFieldValue? fieldValue;
   final String backgroundColorHex;
   final double width;
   final double height;
-  final AfCallbackField afCallbackField;
+  final AfCallbackField? afCallbackField;
   final double borderWidth;
   final bool useBorder;
   final double fontSize;
   final bool isValueValid;
-  final bool isNotNull;
+  final bool? isNotNull;
   final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
-    String dateTimeInitialValue = this.fieldValue.dateTimeValue == null
+    String? dateTimeInitialValue = this.fieldValue!.dateTimeValue == null
         ? null
         : DateUtil1.getDate24hTimeFormat()
-            .format(this.fieldValue.dateTimeValue);
+            .format(this.fieldValue!.dateTimeValue!);
 
     //String dateInitialValue=this.fieldValue.value==null? null : this.fieldValue.value.toString() ;
 
     TextEditingController dateTimeController = TextEditingController()
-      ..text = dateTimeInitialValue;
+      ..text = dateTimeInitialValue.toString();
 
     Widget dateTimeField = TextFormField(
       controller: dateTimeController,
@@ -53,8 +54,10 @@ class AfDateField extends StatelessWidget {
       readOnly: true,
       onTap: ()
     {
-      if (!(this.isReadOnly || this.valueProp.isGuiReadOnly))
+      if (!(this.isReadOnly || this.valueProp!.isGuiReadOnly!))
         {
+
+
         DatePicker.showDateTimePicker(context, showTitleActions: true,
             onChanged: (date) {
               print('change $date');
@@ -63,18 +66,18 @@ class AfDateField extends StatelessWidget {
               print("TimePickerRsult=" + date.toString());
 
               if (this.afCallbackField != null) {
-                this.afCallbackField(
+                this.afCallbackField!(
                     AfFieldValue(
-                        fieldName: this.fieldValue.fieldName,
+                        fieldName: this.fieldValue!.fieldName,
                         dateTimeValue: date),
                     true);
               }
 
               print('confirm $date');
             },
-            currentTime: this.fieldValue.dateTimeValue == null
+            currentTime: this.fieldValue!.dateTimeValue == null
                 ? DateTime.now()
-                : this.fieldValue.dateTimeValue,
+                : this.fieldValue!.dateTimeValue,
             locale: LocaleType.id);
     }
       },
@@ -84,7 +87,7 @@ class AfDateField extends StatelessWidget {
             TextStyle(color: this.isValueValid ? Colors.black : Colors.red),
         border: UnderlineInputBorder(),
         contentPadding: EdgeInsets.all(0),
-        labelText: this.fieldValue.fieldCaption,
+        labelText: this.fieldValue!.fieldCaption,
         focusColor: Colors.orange,
         isDense: true,
       ),

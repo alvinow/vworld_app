@@ -17,27 +17,28 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AfFieldValue(
-      fieldName: fields[0] as String,
-      stringValue: fields[1] as String,
-      integerValue: fields[2] as int,
-      doubleValue: fields[3] as double,
-      dateTimeValue: fields[4] as DateTime,
-      displayValue: fields[5] as String,
-      fieldCaption: fields[7] as String,
-      valueAfDataType: fields[8] as String,
-      created: fields[9] as String,
-      updated: fields[10] as String,
-      creatorActorId: fields[11] as String,
-      lastUpdaterActorId: fields[12] as String,
-      afRefValueFormId: fields[13] as String,
-      comboStringList: (fields[14] as List)?.cast<AfFieldValue>(),
+      fieldName: fields[0] as String?,
+      stringValue: fields[1] as String?,
+      integerValue: fields[2] as int?,
+      doubleValue: fields[3] as double?,
+      dateTimeValue: fields[4] as DateTime?,
+      displayValue: fields[5] as String?,
+      fieldCaption: fields[7] as String?,
+      valueAfDataType: fields[8] as String?,
+      created: fields[9] as String?,
+      updated: fields[10] as String?,
+      creatorActorId: fields[11] as String?,
+      lastUpdaterActorId: fields[12] as String?,
+      afRefValueFormId: fields[13] as String?,
+      comboStringList: (fields[14] as List?)?.cast<AfFieldValue>(),
+      valueAfDataContext: fields[15] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, AfFieldValue obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.fieldName)
       ..writeByte(1)
@@ -65,7 +66,9 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
       ..writeByte(13)
       ..write(obj.afRefValueFormId)
       ..writeByte(14)
-      ..write(obj.comboStringList);
+      ..write(obj.comboStringList)
+      ..writeByte(15)
+      ..write(obj.valueAfDataContext);
   }
 
   @override
@@ -85,25 +88,25 @@ class AfFieldValueAdapter extends TypeAdapter<AfFieldValue> {
 
 AfFieldValue _$AfFieldValueFromJson(Map<String, dynamic> json) {
   return AfFieldValue(
-    fieldName: json['fieldName'] as String,
-    stringValue: json['stringValue'] as String,
-    integerValue: json['integerValue'] as int,
-    doubleValue: (json['doubleValue'] as num)?.toDouble(),
+    fieldName: json['fieldName'] as String?,
+    stringValue: json['stringValue'] as String?,
+    integerValue: json['integerValue'] as int?,
+    doubleValue: (json['doubleValue'] as num?)?.toDouble(),
     dateTimeValue: json['dateTimeValue'] == null
         ? null
         : DateTime.parse(json['dateTimeValue'] as String),
-    displayValue: json['displayValue'] as String,
-    fieldCaption: json['fieldCaption'] as String,
-    valueAfDataType: json['valueAfDataType'] as String,
-    created: json['created'] as String,
-    updated: json['updated'] as String,
-    creatorActorId: json['creatorActorId'] as String,
-    lastUpdaterActorId: json['lastUpdaterActorId'] as String,
-    afRefValueFormId: json['afRefValueFormId'] as String,
-    comboStringList: (json['comboStringList'] as List)
-        ?.map((e) =>
-            e == null ? null : AfFieldValue.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    displayValue: json['displayValue'] as String?,
+    fieldCaption: json['fieldCaption'] as String?,
+    valueAfDataType: json['valueAfDataType'] as String?,
+    created: json['created'] as String?,
+    updated: json['updated'] as String?,
+    creatorActorId: json['creatorActorId'] as String?,
+    lastUpdaterActorId: json['lastUpdaterActorId'] as String?,
+    afRefValueFormId: json['afRefValueFormId'] as String?,
+    comboStringList: (json['comboStringList'] as List<dynamic>?)
+        ?.map((e) => AfFieldValue.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    valueAfDataContext: json['valueAfDataContext'] as String?,
   );
 }
 
@@ -123,4 +126,5 @@ Map<String, dynamic> _$AfFieldValueToJson(AfFieldValue instance) =>
       'lastUpdaterActorId': instance.lastUpdaterActorId,
       'afRefValueFormId': instance.afRefValueFormId,
       'comboStringList': instance.comboStringList,
+      'valueAfDataContext': instance.valueAfDataContext,
     };

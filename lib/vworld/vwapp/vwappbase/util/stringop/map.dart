@@ -1,7 +1,7 @@
 class StringopMap {
 
   static List<String> getStringFieldList(List<dynamic> fieldList){
-    List<String> returnValue=List<String>();
+    List<String> returnValue=<String>[];
 
     for (int fieldCounter = 0;
     fieldCounter < fieldList.length;

@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 
 class FileDocumentTypeTag{
   FileDocumentTypeTag({
-    @required this.filedocumenttypeId,
-    @required this.title,
-    @required this.description,
-    @required this.userNote,
+    required this.filedocumenttypeId,
+    required this.title,
+    required this.description,
+    required this.userNote,
 });
 
 
-  String filedocumenttypeId;
-  String title;
-  String description;
-  String userNote;
+  String? filedocumenttypeId;
+  String? title;
+  String? description;
+  String? userNote;
 
   static final String filedocumenttypeId_CCFN="filedocumenttypeId";
   static final String title_CCFN="title";

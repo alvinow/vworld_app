@@ -17,17 +17,17 @@ final Map<DateTime, List> _holidays = {
 
 class CalendarPage1 extends StatefulWidget {
   CalendarPage1(
-      {Key key,
+      {Key? key,
       this.title,
       this.currrentUser,
       this.meetingList,
       this.afFormGridParam})
       : super(key: key);
 
-  final String title;
-  final Actor currrentUser;
-  final List<Meeting> meetingList;
-  final AfFormGridParam afFormGridParam;
+  final String? title;
+  final Actor? currrentUser;
+  final List<Meeting?>? meetingList;
+  final AfFormGridParam? afFormGridParam;
 
   @override
   _CalendarPage1State createState() => _CalendarPage1State();
@@ -35,20 +35,20 @@ class CalendarPage1 extends StatefulWidget {
 
 class _CalendarPage1State extends State<CalendarPage1>
     with TickerProviderStateMixin {
-  Map<DateTime, List> _events;
-  List _selectedEvents;
-  AnimationController _animationController;
-  //CalendarController _calendarController;
+  late Map<DateTime, List> _events;
+  late List _selectedEvents;
+  late AnimationController _animationController;
+
 
   @override
   void initState() {
     super.initState();
     final _selectedDay = DateTime.now();
 
-    _events = Meeting.getCalenderList(this.widget.meetingList);
+    _events = Meeting.getCalenderList(this.widget.meetingList!);
 
     _selectedEvents = _events[_selectedDay] ?? [];
-   // _calendarController = CalendarController();
+
 
     _animationController = AnimationController(
       vsync: this,
@@ -61,7 +61,7 @@ class _CalendarPage1State extends State<CalendarPage1>
   @override
   void dispose() {
     _animationController.dispose();
-    //_calendarController.dispose();
+
     super.dispose();
   }
 
@@ -79,7 +79,7 @@ class _CalendarPage1State extends State<CalendarPage1>
 
   void _onCalendarCreated(
       PageController pageController) {
-   //print('CALLBACK: _onCalendarCreated');
+
   }
 
   @override
@@ -103,44 +103,7 @@ class _CalendarPage1State extends State<CalendarPage1>
     );
   }
 
-  /*
-  Widget _buildTableCalendar() {
-    print(
-        'Oldest Meeting:   ${Meeting.getOldestMeetingDateTime(this.widget.meetingList)}');
-    print(
-        'Latest Meeting:  ${Meeting.getLatestMeetingDateTime(this.widget.meetingList)}');
 
-    //TableCalendar(focusedDay: focusedDay, firstDay: firstDay, lastDay: lastDay)
-
-
-    Widget returnValue = TableCalendar(
-      locale: 'en_US',
-      //calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.brown[700],
-        outsideDaysVisible: false,
-      ),
-      headerStyle: HeaderStyle(
-        formatButtonTextStyle:
-            TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
-    );
-
-    print('Table Calendar created');
-    return returnValue;
-  }*/
 
 
 
@@ -149,11 +112,7 @@ class _CalendarPage1State extends State<CalendarPage1>
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
-        /*color: _calendarController.isSelected(date)
-            ? Colors.brown[500]
-            : _calendarController.isToday(date)
-                ? Colors.brown[300]
-                : Colors.blue[400],*/
+
       ),
       width: 16.0,
       height: 16.0,
@@ -190,7 +149,7 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('Month'),
               onPressed: () {
                 setState(() {
-                  //_calendarController.setCalendarFormat(CalendarFormat.month);
+
                 });
               },
             ),
@@ -198,8 +157,7 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('2 weeks'),
               onPressed: () {
                 setState(() {
-                  /*_calendarController
-                      .setCalendarFormat(CalendarFormat.twoWeeks);*/
+
                 });
               },
             ),
@@ -207,7 +165,7 @@ class _CalendarPage1State extends State<CalendarPage1>
               child: Text('Week'),
               onPressed: () {
                 setState(() {
-                  //_calendarController.setCalendarFormat(CalendarFormat.week);
+
                 });
               },
             ),
@@ -218,7 +176,7 @@ class _CalendarPage1State extends State<CalendarPage1>
     );
   }
 
-  Widget _buildEventGrid(AfFormGridParam afFormGridParam) {
+  Widget _buildEventGrid(AfFormGridParam? afFormGridParam) {
     return AfFormGrid(afFormGridParam);
   }
 

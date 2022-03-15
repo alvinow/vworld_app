@@ -3,12 +3,12 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/docstream.dart';
 
 
 class UpsyncToken {
-  UpsyncToken({@required this.token, @required this.loginsessionId,@required this.docstreamId,@required this.jsonDocumentMd5} );
+  UpsyncToken({required this.token, required this.loginsessionId,required this.docstreamId,required this.jsonDocumentMd5} );
 
-  final String token;
-  final String loginsessionId;
-  final String docstreamId;
-  final String jsonDocumentMd5;
+  final String? token;
+  final String? loginsessionId;
+  final String? docstreamId;
+  final String? jsonDocumentMd5;
 
   static final String token_CCFN = 'token';
   static final String loginsessionId_CCFN = 'loginsessionId';

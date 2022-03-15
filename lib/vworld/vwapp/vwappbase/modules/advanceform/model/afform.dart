@@ -10,15 +10,15 @@ part 'afform.g.dart';
 @JsonSerializable()
 class AfForm {
   AfForm(
-      {@required this.fieldFormList,
-      @required this.afFormId,
-      @required this.afRecordId});
+      {required this.fieldFormList,
+      required this.afFormId,
+      this.afRecordId});
 
   @HiveField(0)
-  final String afFormId;
+  final String? afFormId;
 
   @HiveField(1)
-  String afRecordId;
+  String? afRecordId;
 
   @HiveField(2)
   List<AfFieldForm> fieldFormList;
@@ -42,8 +42,8 @@ class AfForm {
     return returnValue;
   }
 
-  AfFieldValueRecord getRecord() {
-    AfFieldValueRecord returnValue;
+  AfFieldValueRecord? getRecord() {
+    AfFieldValueRecord? returnValue;
 
     try {
       AfFieldValueRecord newRecord = AfFieldValueRecord(
@@ -54,19 +54,19 @@ class AfForm {
       for (int la = 0; la < this.fieldFormList.length; la++) {
         AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
         AfFieldValue newFieldValue = AfFieldValue(
-            fieldName: currentFieldForm.fieldValue.fieldName,
-            stringValue: currentFieldForm.fieldValue.stringValue,
-            integerValue: currentFieldForm.fieldValue.integerValue,
-            doubleValue: currentFieldForm.fieldValue.doubleValue,
-            dateTimeValue: currentFieldForm.fieldValue.dateTimeValue,
-            displayValue: currentFieldForm.fieldValue.displayValue,
-            fieldCaption: currentFieldForm.fieldValue.fieldCaption,
-            valueAfDataType: currentFieldForm.fieldValue.valueAfDataType,
-            created: currentFieldForm.fieldValue.created,
-            updated: currentFieldForm.fieldValue.updated,
-            creatorActorId: currentFieldForm.fieldValue.creatorActorId,
-            lastUpdaterActorId: currentFieldForm.fieldValue.lastUpdaterActorId,
-            afRefValueFormId: currentFieldForm.fieldValue.afRefValueFormId);
+            fieldName: currentFieldForm.fieldValue!.fieldName,
+            stringValue: currentFieldForm.fieldValue!.stringValue,
+            integerValue: currentFieldForm.fieldValue!.integerValue,
+            doubleValue: currentFieldForm.fieldValue!.doubleValue,
+            dateTimeValue: currentFieldForm.fieldValue!.dateTimeValue,
+            displayValue: currentFieldForm.fieldValue!.displayValue,
+            fieldCaption: currentFieldForm.fieldValue!.fieldCaption,
+            valueAfDataType: currentFieldForm.fieldValue!.valueAfDataType,
+            created: currentFieldForm.fieldValue!.created,
+            updated: currentFieldForm.fieldValue!.updated,
+            creatorActorId: currentFieldForm.fieldValue!.creatorActorId,
+            lastUpdaterActorId: currentFieldForm.fieldValue!.lastUpdaterActorId,
+            afRefValueFormId: currentFieldForm.fieldValue!.afRefValueFormId);
 
         newRecord.fields.add(newFieldValue);
       }
@@ -79,7 +79,7 @@ class AfForm {
     return returnValue;
   }
 
-  bool setRecord(AfFieldValueRecord fieldValueRecord) {
+  bool setRecord(AfFieldValueRecord? fieldValueRecord) {
     bool returnValue = false;
     try {
       if (fieldValueRecord != null &&
@@ -87,7 +87,7 @@ class AfForm {
         this.afRecordId = fieldValueRecord.afRecordId;
 
         for (int lDest = 0; lDest < this.fieldFormList.length; lDest++) {
-          AfFieldValue currentDestinationFieldValue =
+          AfFieldValue? currentDestinationFieldValue =
               this.fieldFormList.elementAt(lDest).fieldValue;
 
           for (int lSource = 0;
@@ -97,7 +97,7 @@ class AfForm {
                 fieldValueRecord.fields.elementAt(lSource);
 
             if (currentSourceFieldValue.fieldName ==
-                currentDestinationFieldValue.fieldName) {
+                currentDestinationFieldValue!.fieldName) {
               if (currentDestinationFieldValue.valueAfDataType ==
                   currentSourceFieldValue.valueAfDataType) {
                 currentDestinationFieldValue.stringValue =
@@ -137,19 +137,19 @@ class AfForm {
     for (int la = 0; la < this.fieldFormList.length; la++) {
       AfFieldForm currentFieldForm = this.fieldFormList.elementAt(la);
 
-      if (currentFieldForm.fieldValue.fieldName == afFieldValue.fieldName) {
-        if (currentFieldForm.fieldValue.valueAfDataType == 'String') {
-          currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
+      if (currentFieldForm.fieldValue!.fieldName == afFieldValue.fieldName) {
+        if (currentFieldForm.fieldValue!.valueAfDataType == 'String') {
+          currentFieldForm.fieldValue!.stringValue = afFieldValue.stringValue;
         }
-        if (currentFieldForm.fieldValue.valueAfDataType == 'ComboString') {
-          currentFieldForm.fieldValue.stringValue = afFieldValue.stringValue;
-          currentFieldForm.fieldValue.displayValue = afFieldValue.displayValue;
-        } else if (currentFieldForm.fieldValue.valueAfDataType == 'Integer') {
-          currentFieldForm.fieldValue.integerValue = afFieldValue.integerValue;
-        } else if (currentFieldForm.fieldValue.valueAfDataType == 'Double') {
-          currentFieldForm.fieldValue.doubleValue = afFieldValue.doubleValue;
-        } else if (currentFieldForm.fieldValue.valueAfDataType == 'DateTime') {
-          currentFieldForm.fieldValue.dateTimeValue =
+        if (currentFieldForm.fieldValue!.valueAfDataType == 'ComboString') {
+          currentFieldForm.fieldValue!.stringValue = afFieldValue.stringValue;
+          currentFieldForm.fieldValue!.displayValue = afFieldValue.displayValue;
+        } else if (currentFieldForm.fieldValue!.valueAfDataType == 'Integer') {
+          currentFieldForm.fieldValue!.integerValue = afFieldValue.integerValue;
+        } else if (currentFieldForm.fieldValue!.valueAfDataType == 'Double') {
+          currentFieldForm.fieldValue!.doubleValue = afFieldValue.doubleValue;
+        } else if (currentFieldForm.fieldValue!.valueAfDataType == 'DateTime') {
+          currentFieldForm.fieldValue!.dateTimeValue =
               afFieldValue.dateTimeValue;
         }
 

@@ -8,7 +8,7 @@ abstract class MeetingmainpageEvent extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class RequestDisplayPanitiaListPageOnMeetingmainpageEvent extends MeetingmainpageEvent{
@@ -58,10 +58,10 @@ class SavemeetingeventpageOnMeetingmainpageEvent extends MeetingmainpageEvent{
   SavemeetingeventpageOnMeetingmainpageEvent(this.timestamp, this.meetingAfForm);
 
   final DateTime timestamp;
-  final AfForm meetingAfForm;
+  final AfForm? meetingAfForm;
 
   @override
-  List<Object> get props => [timestamp,meetingAfForm];
+  List<Object?> get props => [timestamp,meetingAfForm];
 
   @override
   String toString() =>

@@ -6,7 +6,7 @@ import 'package:vworld_app/vworld/vwcore/vwauthorization/vwauthorization.dart';
 abstract class VwHomeBase extends StatelessWidget {
   VwHomeBase(this.vwAuthentication, this.vwAuthorization, this.vwAccounting);
 
-  final VwAuthorization vwAuthorization;
-  final VwAuthentication vwAuthentication;
-  final VwAccounting vwAccounting;
+  final VwAuthorization? vwAuthorization;
+  final VwAuthentication? vwAuthentication;
+  final VwAccounting? vwAccounting;
 }

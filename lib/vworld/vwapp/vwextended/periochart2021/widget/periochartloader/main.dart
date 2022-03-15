@@ -9,7 +9,7 @@ class PeriochartLoader extends StatefulWidget {
 }
 
 class _PeriochartLoaderState extends State<PeriochartLoader> {
-  PeriochartLoaderBloc bloc;
+  late PeriochartLoaderBloc bloc;
 
   @override
   Widget build(BuildContext context) {

@@ -8,8 +8,8 @@ part 'organization.g.dart';
 @JsonSerializable()
 class Organization {
   Organization({
-    @required this.organization_id,
-    @required this.organization_name
+    required this.organization_id,
+    required this.organization_name
 });
 
   factory Organization.fromJson(Map<String, dynamic> json) =>
@@ -18,8 +18,8 @@ class Organization {
   Map<String, dynamic> toJson() => _$OrganizationToJson(this);
 
   @HiveField(0)
-  final String organization_id;
+  final String? organization_id;
   @HiveField(1)
-  final String organization_name;
+  final String? organization_name;
 
 }

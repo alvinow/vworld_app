@@ -6,9 +6,9 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/vwmodel/pcsing
 class PerioTeethGraphic extends CustomPainter {
   PerioTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties);
 
-  final PcSingleTeethSideProperties pcSingleTeethSideProperties;
+  final PcSingleTeethSideProperties? pcSingleTeethSideProperties;
 
-  final PcProperties pcProperties;
+  final PcProperties? pcProperties;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -74,15 +74,15 @@ class PerioTeethGraphic extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  static String getLeftNeighbourTeethNumber(String teethNumber) {
-    String returnValue;
+  static String? getLeftNeighbourTeethNumber(String? teethNumber) {
+    String? returnValue;
     try {
       if (teethNumber == '18' ||
           teethNumber == '21' ||
           teethNumber == '48' ||
           teethNumber == '31') {
       } else {
-        int regio = int.parse(teethNumber.substring(0, 1));
+        int regio = int.parse(teethNumber!.substring(0, 1));
         int row = int.parse(teethNumber.substring(1, 2));
 
         if (regio == 1 || regio == 4) {
@@ -100,15 +100,15 @@ class PerioTeethGraphic extends CustomPainter {
     return returnValue;
   }
 
-  static String getRightNeighbourTeethNumber(String teethNumber) {
-    String returnValue;
+  static String? getRightNeighbourTeethNumber(String? teethNumber) {
+    String? returnValue;
     try {
       if (teethNumber == '11' ||
           teethNumber == '28' ||
           teethNumber == '41' ||
           teethNumber == '38') {
       } else {
-        int regio = int.parse(teethNumber.substring(0, 1));
+        int regio = int.parse(teethNumber!.substring(0, 1));
         int row = int.parse(teethNumber.substring(1, 2));
 
         if (regio == 1 || regio == 4) {
@@ -122,24 +122,24 @@ class PerioTeethGraphic extends CustomPainter {
     return returnValue;
   }
 
-  PcSingleTeethSideProperties getLeftNeighborSingleTeethSideProperties() {
-    PcSingleTeethSideProperties returnValue;
+  PcSingleTeethSideProperties? getLeftNeighborSingleTeethSideProperties() {
+    PcSingleTeethSideProperties? returnValue;
 
     try {
-      String leftNeighbourTeethNumber = PerioTeethGraphic
+      String? leftNeighbourTeethNumber = PerioTeethGraphic
           .getLeftNeighbourTeethNumber(
-          this.pcSingleTeethSideProperties.teethNumber);
+          this.pcSingleTeethSideProperties!.teethNumber);
 
       if (leftNeighbourTeethNumber != null &&
           leftNeighbourTeethNumber.length == 2) {
-        PcSingleTeethProperties pcSingleTeethProperties =
-        this.pcProperties.getTeeth(leftNeighbourTeethNumber);
+        PcSingleTeethProperties? pcSingleTeethProperties =
+        this.pcProperties!.getTeeth(leftNeighbourTeethNumber);
 
-        if (this.pcSingleTeethSideProperties.teethSide ==
+        if (this.pcSingleTeethSideProperties!.teethSide ==
             PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-          returnValue = pcSingleTeethProperties.buccalSide;
+          returnValue = pcSingleTeethProperties!.buccalSide;
         } else {
-          returnValue = pcSingleTeethProperties.lingualSide;
+          returnValue = pcSingleTeethProperties!.lingualSide;
         }
       }
     }
@@ -152,24 +152,24 @@ class PerioTeethGraphic extends CustomPainter {
     return returnValue;
   }
 
-  PcSingleTeethSideProperties getRightNeighborSingleTeethSideProperties() {
-    PcSingleTeethSideProperties returnValue;
+  PcSingleTeethSideProperties? getRightNeighborSingleTeethSideProperties() {
+    PcSingleTeethSideProperties? returnValue;
 
     try {
-      String rightNeighbourTeethNumber =
+      String? rightNeighbourTeethNumber =
       PerioTeethGraphic.getRightNeighbourTeethNumber(
-              this.pcSingleTeethSideProperties.teethNumber);
+              this.pcSingleTeethSideProperties!.teethNumber);
 
       if (rightNeighbourTeethNumber != null &&
           rightNeighbourTeethNumber.length == 2) {
-        PcSingleTeethProperties pcSingleTeethProperties =
-            this.pcProperties.getTeeth(rightNeighbourTeethNumber);
+        PcSingleTeethProperties? pcSingleTeethProperties =
+            this.pcProperties!.getTeeth(rightNeighbourTeethNumber);
 
-        if (this.pcSingleTeethSideProperties.teethSide ==
+        if (this.pcSingleTeethSideProperties!.teethSide ==
             PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-          returnValue = pcSingleTeethProperties.buccalSide;
+          returnValue = pcSingleTeethProperties!.buccalSide;
         } else {
-          returnValue = pcSingleTeethProperties.lingualSide;
+          returnValue = pcSingleTeethProperties!.lingualSide;
         }
       }
     } catch (error) {
@@ -192,47 +192,47 @@ class PerioTeethGraphic extends CustomPainter {
 
       //var baseheight = 90.0;
 
-      PcSingleTeethSideProperties leftNeighborSingleTeethSideProperties =
+      PcSingleTeethSideProperties? leftNeighborSingleTeethSideProperties =
       this.getLeftNeighborSingleTeethSideProperties();
 
-      PcSingleTeethSideProperties rightNeighborSingleTeethSideProperties =
+      PcSingleTeethSideProperties? rightNeighborSingleTeethSideProperties =
       this.getRightNeighborSingleTeethSideProperties();
 
       double leftNeighbourDx = 0;
-      double leftNeighbourDy;
+      double? leftNeighbourDy;
 
       if (leftNeighborSingleTeethSideProperties != null) {
         leftNeighbourDy = baseheight -
             (0.5 *
                 heightmultiplier *
-                (this.pcSingleTeethSideProperties.gingivalMarginPointA +
-                    leftNeighborSingleTeethSideProperties.gingivalMarginPointC));
+                (this.pcSingleTeethSideProperties!.gingivalMarginPointA! +
+                    leftNeighborSingleTeethSideProperties.gingivalMarginPointC!));
       }
 
       var startPointDx = size.width / 8;
       var startPointDy = baseheight -
-          (this.pcSingleTeethSideProperties.gingivalMarginPointA * heightmultiplier);
+          (this.pcSingleTeethSideProperties!.gingivalMarginPointA! * heightmultiplier);
 
       var controlPoint1Dx = size.width / 2;
       var controlPoint1Dy = baseheight -
-          (this.pcSingleTeethSideProperties.gingivalMarginPointB * heightmultiplier);
+          (this.pcSingleTeethSideProperties!.gingivalMarginPointB! * heightmultiplier);
 
       var endPointDx = 7 * size.width / 8;
       var endPointDy = baseheight -
-          (this.pcSingleTeethSideProperties.gingivalMarginPointC * heightmultiplier);
+          (this.pcSingleTeethSideProperties!.gingivalMarginPointC! * heightmultiplier);
 
       double rightNeighbourDx = size.width;
-      double rightNeighbourDy;
+      double? rightNeighbourDy;
 
       if (rightNeighborSingleTeethSideProperties != null) {
         rightNeighbourDy = baseheight -
             (0.5 *
                 heightmultiplier *
-                (this.pcSingleTeethSideProperties.gingivalMarginPointC +
-                    rightNeighborSingleTeethSideProperties.gingivalMarginPointA));
+                (this.pcSingleTeethSideProperties!.gingivalMarginPointC! +
+                    rightNeighborSingleTeethSideProperties.gingivalMarginPointA!));
       }
 
-      Offset leftNeighbourPoint;
+      Offset? leftNeighbourPoint;
       if (leftNeighbourDy != null) {
         leftNeighbourPoint = Offset(leftNeighbourDx, leftNeighbourDy);
       }
@@ -240,7 +240,7 @@ class PerioTeethGraphic extends CustomPainter {
       var controlPoint1 = Offset(controlPoint1Dx, controlPoint1Dy);
       var endPoint = Offset(endPointDx, endPointDy);
 
-      Offset rightNeighbourPoint;
+      Offset? rightNeighbourPoint;
       if (rightNeighbourDy != null) {
         rightNeighbourPoint = Offset(rightNeighbourDx, rightNeighbourDy);
       }
@@ -284,47 +284,47 @@ class PerioTeethGraphic extends CustomPainter {
 
       //var baseheight = 90.0;
 
-      PcSingleTeethSideProperties leftNeighborSingleTeethSideProperties =
+      PcSingleTeethSideProperties? leftNeighborSingleTeethSideProperties =
           this.getLeftNeighborSingleTeethSideProperties();
 
-      PcSingleTeethSideProperties rightNeighborSingleTeethSideProperties =
+      PcSingleTeethSideProperties? rightNeighborSingleTeethSideProperties =
           this.getRightNeighborSingleTeethSideProperties();
 
       double leftNeighbourDx = 0;
-      double leftNeighbourDy;
+      double? leftNeighbourDy;
 
       if (leftNeighborSingleTeethSideProperties != null) {
         leftNeighbourDy = baseheight -
             (0.5 *
                 heightmultiplier *
-                ((this.pcSingleTeethSideProperties.probingDepthPointA-this.pcSingleTeethSideProperties.gingivalMarginPointA) +
-                    (leftNeighborSingleTeethSideProperties.probingDepthPointC-leftNeighborSingleTeethSideProperties.gingivalMarginPointC)   ));
+                ((this.pcSingleTeethSideProperties!.probingDepthPointA!-this.pcSingleTeethSideProperties!.gingivalMarginPointA!) +
+                    (leftNeighborSingleTeethSideProperties.probingDepthPointC!-leftNeighborSingleTeethSideProperties.gingivalMarginPointC!)   ));
       }
 
       var startPointDx = size.width / 8;
       var startPointDy = baseheight -
-          ((this.pcSingleTeethSideProperties.probingDepthPointA-this.pcSingleTeethSideProperties.gingivalMarginPointA)  * heightmultiplier);
+          ((this.pcSingleTeethSideProperties!.probingDepthPointA!-this.pcSingleTeethSideProperties!.gingivalMarginPointA!)  * heightmultiplier);
 
       var controlPoint1Dx = size.width / 2;
       var controlPoint1Dy = baseheight -
-          ((this.pcSingleTeethSideProperties.probingDepthPointB-this.pcSingleTeethSideProperties.gingivalMarginPointB) * heightmultiplier);
+          ((this.pcSingleTeethSideProperties!.probingDepthPointB!-this.pcSingleTeethSideProperties!.gingivalMarginPointB!) * heightmultiplier);
 
       var endPointDx = 7 * size.width / 8;
       var endPointDy = baseheight -
-          ((this.pcSingleTeethSideProperties.probingDepthPointC-this.pcSingleTeethSideProperties.gingivalMarginPointC) * heightmultiplier);
+          ((this.pcSingleTeethSideProperties!.probingDepthPointC!-this.pcSingleTeethSideProperties!.gingivalMarginPointC!) * heightmultiplier);
 
       double rightNeighbourDx = size.width;
-      double rightNeighbourDy;
+      double? rightNeighbourDy;
 
       if (rightNeighborSingleTeethSideProperties != null) {
         rightNeighbourDy = baseheight -
             (0.5 *
                 heightmultiplier *
-                ((this.pcSingleTeethSideProperties.probingDepthPointC-this.pcSingleTeethSideProperties.gingivalMarginPointC) +
-                    (rightNeighborSingleTeethSideProperties.probingDepthPointA-rightNeighborSingleTeethSideProperties.gingivalMarginPointC)  ));
+                ((this.pcSingleTeethSideProperties!.probingDepthPointC!-this.pcSingleTeethSideProperties!.gingivalMarginPointC!) +
+                    (rightNeighborSingleTeethSideProperties.probingDepthPointA!-rightNeighborSingleTeethSideProperties.gingivalMarginPointC!)  ));
       }
 
-      Offset leftNeighbourPoint;
+      Offset? leftNeighbourPoint;
       if (leftNeighbourDy != null) {
         leftNeighbourPoint = Offset(leftNeighbourDx, leftNeighbourDy);
       }
@@ -332,7 +332,7 @@ class PerioTeethGraphic extends CustomPainter {
       var controlPoint1 = Offset(controlPoint1Dx, controlPoint1Dy);
       var endPoint = Offset(endPointDx, endPointDy);
 
-      Offset rightNeighbourPoint;
+      Offset? rightNeighbourPoint;
       if (rightNeighbourDy != null) {
         rightNeighbourPoint = Offset(rightNeighbourDx, rightNeighbourDy);
       }

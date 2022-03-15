@@ -5,10 +5,10 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 
 class PcIntegerField extends StatelessWidget {
   PcIntegerField(
-      {@required this.value,
-      @required this.fieldName,
+      {required this.value,
+      required this.fieldName,
       this.caption,
-      @required this.pcCallbackIntegerField,
+      required this.pcCallbackIntegerField,
       this.width: 42,
       this.height: 18,
       this.borderWidth: 1,
@@ -16,11 +16,11 @@ class PcIntegerField extends StatelessWidget {
       this.minValue: 0,
       this.maxValue: 9});
 
-  final int value;
+  final int? value;
   final int maxValue;
   final int minValue;
   final String fieldName;
-  final String caption;
+  final String? caption;
   final PcCallbackIntegerField pcCallbackIntegerField;
   final double width;
   final double height;
@@ -72,11 +72,11 @@ class PcIntegerField extends StatelessWidget {
       },
 
       onChanged: (value) {
-        int outputValue;
+        int? outputValue;
         if (value == null || value.length == 0 || value == '') {
         } else {
           outputValue = int.tryParse(value);
-          if (outputValue > this.maxValue) {
+          if (outputValue! > this.maxValue) {
             outputValue = this.maxValue;
           } else if (outputValue < this.minValue) {
             outputValue = this.minValue;

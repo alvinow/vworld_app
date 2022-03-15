@@ -21,5 +21,5 @@ abstract class VwDocumentContent {
 
   //Map<String, dynamic> toJson() => _$VwDocumentContentToJson(this);
 
-  String documenttypeId;
+  String? documenttypeId;
 }

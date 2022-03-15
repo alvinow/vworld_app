@@ -17,10 +17,10 @@ class UserloginAdapter extends TypeAdapter<Userlogin> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Userlogin(
-      userlogin_id: fields[0] as String,
-      userlogin_username: fields[1] as String,
-      userlogin_fullname: fields[2] as String,
-      userlogin_role_id: fields[3] as String,
+      userlogin_id: fields[0] as String?,
+      userlogin_username: fields[1] as String?,
+      userlogin_fullname: fields[2] as String?,
+      userlogin_role_id: fields[3] as String?,
     );
   }
 
@@ -55,10 +55,10 @@ class UserloginAdapter extends TypeAdapter<Userlogin> {
 
 Userlogin _$UserloginFromJson(Map<String, dynamic> json) {
   return Userlogin(
-    userlogin_id: json['userlogin_id'] as String,
-    userlogin_username: json['userlogin_username'] as String,
-    userlogin_fullname: json['userlogin_fullname'] as String,
-    userlogin_role_id: json['userlogin_role_id'] as String,
+    userlogin_id: json['userlogin_id'] as String?,
+    userlogin_username: json['userlogin_username'] as String?,
+    userlogin_fullname: json['userlogin_fullname'] as String?,
+    userlogin_role_id: json['userlogin_role_id'] as String?,
   );
 }
 

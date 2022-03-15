@@ -3,7 +3,7 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/model/loginresponse.dart';
 
 class LoginToServerResponse {
   LoginToServerResponse(
-      {@required this.loginResponse,
+      {required this.loginResponse,
       this.isExceptionOccured: false,
       this.isConnectedToServer: false});
   LoginResponse loginResponse;

@@ -152,7 +152,7 @@ class _MeetingDetailSubmitFormState extends State<MeetingDetailSubmitForm> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState.validate() == false) {
+                            if (_formKey.currentState!.validate() == false) {
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

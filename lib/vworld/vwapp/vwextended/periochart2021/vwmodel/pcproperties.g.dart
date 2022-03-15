@@ -17,15 +17,15 @@ class PcPropertiesAdapter extends TypeAdapter<PcProperties> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PcProperties(
-      id: fields[0] as String,
-      patientName: fields[2] as String,
-      patientDob: fields[3] as DateTime,
-      operatorName: fields[4] as String,
-      examDateTime: fields[5] as DateTime,
-      examTypeId: fields[6] as String,
-      teeths: (fields[8] as List)?.cast<PcSingleTeethProperties>(),
-      documenttypeId: fields[7] as String,
-    )..patientId = fields[1] as String;
+      id: fields[0] as String?,
+      patientName: fields[2] as String?,
+      patientDob: fields[3] as DateTime?,
+      operatorName: fields[4] as String?,
+      examDateTime: fields[5] as DateTime?,
+      examTypeId: fields[6] as String?,
+      teeths: (fields[8] as List).cast<PcSingleTeethProperties>(),
+      documenttypeId: fields[7] as String?,
+    )..patientId = fields[1] as String?;
   }
 
   @override
@@ -69,23 +69,21 @@ class PcPropertiesAdapter extends TypeAdapter<PcProperties> {
 
 PcProperties _$PcPropertiesFromJson(Map<String, dynamic> json) {
   return PcProperties(
-    id: json['id'] as String,
-    patientName: json['patientName'] as String,
+    id: json['id'] as String?,
+    patientName: json['patientName'] as String?,
     patientDob: json['patientDob'] == null
         ? null
         : DateTime.parse(json['patientDob'] as String),
-    operatorName: json['operatorName'] as String,
+    operatorName: json['operatorName'] as String?,
     examDateTime: json['examDateTime'] == null
         ? null
         : DateTime.parse(json['examDateTime'] as String),
-    examTypeId: json['examTypeId'] as String,
-    teeths: (json['teeths'] as List)
-        ?.map((e) => e == null
-            ? null
-            : PcSingleTeethProperties.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    documenttypeId: json['documenttypeId'] as String,
-  )..patientId = json['patientId'] as String;
+    examTypeId: json['examTypeId'] as String?,
+    teeths: (json['teeths'] as List<dynamic>)
+        .map((e) => PcSingleTeethProperties.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    documenttypeId: json['documenttypeId'] as String?,
+  )..patientId = json['patientId'] as String?;
 }
 
 Map<String, dynamic> _$PcPropertiesToJson(PcProperties instance) =>

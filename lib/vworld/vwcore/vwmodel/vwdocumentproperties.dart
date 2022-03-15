@@ -1,3 +1,3 @@
 class VwDocumentProperties{
-  String id;
+  String? id;
 }

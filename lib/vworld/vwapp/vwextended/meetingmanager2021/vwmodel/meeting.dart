@@ -10,15 +10,16 @@ part 'meeting.g.dart';
 @JsonSerializable()
 class Meeting {
   Meeting(
-      {@required this.meeting_id,
-      @required this.meeting_meetingtype_id,
-      @required this.meeting_meetingstatus_id,
-      @required this.meeting_name,
-      @required this.meeting_start_datetime,
-      @required this.meeting_end_datetime,
-      @required this.meeting_owner_actor_id,
-      @required this.comitte,
-      @required this.participants});
+      {
+        required this.meeting_id,
+      required this.meeting_meetingtype_id,
+      required this.meeting_meetingstatus_id,
+      required this.meeting_name,
+      required this.meeting_start_datetime,
+      required this.meeting_end_datetime,
+      required this.meeting_owner_actor_id,
+      this.comitte,
+       this.participants});
 
   factory Meeting.fromJson(Map<String, dynamic> json) =>
       _$MeetingFromJson(json);
@@ -41,12 +42,12 @@ class Meeting {
   final String meeting_owner_actor_id;
 
   @HiveField(7)
-  final List<Actor> comitte;
+  final List<Actor>? comitte;
   @HiveField(8)
-  final List<Actor> participants;
+  final List<Actor>? participants;
 
-  static Map<DateTime, List<String>> getCalenderList(List<Meeting> meetings) {
-    Map<DateTime, List<String>> returnValue = Map<DateTime, List<String>>();
+  static Map<DateTime, List<String?>> getCalenderList(List<Meeting?> meetings) {
+    Map<DateTime, List<String?>> returnValue = Map<DateTime, List<String>>();
 
     final DateTime oldestMeetingDate =
         Meeting.getOldestMeetingDateTime(meetings);
@@ -62,11 +63,11 @@ class Meeting {
     ;
 
     for (int dayCounter = 0; dayCounter < diffDaysCountMeeting; dayCounter++) {
-      List<String> currentMeetingList = <String>[];
+      List<String?> currentMeetingList = <String?>[];
       for (int meetingCounter = 0;
           meetingCounter < meetings.length;
           meetingCounter++) {
-        final currentMeeting = meetings.elementAt(meetingCounter);
+        final currentMeeting = meetings.elementAt(meetingCounter)!;
 
         bool isAfterStart=dateIteratorBefore.isAfter(currentMeeting.meeting_start_datetime);
 
@@ -95,7 +96,7 @@ class Meeting {
     return returnValue;
   }
 
-  static int getDiffDaysMeetingDateTime(List<Meeting> meetings) {
+  static int getDiffDaysMeetingDateTime(List<Meeting?> meetings) {
     DateTime oldestMeeting = Meeting.getOldestMeetingDateTime(meetings);
     DateTime newestMeeting = Meeting.getLatestMeetingDateTime(meetings);
 
@@ -104,31 +105,50 @@ class Meeting {
     return returnValue;
   }
 
-  static DateTime getOldestMeetingDateTime(List<Meeting> meetings) {
+  static DateTime getOldestMeetingDateTime(List<Meeting?> meetings) {
     DateTime returnValue = DateTime.now();
 
-    for (int la = 0; la < meetings.length; la++) {
-      DateTime currentMeetingDate =
-          meetings.elementAt(la).meeting_start_datetime;
+    try {
+      for (int la = 0; la < meetings.length; la++) {
+        Meeting? currentMeeting = meetings.elementAt(la);
 
-      if (returnValue.difference(currentMeetingDate).inDays > 0) {
-        returnValue = currentMeetingDate;
+
+        DateTime? currentMeetingDate =
+            currentMeeting!.meeting_start_datetime;
+
+        if (returnValue
+            .difference(currentMeetingDate)
+            .inDays > 0) {
+          returnValue = currentMeetingDate;
+        }
       }
+    }
+    catch(error){
+      print(error.toString());
     }
 
     return returnValue;
   }
 
-  static DateTime getLatestMeetingDateTime(List<Meeting> meetings) {
+  static DateTime getLatestMeetingDateTime(List<Meeting?> meetings) {
     DateTime returnValue = DateTime.now();
+    try {
+      for (int la = 0; la < meetings.length; la++) {
+        Meeting? currentMeeting = meetings.elementAt(la);
 
-    for (int la = 0; la < meetings.length; la++) {
-      DateTime currentMeetingDate = meetings.elementAt(la).meeting_end_datetime;
+        DateTime? currentMeetingDate = currentMeeting!.meeting_end_datetime;
 
-      if (returnValue.difference(currentMeetingDate).inDays < 0) {
-        returnValue = currentMeetingDate;
+        if (returnValue
+            .difference(currentMeetingDate)
+            .inDays < 0) {
+          returnValue = currentMeetingDate;
+        }
       }
     }
+    catch(error){
+    print(error.toString());
+    }
+
     return returnValue;
   }
 }

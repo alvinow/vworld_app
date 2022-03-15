@@ -29,52 +29,52 @@ class PcSingleTeethSideProperties  {
   static final String pcSingleTeethSideBuccalFMS = 'PcSingleTeethSideBuccal';
 
   @HiveField(0)
-  String teethNumber;
+  String? teethNumber;
 
   @HiveField(1)
-  String teethSide;
+  String? teethSide;
 
   @HiveField(2)
-  int furcationLevelPointA;
+  int? furcationLevelPointA;
 
   @HiveField(3)
-  int furcationLevelPointB;
+  int? furcationLevelPointB;
 
   @HiveField(4)
-  int isBleedingOnProbingPointA;
+  int? isBleedingOnProbingPointA;
 
   @HiveField(5)
-  int isBleedingOnProbingPointB;
+  int? isBleedingOnProbingPointB;
 
   @HiveField(6)
-  int isBleedingOnProbingPointC;
+  int? isBleedingOnProbingPointC;
 
   @HiveField(7)
-  int isPlaquePointA;
+  int? isPlaquePointA;
 
   @HiveField(8)
-  int isPlaquePointB;
+  int? isPlaquePointB;
 
   @HiveField(9)
-  int isPlaquePointC;
+  int? isPlaquePointC;
 
   @HiveField(10)
-  int gingivalMarginPointA;
+  int? gingivalMarginPointA;
 
   @HiveField(11)
-  int gingivalMarginPointB;
+  int? gingivalMarginPointB;
 
   @HiveField(12)
-  int gingivalMarginPointC;
+  int? gingivalMarginPointC;
 
   @HiveField(13)
-  int probingDepthPointA;
+  int? probingDepthPointA;
 
   @HiveField(14)
-  int probingDepthPointB;
+  int? probingDepthPointB;
 
   @HiveField(15)
-  int probingDepthPointC;
+  int? probingDepthPointC;
 
   static final String teethNumberCCFN = 'teethNumber';
   static final String teethSideCCFN = 'teethSide';

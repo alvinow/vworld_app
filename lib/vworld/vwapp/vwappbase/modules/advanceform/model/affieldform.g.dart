@@ -17,12 +17,12 @@ class AfFieldFormAdapter extends TypeAdapter<AfFieldForm> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AfFieldForm(
-      fieldValue: fields[0] as AfFieldValue,
-      valueProp: fields[1] as AfValueProp,
-      useExpansionTile: fields[2] as bool,
-      autoExpandWhenNotNull: fields[3] as bool,
-      initiallyExpanded: fields[4] as bool,
-      isHidden: fields[5] as bool,
+      fieldValue: fields[0] as AfFieldValue?,
+      valueProp: fields[1] as AfValueProp?,
+      useExpansionTile: fields[2] as bool?,
+      autoExpandWhenNotNull: fields[3] as bool?,
+      initiallyExpanded: fields[4] as bool?,
+      isHidden: fields[5] as bool?,
     );
   }
 
@@ -67,10 +67,10 @@ AfFieldForm _$AfFieldFormFromJson(Map<String, dynamic> json) {
     valueProp: json['valueProp'] == null
         ? null
         : AfValueProp.fromJson(json['valueProp'] as Map<String, dynamic>),
-    useExpansionTile: json['useExpansionTile'] as bool,
-    autoExpandWhenNotNull: json['autoExpandWhenNotNull'] as bool,
-    initiallyExpanded: json['initiallyExpanded'] as bool,
-    isHidden: json['isHidden'] as bool,
+    useExpansionTile: json['useExpansionTile'] as bool?,
+    autoExpandWhenNotNull: json['autoExpandWhenNotNull'] as bool?,
+    initiallyExpanded: json['initiallyExpanded'] as bool?,
+    isHidden: json['isHidden'] as bool?,
   );
 }
 

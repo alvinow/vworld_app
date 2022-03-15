@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vworld_app/vworld/vwapp/vwappbase/model/primary/filedocument/filedocument.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affieldvalue.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/afvalueprop.dart';
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
@@ -21,34 +22,34 @@ class AfComboStringField extends StatelessWidget {
       this.isReadOnly:false
       });
 
-  final AfValueProp valueProp;
-  final AfFieldValue fieldValue;
-  final String backgroundColorHex;
-  final List<AfFieldValue> comboListFieldValue;
-  final double width;
-  final double height;
-  final AfCallbackField afCallbackField;
-  final double borderWidth;
-  final bool useBorder;
-  final double fontSize;
-  final bool isValueValid;
-  final bool isNotNull;
+  final AfValueProp? valueProp;
+  final AfFieldValue? fieldValue;
+  final String? backgroundColorHex;
+  final List<AfFieldValue>? comboListFieldValue;
+  final double? width;
+  final double? height;
+  final AfCallbackField? afCallbackField;
+  final double? borderWidth;
+  final bool? useBorder;
+  final double? fontSize;
+  final bool? isValueValid;
+  final bool? isNotNull;
   final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> comboFieldList = <Widget>[];
 
-    for (int la = 0; la < this.comboListFieldValue.length; la++) {
-      AfFieldValue currentElement = this.comboListFieldValue.elementAt(la);
+    for (int la = 0; la < this.comboListFieldValue!.length; la++) {
+      AfFieldValue currentElement = this.comboListFieldValue!.elementAt(la);
 
       comboFieldList.add(Text(currentElement.displayValue.toString()));
     }
 
     TextEditingController textController = TextEditingController();
 
-    if (fieldValue.stringValue != null) {
-      textController..text = fieldValue.displayValue;
+    if (fieldValue!.stringValue != null) {
+      textController..text = fieldValue!.displayValue!;
     }
 
     Widget returnValue = Container(
@@ -56,7 +57,7 @@ class AfComboStringField extends StatelessWidget {
         child: TextFormField(
           controller: textController,
           onTap: () async {
-            if (!(this.valueProp.isGuiReadOnly || this.isReadOnly)  ) {
+            if (!(this.valueProp!.isGuiReadOnly! || this.isReadOnly)  ) {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext bc) {
@@ -75,9 +76,9 @@ class AfComboStringField extends StatelessWidget {
           decoration: InputDecoration(
             border: UnderlineInputBorder(),
             labelStyle:
-                TextStyle(color: this.isValueValid ? Colors.black : Colors.red),
+                TextStyle(color: this.isValueValid! ? Colors.black : Colors.red),
             contentPadding: EdgeInsets.all(0),
-            labelText: this.fieldValue.fieldCaption,
+            labelText: this.fieldValue!.fieldCaption,
             focusColor: Colors.orange,
             isDense: true,
           ),
@@ -89,23 +90,23 @@ class AfComboStringField extends StatelessWidget {
 
 class ComboListPage extends StatefulWidget {
   ComboListPage(
-      {@required this.valueProp,
-      @required this.fieldValue,
-      @required this.comboListFieldValue,
-      @required this.bc,
+      {required this.valueProp,
+      required this.fieldValue,
+      required this.comboListFieldValue,
+      required this.bc,
       this.afCallbackField});
 
-  AfValueProp valueProp;
-  AfFieldValue fieldValue;
+  AfValueProp? valueProp;
+  AfFieldValue? fieldValue;
   BuildContext bc;
-  final List<AfFieldValue> comboListFieldValue;
-  final AfCallbackField afCallbackField;
+  final List<AfFieldValue>? comboListFieldValue;
+  final AfCallbackField? afCallbackField;
 
   _ComboListPageState createState() => _ComboListPageState();
 }
 
 class _ComboListPageState extends State<ComboListPage> {
-  int selectedIndex;
+  int? selectedIndex;
 
   @override
   void initState() {
@@ -113,12 +114,12 @@ class _ComboListPageState extends State<ComboListPage> {
 
     this.selectedIndex = 0;
 
-    if (this.widget.fieldValue.stringValue != null) {
-      for (int la = 0; la < this.widget.comboListFieldValue.length; la++) {
+    if (this.widget.fieldValue!.stringValue != null) {
+      for (int la = 0; la < this.widget.comboListFieldValue!.length; la++) {
         AfFieldValue currentElement =
-            this.widget.comboListFieldValue.elementAt(la);
+            this.widget.comboListFieldValue!.elementAt(la);
 
-        if (currentElement.stringValue == this.widget.fieldValue.stringValue) {
+        if (currentElement.stringValue == this.widget.fieldValue!.stringValue) {
           this.selectedIndex = la;
           break;
         }
@@ -126,8 +127,8 @@ class _ComboListPageState extends State<ComboListPage> {
     }
   }
 
-  AfFieldValue getAfFieldValue(int index, List<AfFieldValue> afFieldValueList) {
-    AfFieldValue returnValue;
+  AfFieldValue? getAfFieldValue(int? index, List<AfFieldValue> afFieldValueList) {
+    AfFieldValue? returnValue;
 
     for (int la = 0; la < afFieldValueList.length; la++) {
       AfFieldValue currentElement = afFieldValueList.elementAt(la);
@@ -144,11 +145,11 @@ class _ComboListPageState extends State<ComboListPage> {
   Widget build(BuildContext context) {
     List<Widget> comboFieldList = <Widget>[];
 
-    for (int la = 0; la < this.widget.comboListFieldValue.length; la++) {
+    for (int la = 0; la < this.widget.comboListFieldValue!.length; la++) {
       AfFieldValue currentElement =
-          this.widget.comboListFieldValue.elementAt(la);
+          this.widget.comboListFieldValue!.elementAt(la);
 
-      comboFieldList.add(Text(currentElement.displayValue));
+      comboFieldList.add(Text(currentElement.displayValue!));
     }
 
     Widget returnValue = Container(
@@ -158,7 +159,7 @@ class _ComboListPageState extends State<ComboListPage> {
               height: 200,
               child: CupertinoPicker(
                 scrollController:
-                    FixedExtentScrollController(initialItem: selectedIndex),
+                    FixedExtentScrollController(initialItem: selectedIndex!),
                 magnification: 1.5,
                 backgroundColor: Colors.white,
                 children: comboFieldList,
@@ -186,18 +187,22 @@ class _ComboListPageState extends State<ComboListPage> {
                     onPressed: () async {
                       Navigator.pop(this.widget.bc);
 
-                      AfFieldValue currentFieldValue = this.getAfFieldValue(
-                          this.selectedIndex, this.widget.comboListFieldValue);
+                      AfFieldValue? currentFieldValue = this.getAfFieldValue(
+                          this.selectedIndex, this.widget.comboListFieldValue!);
 
                       if (currentFieldValue != null) {
-                        this.widget.afCallbackField(
-                            AfFieldValue(
-                                fieldName: this.widget.fieldValue.fieldName,
+
+                        /*
+                        this.widget.afCallbackField!(
+                            FileDocumentBinary(
+                                fieldName: this.widget.fieldValue!.fieldName,
                                 stringValue: currentFieldValue.stringValue,
                                 displayValue: currentFieldValue.displayValue),
-                            true);
+                            true);*/
                       }
                       print('selected Index=' + this.selectedIndex.toString());
+
+
                     },
                     child: Icon(Icons.check))),
           ])

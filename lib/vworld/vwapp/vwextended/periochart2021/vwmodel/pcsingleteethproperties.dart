@@ -8,25 +8,25 @@ part 'pcsingleteethproperties.g.dart';
 @HiveType(typeId: 2)
 @JsonSerializable()
 class PcSingleTeethProperties {
-  PcSingleTeethProperties({@required this.teethNumber, this.mobilityLevel:0,  this.isImplant:0,@required this.buccalSide,@required this.lingualSide, this.note});
+  PcSingleTeethProperties({required this.teethNumber, this.mobilityLevel:0,  this.isImplant:0,required this.buccalSide,required this.lingualSide, this.note});
 
   @HiveField(0)
-  String teethNumber;
+  String? teethNumber;
 
   @HiveField(1)
-  int mobilityLevel;
+  int? mobilityLevel;
 
   @HiveField(2)
-  int isImplant;
+  int? isImplant;
 
   @HiveField(3)
-  PcSingleTeethSideProperties buccalSide;
+  PcSingleTeethSideProperties? buccalSide;
 
   @HiveField(4)
-  PcSingleTeethSideProperties lingualSide;
+  PcSingleTeethSideProperties? lingualSide;
 
   @HiveField(5)
-  String note;
+  String? note;
 
   static final String teethNumberCCFN = 'teethNumber';
   static final String mobilityLevelCCFN = 'mobilityLevel';

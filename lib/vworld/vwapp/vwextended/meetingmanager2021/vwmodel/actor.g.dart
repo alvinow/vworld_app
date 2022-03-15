@@ -17,15 +17,15 @@ class ActorAdapter extends TypeAdapter<Actor> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Actor(
-      actor_id: fields[1] as String,
-      actor_actorrole_id: fields[2] as String,
-      actor_fullname: fields[3] as String,
-      actor_username: fields[4] as String,
-      actor_password: fields[5] as String,
-      actor_loginrightstatus_id: fields[6] as String,
-      actor_person_id: fields[7] as String,
-      actor_organization_id: fields[8] as String,
-    )..documenttypeId = fields[0] as String;
+      actor_id: fields[1] as String?,
+      actor_actorrole_id: fields[2] as String?,
+      actor_fullname: fields[3] as String?,
+      actor_username: fields[4] as String?,
+      actor_password: fields[5] as String?,
+      actor_loginrightstatus_id: fields[6] as String?,
+      actor_person_id: fields[7] as String?,
+      actor_organization_id: fields[8] as String?,
+    )..documenttypeId = fields[0] as String?;
   }
 
   @override
@@ -69,15 +69,15 @@ class ActorAdapter extends TypeAdapter<Actor> {
 
 Actor _$ActorFromJson(Map<String, dynamic> json) {
   return Actor(
-    actor_id: json['actor_id'] as String,
-    actor_actorrole_id: json['actor_actorrole_id'] as String,
-    actor_fullname: json['actor_fullname'] as String,
-    actor_username: json['actor_username'] as String,
-    actor_password: json['actor_password'] as String,
-    actor_loginrightstatus_id: json['actor_loginrightstatus_id'] as String,
-    actor_person_id: json['actor_person_id'] as String,
-    actor_organization_id: json['actor_organization_id'] as String,
-  )..documenttypeId = json['documenttypeId'] as String;
+    actor_id: json['actor_id'] as String?,
+    actor_actorrole_id: json['actor_actorrole_id'] as String?,
+    actor_fullname: json['actor_fullname'] as String?,
+    actor_username: json['actor_username'] as String?,
+    actor_password: json['actor_password'] as String?,
+    actor_loginrightstatus_id: json['actor_loginrightstatus_id'] as String?,
+    actor_person_id: json['actor_person_id'] as String?,
+    actor_organization_id: json['actor_organization_id'] as String?,
+  )..documenttypeId = json['documenttypeId'] as String?;
 }
 
 Map<String, dynamic> _$ActorToJson(Actor instance) => <String, dynamic>{

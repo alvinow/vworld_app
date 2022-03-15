@@ -9,9 +9,9 @@ class StringUtil {
     return value != null && value.length > 0;
   }
 
-  static String convertDoubleToStringCurrencyWithLocaleFormat(
+  static String? convertDoubleToStringCurrencyWithLocaleFormat(
       double value, String locale) {
-    String returnValue;
+    String? returnValue;
     final currencyFormatter = NumberFormat.currency(locale: locale);
     print(currencyFormatter.format(value));
     return returnValue;

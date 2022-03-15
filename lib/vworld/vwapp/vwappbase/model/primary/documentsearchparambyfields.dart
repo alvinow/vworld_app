@@ -21,29 +21,29 @@ class GroupDocumentSearchField {
 
 class DocumentSearchParamByFields {
   DocumentSearchParamByFields(
-      {@required this.title,
+      {required this.title,
         this.searchGeneralKeyword,
         this.requiredSearchFieldList,
         this.optionalSearchFieldList,
         this.documentOrderFieldList}) {
     if (this.requiredSearchFieldList == null) {
-      this.requiredSearchFieldList = List<DocumentSearchField>();
+      this.requiredSearchFieldList = <DocumentSearchField>[];
     }
 
     if (this.optionalSearchFieldList == null) {
-      this.optionalSearchFieldList = List<DocumentSearchField>();
+      this.optionalSearchFieldList = <DocumentSearchField>[];
     }
 
     if (this.documentOrderFieldList == null) {
-      this.documentOrderFieldList = List<DocumentOrderField>();
+      this.documentOrderFieldList = <DocumentOrderField>[];
     }
   }
 
-  String title;
-  String searchGeneralKeyword;
-  List<DocumentSearchField> requiredSearchFieldList;
-  List<DocumentOrderField> documentOrderFieldList;
-  List<DocumentSearchField> optionalSearchFieldList;
+  String? title;
+  String? searchGeneralKeyword;
+  List<DocumentSearchField>? requiredSearchFieldList;
+  List<DocumentOrderField>? documentOrderFieldList;
+  List<DocumentSearchField>? optionalSearchFieldList;
 
   static final String title_CCFN='title';
   static final String searchGeneralKeyword_CCFN='searchGeneralKeyword';
@@ -56,13 +56,13 @@ class DocumentSearchParamByFields {
     DocumentSearchParamByFields.title_CCFN: this.title,
     DocumentSearchParamByFields.searchGeneralKeyword_CCFN: this.searchGeneralKeyword,
     DocumentSearchParamByFields.requiredSearchFieldList_CCFN: this.requiredSearchFieldList != null
-        ? this.requiredSearchFieldList.map((item) => item.toJson()).toList()
+        ? this.requiredSearchFieldList!.map((item) => item.toJson()).toList()
         : [],
     DocumentSearchParamByFields.documentOrderFieldList_CCFN: this.documentOrderFieldList != null
-        ? this.documentOrderFieldList.map((item) => item.toJson()).toList()
+        ? this.documentOrderFieldList!.map((item) => item.toJson()).toList()
         : [],
     DocumentSearchParamByFields.optionalSearchFieldList_CCFN : this.optionalSearchFieldList != null
-        ? this.optionalSearchFieldList.map((item) => item.toJson()).toList()
+        ? this.optionalSearchFieldList!.map((item) => item.toJson()).toList()
         : [],
 
   };
@@ -71,26 +71,26 @@ class DocumentSearchParamByFields {
     title: data[DocumentSearchParamByFields.title_CCFN],
     searchGeneralKeyword: data[DocumentSearchParamByFields.searchGeneralKeyword_CCFN],
     requiredSearchFieldList: data[DocumentSearchParamByFields.requiredSearchFieldList_CCFN] == null
-        ? List<DocumentSearchField>()
+        ? <DocumentSearchField>[]
         : data[DocumentSearchParamByFields.requiredSearchFieldList_CCFN]
         .map<DocumentSearchParamByFields>((item) => DocumentSearchField.fromJson(item))
         .toList(),
     documentOrderFieldList: data[DocumentSearchParamByFields.documentOrderFieldList_CCFN] == null
-        ? List<DocumentOrderField>()
+        ? <DocumentOrderField>[]
         : data[DocumentSearchParamByFields.documentOrderFieldList_CCFN]
         .map<DocumentSearchParamByFields>((item) => DocumentOrderField.fromJson(item))
         .toList(),
     optionalSearchFieldList: data[DocumentSearchParamByFields.optionalSearchFieldList_CCFN] == null
-        ? List<DocumentSearchField>()
+        ? <DocumentSearchField>[]
         : data[DocumentSearchParamByFields.optionalSearchFieldList_CCFN]
         .map<DocumentSearchParamByFields>((item) => DocumentSearchField.fromJson(item))
         .toList(),
 
   );
 
-  static DocumentSearchField getDocumentSearchFieldByFieldName(
+  static DocumentSearchField? getDocumentSearchFieldByFieldName(
       String fieldName, List<DocumentSearchField> list) {
-    DocumentSearchField returnValue;
+    DocumentSearchField? returnValue;
 
     for (int la = 0; la < list.length; la++) {
       DocumentSearchField currentElement = list.elementAt(la);
@@ -120,12 +120,12 @@ class DocumentSearchParamByFields {
     return returnValue;
   }
 
-  String getOrderParam() {
-    String returnValue;
+  String? getOrderParam() {
+    String? returnValue;
 
-    for (int la = 0; la < this.documentOrderFieldList.length; la++) {
+    for (int la = 0; la < this.documentOrderFieldList!.length; la++) {
       DocumentOrderField documentOrderField =
-      this.documentOrderFieldList.elementAt(la);
+      this.documentOrderFieldList!.elementAt(la);
 
       if (documentOrderField.isActive == true) {
         if (returnValue == null) {
@@ -139,13 +139,13 @@ class DocumentSearchParamByFields {
     return returnValue;
   }
 
-  WhereQuerySetParam getQuerySetParam() {
+  WhereQuerySetParam? getQuerySetParam() {
     List<DocumentSearchField> unionDocumentSearchFieldList =
-    List<DocumentSearchField>();
+    <DocumentSearchField>[];
 
-    unionDocumentSearchFieldList.addAll(this.requiredSearchFieldList);
+    unionDocumentSearchFieldList.addAll(this.requiredSearchFieldList!);
 
-    unionDocumentSearchFieldList.addAll(this.optionalSearchFieldList);
+    unionDocumentSearchFieldList.addAll(this.optionalSearchFieldList!);
 
     return DocumentSearchField.getQuerySetParamFromDocumentSearchField(
         unionDocumentSearchFieldList);
@@ -168,7 +168,7 @@ class QueryDocumentParam {
 }
 */
 class WhereQuerySetParam {
-  WhereQuerySetParam({@required this.query, @required this.valueList});
+  WhereQuerySetParam({required this.query, required this.valueList});
   String query;
   List<dynamic> valueList;
 
@@ -199,13 +199,13 @@ class WhereQuerySetParam {
 
 class DocumentOrderField {
   DocumentOrderField(
-      {@required this.isActive,
-        @required this.displayCaption,
-        @required this.fieldName});
+      {required this.isActive,
+        required this.displayCaption,
+        required this.fieldName});
 
-  bool isActive;
-  String displayCaption;
-  String fieldName;
+  bool? isActive;
+  String? displayCaption;
+  String? fieldName;
 
   static final String isActive_CCFN='isActive';
   static final String displayCaption_CCFN='displayCaption';
@@ -223,8 +223,8 @@ class DocumentOrderField {
       fieldName: data[DocumentOrderField.fieldName_CCFN]
   );
 
-  static String getOrderParam(List<DocumentOrderField> list) {
-    String returnValue;
+  static String? getOrderParam(List<DocumentOrderField> list) {
+    String? returnValue;
 
     for (int la = 0; la < list.length; la++) {
       DocumentOrderField documentOrderField = list.elementAt(la);
@@ -246,18 +246,18 @@ class DocumentSearchField {
   DocumentSearchField({
     @required this.isActive: false,
     @required this.isHidden: false,
-    @required this.displayCaption,
-    @required this.fieldName,
-    @required this.queryValue,
-    @required this.equalityOperator,
+    required this.displayCaption,
+    required this.fieldName,
+    required this.queryValue,
+    required this.equalityOperator,
   });
 
-  bool isActive;
-  bool isHidden;
-  String displayCaption;
-  String fieldName;
+  bool? isActive;
+  bool? isHidden;
+  String? displayCaption;
+  String? fieldName;
   var queryValue;
-  String equalityOperator;
+  String? equalityOperator;
 
   static final String isActive_CCFN = 'isActive';
   static final String isHidden_CCFN = 'isHidden';
@@ -294,21 +294,21 @@ class DocumentSearchField {
     return returnValue;
   }
 
-  static WhereQuerySetParam getQuerySetParamFromDocumentSearchField(
+  static WhereQuerySetParam? getQuerySetParamFromDocumentSearchField(
       List<DocumentSearchField> documentSearchFieldList,
       {String phraseConnector: 'AND'}) {
     //final String queryConnector = "AND";
 
-    String query;
-    List<dynamic> valueList = List<dynamic>();
+    String? query;
+    List<dynamic> valueList = <dynamic>[];
 
     for (int la = 0; la < documentSearchFieldList.length; la++) {
       DocumentSearchField currentElement =
       documentSearchFieldList.elementAt(la);
 
-      if (currentElement.isActive &&
+      if (currentElement.isActive! &&
           currentElement.fieldName != null &&
-          currentElement.fieldName.length > 0) {
+          currentElement.fieldName!.length > 0) {
         final String currentQuery = currentElement.getQuery();
 
         if (query == null) {
@@ -323,7 +323,7 @@ class DocumentSearchField {
       }
     }
 
-    WhereQuerySetParam returnValue = null;
+    WhereQuerySetParam? returnValue = null;
 
     if (query != null) {
       returnValue = WhereQuerySetParam(query: query, valueList: valueList);

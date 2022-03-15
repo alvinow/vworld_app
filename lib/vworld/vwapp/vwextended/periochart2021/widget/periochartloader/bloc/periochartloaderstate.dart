@@ -21,7 +21,7 @@ class PeriochartLoaderStateUninitialized extends PeriochartLoaderState {
 }
 
 class PeriochartLoaderStateProcessing extends PeriochartLoaderState {
-PeriochartLoaderStateProcessing({@required this.title,@required this.description});
+PeriochartLoaderStateProcessing({required this.title,required this.description});
 
 final String title;
 final String description;
@@ -36,9 +36,9 @@ String toString() =>
 
 class PeriochartLoaderStateShowChart extends PeriochartLoaderState{
 
-  PeriochartLoaderStateShowChart({@required this.loaderPcPropertiesId, @required this.pcProperties});
+  PeriochartLoaderStateShowChart({required this.loaderPcPropertiesId, required this.pcProperties});
 
-  final String loaderPcPropertiesId;
+  final String? loaderPcPropertiesId;
   final PcProperties pcProperties;
 
   @override

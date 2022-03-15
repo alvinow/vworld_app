@@ -19,7 +19,7 @@ class PerioIcon {
   PerioIcon._();
 
   static const _kFontFam = 'PerioIcon';
-  static const String _kFontPkg = null;
+  //static const String _kFontPkg = null;
 
-  static const IconData half_circle_svgrepo_com = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData half_circle_svgrepo_com = IconData(0xe800, fontFamily: _kFontFam);
 }

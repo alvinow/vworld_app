@@ -5,9 +5,9 @@ import 'dart:async';
 import 'dart:io';
 
 class DeviceInfo {
-  DeviceInfo({@required this.udid, @required this.reportDeviceInfo});
+  DeviceInfo({required this.udid, required this.reportDeviceInfo});
 
-  String udid;
+  String? udid;
 
   ReportDeviceInfo reportDeviceInfo;
 
@@ -20,8 +20,8 @@ class DeviceInfo {
 }
 
 class HelperReportDeviceInfo {
-  static Future<String> getUdid() async {
-    String returnValue;
+  static Future<String?> getUdid() async {
+    String? returnValue;
 
     try {
       returnValue = await FlutterUdid.udid;
@@ -30,12 +30,12 @@ class HelperReportDeviceInfo {
     return returnValue;
   }
 
-  static Future<ReportDeviceInfo> getReportDeviceInfo() async {
-    ReportDeviceInfo returnValue;
+  static Future<ReportDeviceInfo?> getReportDeviceInfo() async {
+    ReportDeviceInfo? returnValue;
     String platform = "unknown";
 
     try {
-      Map<String, dynamic> deviceReport;
+      Map<String, dynamic>? deviceReport;
       if (Platform.isAndroid) {
         platform = "android";
         deviceReport =
@@ -104,11 +104,11 @@ class HelperReportDeviceInfo {
 }
 
 class ReportDeviceInfo {
-  final String deviceType;
-  final Map<String, dynamic> deviceReport;
+  final String? deviceType;
+  final Map<String, dynamic>? deviceReport;
 
   ReportDeviceInfo(
-      { this.deviceType = "unknown", @required this.deviceReport});
+      { this.deviceType = "unknown", required this.deviceReport});
 
   Map<String, dynamic> toJson() =>
       {'deviceType': this.deviceType, 'deviceReport': this.deviceReport};
@@ -119,8 +119,8 @@ class ReportDeviceInfo {
 }
 
 class LoginRequestBody {
-  final String username;
-  final String password;
+  final String? username;
+  final String? password;
   //final DeviceInfo deviceInfo;
 
   static const String username_fieldName = 'username';
@@ -128,7 +128,7 @@ class LoginRequestBody {
   static const deviceInfo_fieldName = 'deviceInfo';
 
   LoginRequestBody(
-      {@required this.username, @required this.password});
+      {required this.username, required this.password});
 
   Map<String, dynamic> toJson() => {
     username_fieldName: this.username,

@@ -23,7 +23,7 @@ class PcSingleTeethTable extends StatelessWidget {
     }
   }
 
-  void implementCallbackIntegerField(String fieldName, int value, bool doSetState) {
+  void implementCallbackIntegerField(String fieldName, int? value, bool doSetState) {
 
 
     if (fieldName == PcSingleTeethProperties.mobilityLevelCCFN) {
@@ -35,110 +35,110 @@ class PcSingleTeethTable extends StatelessWidget {
         PcSingleTeethSideProperties.furcationLevelPointACCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.furcationLevelPointA = value;
+        this.pcSingleTeethProperties.buccalSide!.furcationLevelPointA = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.furcationLevelPointA = value;
+        this.pcSingleTeethProperties.lingualSide!.furcationLevelPointA = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.furcationLevelPointBCCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.furcationLevelPointB = value;
+        this.pcSingleTeethProperties.buccalSide!.furcationLevelPointB = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.furcationLevelPointB = value;
+        this.pcSingleTeethProperties.lingualSide!.furcationLevelPointB = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointA =
+        this.pcSingleTeethProperties.buccalSide!.isBleedingOnProbingPointA =
             value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isBleedingOnProbingPointA =
+        this.pcSingleTeethProperties.lingualSide!.isBleedingOnProbingPointA =
             value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointB =
+        this.pcSingleTeethProperties.buccalSide!.isBleedingOnProbingPointB =
             value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isBleedingOnProbingPointB =
+        this.pcSingleTeethProperties.lingualSide!.isBleedingOnProbingPointB =
             value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.isBleedingOnProbingPointCCCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isBleedingOnProbingPointC =
+        this.pcSingleTeethProperties.buccalSide!.isBleedingOnProbingPointC =
             value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isBleedingOnProbingPointC =
+        this.pcSingleTeethProperties.lingualSide!.isBleedingOnProbingPointC =
             value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointACCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isPlaquePointA = value;
+        this.pcSingleTeethProperties.buccalSide!.isPlaquePointA = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isPlaquePointA = value;
+        this.pcSingleTeethProperties.lingualSide!.isPlaquePointA = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointBCCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isPlaquePointB = value;
+        this.pcSingleTeethProperties.buccalSide!.isPlaquePointB = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isPlaquePointB = value;
+        this.pcSingleTeethProperties.lingualSide!.isPlaquePointB = value;
       }
     } else if (fieldName == PcSingleTeethSideProperties.isPlaquePointCCCFN) {
 
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.isPlaquePointC = value;
+        this.pcSingleTeethProperties.buccalSide!.isPlaquePointC = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.isPlaquePointC = value;
+        this.pcSingleTeethProperties.lingualSide!.isPlaquePointC = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.gingivalMarginPointACCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.gingivalMarginPointA = value;
+        this.pcSingleTeethProperties.buccalSide!.gingivalMarginPointA = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.gingivalMarginPointA = value;
+        this.pcSingleTeethProperties.lingualSide!.gingivalMarginPointA = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.gingivalMarginPointBCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.gingivalMarginPointB = value;
+        this.pcSingleTeethProperties.buccalSide!.gingivalMarginPointB = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.gingivalMarginPointB = value;
+        this.pcSingleTeethProperties.lingualSide!.gingivalMarginPointB = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.gingivalMarginPointCCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.gingivalMarginPointC = value;
+        this.pcSingleTeethProperties.buccalSide!.gingivalMarginPointC = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.gingivalMarginPointC = value;
+        this.pcSingleTeethProperties.lingualSide!.gingivalMarginPointC = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.probingDepthPointACCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointA = value;
+        this.pcSingleTeethProperties.buccalSide!.probingDepthPointA = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.probingDepthPointA = value;
+        this.pcSingleTeethProperties.lingualSide!.probingDepthPointA = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.probingDepthPointBCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointB = value;
+        this.pcSingleTeethProperties.buccalSide!.probingDepthPointB = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.probingDepthPointB = value;
+        this.pcSingleTeethProperties.lingualSide!.probingDepthPointB = value;
       }
     } else if (fieldName ==
         PcSingleTeethSideProperties.probingDepthPointCCCFN) {
       if (teethSide == PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
-        this.pcSingleTeethProperties.buccalSide.probingDepthPointC = value;
+        this.pcSingleTeethProperties.buccalSide!.probingDepthPointC = value;
       } else {
-        this.pcSingleTeethProperties.lingualSide.probingDepthPointC = value;
+        this.pcSingleTeethProperties.lingualSide!.probingDepthPointC = value;
       }
     }
 
@@ -175,7 +175,7 @@ class PcSingleTeethTable extends StatelessWidget {
                       PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
-                      .buccalSide
+                      .buccalSide!
                       .furcationLevelPointA,
                   iconDataList: <IconData>[
                     Icons.circle,
@@ -214,7 +214,7 @@ class PcSingleTeethTable extends StatelessWidget {
                             .furcationLevelPointACCFN,
                         initialIndex: this
                             .pcSingleTeethProperties
-                            .lingualSide
+                            .lingualSide!
                             .furcationLevelPointA,
                         iconDataList: <IconData>[
                           Icons.circle,
@@ -239,7 +239,7 @@ class PcSingleTeethTable extends StatelessWidget {
                             .furcationLevelPointBCCFN,
                         initialIndex: this
                             .pcSingleTeethProperties
-                            .lingualSide
+                            .lingualSide!
                             .furcationLevelPointB,
                         iconDataList: <IconData>[
                           Icons.circle,
@@ -275,7 +275,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
-                      .buccalSide
+                      .buccalSide!
                       .furcationLevelPointA,
                   iconDataList: <IconData>[
                     Icons.circle,
@@ -307,7 +307,7 @@ class PcSingleTeethTable extends StatelessWidget {
                   PcSingleTeethSideProperties.furcationLevelPointACCFN,
                   initialIndex: this
                       .pcSingleTeethProperties
-                      .lingualSide
+                      .lingualSide!
                       .furcationLevelPointA,
                   iconDataList: <IconData>[
                     Icons.circle,
@@ -402,7 +402,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .isBleedingOnProbingPointA,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -420,7 +420,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .isBleedingOnProbingPointB,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -438,7 +438,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointCCCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .isBleedingOnProbingPointC,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -467,7 +467,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointACCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .isBleedingOnProbingPointA,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -485,7 +485,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointBCCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .isBleedingOnProbingPointB,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -503,7 +503,7 @@ class PcSingleTeethTable extends StatelessWidget {
                     PcSingleTeethSideProperties.isBleedingOnProbingPointCCCFN,
                 initialIndex: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .isBleedingOnProbingPointC,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
@@ -536,7 +536,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointACCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.buccalSide.isPlaquePointA,
+                    this.pcSingleTeethProperties.buccalSide!.isPlaquePointA,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -551,7 +551,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointBCCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.buccalSide.isPlaquePointB,
+                    this.pcSingleTeethProperties.buccalSide!.isPlaquePointB,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -566,7 +566,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointCCCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.buccalSide.isPlaquePointC,
+                    this.pcSingleTeethProperties.buccalSide!.isPlaquePointC,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -593,7 +593,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointACCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.lingualSide.isPlaquePointA,
+                    this.pcSingleTeethProperties.lingualSide!.isPlaquePointA,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -608,7 +608,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointBCCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.lingualSide.isPlaquePointB,
+                    this.pcSingleTeethProperties.lingualSide!.isPlaquePointB,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -623,7 +623,7 @@ class PcSingleTeethTable extends StatelessWidget {
             CyclicIconButton(
                 fieldName: PcSingleTeethSideProperties.isPlaquePointCCCFN,
                 initialIndex:
-                    this.pcSingleTeethProperties.lingualSide.isPlaquePointC,
+                    this.pcSingleTeethProperties.lingualSide!.isPlaquePointC,
                 iconDataList: <IconData>[
                   Icons.check_box_sharp,
                   Icons.check_box_sharp,
@@ -653,7 +653,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .gingivalMarginPointA,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointACCFN,
                 //caption: 'mobility',
@@ -666,7 +666,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .gingivalMarginPointB,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointBCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -678,7 +678,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .buccalSide
+                    .buccalSide!
                     .gingivalMarginPointC,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointCCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -699,7 +699,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .gingivalMarginPointA,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointACCFN,
                 //caption: 'mobility',
@@ -712,7 +712,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .gingivalMarginPointB,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointBCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -724,7 +724,7 @@ class PcSingleTeethTable extends StatelessWidget {
               PcIntegerField(
                 value: this
                     .pcSingleTeethProperties
-                    .lingualSide
+                    .lingualSide!
                     .gingivalMarginPointC,
                 fieldName: PcSingleTeethSideProperties.gingivalMarginPointCCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -749,7 +749,7 @@ class PcSingleTeethTable extends StatelessWidget {
             children: [
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.buccalSide.probingDepthPointA,
+                    this.pcSingleTeethProperties.buccalSide!.probingDepthPointA,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointACCFN,
                 //caption: 'mobility',
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -760,7 +760,7 @@ class PcSingleTeethTable extends StatelessWidget {
               ),
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.buccalSide.probingDepthPointB,
+                    this.pcSingleTeethProperties.buccalSide!.probingDepthPointB,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointBCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
                 width: (this.columnWidth / 3) - 2,
@@ -770,7 +770,7 @@ class PcSingleTeethTable extends StatelessWidget {
               ),
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.buccalSide.probingDepthPointC,
+                    this.pcSingleTeethProperties.buccalSide!.probingDepthPointC,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointCCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
                 width: (this.columnWidth / 3) - 2,
@@ -789,7 +789,7 @@ class PcSingleTeethTable extends StatelessWidget {
             children: [
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.lingualSide.probingDepthPointA,
+                    this.pcSingleTeethProperties.lingualSide!.probingDepthPointA,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointACCFN,
                 //caption: 'mobility',
                 pcCallbackIntegerField: implementCallbackIntegerField,
@@ -800,7 +800,7 @@ class PcSingleTeethTable extends StatelessWidget {
               ),
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.lingualSide.probingDepthPointB,
+                    this.pcSingleTeethProperties.lingualSide!.probingDepthPointB,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointBCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
                 width: (this.columnWidth / 3) - 2,
@@ -810,7 +810,7 @@ class PcSingleTeethTable extends StatelessWidget {
               ),
               PcIntegerField(
                 value:
-                    this.pcSingleTeethProperties.lingualSide.probingDepthPointC,
+                    this.pcSingleTeethProperties.lingualSide!.probingDepthPointC,
                 fieldName: PcSingleTeethSideProperties.probingDepthPointCCCFN,
                 pcCallbackIntegerField: implementCallbackIntegerField,
                 width: (this.columnWidth / 3) - 2,
@@ -849,7 +849,7 @@ class PcSingleTeethTable extends StatelessWidget {
     );
 */
     final String regio =
-        this.pcSingleTeethProperties.teethNumber.substring(0, 1);
+        this.pcSingleTeethProperties.teethNumber!.substring(0, 1);
 
     if (regio == '1' || regio == '2') {
       if (this.teethSide ==
@@ -862,7 +862,7 @@ class PcSingleTeethTable extends StatelessWidget {
                 this.getMobilityLevelRow(),
                 this.getIsImplantRow(),
                 this.getFurcationInputRow(
-                    this.pcSingleTeethProperties.teethNumber,
+                    this.pcSingleTeethProperties.teethNumber!,
                     PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
                 this.getBleedingOnProbingRow(),
                 this.getPlaqueRow(),
@@ -881,7 +881,7 @@ class PcSingleTeethTable extends StatelessWidget {
                 this.getPlaqueRow(),
                 this.getBleedingOnProbingRow(),
                 this.getFurcationInputRow(
-                    this.pcSingleTeethProperties.teethNumber,
+                    this.pcSingleTeethProperties.teethNumber!,
                     PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
               ],
             ));
@@ -898,7 +898,7 @@ class PcSingleTeethTable extends StatelessWidget {
                 this.getPlaqueRow(),
                 this.getBleedingOnProbingRow(),
                 this.getFurcationInputRow(
-                    this.pcSingleTeethProperties.teethNumber,
+                    this.pcSingleTeethProperties.teethNumber!,
                     PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS),
                 this.getIsImplantRow(),
                 this.getMobilityLevelRow(),
@@ -912,7 +912,7 @@ class PcSingleTeethTable extends StatelessWidget {
               children: [
                 this.getNoteRow(),
                 this.getFurcationInputRow(
-                    this.pcSingleTeethProperties.teethNumber,
+                    this.pcSingleTeethProperties.teethNumber!,
                     PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS),
                 this.getBleedingOnProbingRow(),
                 this.getPlaqueRow(),

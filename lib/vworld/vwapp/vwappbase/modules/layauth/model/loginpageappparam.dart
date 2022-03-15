@@ -9,5 +9,5 @@ class LoginPageAppParam {
   final bool isPreviousLogInFailed;
   final bool isPreviousLoginNotConnectedToInternet;
   final bool isPreviousLoginNotConnectedToServer;
-  final LoginRequestParam loginRequestParam;
+  final LoginRequestParam? loginRequestParam;
 }

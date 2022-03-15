@@ -4,20 +4,20 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/model/affo
 import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/afformpage/afformpage.dart';
 
 typedef OnSaveValidRecordMeetingPageDetail = void Function(
-    AfForm, BuildContext);
+    AfForm?, BuildContext);
 typedef OnSaveInvalidRecordMeetingPageDetail = void Function(
-    AfForm, BuildContext);
+    AfForm?, BuildContext);
 
 class MeetingPageDetail extends StatelessWidget {
   MeetingPageDetail(
-      {@required this.afFormPage,
+      {required this.afFormPage,
       this.onSaveInvalidRecordMeetingPageDetail,
       this.onSaveValidRecordMeetingPageDetail});
 
   AfFormPage afFormPage;
 
-  OnSaveValidRecordMeetingPageDetail onSaveValidRecordMeetingPageDetail;
-  OnSaveInvalidRecordMeetingPageDetail onSaveInvalidRecordMeetingPageDetail;
+  OnSaveValidRecordMeetingPageDetail? onSaveValidRecordMeetingPageDetail;
+  OnSaveInvalidRecordMeetingPageDetail? onSaveInvalidRecordMeetingPageDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class MeetingPageDetail extends StatelessWidget {
         color: Colors.white,
       ),
       onPressed: () {
-        if (afFormPage.getCurrentState().isRecordValid()) {
+        if (afFormPage.getCurrentState()!.isRecordValid()) {
           if (this.onSaveValidRecordMeetingPageDetail != null) {
-            onSaveValidRecordMeetingPageDetail(
+            onSaveValidRecordMeetingPageDetail!(
                 this.afFormPage.getCurrentState(), context);
           }
         } else {
           if (this.onSaveInvalidRecordMeetingPageDetail != null) {
-            this.onSaveInvalidRecordMeetingPageDetail(
+            this.onSaveInvalidRecordMeetingPageDetail!(
                 this.afFormPage.getCurrentState(), context);
           }
         }

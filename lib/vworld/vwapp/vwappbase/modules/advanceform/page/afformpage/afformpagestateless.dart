@@ -9,22 +9,22 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/modules/advanceform/page/affor
 
 class AfFormPageStateless extends StatelessWidget {
   AfFormPageStateless(
-      {@required this.state,
+      {required this.state,
       this.propertiesOnChangedCallback,
       this.callbackField,
       this.isReadOnly:false
       });
 
-  final AfForm state;
-  final AfPropertiesOnChangedCallback propertiesOnChangedCallback;
-  final AfCallbackField callbackField;
+  final AfForm? state;
+  final AfPropertiesOnChangedCallback? propertiesOnChangedCallback;
+  final AfCallbackField? callbackField;
   final bool isReadOnly;
 
   @override
   Widget build(BuildContext context) {
     Widget returnValue = Center(child: Text('<Empty Form>'));
 
-    returnValue = SingleChildScrollView(child: this._generateForm(this.state));
+    returnValue = SingleChildScrollView(child: this._generateForm(this.state!));
 
     return returnValue;
   }
@@ -45,33 +45,33 @@ class AfFormPageStateless extends StatelessWidget {
 
       if (currentFieldForm.isHidden == false)
         {
-        if (currentFieldForm.fieldValue.valueAfDataType == 'String') {
+        if (currentFieldForm.fieldValue!.valueAfDataType == 'String') {
           currentUiField = AfStringField(
             fieldValue: currentFieldForm.fieldValue,
             isValueValid: currentFieldForm.isValueValid(),
-            isNotNull: currentFieldForm.valueProp.isNotNull,
+            isNotNull: currentFieldForm.valueProp!.isNotNull,
             valueProp: currentFieldForm.valueProp,
             afCallbackField: this.callbackField,
             isReadOnly: this.isReadOnly,
           );
           fieldFormList.add(currentUiField);
-        } else if (currentFieldForm.fieldValue.valueAfDataType == 'DateTime') {
+        } else if (currentFieldForm.fieldValue!.valueAfDataType == 'DateTime') {
           currentUiField = AfDateField(
               fieldValue: currentFieldForm.fieldValue,
               isValueValid: currentFieldForm.isValueValid(),
-              isNotNull: currentFieldForm.valueProp.isNotNull,
+              isNotNull: currentFieldForm.valueProp!.isNotNull,
               valueProp: currentFieldForm.valueProp,
               afCallbackField: this.callbackField,
             isReadOnly: this.isReadOnly,
           );
           fieldFormList.add(currentUiField);
         } else
-        if (currentFieldForm.fieldValue.valueAfDataType == 'ComboString') {
+        if (currentFieldForm.fieldValue!.valueAfDataType == 'ComboString') {
           currentUiField = AfComboStringField(
-              comboListFieldValue: currentFieldForm.fieldValue.comboStringList,
+              comboListFieldValue: currentFieldForm.fieldValue!.comboStringList,
               fieldValue: currentFieldForm.fieldValue,
               isValueValid: currentFieldForm.isValueValid(),
-              isNotNull: currentFieldForm.valueProp.isNotNull,
+              isNotNull: currentFieldForm.valueProp!.isNotNull,
               valueProp: currentFieldForm.valueProp,
               afCallbackField: this.callbackField,
             isReadOnly: this.isReadOnly,);

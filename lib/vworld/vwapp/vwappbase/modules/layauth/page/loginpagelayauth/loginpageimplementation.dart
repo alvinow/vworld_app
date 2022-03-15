@@ -8,7 +8,7 @@ typedef LoginApp = void Function(String, String);
 
 class LoginPageImplementation extends StatefulWidget {
   LoginPageImplementation(
-      {@required this.doLoginApp,
+      {required this.doLoginApp,
       this.loginPageAppParam: const LoginPageAppParam()});
 
   final LoginPageAppParam loginPageAppParam;

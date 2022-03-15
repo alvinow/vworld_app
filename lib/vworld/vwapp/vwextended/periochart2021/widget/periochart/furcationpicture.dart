@@ -9,10 +9,10 @@ class FurcationPicture extends StatelessWidget {
   FurcationPicture(this.teethNumber, this.side,
       {this.furcationLevelPointA: 0, this.furcationLevelPointB: 0});
 
-  final String teethNumber;
-  final String side;
-  final int furcationLevelPointA;
-  final int furcationLevelPointB;
+  final String? teethNumber;
+  final String? side;
+  final int? furcationLevelPointA;
+  final int? furcationLevelPointB;
 
   @override
   Widget build(BuildContext context) {

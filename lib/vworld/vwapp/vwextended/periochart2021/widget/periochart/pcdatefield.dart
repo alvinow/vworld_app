@@ -7,10 +7,10 @@ import 'package:vworld_app/vworld/vwapp/vwextended/periochart2021/widget/perioch
 
 class PcDateField extends StatelessWidget {
   PcDateField(
-      {@required this.value,
-      @required this.fieldName,
-      @required this.caption,
-      @required this.pcCallbackDateField,
+      {required this.value,
+      required this.fieldName,
+      required this.caption,
+      required this.pcCallbackDateField,
       this.width: 100,
       this.height: 40,
       this.borderWidth: 1,
@@ -19,7 +19,7 @@ class PcDateField extends StatelessWidget {
       this.requestParetSetStateOnChanged:false
       });
 
-  final DateTime value;
+  final DateTime? value;
   final String fieldName;
   final String caption;
   final PcCallbackDateField pcCallbackDateField;
@@ -37,14 +37,14 @@ class PcDateField extends StatelessWidget {
     if (this.useBorder == true) {
       borderBoxDecoration = BoxDecoration(
         border: Border.all(width: this.borderWidth, color: Colors.black),
-        color: Hexcolor("#d1ebf0"),
+        color: HexColor("#d1ebf0"),
       );
     }
 
     final DateFormat formatterDateTimeID = DateFormat('yyyy-MM-dd');
 
     TextEditingController myController = TextEditingController()
-      ..text = formatterDateTimeID.format(this.value);
+      ..text = formatterDateTimeID.format(this.value!);
 
     Widget lReturnValue = Container(
         decoration: borderBoxDecoration,

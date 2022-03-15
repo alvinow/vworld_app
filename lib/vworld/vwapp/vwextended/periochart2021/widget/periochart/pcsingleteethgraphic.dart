@@ -10,11 +10,11 @@ class PcSingleTeethGraphic extends StatelessWidget {
   PcSingleTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties,
       this.pcSingleTeethProperties, this.columnWidth);
 
-  final PcSingleTeethSideProperties pcSingleTeethSideProperties;
+  final PcSingleTeethSideProperties? pcSingleTeethSideProperties;
 
   final PcSingleTeethProperties pcSingleTeethProperties;
 
-  final PcProperties pcProperties;
+  final PcProperties? pcProperties;
 
   final double columnWidth;
 
@@ -39,7 +39,7 @@ class PcSingleTeethGraphic extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget teethPicture = Container(
         child: Stack(children: [
-          TeethPicture(this.pcSingleTeethSideProperties.teethNumber, this.pcSingleTeethSideProperties.teethSide, this.pcSingleTeethProperties, this.pcSingleTeethSideProperties,columnWidth: this.columnWidth,),
+          TeethPicture(this.pcSingleTeethSideProperties!.teethNumber, this.pcSingleTeethSideProperties!.teethSide, this.pcSingleTeethProperties, this.pcSingleTeethSideProperties,columnWidth: this.columnWidth,),
       CustomPaint(
         painter:
         PerioTeethGraphic(this.pcSingleTeethSideProperties, this.pcProperties),
@@ -48,12 +48,12 @@ class PcSingleTeethGraphic extends StatelessWidget {
     ]));
 
     final String regio =
-        this.pcSingleTeethSideProperties.teethNumber.substring(0, 1);
+        this.pcSingleTeethSideProperties!.teethNumber!.substring(0, 1);
 
     Widget lReturnValue = Container();
 
     if (regio == '1' || regio == '2') {
-      if (this.pcSingleTeethSideProperties.teethSide ==
+      if (this.pcSingleTeethSideProperties!.teethSide ==
           PcSingleTeethSideProperties.pcSingleTeethSideLingualFMS) {
         lReturnValue = Transform(
           alignment: Alignment.center,
@@ -64,7 +64,7 @@ class PcSingleTeethGraphic extends StatelessWidget {
         lReturnValue = teethPicture;
       }
     } else {
-      if (this.pcSingleTeethSideProperties.teethSide ==
+      if (this.pcSingleTeethSideProperties!.teethSide ==
           PcSingleTeethSideProperties.pcSingleTeethSideBuccalFMS) {
         lReturnValue = Transform(
           alignment: Alignment.center,

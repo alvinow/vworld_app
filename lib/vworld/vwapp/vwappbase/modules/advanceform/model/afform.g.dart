@@ -17,9 +17,9 @@ class AfFormAdapter extends TypeAdapter<AfForm> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AfForm(
-      fieldFormList: (fields[2] as List)?.cast<AfFieldForm>(),
-      afFormId: fields[0] as String,
-      afRecordId: fields[1] as String,
+      fieldFormList: (fields[2] as List).cast<AfFieldForm>(),
+      afFormId: fields[0] as String?,
+      afRecordId: fields[1] as String?,
     );
   }
 
@@ -52,12 +52,11 @@ class AfFormAdapter extends TypeAdapter<AfForm> {
 
 AfForm _$AfFormFromJson(Map<String, dynamic> json) {
   return AfForm(
-    fieldFormList: (json['fieldFormList'] as List)
-        ?.map((e) =>
-            e == null ? null : AfFieldForm.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    afFormId: json['afFormId'] as String,
-    afRecordId: json['afRecordId'] as String,
+    fieldFormList: (json['fieldFormList'] as List<dynamic>)
+        .map((e) => AfFieldForm.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    afFormId: json['afFormId'] as String?,
+    afRecordId: json['afRecordId'] as String?,
   );
 }
 

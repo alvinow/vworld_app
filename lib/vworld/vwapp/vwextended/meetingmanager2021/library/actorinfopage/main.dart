@@ -7,7 +7,7 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/ac
 class ActorInfoPage extends StatefulWidget {
   ActorInfoPage(this.bloc, this.navigationBar, this.actor);
 
-  final Bloc bloc;
+  final Bloc? bloc;
 
   final Actor actor;
 
@@ -30,11 +30,11 @@ class _ActorInfoPage extends State<ActorInfoPage> {
       children: [
         iconUser,
         Text(
-          this.widget.actor.actor_username,
+          this.widget.actor.actor_username!,
           style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
         ),
         Text(
-          this.widget.actor.actor_fullname,
+          this.widget.actor.actor_fullname!,
           style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),

@@ -16,8 +16,8 @@ abstract class PeriochartLoaderEvent extends Equatable {
 
 class LoadFromLocalHiveEvent  extends PeriochartLoaderEvent {
   LoadFromLocalHiveEvent({
-    @required this.loaderPcPropertiesId,
-    @required this.timestamp,
+    required this.loaderPcPropertiesId,
+    required this.timestamp,
   });
 
   final String loaderPcPropertiesId;
@@ -34,8 +34,8 @@ class LoadFromLocalHiveEvent  extends PeriochartLoaderEvent {
 
 class SaveToLocalHiveEvent  extends PeriochartLoaderEvent {
   SaveToLocalHiveEvent({
-    @required this. pcProperties,
-    @required this.timestamp,
+    required this. pcProperties,
+    required this.timestamp,
   });
 
   final PcProperties pcProperties;

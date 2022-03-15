@@ -5,11 +5,11 @@ typedef IndexChangedCyclicIconButton = void Function(String, int);
 
 class CyclicIconButton extends StatefulWidget {
   CyclicIconButton(
-      {@required this.fieldName,
+      {required this.fieldName,
       this.initialIndex: 0,
-      @required this.iconDataList,
+      required this.iconDataList,
       this.iconSize: 15.0,
-      @required this.colorList,
+      required this.colorList,
       this.pcCallbackIntegerField,
       this.isReadOnly: true,
       this.backgroundColor: Colors.white,
@@ -18,19 +18,19 @@ class CyclicIconButton extends StatefulWidget {
   final Color backgroundColor;
   final String fieldName;
   final bool isReadOnly;
-  final PcCallbackIntegerField pcCallbackIntegerField;
+  final PcCallbackIntegerField? pcCallbackIntegerField;
   final List<IconData> iconDataList;
   final List<Color> colorList;
   final double iconSize;
-  final int initialIndex;
+  final int? initialIndex;
   final bool requestParetSetStateOnChanged;
 
   _CyclicIconButtonState createState() => _CyclicIconButtonState();
 }
 
 class _CyclicIconButtonState extends State<CyclicIconButton> {
-  int currentIndex;
-  DateTime lastTap;
+  int? currentIndex;
+  late DateTime lastTap;
 
   @override
   void initState() {
@@ -72,23 +72,23 @@ class _CyclicIconButtonState extends State<CyclicIconButton> {
   }
 
   Color getActiveColor() {
-    Color returnValue = this.widget.colorList.elementAt(this.currentIndex);
+    Color returnValue = this.widget.colorList.elementAt(this.currentIndex!);
     return returnValue;
   }
 
   IconData getActiveIconData() {
-    return this.widget.iconDataList.elementAt(this.currentIndex);
+    return this.widget.iconDataList.elementAt(this.currentIndex!);
   }
 
   Future<void> nextCircularIndex() async {
-    if (this.currentIndex + 1 < this.widget.iconDataList.length) {
-      this.currentIndex = this.currentIndex + 1;
+    if (this.currentIndex! + 1 < this.widget.iconDataList.length) {
+      this.currentIndex = this.currentIndex! + 1;
     } else {
       this.currentIndex = 0;
     }
 
     if (this.widget.pcCallbackIntegerField != null) {
-      this.widget.pcCallbackIntegerField(this.widget.fieldName,
+      this.widget.pcCallbackIntegerField!(this.widget.fieldName,
           this.currentIndex, this.widget.requestParetSetStateOnChanged);
     }
 

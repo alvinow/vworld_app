@@ -25,32 +25,32 @@ class PcPatient {
   Map<String, dynamic> toJson() => _$PcPatientToJson(this);
 
   @HiveField(0)
-  final String id;
+  final String? id;
 
   @HiveField(1)
-  String fullName;
+  String? fullName;
 
   @HiveField(2)
-  String gender;
+  String? gender;
 
   @HiveField(3)
-  DateTime birthOfDate;
+  DateTime? birthOfDate;
 
   @HiveField(4)
-  String allergy;
+  String? allergy;
 
   @HiveField(5)
-  String medicalHistory;
+  String? medicalHistory;
 
   @HiveField(6)
-  String address;
+  String? address;
 
   @HiveField(7)
-  String city;
+  String? city;
 
   @HiveField(8)
-  String phone;
+  String? phone;
 
   @HiveField(9)
-  String occupation;
+  String? occupation;
 }

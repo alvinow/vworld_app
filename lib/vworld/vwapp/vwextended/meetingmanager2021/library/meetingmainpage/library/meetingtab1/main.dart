@@ -8,7 +8,7 @@ class MeetingTab1 extends StatelessWidget {
 
   final int activeIndex;
 
-  Bloc bloc;
+  Bloc? bloc;
 
   @override
   Widget build(BuildContext context) {
@@ -46,18 +46,18 @@ class MeetingTab1 extends StatelessWidget {
       ],
       onTap: (index) {
         if (index == 0) {
-          this.bloc.add(OpeneventpageOnMeetingmainpageEvent(DateTime.now()));
+          this.bloc!.add(OpeneventpageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020UserloginInfo(DateTime.now()));
         } else if (index == 1) {
-          this.bloc.add(RequestDisplayPanitiaListPageOnMeetingmainpageEvent(DateTime.now()));
+          this.bloc!.add(RequestDisplayPanitiaListPageOnMeetingmainpageEvent(DateTime.now()));
 
         }
         else if (index == 2) {
-          this.bloc.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
+          this.bloc!.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020ShowUserDashboard(DateTime.now()));
         }
         else if (index == 3) {
-          this.bloc.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
+          this.bloc!.add(OpenactorinfopageOnMeetingmainpageEvent(DateTime.now()));
           //this.bloc.add(EventSpiMobile2020ShowUserDashboard(DateTime.now()));
         }
 

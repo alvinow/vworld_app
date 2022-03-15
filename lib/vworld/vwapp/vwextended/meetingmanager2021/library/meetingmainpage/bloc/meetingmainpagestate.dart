@@ -35,15 +35,15 @@ class DisplayPanitiaListPageOnMeetingmainpageState extends MeetingmainpageState{
 
 class DisplayeventpageOnMeetingmainpageState extends MeetingmainpageState {
   DisplayeventpageOnMeetingmainpageState(
-      {@required this.title,
-      @required this.actor,
-      @required this.meetingList,
-      @required this.organizationMember,
-      @required this.afFormGridParam});
+      {required this.title,
+      required this.actor,
+      required this.meetingList,
+      required this.organizationMember,
+      required this.afFormGridParam});
 
   final String title;
   final Actor actor;
-  final List<Meeting> meetingList;
+  final List<Meeting?> meetingList;
   final List<Actor> organizationMember;
   final AfFormGridParam afFormGridParam;
 
@@ -61,7 +61,7 @@ class DisplayAfformOnMeetingmainpageState extends MeetingmainpageState {
 }
 
 class DisplayactorinfopageOnMeetingmainpageState extends MeetingmainpageState {
-  DisplayactorinfopageOnMeetingmainpageState({@required this.actor});
+  DisplayactorinfopageOnMeetingmainpageState({required this.actor});
 
   final Actor actor;
 
@@ -71,7 +71,7 @@ class DisplayactorinfopageOnMeetingmainpageState extends MeetingmainpageState {
 
 class ProcessingOnMeetingmainpageState extends MeetingmainpageState {
   ProcessingOnMeetingmainpageState(
-      {@required this.title, this.description: ''});
+      {required this.title, this.description: ''});
 
   final String title;
   final String description;

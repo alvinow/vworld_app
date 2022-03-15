@@ -8,8 +8,8 @@ import 'package:vworld_app/vworld/vwapp/vwappbase/vwaaa/vwauthentication/vwauthe
 import 'package:vworld_app/vworld/vwcore/vwauthorization/vwauthorization.dart';
 
 class VwHomeBasePeriochart2021 extends VwHomeBase {
-  VwHomeBasePeriochart2021(VwAuthentication vwAuthentication,
-      VwAuthorization vwAuthorization, VwAccounting vwAccounting)
+  VwHomeBasePeriochart2021(VwAuthentication? vwAuthentication,
+      VwAuthorization? vwAuthorization, VwAccounting? vwAccounting)
       : super(vwAuthentication, vwAuthorization, vwAccounting);
 
   @override

@@ -13,11 +13,11 @@ import 'package:vworld_app/vworld/vwapp/vwextended/meetingmanager2021/vwmodel/ac
 
 class LibEditorFormStyle1 {
 
-  static void createNewRecord(
-      String formId, BuildContext context, Actor currrentActor, LoginResponse loginResponse,
-      {OnSaveValidRecordEditorForm onSaveValidRecordEditorForm,
-        OnSaveInvalidRecordEditorForm onSaveInvalidRecordEditorForm }) {
 
+  static void createNewRecord(String formId, BuildContext context,
+      Actor currrentActor, LoginResponse loginResponse,
+      {OnSaveValidRecordEditorForm? onSaveValidRecordEditorForm,
+      OnSaveInvalidRecordEditorForm? onSaveInvalidRecordEditorForm}) {
     try {
       AfForm meetingForm = AfFormDemo.getAfFormById(formId);
 
@@ -44,21 +44,17 @@ class LibEditorFormStyle1 {
 
       Widget recordPage = RecordPageDetailStyle1(
         afFormPage: afFormPage,
-        onSaveValidRecordEditorForm:
-        onSaveValidRecordEditorForm,
+        onSaveValidRecordEditorForm: onSaveValidRecordEditorForm,
         onSaveInvalidRecordEditorForm: onSaveInvalidRecordEditorForm,
       );
 
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => recordPage));
-    }
-    catch(error){
-      print("Error On LibEditorFormStyle1.createNewRecord: "+error.toString());
+    } catch (error) {
+      print(
+          "Error On LibEditorFormStyle1.createNewRecord: " + error.toString());
     }
   }
 
-  static void editRecord(){
-
-  }
-
+  static void editRecord() {}
 }
